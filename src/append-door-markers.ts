@@ -1,11 +1,12 @@
 import type { Board } from "./board/board.ts";
 import type { BoardLayout } from "./board/space-placement.ts";
 import { findPlacement } from "./board/find-placement.ts";
-import { boxFromGrid, centerOfBox } from "./board-grid.ts";
+import { boxFromPlacement } from "./board/placement-box.ts";
+import { centerOfBox } from "./board-grid.ts";
 import { SVG_NAMESPACE } from "./svg-namespace.ts";
 
 const DOOR_FILL = "#1a120c";
-const DOOR_RADIUS = 4;
+const DOOR_RADIUS = 5;
 
 export function appendDoorMarkers(
   svg: SVGSVGElement,
@@ -49,22 +50,8 @@ function appendDoorMarker(
     return;
   }
 
-  const fromCenter = centerOfBox(
-    boxFromGrid(
-      fromPlacement.column,
-      fromPlacement.row,
-      fromPlacement.columnSpan,
-      fromPlacement.rowSpan,
-    ),
-  );
-  const toCenter = centerOfBox(
-    boxFromGrid(
-      toPlacement.column,
-      toPlacement.row,
-      toPlacement.columnSpan,
-      toPlacement.rowSpan,
-    ),
-  );
+  const fromCenter = centerOfBox(boxFromPlacement(fromPlacement));
+  const toCenter = centerOfBox(boxFromPlacement(toPlacement));
   const marker = document.createElementNS(SVG_NAMESPACE, "circle");
   marker.setAttribute("data-door-kind", "door");
   marker.setAttribute("cx", String((fromCenter.x + toCenter.x) / 2));

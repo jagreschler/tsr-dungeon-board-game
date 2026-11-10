@@ -7,6 +7,7 @@ export type Space = {
   level: Level;
   isStart: boolean;
   isSafe: boolean;
+  printedName?: string;
   destinationLevel?: Level;
 };
 
@@ -14,7 +15,9 @@ export function createSpace(
   identifier: string,
   kind: SpaceKind,
   level: Level,
-  extras: Partial<Pick<Space, "isStart" | "isSafe" | "destinationLevel">> = {},
+  extras: Partial<
+    Pick<Space, "isStart" | "isSafe" | "destinationLevel" | "printedName">
+  > = {},
 ): Space {
   return {
     identifier,
@@ -22,6 +25,7 @@ export function createSpace(
     level,
     isStart: extras.isStart ?? false,
     isSafe: extras.isSafe ?? false,
+    printedName: extras.printedName,
     destinationLevel: extras.destinationLevel,
   };
 }

@@ -98,3 +98,54 @@ for the Main Gallery, step marks on stairs, and a marker for ordinary doors.
 Secret doors stay hidden because they have not been found. The grid is a
 rough sketch of the inner ring around Start. Align it to the 1981 board in a
 later PR.
+
+## DUN-5 — One traced 1981 board (10 Nov 2026)
+
+The 1981 board is one flat map, not six stacked floors. This branch draws
+that single map. `level` on each space is only the colored zone (1–6) the
+rules use for monster/treasure decks and hero depth limits. File names,
+exports, tests, the SVG label, and new docs headings say "board" / "dungeon
+board", not "Level 1". Unnamed rooms dropped the `level-1-room-*` ids
+(`room-north`, `room-east`, and so on).
+
+The start space is the **Main Staircase**. The safe chamber is the **Main
+Gallery**. Classes stay Superhero, Hero, Elf, and Wizard. A scan of this
+branch found no 2012 terms (Great Hall, Fighter, Rogue, Cleric) in code to
+rename; tests now reject "Great Hall" in the UI and printed names.
+
+Traced from (downloaded to `/tmp` only; not committed — the photos are
+copyrighted):
+
+- Jasper line art, rotated 90° clockwise, for corridor squares, room
+  outlines, and `S` secret-door marks
+- Wayne's Books 1975 photo for printed chamber names and overall geometry
+- BGG pic950059 for zooming labels and doors
+- BGG pic756723 (1981 board, left third covered) for zone colors: gold,
+  green, orange, magenta, red, blue
+
+Room counts per zone follow Zenopus's treasure-card / room inventory
+(9 / 9 / 16 / 18 / 16 / 12) plus Jason's 13 named chambers with **4 on
+level 5**.
+
+### Approximate or still unread
+
+- Armory, Crypt, and Storeroom are irregular on the board; they are bounding
+  rectangles. Wizard's Laboratory and King's Library are triangles.
+- Kitchen and the Queen's Treasure Room Annex are circles.
+- Main Staircase and Main Gallery still share the central circle: the
+  gallery is the lower half so "return to Start" and "no monsters in the
+  Main Gallery" can stay two spaces.
+- Corridor squares come from white flagstone blobs. Cracks split some
+  squares; a few long blobs were cut into pieces. Count is therefore a
+  census of those blobs, not a hand count of every printed flagstone.
+- One L-shaped blob west of King's Treasure was split into two rooms.
+- A few rooms were reassigned across nearby color zones so the Zenopus
+  room counts match; the inner gold ring is missing a clean
+  `room-southwest` name because that rectangle sat on a color boundary.
+- Only the rounded stair west of the Main Staircase is typed as `stairs`
+  (destination 4, matching the 1981 diagram). Other rounded landings are
+  still corridor squares until they can be read on a flatter 1981 scan.
+- Secret doors follow `S` letters on Jasper, not a photo-perfect dashed-wall
+  census. The 1981 photo's left third is under the rules sheet.
+- Zone colors for the covered left third (Armory / Kitchen / Storeroom)
+  follow 1981's palette applied to Wayne's geometry.

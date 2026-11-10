@@ -7,7 +7,7 @@ afterEach(() => {
 });
 
 describe("title page", () => {
-  it("renders Dungeon!", async () => {
+  it("renders Dungeon! with one board SVG", async () => {
     document.body.append(page());
     await import("./main");
 
@@ -18,8 +18,12 @@ describe("title page", () => {
     }
     expect(title.textContent).toBe("Dungeon!");
 
-    const board = document.querySelector("#app .dungeon-board");
-    expect(board).toBeInstanceOf(SVGSVGElement);
+    const boards = document.querySelectorAll("#app .dungeon-board");
+    expect(boards.length).toBe(1);
+    expect(boards[0]).toBeInstanceOf(SVGSVGElement);
+
+    expect(document.body.textContent?.includes("Level 1")).toBe(false);
+    expect(document.body.textContent?.includes("Great Hall")).toBe(false);
   });
 });
 

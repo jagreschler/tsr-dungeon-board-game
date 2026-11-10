@@ -1,9 +1,13 @@
+import type { PlacementShape, TriangleTip } from "./traced-space.ts";
+
 export type SpacePlacement = {
   spaceIdentifier: string;
-  column: number;
-  row: number;
-  columnSpan: number;
-  rowSpan: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  shape: PlacementShape;
+  triangleTip?: TriangleTip;
 };
 
 export type BoardLayout = {
@@ -12,16 +16,20 @@ export type BoardLayout = {
 
 export function createSpacePlacement(
   spaceIdentifier: string,
-  column: number,
-  row: number,
-  columnSpan: number,
-  rowSpan: number,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  shape: PlacementShape = "rect",
+  triangleTip?: TriangleTip,
 ): SpacePlacement {
   return {
     spaceIdentifier,
-    column,
-    row,
-    columnSpan,
-    rowSpan,
+    x,
+    y,
+    width,
+    height,
+    shape,
+    triangleTip,
   };
 }

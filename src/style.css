@@ -41,9 +41,9 @@ body {
 }
 
 .dungeon-board {
-  width: min(92vw, 1100px);
+  width: min(96vw, 1280px);
   height: auto;
-  background: rgba(20, 14, 11, 0.55);
+  background: #1a1410;
   border: 1px solid rgba(243, 226, 196, 0.18);
 }
 

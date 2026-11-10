@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { level1Board } from "./board/level-1-board.ts";
-import { level1Layout } from "./board/level-1-layout.ts";
+import { dungeonBoard } from "./board/dungeon-board.ts";
+import { dungeonLayout } from "./board/dungeon-layout.ts";
 import { GenerateBoard } from "./generate-board.ts";
 
 const ROOM_SELECTOR = ".dungeon-board [data-space-kind='room']";
@@ -8,14 +8,30 @@ const CORRIDOR_SELECTOR = ".dungeon-board [data-space-kind='corridor']";
 const DOOR_SELECTOR = ".dungeon-board [data-door-kind='door']";
 const SECRET_DOOR_SELECTOR = ".dungeon-board [data-door-kind='secretDoor']";
 
+const NAMED_CHAMBERS = [
+  "Main Gallery",
+  "Kitchen",
+  "Council Room",
+  "Armory",
+  "Crypt",
+  "Storeroom",
+  "Torture Chamber",
+  "King's Library",
+  "King's Treasure Room",
+  "Queen's Treasure Room",
+  "Queen's Treasure Room Annex",
+  "Wizard's Laboratory",
+  "Wizard's Treasure Room",
+];
+
 function boardSvg(): SVGSVGElement {
-  return new GenerateBoard(level1Board, level1Layout).svg();
+  return new GenerateBoard(dungeonBoard, dungeonLayout).svg();
 }
 
 function uniqueConnectionCount(kind: "door" | "secretDoor"): number {
   const seen = new Set<string>();
 
-  for (const connection of level1Board.connections) {
+  for (const connection of dungeonBoard.connections) {
     if (connection.kind === kind) {
       const ends = [
         connection.fromSpaceIdentifier,
@@ -83,6 +99,22 @@ function shapeIsInsideViewBox(
     );
   }
 
+  if (element instanceof SVGPolygonElement) {
+    const points = element.points;
+    for (let index = 0; index < points.numberOfItems; index += 1) {
+      const point = points.getItem(index);
+      if (
+        point.x < box.minX ||
+        point.x > box.maxX ||
+        point.y < box.minY ||
+        point.y > box.maxY
+      ) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   if (element instanceof SVGLineElement) {
     const points = [
       [element.x1.baseVal.value, element.y1.baseVal.value],
@@ -98,24 +130,32 @@ function shapeIsInsideViewBox(
   return true;
 }
 
-describe("Level 1 layout", () => {
-  it("places every Level 1 space on the grid", () => {
+describe("board layout", () => {
+  it("places every space on the traced board", () => {
     const placed = new Set(
-      level1Layout.placements.map((placement) => placement.spaceIdentifier),
+      dungeonLayout.placements.map((placement) => placement.spaceIdentifier),
     );
 
-    for (const space of level1Board.spaces) {
+    for (const space of dungeonBoard.spaces) {
       expect(placed.has(space.identifier)).toBe(true);
     }
   });
 });
 
 describe("GenerateBoard", () => {
+  it("draws one board SVG", () => {
+    const svg = boardSvg();
+
+    expect(svg.getAttribute("class")).toBe("dungeon-board");
+    expect(svg.getAttribute("aria-label")).toBe("The 1981 Dungeon! board");
+    expect(svg.getAttribute("aria-label")?.includes("Level 1")).toBe(false);
+  });
+
   it("draws one shape group per space", () => {
     const svg = boardSvg();
     const groups = svg.querySelectorAll("[data-space-identifier]");
 
-    expect(groups.length).toBe(level1Board.spaces.length);
+    expect(groups.length).toBe(dungeonBoard.spaces.length);
   });
 
   it("draws rooms and corridors with different fills", () => {
@@ -126,6 +166,32 @@ describe("GenerateBoard", () => {
     expect(roomFill === null).toBe(false);
     expect(corridorFill === null).toBe(false);
     expect(roomFill === corridorFill).toBe(false);
+  });
+
+  it("paints rooms with the 1981 level-zone colors", () => {
+    const svg = boardSvg();
+    const fills = new Set<string>();
+
+    for (const room of svg.querySelectorAll(ROOM_SELECTOR)) {
+      const painted = room.querySelector("[fill]");
+      const fill = painted?.getAttribute("fill");
+      if (fill !== null && fill !== undefined) {
+        fills.add(fill);
+      }
+    }
+
+    expect(fills.size >= 6).toBe(true);
+  });
+
+  it("labels each named chamber", () => {
+    const svg = boardSvg();
+    const labels = [...svg.querySelectorAll("[data-printed-name]")].map(
+      (node) => node.getAttribute("data-printed-name"),
+    );
+
+    for (const name of NAMED_CHAMBERS) {
+      expect(labels.includes(name)).toBe(true);
+    }
   });
 
   it("draws ordinary doors and hides secret doors", () => {
@@ -140,7 +206,7 @@ describe("GenerateBoard", () => {
   it("keeps every shape inside the SVG viewBox", () => {
     const svg = boardSvg();
     const box = viewBoxBox(svg);
-    const shapes = svg.querySelectorAll("rect, circle, line");
+    const shapes = svg.querySelectorAll("rect, circle, line, polygon");
 
     expect(shapes.length > 0).toBe(true);
 
