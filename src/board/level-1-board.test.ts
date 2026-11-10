@@ -1,11 +1,37 @@
 import { describe, expect, it } from "vitest";
 import { level1Board } from "./level-1-board.ts";
 import { findSpace } from "./find-space.ts";
-import { hasSymmetricConnections } from "./has-symmetric-connections.ts";
+import { listNeighborSpacesAHeroCanStepTo } from "./list-neighbor-spaces-a-hero-can-step-to.ts";
 import { listSpacesByKind } from "./list-spaces.ts";
 
 const LEVEL_1_ROOM_COUNT = 9;
 const LEVEL_1_CHAMBER_COUNT = 1;
+
+const WEST_SECRET_DOOR = {
+  fromSpaceIdentifier: "corridor-west-1",
+  toSpaceIdentifier: "level-1-room-northwest",
+};
+
+const EAST_SECRET_DOOR = {
+  fromSpaceIdentifier: "corridor-east-2",
+  toSpaceIdentifier: "corridor-east-southeast-1",
+};
+
+function neighborIdentifiers(
+  spaceIdentifier: string,
+  foundSecretDoors: readonly {
+    fromSpaceIdentifier: string;
+    toSpaceIdentifier: string;
+  }[] = [],
+): string[] {
+  const neighbors = listNeighborSpacesAHeroCanStepTo(
+    level1Board,
+    spaceIdentifier,
+    foundSecretDoors,
+  );
+
+  return neighbors.map((space) => space.identifier);
+}
 
 describe("Level 1 board", () => {
   it("has nine rooms and one chamber", () => {
@@ -62,49 +88,46 @@ describe("Level 1 board", () => {
     }
   });
 
-  it("keeps every adjacency symmetric", () => {
-    expect(hasSymmetricConnections(level1Board)).toBe(true);
-  });
+  it("joins every connection to two real spaces", () => {
+    expect(level1Board.connections.length > 0).toBe(true);
 
-  it("joins every doorway to two real spaces", () => {
-    expect(level1Board.doorways.length > 0).toBe(true);
-
-    for (const doorway of level1Board.doorways) {
-      const fromSpace = findSpace(level1Board, doorway.fromSpaceIdentifier);
-      const toSpace = findSpace(level1Board, doorway.toSpaceIdentifier);
+    for (const connection of level1Board.connections) {
+      const fromSpace = findSpace(level1Board, connection.fromSpaceIdentifier);
+      const toSpace = findSpace(level1Board, connection.toSpaceIdentifier);
 
       expect(fromSpace === undefined).toBe(false);
       expect(toSpace === undefined).toBe(false);
-      expect(doorway.fromSpaceIdentifier === doorway.toSpaceIdentifier).toBe(
-        false,
-      );
+      expect(
+        connection.fromSpaceIdentifier === connection.toSpaceIdentifier,
+      ).toBe(false);
     }
   });
 
-  it("records both ordinary doors and secret doors", () => {
-    const ordinaryDoors = level1Board.doorways.filter((doorway) => {
-      return doorway.kind === "door";
-    });
-    const secretDoors = level1Board.doorways.filter((doorway) => {
-      return doorway.kind === "secretDoor";
-    });
+  it("records open links, ordinary doors, and secret doors", () => {
+    const kinds = new Set(
+      level1Board.connections.map((connection) => connection.kind),
+    );
 
-    expect(ordinaryDoors.length > 0).toBe(true);
-    expect(secretDoors.length > 0).toBe(true);
+    expect(kinds.has("open")).toBe(true);
+    expect(kinds.has("door")).toBe(true);
+    expect(kinds.has("secretDoor")).toBe(true);
   });
 
-  it("gives every room a doorway onto a real space", () => {
+  it("gives every room a door or secret door onto a real space", () => {
     const rooms = listSpacesByKind(level1Board, "room");
 
     for (const room of rooms) {
-      const doorway = level1Board.doorways.find((candidate) => {
-        return (
+      const connection = level1Board.connections.find((candidate) => {
+        const joinsRoom =
           candidate.fromSpaceIdentifier === room.identifier ||
-          candidate.toSpaceIdentifier === room.identifier
-        );
+          candidate.toSpaceIdentifier === room.identifier;
+        const isDoor =
+          candidate.kind === "door" || candidate.kind === "secretDoor";
+
+        return joinsRoom && isDoor;
       });
 
-      expect(doorway === undefined).toBe(false);
+      expect(connection === undefined).toBe(false);
     }
   });
 
@@ -118,5 +141,33 @@ describe("Level 1 board", () => {
       expect(stair.destinationLevel === undefined).toBe(false);
       expect(stair.destinationLevel === 1).toBe(false);
     }
+  });
+});
+
+describe("hero steps", () => {
+  it("blocks the west secret door until the party finds it", () => {
+    const beforeFinding = neighborIdentifiers("corridor-west-1");
+    const afterFinding = neighborIdentifiers("corridor-west-1", [
+      WEST_SECRET_DOOR,
+    ]);
+
+    expect(beforeFinding.includes("level-1-room-northwest")).toBe(false);
+    expect(afterFinding.includes("level-1-room-northwest")).toBe(true);
+  });
+
+  it("lets a hero use the east secret door once it is found", () => {
+    const beforeFinding = neighborIdentifiers("corridor-east-2");
+    const afterFinding = neighborIdentifiers("corridor-east-2", [
+      EAST_SECRET_DOOR,
+    ]);
+
+    expect(beforeFinding.includes("corridor-east-southeast-1")).toBe(false);
+    expect(afterFinding.includes("corridor-east-southeast-1")).toBe(true);
+  });
+
+  it("lets a hero walk through an ordinary door without finding anything", () => {
+    const neighbors = neighborIdentifiers("corridor-north-1");
+
+    expect(neighbors.includes("level-1-room-north")).toBe(true);
   });
 });

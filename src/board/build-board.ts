@@ -1,18 +1,15 @@
 import type { Board } from "./board.ts";
 import { createConnection, type Connection } from "./connection.ts";
-import type { Doorway } from "./doorway.ts";
 import type { Space } from "./space.ts";
 
 export function buildBoard(
   spaces: Space[],
-  doorways: Doorway[],
   oneWayConnections: Connection[],
 ): Board {
   const connections = expandSymmetricConnections(oneWayConnections);
 
   return {
     spaces,
-    doorways,
     connections,
   };
 }
@@ -26,6 +23,7 @@ function expandSymmetricConnections(connections: Connection[]): Connection[] {
       createConnection(
         connection.toSpaceIdentifier,
         connection.fromSpaceIdentifier,
+        connection.kind,
       ),
     );
   }

@@ -75,3 +75,13 @@ PR does not invent any.
   This PR models them as two adjacent spaces (start vs safe chamber) so later
   rules can treat "return to Start" and "no monsters in the Main Gallery"
   separately. Confirm whether a pawn occupies one circle or two.
+
+## DUN-2 — Door kind lives on the connection (10 Nov 2026)
+
+Doorways used to be a second list beside connections. Secret doors then
+either copied an open hallway (so a hero walked through without finding
+them) or had no hallway at all (so they could never be used). Each link
+between two spaces is now one connection whose kind is open, door, or
+secret door. Movement reads that kind: a secret door is closed until the
+party has found it. The old "connections are always symmetric" check went
+away because `buildBoard` already writes the reverse link.
