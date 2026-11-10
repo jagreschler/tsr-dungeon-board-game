@@ -110,3 +110,9 @@ Numbered rooms fill the six color zones. Counts follow the 1981 board:
 
 Corridors fill the halls between rooms. This slice adds 353 corridor
 traces so later connections can name both ends.
+
+## DUN-5-5 — Open hallway connections (10 Nov 2026)
+
+Open hallways join the traces into one board. The old Level 1 sketch
+files go away. A hero can already walk the Main Staircase into the Main
+Gallery. Doors and secret doors come next.
