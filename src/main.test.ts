@@ -22,6 +22,14 @@ describe("title page", () => {
     expect(boards.length).toBe(1);
     expect(boards[0]).toBeInstanceOf(SVGSVGElement);
 
+    const heroToken = document.querySelector(
+      "#app .dungeon-board [data-piece-kind='hero']",
+    );
+    expect(heroToken === null).toBe(false);
+    expect(heroToken?.getAttribute("data-space-identifier")).toBe(
+      "main-staircase",
+    );
+
     expect(document.body.textContent?.includes("Level 1")).toBe(false);
     expect(document.body.textContent?.includes("Great Hall")).toBe(false);
   });

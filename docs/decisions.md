@@ -185,3 +185,11 @@ an open step from the staircase, so a hero can still reach every gold
 room from Start without finding a secret door. Ordinary door markers are
 drawn on the room wall that faces the neighbor, not halfway between
 space centers. Secret doors stay hidden until found.
+
+## DUN-7 — A Hero piece sits on the Main Staircase (10 Nov 2026)
+
+A piece is a small game-agnostic record: who it is, what kind of piece
+it is, and which space it sits on. That shape can later hold Clue pawns
+as easily as Dungeon! classes. This slice adds one piece, the 1981
+Hero, on the Main Staircase when the board loads, and draws it as a
+token at that space's center. There is no movement yet.
