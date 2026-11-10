@@ -193,3 +193,34 @@ it is, and which space it sits on. That shape can later hold Clue pawns
 as easily as Dungeon! classes. This slice adds one piece, the 1981
 Hero, on the Main Staircase when the board loads, and draws it as a
 token at that space's center. There is no movement yet.
+
+## DUN-9 — The Hero may move up to five spaces (10 Nov 2026)
+
+A pawn moves 0 to 5 spaces on a turn; dice are not used for movement.
+Each corridor, stair, room, or chamber counts as one space. Doors and
+secret doors do not add a space. Secret doors stay blocked until found
+(nothing is found yet). Entering a room or any chamber other than the
+Main Gallery ends the move there. The Main Staircase and Main Gallery
+can be walked through. Pawns may not land on another pawn except at
+Start or in a chamber.
+
+The search itself is game-agnostic: a board graph, a start space, a
+step limit, and rules for blocked and stopping spaces. Dungeon! passes
+those rules in. Reachable spaces (1 to 5 steps away) glow green. Clicking
+a glow moves the Hero and the glow recomputes. No turns, dice, or
+monsters yet.
+
+## DUN-9 — One class per kind of move highlight (10 Nov 2026)
+
+The green glow used three shapes in one function: a circle for the Main
+Staircase, a polygon for traced walls, and a box for corridors. Each
+shape is now its own small Generate class, and they share the glow
+paint. That is easier to read and easier to extend if another highlight
+shape shows up later. The board still looks the same.
+
+## DUN-9 — DungeonSession, not PlayDungeon (10 Nov 2026)
+
+The class that holds the live board, Hero, and glow was named
+`PlayDungeon`. Class names for nouns must not use words that can also
+be verbs, and "Play" is a verb. It is now `DungeonSession`. The glow
+and the click-to-move behavior are unchanged.
