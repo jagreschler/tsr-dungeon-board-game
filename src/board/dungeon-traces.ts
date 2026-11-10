@@ -1,3 +1,4 @@
+import { applySpaceOutline } from "./apply-space-outline.ts";
 import type { TraceTuple, TracedSpace } from "./traced-space.ts";
 import { tuplesToTraces } from "./traced-space.ts";
 import { namedTraces } from "./named-traces.ts";
@@ -24,4 +25,4 @@ export const dungeonTraces: TracedSpace[] = [
   ...namedTraces,
   ...tuplesToTraces(roomTuples, "room"),
   ...tuplesToTraces(corridorTuples, "corridor"),
-];
+].map(applySpaceOutline);

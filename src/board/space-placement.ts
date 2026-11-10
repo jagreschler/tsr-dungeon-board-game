@@ -1,4 +1,4 @@
-import type { PlacementShape, TriangleTip } from "./traced-space.ts";
+import type { OutlinePoint, PlacementShape } from "./traced-space.ts";
 
 export type SpacePlacement = {
   spaceIdentifier: string;
@@ -7,7 +7,7 @@ export type SpacePlacement = {
   width: number;
   height: number;
   shape: PlacementShape;
-  triangleTip?: TriangleTip;
+  outline: OutlinePoint[];
 };
 
 export type BoardLayout = {
@@ -21,7 +21,7 @@ export function createSpacePlacement(
   width: number,
   height: number,
   shape: PlacementShape = "rect",
-  triangleTip?: TriangleTip,
+  outline: OutlinePoint[] = [],
 ): SpacePlacement {
   return {
     spaceIdentifier,
@@ -30,6 +30,6 @@ export function createSpacePlacement(
     width,
     height,
     shape,
-    triangleTip,
+    outline,
   };
 }

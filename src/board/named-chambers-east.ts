@@ -10,7 +10,7 @@ export const namedChambersEast: TracedSpace[] = [
     width: 172,
     height: 172,
     printedName: "Wizard's Treasure Room",
-    shape: "rect",
+    shape: "polygon",
   },
   {
     identifier: "wizards-laboratory",
@@ -21,8 +21,7 @@ export const namedChambersEast: TracedSpace[] = [
     width: 140,
     height: 125,
     printedName: "Wizard's Laboratory",
-    shape: "triangle",
-    triangleTip: "north",
+    shape: "polygon",
   },
   {
     identifier: "kings-treasure-room",
@@ -33,7 +32,7 @@ export const namedChambersEast: TracedSpace[] = [
     width: 145,
     height: 141,
     printedName: "King's Treasure Room",
-    shape: "rect",
+    shape: "polygon",
   },
   {
     identifier: "kings-library",
@@ -44,8 +43,7 @@ export const namedChambersEast: TracedSpace[] = [
     width: 171,
     height: 144,
     printedName: "King's Library",
-    shape: "triangle",
-    triangleTip: "east",
+    shape: "polygon",
   },
   {
     identifier: "queens-treasure-room",
@@ -56,7 +54,7 @@ export const namedChambersEast: TracedSpace[] = [
     width: 249,
     height: 145,
     printedName: "Queen's Treasure Room",
-    shape: "rect",
+    shape: "polygon",
   },
   {
     identifier: "queens-treasure-room-annex",
@@ -67,6 +65,6 @@ export const namedChambersEast: TracedSpace[] = [
     width: 206,
     height: 190,
     printedName: "Queen's Treasure Room Annex",
-    shape: "circle",
+    shape: "polygon",
   },
 ];

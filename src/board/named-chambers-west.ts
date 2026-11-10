@@ -10,7 +10,7 @@ export const namedChambersWest: TracedSpace[] = [
     width: 116,
     height: 179,
     printedName: "Crypt",
-    shape: "rect",
+    shape: "polygon",
   },
   {
     identifier: "armory",
@@ -21,7 +21,7 @@ export const namedChambersWest: TracedSpace[] = [
     width: 201,
     height: 175,
     printedName: "Armory",
-    shape: "rect",
+    shape: "polygon",
   },
   {
     identifier: "council-room",
@@ -32,7 +32,7 @@ export const namedChambersWest: TracedSpace[] = [
     width: 167,
     height: 169,
     printedName: "Council Room",
-    shape: "rect",
+    shape: "polygon",
   },
   {
     identifier: "kitchen",
@@ -43,7 +43,7 @@ export const namedChambersWest: TracedSpace[] = [
     width: 166,
     height: 195,
     printedName: "Kitchen",
-    shape: "circle",
+    shape: "polygon",
   },
   {
     identifier: "torture-chamber",
@@ -54,7 +54,7 @@ export const namedChambersWest: TracedSpace[] = [
     width: 210,
     height: 143,
     printedName: "Torture Chamber",
-    shape: "rect",
+    shape: "polygon",
   },
   {
     identifier: "storeroom",
@@ -65,6 +65,6 @@ export const namedChambersWest: TracedSpace[] = [
     width: 190,
     height: 181,
     printedName: "Storeroom",
-    shape: "rect",
+    shape: "polygon",
   },
 ];

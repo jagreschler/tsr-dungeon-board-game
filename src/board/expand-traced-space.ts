@@ -1,3 +1,4 @@
+import { boxOutline } from "./box-outline.ts";
 import { createSpace, type Space } from "./space.ts";
 import {
   createSpacePlacement,
@@ -15,6 +16,9 @@ export function spaceFromTrace(trace: TracedSpace): Space {
 }
 
 export function placementFromTrace(trace: TracedSpace): SpacePlacement {
+  const outline =
+    trace.outline ?? boxOutline(trace.x, trace.y, trace.width, trace.height);
+
   return createSpacePlacement(
     trace.identifier,
     trace.x,
@@ -22,6 +26,6 @@ export function placementFromTrace(trace: TracedSpace): SpacePlacement {
     trace.width,
     trace.height,
     trace.shape ?? "rect",
-    trace.triangleTip,
+    outline,
   );
 }

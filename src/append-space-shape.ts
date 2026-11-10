@@ -5,9 +5,9 @@ import { boxFromPlacement } from "./board/placement-box.ts";
 import { appendChamberLabel } from "./append-chamber-label.ts";
 import {
   appendCircle,
+  appendPolygon,
   appendRect,
   appendStairSteps,
-  appendTriangle,
 } from "./append-space-geometry.ts";
 import { SVG_NAMESPACE } from "./svg-namespace.ts";
 import type { BoardBox } from "./board-grid.ts";
@@ -52,30 +52,13 @@ function appendKindShape(
   placement: SpacePlacement,
   box: BoardBox,
 ): void {
-  if (space.kind === "mainStaircase" || placement.shape === "circle") {
-    const fill =
-      space.kind === "mainStaircase" ? STAIRCASE_FILL : CHAMBER_FILL;
-    appendCircle(group, box, fill);
+  if (space.kind === "mainStaircase") {
+    appendCircle(group, box, STAIRCASE_FILL);
     return;
   }
 
-  if (space.kind === "mainGallery") {
-    appendRect(group, box, GALLERY_FILL, 14);
-    return;
-  }
-
-  if (placement.shape === "triangle") {
-    appendTriangle(group, box, CHAMBER_FILL, placement.triangleTip ?? "north");
-    return;
-  }
-
-  if (space.kind === "chamber") {
-    appendRect(group, box, CHAMBER_FILL, 4);
-    return;
-  }
-
-  if (space.kind === "room") {
-    appendRect(group, box, ROOM_FILL[space.level], 2);
+  if (usesTracedOutline(space, placement)) {
+    appendPolygon(group, placement.outline, fillForEnclosedSpace(space));
     return;
   }
 
@@ -86,4 +69,28 @@ function appendKindShape(
   }
 
   appendRect(group, box, CORRIDOR_FILL, 1);
+}
+
+function usesTracedOutline(space: Space, placement: SpacePlacement): boolean {
+  if (placement.outline.length < 4) {
+    return false;
+  }
+
+  return (
+    space.kind === "room" ||
+    space.kind === "chamber" ||
+    space.kind === "mainGallery"
+  );
+}
+
+function fillForEnclosedSpace(space: Space): string {
+  if (space.kind === "mainGallery") {
+    return GALLERY_FILL;
+  }
+
+  if (space.kind === "chamber") {
+    return CHAMBER_FILL;
+  }
+
+  return ROOM_FILL[space.level];
 }

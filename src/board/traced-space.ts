@@ -2,9 +2,12 @@ import type { ConnectionKind } from "./connection.ts";
 import type { Level } from "./level.ts";
 import type { SpaceKind } from "./space-kind.ts";
 
-export type PlacementShape = "rect" | "circle" | "triangle";
+export type PlacementShape = "rect" | "circle" | "polygon";
 
-export type TriangleTip = "north" | "east" | "south" | "west";
+export type OutlinePoint = {
+  x: number;
+  y: number;
+};
 
 export type TracedSpace = {
   identifier: string;
@@ -16,7 +19,7 @@ export type TracedSpace = {
   height: number;
   printedName?: string;
   shape?: PlacementShape;
-  triangleTip?: TriangleTip;
+  outline?: OutlinePoint[];
   isStart?: boolean;
   isSafe?: boolean;
   destinationLevel?: Level;

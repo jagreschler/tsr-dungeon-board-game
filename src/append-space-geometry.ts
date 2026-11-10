@@ -1,4 +1,3 @@
-import type { SpacePlacement } from "./board/space-placement.ts";
 import { SVG_NAMESPACE } from "./svg-namespace.ts";
 import type { BoardBox } from "./board-grid.ts";
 
@@ -21,6 +20,22 @@ export function appendRect(
   group.append(rect);
 }
 
+export function appendPolygon(
+  group: SVGGElement,
+  outline: readonly { x: number; y: number }[],
+  fill: string,
+): void {
+  const polygon = document.createElementNS(SVG_NAMESPACE, "polygon");
+  const points = outline
+    .map((point) => `${point.x},${point.y}`)
+    .join(" ");
+  polygon.setAttribute("points", points);
+  polygon.setAttribute("fill", fill);
+  polygon.setAttribute("stroke", SPACE_INK);
+  polygon.setAttribute("stroke-linejoin", "round");
+  group.append(polygon);
+}
+
 export function appendCircle(
   group: SVGGElement,
   box: BoardBox,
@@ -36,19 +51,6 @@ export function appendCircle(
   group.append(circle);
 }
 
-export function appendTriangle(
-  group: SVGGElement,
-  box: BoardBox,
-  fill: string,
-  tip: NonNullable<SpacePlacement["triangleTip"]>,
-): void {
-  const polygon = document.createElementNS(SVG_NAMESPACE, "polygon");
-  polygon.setAttribute("points", trianglePoints(box, tip));
-  polygon.setAttribute("fill", fill);
-  polygon.setAttribute("stroke", SPACE_INK);
-  group.append(polygon);
-}
-
 export function appendStairSteps(group: SVGGElement, box: BoardBox): void {
   for (const fraction of [0.35, 0.55, 0.75]) {
     const line = document.createElementNS(SVG_NAMESPACE, "line");
@@ -59,28 +61,4 @@ export function appendStairSteps(group: SVGGElement, box: BoardBox): void {
     line.setAttribute("stroke", SPACE_INK);
     group.append(line);
   }
-}
-
-function trianglePoints(
-  box: BoardBox,
-  tip: NonNullable<SpacePlacement["triangleTip"]>,
-): string {
-  const midX = box.x + box.width / 2;
-  const midY = box.y + box.height / 2;
-  const right = box.x + box.width;
-  const bottom = box.y + box.height;
-
-  if (tip === "east") {
-    return `${right},${midY} ${box.x},${box.y} ${box.x},${bottom}`;
-  }
-
-  if (tip === "south") {
-    return `${midX},${bottom} ${box.x},${box.y} ${right},${box.y}`;
-  }
-
-  if (tip === "west") {
-    return `${box.x},${midY} ${right},${box.y} ${right},${bottom}`;
-  }
-
-  return `${midX},${box.y} ${box.x},${bottom} ${right},${bottom}`;
 }

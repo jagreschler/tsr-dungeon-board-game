@@ -22,7 +22,7 @@ export const startAndStairs: TracedSpace[] = [
     width: 216,
     height: 99,
     printedName: "Main Gallery",
-    shape: "rect",
+    shape: "polygon",
     isSafe: true,
   },
   {

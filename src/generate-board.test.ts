@@ -140,6 +140,25 @@ describe("board layout", () => {
       expect(placed.has(space.identifier)).toBe(true);
     }
   });
+
+  it("gives every room and chamber a polygon outline of at least four points", () => {
+    const enclosed = dungeonBoard.spaces.filter((space) => {
+      return (
+        space.kind === "room" ||
+        space.kind === "chamber" ||
+        space.kind === "mainGallery"
+      );
+    });
+
+    for (const space of enclosed) {
+      const placement = dungeonLayout.placements.find((candidate) => {
+        return candidate.spaceIdentifier === space.identifier;
+      });
+
+      expect(placement === undefined).toBe(false);
+      expect((placement?.outline.length ?? 0) >= 4).toBe(true);
+    }
+  });
 });
 
 describe("GenerateBoard", () => {
@@ -191,6 +210,29 @@ describe("GenerateBoard", () => {
 
     for (const name of NAMED_CHAMBERS) {
       expect(labels.includes(name)).toBe(true);
+    }
+  });
+
+  it("draws every room and chamber as a polygon of at least four points", () => {
+    const svg = boardSvg();
+    const groups = svg.querySelectorAll(
+      "[data-space-kind='room'], [data-space-kind='chamber'], [data-space-kind='mainGallery']",
+    );
+
+    expect(groups.length > 0).toBe(true);
+
+    for (const group of groups) {
+      const polygon = group.querySelector("polygon");
+      const rect = group.querySelector("rect");
+      const circle = group.querySelector("circle");
+
+      expect(polygon === null).toBe(false);
+      expect(rect === null).toBe(true);
+      expect(circle === null).toBe(true);
+
+      if (polygon instanceof SVGPolygonElement) {
+        expect(polygon.points.numberOfItems >= 4).toBe(true);
+      }
     }
   });
 

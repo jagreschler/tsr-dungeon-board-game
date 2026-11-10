@@ -149,3 +149,22 @@ level 5**.
   census. The 1981 photo's left third is under the rules sheet.
 - Zone colors for the covered left third (Armory / Kitchen / Storeroom)
   follow 1981's palette applied to Wayne's geometry.
+
+## DUN-5 — Polygon wall outlines (10 Nov 2026)
+
+Placeholder rects, circles, and triangles did not match the printed walls.
+Rooms, named chambers, and the Main Gallery now draw as polygons traced from
+Jasper's white interiors (same topology image as the first DUN-5 pass).
+Armory, Crypt, and Storeroom follow their irregular walls. Kitchen and the
+Queen's Treasure Room Annex are many-sided loops instead of true circles.
+Wizard's Laboratory and King's Library keep a triangular look but use four
+or more wall points, including the door edge, so they are not 3-point
+placeholders. The Main Gallery is the lower arc of the start circle plus
+the chord across it.
+
+Unnamed rooms that the board prints as diamonds or slightly crooked
+rectangles got the same treatment. Corridor squares, the Main Staircase
+circle, and the west stairs are unchanged. Room, chamber, and corridor
+counts and the connection graph did not change. Some outlines still
+simplify a hand-drawn wall into a short polyline, so they are closer than
+before but not a perfect scan of every ink nick.
