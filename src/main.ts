@@ -1,7 +1,7 @@
 import "./style.css";
 import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
-import { heroPiece } from "./hero-piece.ts";
+import { heroPiece } from "./pieces/hero-piece.ts";
 import { DungeonSession } from "./dungeon-session.ts";
 
 const app = document.querySelector("#app");

@@ -1,6 +1,6 @@
 import { buildBoard } from "./build-board.ts";
-import { dungeonLinkTuples } from "./board-links.ts";
-import { dungeonTraces } from "./dungeon-traces.ts";
+import { dungeonLinkTuples } from "./map-data/board-links.ts";
+import { dungeonTraces } from "./map-data/dungeon-traces.ts";
 import { createConnection } from "./connection.ts";
 import { spaceFromTrace } from "./expand-traced-space.ts";
 
