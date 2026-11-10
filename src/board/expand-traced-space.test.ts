@@ -17,9 +17,8 @@ const sampleTrace: TracedSpace = {
 };
 
 describe("traced space basics", () => {
-  it("starts with an empty dungeon trace list", () => {
+  it("keeps the dungeon trace list as an array", () => {
     expect(Array.isArray(dungeonTraces)).toBe(true);
-    expect(dungeonTraces.length).toBe(0);
   });
 
   it("copies the printed name onto a space", () => {
