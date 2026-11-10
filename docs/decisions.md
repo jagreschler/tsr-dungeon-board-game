@@ -175,3 +175,13 @@ copyrighted):
 Room counts per zone follow Zenopus's treasure-card / room inventory
 (9 / 9 / 16 / 18 / 16 / 12) plus Jason's 13 named chambers with **4 on
 level 5**.
+
+## DUN-6 — Doors sit on the room wall, not the staircase (10 Nov 2026)
+
+Four gold rooms around the Main Staircase had their doors wired straight
+to Start, so the door dots sat on the circle. Each of those doors now
+opens onto the short corridor stub in front of the room; the stub stays
+an open step from the staircase, so a hero can still reach every gold
+room from Start without finding a secret door. Ordinary door markers are
+drawn on the room wall that faces the neighbor, not halfway between
+space centers. Secret doors stay hidden until found.
