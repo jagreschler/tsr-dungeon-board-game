@@ -1,4 +1,7 @@
 import "./style.css";
+import { dungeonBoard } from "./board/dungeon-board.ts";
+import { dungeonLayout } from "./board/dungeon-layout.ts";
+import { GenerateBoard } from "./generate-board.ts";
 
 const app = document.querySelector("#app");
 
@@ -10,6 +13,9 @@ const title = document.createElement("h1");
 title.className = "title";
 title.textContent = "Dungeon!";
 app.append(title);
+
+const boardDrawing = new GenerateBoard(dungeonBoard, dungeonLayout);
+app.append(boardDrawing.svg());
 
 const appVersion = document.createElement("p");
 appVersion.className = "app-version";

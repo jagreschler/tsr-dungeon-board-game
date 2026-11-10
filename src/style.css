@@ -20,8 +20,10 @@ body {
   box-sizing: border-box;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.25rem;
   padding: 1.5rem;
 }
 
@@ -36,6 +38,13 @@ body {
     0 0 28px rgba(255, 140, 40, 0.6),
     0 0 72px rgba(255, 90, 20, 0.32);
   animation: torch-flicker 3.4s ease-in-out infinite;
+}
+
+.dungeon-board {
+  width: min(96vw, 1280px);
+  height: auto;
+  background: #1a1410;
+  border: 1px solid rgba(243, 226, 196, 0.18);
 }
 
 .app-version {
