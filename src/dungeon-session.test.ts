@@ -2,11 +2,11 @@ import { describe, expect, it } from "vitest";
 import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
 import { heroPiece } from "./hero-piece.ts";
-import { PlayDungeon } from "./play-dungeon.ts";
+import { DungeonSession } from "./dungeon-session.ts";
 
-describe("PlayDungeon", () => {
+describe("DungeonSession", () => {
   it("moves the Hero onto a highlighted space when that glow is clicked", () => {
-    const play = new PlayDungeon(dungeonBoard, dungeonLayout, heroPiece);
+    const play = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
     const svg = play.element();
     const galleryGlow = svg.querySelector(
       "[data-move-highlight='main-gallery']",

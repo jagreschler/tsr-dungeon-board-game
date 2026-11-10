@@ -217,3 +217,10 @@ Staircase, a polygon for traced walls, and a box for corridors. Each
 shape is now its own small Generate class, and they share the glow
 paint. That is easier to read and easier to extend if another highlight
 shape shows up later. The board still looks the same.
+
+## DUN-9 — DungeonSession, not PlayDungeon (10 Nov 2026)
+
+The class that holds the live board, Hero, and glow was named
+`PlayDungeon`. Class names for nouns must not use words that can also
+be verbs, and "Play" is a verb. It is now `DungeonSession`. The glow
+and the click-to-move behavior are unchanged.

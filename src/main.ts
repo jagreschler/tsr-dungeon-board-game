@@ -2,7 +2,7 @@ import "./style.css";
 import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
 import { heroPiece } from "./hero-piece.ts";
-import { PlayDungeon } from "./play-dungeon.ts";
+import { DungeonSession } from "./dungeon-session.ts";
 
 const app = document.querySelector("#app");
 
@@ -15,7 +15,7 @@ title.className = "title";
 title.textContent = "Dungeon!";
 app.append(title);
 
-app.append(new PlayDungeon(dungeonBoard, dungeonLayout, heroPiece).element());
+app.append(new DungeonSession(dungeonBoard, dungeonLayout, heroPiece).element());
 
 const appVersion = document.createElement("p");
 appVersion.className = "app-version";

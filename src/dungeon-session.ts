@@ -7,7 +7,7 @@ import { listSpacesAHeroCanMoveTo } from "./list-spaces-a-hero-can-move-to.ts";
 import { placePieceOnSpace, type Piece } from "./piece.ts";
 import { SVG_NAMESPACE } from "./svg-namespace.ts";
 
-export class PlayDungeon {
+export class DungeonSession {
   private piece: Piece;
   private overlay: SVGGElement | undefined;
 
