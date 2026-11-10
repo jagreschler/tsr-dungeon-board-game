@@ -3,10 +3,10 @@ import { findSpace } from "./board/find-space.ts";
 import { findPlacement } from "./board/find-placement.ts";
 import { boxFromPlacement } from "./board/placement-box.ts";
 import type { BoardLayout, SpacePlacement } from "./board/space-placement.ts";
+import { GenerateBoxMoveHighlight } from "./generate-box-move-highlight.ts";
+import { GenerateCircleMoveHighlight } from "./generate-circle-move-highlight.ts";
+import { GenerateOutlineMoveHighlight } from "./generate-outline-move-highlight.ts";
 import { SVG_NAMESPACE } from "./svg-namespace.ts";
-
-const GLOW_FILL = "rgba(80, 220, 120, 0.42)";
-const GLOW_STROKE = "rgba(120, 255, 170, 0.95)";
 
 export class GenerateMoveHighlights {
   constructor(
@@ -27,7 +27,9 @@ export class GenerateMoveHighlights {
 
       const highlight = document.createElementNS(SVG_NAMESPACE, "g");
       highlight.setAttribute("data-move-highlight", spaceIdentifier);
-      appendGlowShape(highlight, this.board, spaceIdentifier, placement);
+      highlight.append(
+        shapeForPlacement(this.board, spaceIdentifier, placement),
+      );
       group.append(highlight);
     }
 
@@ -35,48 +37,21 @@ export class GenerateMoveHighlights {
   }
 }
 
-function appendGlowShape(
-  group: SVGGElement,
+function shapeForPlacement(
   board: Board,
   spaceIdentifier: string,
   placement: SpacePlacement,
-): void {
+): SVGElement {
   const space = findSpace(board, spaceIdentifier);
   const box = boxFromPlacement(placement);
 
   if (space !== undefined && space.kind === "mainStaircase") {
-    const circle = document.createElementNS(SVG_NAMESPACE, "circle");
-    circle.setAttribute("cx", String(box.x + box.width / 2));
-    circle.setAttribute("cy", String(box.y + box.height / 2));
-    circle.setAttribute("r", String(Math.min(box.width, box.height) / 2));
-    paintGlow(circle);
-    group.append(circle);
-    return;
+    return new GenerateCircleMoveHighlight(box).element();
   }
 
   if (placement.outline.length >= 4) {
-    const polygon = document.createElementNS(SVG_NAMESPACE, "polygon");
-    polygon.setAttribute(
-      "points",
-      placement.outline.map((point) => `${point.x},${point.y}`).join(" "),
-    );
-    paintGlow(polygon);
-    group.append(polygon);
-    return;
+    return new GenerateOutlineMoveHighlight(placement.outline).element();
   }
 
-  const rect = document.createElementNS(SVG_NAMESPACE, "rect");
-  rect.setAttribute("x", String(box.x));
-  rect.setAttribute("y", String(box.y));
-  rect.setAttribute("width", String(box.width));
-  rect.setAttribute("height", String(box.height));
-  rect.setAttribute("rx", "2");
-  paintGlow(rect);
-  group.append(rect);
-}
-
-function paintGlow(shape: SVGElement): void {
-  shape.setAttribute("fill", GLOW_FILL);
-  shape.setAttribute("stroke", GLOW_STROKE);
-  shape.setAttribute("stroke-width", "3");
+  return new GenerateBoxMoveHighlight(box).element();
 }

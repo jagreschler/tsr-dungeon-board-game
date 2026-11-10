@@ -209,3 +209,11 @@ step limit, and rules for blocked and stopping spaces. Dungeon! passes
 those rules in. Reachable spaces (1 to 5 steps away) glow green. Clicking
 a glow moves the Hero and the glow recomputes. No turns, dice, or
 monsters yet.
+
+## DUN-9 — One class per kind of move highlight (10 Nov 2026)
+
+The green glow used three shapes in one function: a circle for the Main
+Staircase, a polygon for traced walls, and a box for corridors. Each
+shape is now its own small Generate class, and they share the glow
+paint. That is easier to read and easier to extend if another highlight
+shape shows up later. The board still looks the same.
