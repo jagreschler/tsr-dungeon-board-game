@@ -100,3 +100,8 @@ the named chambers. The trace list starts empty.
 The 1981 board names 13 chambers plus the Main Staircase. This slice adds
 those traces so later rooms and corridors can attach to real identifiers.
 The Main Staircase is the start. The Main Gallery is safe.
+
+## DUN-5-3 — Numbered rooms by zone (10 Nov 2026)
+
+Numbered rooms fill the six color zones. Counts follow the 1981 board:
+9, 9, 16, 18, 16, and 12. Named chambers stay on their own traces.
