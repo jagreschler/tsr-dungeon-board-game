@@ -47,6 +47,23 @@ body {
   border: 1px solid rgba(243, 226, 196, 0.18);
 }
 
+[data-move-highlight] {
+  cursor: pointer;
+  filter: drop-shadow(0 0 6px rgba(90, 255, 150, 0.9));
+  animation: move-glow-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes move-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
 .app-version {
   position: fixed;
   right: 0.75rem;
@@ -82,7 +99,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .title {
+  .title,
+  [data-move-highlight] {
     animation: none;
   }
 }

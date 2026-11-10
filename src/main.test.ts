@@ -30,6 +30,11 @@ describe("title page", () => {
       "main-staircase",
     );
 
+    const highlights = document.querySelectorAll(
+      "#app .dungeon-board [data-move-highlight]",
+    );
+    expect(highlights.length > 0).toBe(true);
+
     expect(document.body.textContent?.includes("Level 1")).toBe(false);
     expect(document.body.textContent?.includes("Great Hall")).toBe(false);
   });

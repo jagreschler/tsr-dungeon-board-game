@@ -15,3 +15,10 @@ export function createPiece(
     spaceIdentifier,
   };
 }
+
+export function placePieceOnSpace(
+  piece: Piece,
+  spaceIdentifier: string,
+): Piece {
+  return createPiece(piece.identifier, piece.kind, spaceIdentifier);
+}

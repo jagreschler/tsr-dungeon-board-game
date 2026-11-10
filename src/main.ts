@@ -1,9 +1,8 @@
 import "./style.css";
 import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
-import { GenerateBoard } from "./generate-board.ts";
-import { GenerateHeroPiece } from "./generate-hero-piece.ts";
 import { heroPiece } from "./hero-piece.ts";
+import { PlayDungeon } from "./play-dungeon.ts";
 
 const app = document.querySelector("#app");
 
@@ -16,9 +15,7 @@ title.className = "title";
 title.textContent = "Dungeon!";
 app.append(title);
 
-const boardSvg = new GenerateBoard(dungeonBoard, dungeonLayout).svg();
-boardSvg.append(new GenerateHeroPiece(heroPiece, dungeonLayout).element());
-app.append(boardSvg);
+app.append(new PlayDungeon(dungeonBoard, dungeonLayout, heroPiece).element());
 
 const appVersion = document.createElement("p");
 appVersion.className = "app-version";
