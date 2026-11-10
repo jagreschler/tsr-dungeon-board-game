@@ -94,3 +94,9 @@ The 1981 board will be one list of traced spaces, not a Level 1 sketch.
 This slice adds the record types, a four-point box outline helper, and
 `printedName` on `Space` so later slices can name the Main Staircase and
 the named chambers. The trace list starts empty.
+
+## DUN-5-2 — Start, stairs, and named chambers (10 Nov 2026)
+
+The 1981 board names 13 chambers plus the Main Staircase. This slice adds
+those traces so later rooms and corridors can attach to real identifiers.
+The Main Staircase is the start. The Main Gallery is safe.
