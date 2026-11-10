@@ -105,3 +105,8 @@ The Main Staircase is the start. The Main Gallery is safe.
 
 Numbered rooms fill the six color zones. Counts follow the 1981 board:
 9, 9, 16, 18, 16, and 12. Named chambers stay on their own traces.
+
+## DUN-5-4 — Corridor traces (10 Nov 2026)
+
+Corridors fill the halls between rooms. This slice adds 353 corridor
+traces so later connections can name both ends.
