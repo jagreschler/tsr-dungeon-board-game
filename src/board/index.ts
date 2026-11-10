@@ -5,7 +5,6 @@ export type { Space } from "./space.ts";
 export type { SpaceKind } from "./space-kind.ts";
 export { buildBoard } from "./build-board.ts";
 export { findSpace } from "./find-space.ts";
-export { isLevel } from "./level.ts";
 export { level1Board } from "./level-1-board.ts";
 export type { FoundSecretDoor } from "./list-neighbor-spaces-a-hero-can-step-to.ts";
 export { listNeighborSpacesAHeroCanStepTo } from "./list-neighbor-spaces-a-hero-can-step-to.ts";

@@ -84,4 +84,6 @@ them) or had no hallway at all (so they could never be used). Each link
 between two spaces is now one connection whose kind is open, door, or
 secret door. Movement reads that kind: a secret door is closed until the
 party has found it. The old "connections are always symmetric" check went
-away because `buildBoard` already writes the reverse link.
+away because `buildBoard` already writes the reverse link. Unused
+`isLevel`, `MINIMUM_LEVEL`, and `MAXIMUM_LEVEL` were deleted; the `Level`
+type stays because spaces still use it.
