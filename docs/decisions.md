@@ -122,3 +122,9 @@ Gallery. Doors and secret doors come next.
 Ordinary doors join rooms to halls. Secret doors block a hero until the
 party has found them. Connection kind still lives on the link, not on
 the space.
+
+## DUN-5-7 — Draw the traced board (10 Nov 2026)
+
+The app now draws one SVG of the whole 1981 board. Rooms and chambers
+use four-point box outlines until the next slice traces real walls.
+`main.ts` only mounts the title and that SVG.
