@@ -1,4 +1,4 @@
-import type { Board } from "./board";
+import type { Board } from "./board.ts";
 
 export function hasSymmetricConnections(board: Board): boolean {
   for (const connection of board.connections) {

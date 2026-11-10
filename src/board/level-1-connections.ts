@@ -1,4 +1,4 @@
-import { createConnection, type Connection } from "./connection";
+import { createConnection, type Connection } from "./connection.ts";
 
 export const level1Connections: Connection[] = [
   createConnection("main-staircase", "main-gallery"),

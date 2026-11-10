@@ -1,7 +1,7 @@
-import type { Board } from "./board";
-import { createConnection, type Connection } from "./connection";
-import type { Doorway } from "./doorway";
-import type { Space } from "./space";
+import type { Board } from "./board.ts";
+import { createConnection, type Connection } from "./connection.ts";
+import type { Doorway } from "./doorway.ts";
+import type { Space } from "./space.ts";
 
 export function buildBoard(
   spaces: Space[],

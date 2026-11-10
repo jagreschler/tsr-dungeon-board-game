@@ -1,5 +1,5 @@
-import type { Level } from "./level";
-import type { SpaceKind } from "./space-kind";
+import type { Level } from "./level.ts";
+import type { SpaceKind } from "./space-kind.ts";
 
 export type Space = {
   identifier: string;

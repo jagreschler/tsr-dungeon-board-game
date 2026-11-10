@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { level1Board } from "./level-1-board";
-import { findSpace } from "./find-space";
-import { hasSymmetricConnections } from "./has-symmetric-connections";
-import { listSpacesByKind } from "./list-spaces";
+import { level1Board } from "./level-1-board.ts";
+import { findSpace } from "./find-space.ts";
+import { hasSymmetricConnections } from "./has-symmetric-connections.ts";
+import { listSpacesByKind } from "./list-spaces.ts";
 
 const LEVEL_1_ROOM_COUNT = 9;
 const LEVEL_1_CHAMBER_COUNT = 1;

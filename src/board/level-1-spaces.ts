@@ -1,4 +1,4 @@
-import { createSpace, type Space } from "./space";
+import { createSpace, type Space } from "./space.ts";
 
 const GOLD_LEVEL = 1 as const;
 

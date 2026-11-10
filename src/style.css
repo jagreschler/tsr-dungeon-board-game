@@ -1,0 +1,79 @@
+:root {
+  color-scheme: dark;
+  --ink: #140e0b;
+  --parchment: #f3e2c4;
+  --ember: rgba(255, 154, 60, 0.34);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, "Palatino Linotype", Palatino, serif;
+  color: var(--parchment);
+  background:
+    radial-gradient(circle at 50% 42%, var(--ember), transparent 26%),
+    radial-gradient(circle at 50% 55%, rgba(255, 80, 20, 0.14), transparent 58%),
+    var(--ink);
+}
+
+#app {
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(3.25rem, 14vw, 7rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-shadow:
+    0 0 10px rgba(255, 196, 120, 0.9),
+    0 0 28px rgba(255, 140, 40, 0.6),
+    0 0 72px rgba(255, 90, 20, 0.32);
+  animation: torch-flicker 3.4s ease-in-out infinite;
+}
+
+.app-version {
+  position: fixed;
+  right: 0.75rem;
+  bottom: 0.6rem;
+  margin: 0;
+  color: rgba(243, 226, 196, 0.55);
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+@keyframes torch-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  46% {
+    opacity: 0.9;
+  }
+
+  58% {
+    opacity: 1;
+  }
+
+  73% {
+    opacity: 0.84;
+  }
+
+  82% {
+    opacity: 0.96;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title {
+    animation: none;
+  }
+}

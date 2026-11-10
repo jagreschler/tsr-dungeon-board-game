@@ -1,4 +1,4 @@
-import { createDoorway, type Doorway } from "./doorway";
+import { createDoorway, type Doorway } from "./doorway.ts";
 
 export const level1Doorways: Doorway[] = [
   createDoorway(
