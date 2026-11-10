@@ -135,3 +135,15 @@ Named chambers and numbered rooms now use traced wall polygons instead
 of four-point boxes. Corridors stay as boxes. The GenerateBoard outline
 test still requires at least four points, and the drawn rooms follow
 the 1981 walls.
+
+## DUN-5-8 — Guard wall outlines with a reference test (10 Nov 2026)
+
+Chamber and room wall outlines are hand-traced numbers, so this test
+keeps a snapshot of every outline and fails by name if any coordinate
+changes. An intentional retrace updates the snapshot on purpose with
+`npx vitest run -u`. The same test checks that each outline has at
+least three points, every point sits inside the 2200×1702 Jasper
+tracing image, and the outline stays close to that space's traced box.
+The four earlier tests were dropped only to match PR 4 byte-for-byte,
+and they still guard the room counts, corridor count, named chambers,
+and trace basics.
