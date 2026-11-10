@@ -147,3 +147,31 @@ tracing image, and the outline stays close to that space's traced box.
 The four earlier tests were dropped only to match PR 4 byte-for-byte,
 and they still guard the room counts, corridor count, named chambers,
 and trace basics.
+
+## DUN-5 — One flat board and tracing sources (10 Nov 2026)
+
+The 1981 board is one flat map, not six stacked floors. The game draws
+that single map. `level` on each space is only the colored zone (1–6) the
+rules use for monster/treasure decks and hero depth limits. File names,
+exports, tests, the SVG label, and new docs headings say "board" / "dungeon
+board", not "Level 1". Unnamed rooms dropped the `level-1-room-*` ids
+(`room-north`, `room-east`, and so on).
+
+The start space is the **Main Staircase**. The safe chamber is the **Main
+Gallery**. Classes stay Superhero, Hero, Elf, and Wizard. A scan of this
+branch found no 2012 terms (Great Hall, Fighter, Rogue, Cleric) in code to
+rename; tests now reject "Great Hall" in the UI and printed names.
+
+Traced from (downloaded to `/tmp` only; not committed — the photos are
+copyrighted):
+
+- Jasper line art, rotated 90° clockwise, for corridor squares, room
+  outlines, and `S` secret-door marks
+- Wayne's Books 1975 photo for printed chamber names and overall geometry
+- BGG pic950059 for zooming labels and doors
+- BGG pic756723 (1981 board, left third covered) for zone colors: gold,
+  green, orange, magenta, red, blue
+
+Room counts per zone follow Zenopus's treasure-card / room inventory
+(9 / 9 / 16 / 18 / 16 / 12) plus Jason's 13 named chambers with **4 on
+level 5**.
