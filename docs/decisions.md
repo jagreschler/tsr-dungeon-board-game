@@ -128,3 +128,10 @@ the space.
 The app now draws one SVG of the whole 1981 board. Rooms and chambers
 use four-point box outlines until the next slice traces real walls.
 `main.ts` only mounts the title and that SVG.
+
+## DUN-5-8 — Real wall outlines (10 Nov 2026)
+
+Named chambers and numbered rooms now use traced wall polygons instead
+of four-point boxes. Corridors stay as boxes. The GenerateBoard outline
+test still requires at least four points, and the drawn rooms follow
+the 1981 walls.
