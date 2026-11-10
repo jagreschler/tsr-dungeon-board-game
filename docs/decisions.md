@@ -116,3 +116,9 @@ traces so later connections can name both ends.
 Open hallways join the traces into one board. The old Level 1 sketch
 files go away. A hero can already walk the Main Staircase into the Main
 Gallery. Doors and secret doors come next.
+
+## DUN-5-6 — Doors and secret doors (10 Nov 2026)
+
+Ordinary doors join rooms to halls. Secret doors block a hero until the
+party has found them. Connection kind still lives on the link, not on
+the space.
