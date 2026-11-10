@@ -87,3 +87,10 @@ party has found it. The old "connections are always symmetric" check went
 away because `buildBoard` already writes the reverse link. Unused
 `isLevel`, `MINIMUM_LEVEL`, and `MAXIMUM_LEVEL` were deleted; the `Level`
 type stays because spaces still use it.
+
+## DUN-5-1 — Traced space records (10 Nov 2026)
+
+The 1981 board will be one list of traced spaces, not a Level 1 sketch.
+This slice adds the record types, a four-point box outline helper, and
+`printedName` on `Space` so later slices can name the Main Staircase and
+the named chambers. The trace list starts empty.
