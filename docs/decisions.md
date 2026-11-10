@@ -87,3 +87,14 @@ party has found it. The old "connections are always symmetric" check went
 away because `buildBoard` already writes the reverse link. Unused
 `isLevel`, `MINIMUM_LEVEL`, and `MAXIMUM_LEVEL` were deleted; the `Level`
 type stays because spaces still use it.
+
+## DUN-4 — Draw Level 1 as SVG (10 Nov 2026)
+
+The board graph still has no real map coordinates. Level 1 spaces now have a
+separate grid layout (`level-1-layout.ts`) so drawing does not live on the
+space records. `GenerateBoard` turns that layout into an SVG: gold rooms,
+gray corridor squares, a circle for the Main Staircase, a rounded rectangle
+for the Main Gallery, step marks on stairs, and a marker for ordinary doors.
+Secret doors stay hidden because they have not been found. The grid is a
+rough sketch of the inner ring around Start. Align it to the 1981 board in a
+later PR.

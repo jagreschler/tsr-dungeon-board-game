@@ -17,6 +17,9 @@ describe("title page", () => {
       throw new Error("missing title");
     }
     expect(title.textContent).toBe("Dungeon!");
+
+    const board = document.querySelector("#app .dungeon-board");
+    expect(board).toBeInstanceOf(SVGSVGElement);
   });
 });
 
