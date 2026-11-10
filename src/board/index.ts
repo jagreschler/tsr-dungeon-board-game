@@ -1,0 +1,12 @@
+export type { Board } from "./board";
+export type { Connection } from "./connection";
+export type { Doorway, DoorwayKind } from "./doorway";
+export type { Level } from "./level";
+export type { Space } from "./space";
+export type { SpaceKind } from "./space-kind";
+export { buildBoard } from "./build-board";
+export { findSpace } from "./find-space";
+export { hasSymmetricConnections } from "./has-symmetric-connections";
+export { isLevel } from "./level";
+export { level1Board } from "./level-1-board";
+export { listSpacesByKind } from "./list-spaces";
