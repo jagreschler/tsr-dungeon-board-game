@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { boxOutline } from "./box-outline.ts";
-import { dungeonTraces } from "./dungeon-traces.ts";
+import { dungeonTraces } from "./map-data/dungeon-traces.ts";
 import { placementFromTrace, spaceFromTrace } from "./expand-traced-space.ts";
 import type { TracedSpace } from "./traced-space.ts";
 

@@ -224,3 +224,22 @@ The class that holds the live board, Hero, and glow was named
 `PlayDungeon`. Class names for nouns must not use words that can also
 be verbs, and "Play" is a verb. It is now `DungeonSession`. The glow
 and the click-to-move behavior are unchanged.
+
+## DUN-8 — Source files live in a few named folders (10 Nov 2026)
+
+The `src/` root had become a flat pile of drawing, movement, and piece
+files next to `main.ts`. They now sit in folders by what they are:
+
+- `src/board/` — the board graph, spaces, and layout
+- `src/board/map-data/` — traced map data, grouped by kind (corridors,
+  rooms, open links, door links, secret-door links, chambers, outlines).
+  `dungeon-traces.ts` and `board-links.ts` stay at the map-data root
+  because they gather those groups
+- `src/rendering/` — Generate classes and SVG helpers that draw the board
+- `src/movement/` — which spaces a hero can step to, reachability, and
+  the 1981 move rules
+- `src/pieces/` — the generic piece record and the Hero
+
+`main.ts`, `dungeon-session.ts`, and `style.css` stay at the root.
+Pieces, movement, and rendering stay reusable for a later Clue game.
+Nothing about how the game plays changed; only import paths moved.

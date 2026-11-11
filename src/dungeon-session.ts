@@ -1,11 +1,11 @@
 import type { Board } from "./board/board.ts";
 import type { BoardLayout } from "./board/space-placement.ts";
-import { GenerateBoard } from "./generate-board.ts";
-import { GenerateHeroPiece } from "./generate-hero-piece.ts";
-import { GenerateMoveHighlights } from "./generate-move-highlights.ts";
-import { listSpacesAHeroCanMoveTo } from "./list-spaces-a-hero-can-move-to.ts";
-import { placePieceOnSpace, type Piece } from "./piece.ts";
-import { SVG_NAMESPACE } from "./svg-namespace.ts";
+import { GenerateBoard } from "./rendering/generate-board.ts";
+import { GenerateHeroPiece } from "./rendering/generate-hero-piece.ts";
+import { GenerateMoveHighlights } from "./rendering/generate-move-highlights.ts";
+import { listSpacesAHeroCanMoveTo } from "./movement/list-spaces-a-hero-can-move-to.ts";
+import { placePieceOnSpace, type Piece } from "./pieces/piece.ts";
+import { SVG_NAMESPACE } from "./rendering/svg-namespace.ts";
 
 export class DungeonSession {
   private piece: Piece;

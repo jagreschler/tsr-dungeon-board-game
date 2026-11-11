@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
-import { heroPiece } from "./hero-piece.ts";
+import { heroPiece } from "./pieces/hero-piece.ts";
 import { DungeonSession } from "./dungeon-session.ts";
 
 describe("DungeonSession", () => {
