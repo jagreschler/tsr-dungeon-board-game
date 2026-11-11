@@ -56,6 +56,16 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(reachable.has("corridor-1252-704")).toBe(true);
   });
 
+  it("does not jump the wall from corridor-1068-485 to corridor-1053-429", () => {
+    const reachable = listSpacesAHeroCanMoveTo(
+      dungeonBoard,
+      "corridor-1068-485",
+      [],
+    );
+
+    expect(reachable.has("corridor-1053-429")).toBe(false);
+  });
+
   it("does not land on another pawn in a corridor", () => {
     const reachable = listSpacesAHeroCanMoveTo(
       dungeonBoard,
