@@ -30,6 +30,9 @@ export class DungeonSession {
       void import("./rendering/bind-reference-overlay.ts").then((module) => {
         module.bindReferenceOverlay(svg, true);
       });
+      void import("./cards/bind-monster-card-preview.ts").then((module) => {
+        module.bindMonsterCardPreview(svg, true);
+      });
     }
     return svg;
   }

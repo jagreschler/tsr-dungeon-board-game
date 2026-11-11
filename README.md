@@ -27,6 +27,10 @@ To line the drawing up with the traced spaces while working locally:
 
 The overlay is off by default. If the file is missing, the key does nothing. The production build never includes or references the image.
 
+### Local monster card preview
+
+Monster draws are not in the game yet. In `npm run dev` only, press **G** to preview the Level 1 Goblins clip and card. Press **Shift+G** to skip the clip and show the card only. Production builds do not bind this key.
+
 ## Test
 
 ```bash

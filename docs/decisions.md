@@ -422,6 +422,23 @@ reachability shortlist and look unambiguous.
 Adding them lets a hero reach 11 more spaces, so the known-unreachable
 list goes from 111 to 100. Other listed gaps stay for later passes.
 
+## DUN-18 — First monster card and clip (11 Nov 2026)
+
+This slice adds the Level 1 Goblins card picture and a short mute clip.
+The game still cannot draw a monster during a real turn. A local-only
+**G** key (Shift+G for the card with no clip) shows the overlay so we
+can check the art. Production play does not bind that key.
+
+The lookup builds file names as `L<level>-<monster>` in lowercase
+(`L1-goblins.jpg` / `.mp4`). If the monster is unknown, or we have no
+clip, the clip is left off and the card can show on its own. The clip
+plays first with Skip, then the card sits on a dimmed board with Close.
+The blank box on the art gets the name Goblins and the 1981 numbers:
+Lightning 6, Fireball 2, Wizard 5, Superhero 2, Hero 4, Elf 3. Monster
+cards use a red border. The overlay publishes `CardRevealed` and
+`OverlayClosed` so later encounter rules can listen without living
+inside the picture code.
+
 ## DUN-17 — No open hall through the gold/magenta wall (11 Nov 2026)
 
 A hero on `corridor-1068-485` (level 1, gold) could highlight

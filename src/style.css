@@ -82,6 +82,104 @@ body {
   }
 }
 
+.monster-card-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 6, 4, 0.72);
+  padding: 0.75rem;
+}
+
+.monster-card-overlay-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  max-height: 100%;
+}
+
+.monster-card-overlay-step[hidden] {
+  display: none;
+}
+
+.monster-card-overlay video {
+  display: block;
+  width: min(52vh, 360px);
+  max-width: 86vw;
+  max-height: calc(100vh - 6rem);
+  object-fit: contain;
+  border: 5px solid #9b1b1b;
+  background: #1a0a0a;
+}
+
+.monster-card {
+  position: relative;
+  width: min(52vh, 360px);
+  max-width: 86vw;
+  border: 5px solid #9b1b1b;
+  box-shadow: 0 0 28px rgba(0, 0, 0, 0.65);
+  background: #2a0c0c;
+}
+
+.monster-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 6rem);
+  object-fit: contain;
+}
+
+.monster-card-stats {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 5%;
+  height: 19%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #f3e2c4;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+
+.monster-card-stats-name {
+  margin: 0 0 0.2em;
+  font-size: clamp(0.7rem, 2.1vh, 1.05rem);
+  letter-spacing: 0.08em;
+}
+
+.monster-card-stats-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 0.75rem;
+  margin: 0;
+  font-size: clamp(0.5rem, 1.5vh, 0.78rem);
+  line-height: 1.25;
+}
+
+.monster-card-stats-columns ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.monster-card-overlay button {
+  font-family: Georgia, "Palatino Linotype", Palatino, serif;
+  font-size: 1rem;
+  color: #140e0b;
+  background: #f3e2c4;
+  border: 1px solid #cbb892;
+  border-radius: 0.2rem;
+  padding: 0.35rem 1.1rem;
+  cursor: pointer;
+}
+
 .app-version {
   position: fixed;
   right: 0.75rem;
