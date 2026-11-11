@@ -352,6 +352,14 @@ room-4-07 / room-4-08 secret marks) stay for a later pass.
 Map-gap checks now sit together in `src/board/map-gaps.test.ts`, one
 describe block per fix, so they do not scatter into one file per level.
 
+## DUN-12 — Drop the hard-coded level 4 pair checks (11 Nov 2026)
+
+The level 4 sure-gap tests named each from/to pair in code. Those IDs
+are hard to read, and the real check is whether a hero can reach the
+spaces, which the reachability test covers. The pair checks are gone.
+Door, secret-door, and open kinds, and the removed diagonal shortcuts,
+are now checked only by eye against the reference drawing.
+
 ## DUN-13 — Map reachability from the Main Staircase (11 Nov 2026)
 
 Jason wanted a test that walks the whole board from the Main Staircase
