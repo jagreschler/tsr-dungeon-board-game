@@ -435,3 +435,5 @@ the wall stay. The known-unreachable list is unchanged (100).
 Wall-separated pairs for the one-move highlight live in
 `src/movement/wall-separated-space-pairs.ts`; the movement test walks
 that table so a new pair is data only.
+Also listed: 1122-417/1122-456 and 1122-417/1053-429; the leftover
+open hall from 1122-417 to 1053-429 is gone. Unreachable count stays 100.
