@@ -243,3 +243,21 @@ files next to `main.ts`. They now sit in folders by what they are:
 `main.ts`, `dungeon-session.ts`, and `style.css` stay at the root.
 Pieces, movement, and rendering stay reusable for a later Clue game.
 Nothing about how the game plays changed; only import paths moved.
+
+## DUN-10 — Hover names for each space, and a local tracing overlay (11 Nov 2026)
+
+Jason could not tell which numbered room was which. Every space now has an
+SVG `<title>` so the browser shows a native tooltip on hover, like "Room 3-14,
+level 3". Named chambers keep their printed name ("Storeroom, level 3"). The
+green move glows carry the same title, because they sit on top of the spaces
+and would otherwise hide the tooltip. `describeSpace` is the one function that
+builds that sentence.
+
+A local-only overlay of Jasper's fan line drawing can be toggled with the B
+key during `npm run dev`, so traces can be checked against the source image.
+The PNG stays out of the repo: it is a reference copy, not for redistribution,
+and this site is public. Drop it in gitignored `local-reference/` if you have
+it. The overlay is off by default, does nothing if the file is missing, and
+is stripped from the production build. Trace coordinates already match the
+image pixels (0,0 origin, 2200×1702), so the overlay is drawn at that size
+with no extra offset or scale.

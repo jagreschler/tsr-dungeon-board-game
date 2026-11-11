@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { describeSpace } from "../board/describe-space.ts";
 import { dungeonBoard } from "../board/dungeon-board.ts";
 import { dungeonLayout } from "../board/dungeon-layout.ts";
 import { GenerateBoard } from "./generate-board.ts";
@@ -175,6 +176,20 @@ describe("GenerateBoard", () => {
     const groups = svg.querySelectorAll("[data-space-identifier]");
 
     expect(groups.length).toBe(dungeonBoard.spaces.length);
+  });
+
+  it("gives every space a native tooltip with its readable name", () => {
+    const svg = boardSvg();
+
+    for (const space of dungeonBoard.spaces) {
+      const group = svg.querySelector(
+        `[data-space-identifier='${space.identifier}']`,
+      );
+      const title = group?.querySelector("title");
+
+      expect(title === null || title === undefined).toBe(false);
+      expect(title?.textContent).toBe(describeSpace(space));
+    }
   });
 
   it("draws rooms and corridors with different fills", () => {

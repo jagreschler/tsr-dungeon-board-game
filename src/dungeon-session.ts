@@ -26,6 +26,11 @@ export class DungeonSession {
     svg.append(overlay);
     this.overlay = overlay;
     this.drawOverlay();
+    if (import.meta.env.DEV) {
+      void import("./rendering/bind-jasper-overlay.ts").then((module) => {
+        module.bindJasperOverlay(svg, true);
+      });
+    }
     return svg;
   }
 

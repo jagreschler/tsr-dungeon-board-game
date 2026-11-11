@@ -1,3 +1,4 @@
+import { describeSpace } from "../board/describe-space.ts";
 import type { Space } from "../board/space.ts";
 import type { SpacePlacement } from "../board/space-placement.ts";
 import type { Level } from "../board/level.ts";
@@ -37,6 +38,9 @@ export function appendSpaceShape(
   group.setAttribute("data-space-identifier", space.identifier);
   group.setAttribute("data-space-kind", space.kind);
   group.setAttribute("data-space-level", String(space.level));
+  const title = document.createElementNS(SVG_NAMESPACE, "title");
+  title.textContent = describeSpace(space);
+  group.append(title);
   appendKindShape(group, space, placement, box);
 
   if (space.printedName !== undefined) {

@@ -11,3 +11,7 @@ dist/
 coverage/
 *.tsbuildinfo
 .DS_Store
+
+# Fan line-art used only on a local machine to check traces. Do not commit;
+# it is a reference copy, not for redistribution, and this repository is public.
+local-reference/
