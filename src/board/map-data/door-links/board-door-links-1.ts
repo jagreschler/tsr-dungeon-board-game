@@ -1,4 +1,4 @@
-import type { LinkTuple } from "../traced-space.ts";
+import type { LinkTuple } from "../../traced-space.ts";
 
 export const doorLinks1: LinkTuple[] = [
   ["crypt", "room-4-04", "door"],

@@ -1,4 +1,4 @@
-import type { LinkTuple } from "../traced-space.ts";
+import type { LinkTuple } from "../../traced-space.ts";
 
 export const openLinks3: LinkTuple[] = [
   ["corridor-663-725", "corridor-701-725", "open"],

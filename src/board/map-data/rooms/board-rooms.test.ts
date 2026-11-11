@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dungeonTraces } from "./dungeon-traces.ts";
+import { dungeonTraces } from "../dungeon-traces.ts";
 
 const roomsPerLevel = {
   1: 9,

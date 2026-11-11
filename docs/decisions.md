@@ -231,10 +231,13 @@ The `src/` root had become a flat pile of drawing, movement, and piece
 files next to `main.ts`. They now sit in folders by what they are:
 
 - `src/board/` — the board graph, spaces, and layout
-- `src/board/map-data/` — the traced rooms, corridors, links, and wall
-  outlines
+- `src/board/map-data/` — traced map data, grouped by kind (corridors,
+  rooms, open links, door links, secret-door links, chambers, outlines).
+  `dungeon-traces.ts` and `board-links.ts` stay at the map-data root
+  because they gather those groups
 - `src/rendering/` — Generate classes and SVG helpers that draw the board
-- `src/movement/` — reachability and the 1981 move rules
+- `src/movement/` — which spaces a hero can step to, reachability, and
+  the 1981 move rules
 - `src/pieces/` — the generic piece record and the Hero
 
 `main.ts`, `dungeon-session.ts`, and `style.css` stay at the root.

@@ -1,4 +1,4 @@
-import type { TracedSpace } from "../traced-space.ts";
+import type { TracedSpace } from "../../traced-space.ts";
 
 export const namedChambersWest: TracedSpace[] = [
   {

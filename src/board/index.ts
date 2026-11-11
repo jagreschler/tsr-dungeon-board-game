@@ -9,6 +9,4 @@ export { dungeonLayout } from "./dungeon-layout.ts";
 export { findPlacement } from "./find-placement.ts";
 export { findSpace } from "./find-space.ts";
 export type { BoardLayout, SpacePlacement } from "./space-placement.ts";
-export type { FoundSecretDoor } from "./list-neighbor-spaces-a-hero-can-step-to.ts";
-export { listNeighborSpacesAHeroCanStepTo } from "./list-neighbor-spaces-a-hero-can-step-to.ts";
 export { listSpacesByKind } from "./list-spaces.ts";

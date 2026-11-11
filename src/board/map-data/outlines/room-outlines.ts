@@ -1,4 +1,4 @@
-import type { OutlinePoint } from "../traced-space.ts";
+import type { OutlinePoint } from "../../traced-space.ts";
 
 export const roomOutlines: Record<string, OutlinePoint[]> = {
   "room-north": [{ x: 1115, y: 517 }, { x: 1141, y: 523 }, { x: 1137, y: 588 }, { x: 1054, y: 588 }, { x: 1053, y: 523 }],

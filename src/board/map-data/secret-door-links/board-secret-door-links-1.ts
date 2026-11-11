@@ -1,4 +1,4 @@
-import type { LinkTuple } from "../traced-space.ts";
+import type { LinkTuple } from "../../traced-space.ts";
 
 export const secretDoorLinks1: LinkTuple[] = [
   ["wizards-treasure-room", "corridor-1828-214", "secretDoor"],

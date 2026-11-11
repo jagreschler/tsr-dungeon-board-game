@@ -1,35 +1,23 @@
 import { describe, expect, it } from "vitest";
-import { chamberOutlines } from "./chamber-outlines.ts";
-import { namedChambersEast } from "./named-chambers-east.ts";
-import { namedChambersWest } from "./named-chambers-west.ts";
-import { startAndStairs } from "./start-and-stairs.ts";
-import type { OutlinePoint } from "../traced-space.ts";
-import type { TracedSpace } from "../traced-space.ts";
+import { roomTuples1 } from "../rooms/board-rooms-1.ts";
+import { roomTuples2 } from "../rooms/board-rooms-2.ts";
+import { roomOutlines } from "./room-outlines.ts";
+import type { OutlinePoint } from "../../traced-space.ts";
 
 // Pixel size of the rotated Jasper tracing image the outlines were taken from.
 const REFERENCE_BOARD_IMAGE_WIDTH = 2200;
 const REFERENCE_BOARD_IMAGE_HEIGHT = 1702;
 const OUTLINE_BOX_SLACK_IN_PIXELS = 40;
 
-function namedChambers(): TracedSpace[] {
-  const gallery = startAndStairs.find((trace) => {
-    return trace.identifier === "main-gallery";
-  });
-
-  if (gallery === undefined) {
-    throw new Error("Main Gallery is missing from the start-and-stairs traces.");
-  }
-
-  return [...namedChambersWest, ...namedChambersEast, gallery];
-}
-
-function printedNameOf(chamber: TracedSpace): string {
-  if (chamber.printedName === undefined) {
-    throw new Error(`${chamber.identifier} is missing a printed name.`);
-  }
-
-  return chamber.printedName;
-}
+const roomBoxes = [...roomTuples1, ...roomTuples2].map((tuple) => {
+  return {
+    identifier: tuple[0],
+    x: tuple[2],
+    y: tuple[3],
+    width: tuple[4],
+    height: tuple[5],
+  };
+});
 
 function assertOutlineStaysOnTheBoard(
   name: string,
@@ -76,40 +64,34 @@ function assertOutlineStaysOnTheBoard(
   ).toBe(true);
 }
 
-const chambers = namedChambers();
-
-describe("chamber outlines", () => {
-  it("has an outline for each of the 13 named chambers", () => {
-    expect(chambers.length).toBe(13);
-    expect(Object.keys(chamberOutlines).sort()).toEqual(
-      chambers.map((chamber) => chamber.identifier).sort(),
+describe("room outlines", () => {
+  it("has an outline for every numbered room", () => {
+    expect(Object.keys(roomOutlines).sort()).toEqual(
+      roomBoxes.map((room) => room.identifier).sort(),
     );
   });
 
   it.each(
-    chambers.map((chamber) => {
-      return {
-        name: printedNameOf(chamber),
-        identifier: chamber.identifier,
-      };
+    roomBoxes.map((room) => {
+      return { identifier: room.identifier };
     }),
-  )("$name outline matches the reference tracing", ({ identifier }) => {
-    expect(chamberOutlines[identifier]).toMatchSnapshot();
+  )("$identifier outline matches the reference tracing", ({ identifier }) => {
+    expect(roomOutlines[identifier]).toMatchSnapshot();
   });
 
-  it("keeps every chamber outline on the board image and close to its traced box", () => {
-    for (const chamber of chambers) {
-      const name = printedNameOf(chamber);
-      const outline = chamberOutlines[chamber.identifier];
+  it("keeps every room outline on the board image and close to its traced box", () => {
+    for (const room of roomBoxes) {
+      const outline = roomOutlines[room.identifier];
 
-      expect(outline === undefined, `${name} is missing an outline`).toBe(
-        false,
-      );
+      expect(
+        outline === undefined,
+        `${room.identifier} is missing an outline`,
+      ).toBe(false);
       if (outline === undefined) {
         continue;
       }
 
-      assertOutlineStaysOnTheBoard(name, outline, chamber);
+      assertOutlineStaysOnTheBoard(room.identifier, outline, room);
     }
   });
 });

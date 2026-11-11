@@ -1,7 +1,7 @@
-import type { Board } from "./board.ts";
-import type { Connection } from "./connection.ts";
-import { findSpace } from "./find-space.ts";
-import type { Space } from "./space.ts";
+import type { Board } from "../board/board.ts";
+import type { Connection } from "../board/connection.ts";
+import { findSpace } from "../board/find-space.ts";
+import type { Space } from "../board/space.ts";
 
 export type FoundSecretDoor = {
   fromSpaceIdentifier: string;

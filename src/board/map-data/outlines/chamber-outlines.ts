@@ -1,4 +1,4 @@
-import type { OutlinePoint } from "../traced-space.ts";
+import type { OutlinePoint } from "../../traced-space.ts";
 
 export const chamberOutlines: Record<string, OutlinePoint[]> = {
   "crypt": [{ x: 1041, y: 228 }, { x: 1079, y: 236 }, { x: 1072, y: 258 }, { x: 1082, y: 269 }, { x: 1083, y: 359 }, { x: 1070, y: 406 }, { x: 1041, y: 405 }, { x: 1036, y: 394 }, { x: 991, y: 394 }, { x: 978, y: 386 }, { x: 971, y: 362 }, { x: 976, y: 266 }, { x: 1031, y: 246 }],

@@ -1,4 +1,4 @@
-import type { TraceTuple } from "../traced-space.ts";
+import type { TraceTuple } from "../../traced-space.ts";
 
 export const roomTuples2: TraceTuple[] = [
   ["room-4-12", 4, 772, 1290, 67, 93],

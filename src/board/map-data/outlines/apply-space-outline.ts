@@ -1,6 +1,6 @@
 import { chamberOutlines } from "./chamber-outlines.ts";
 import { roomOutlines } from "./room-outlines.ts";
-import type { OutlinePoint, TracedSpace } from "../traced-space.ts";
+import type { OutlinePoint, TracedSpace } from "../../traced-space.ts";
 
 export function applySpaceOutline(trace: TracedSpace): TracedSpace {
   const outline =

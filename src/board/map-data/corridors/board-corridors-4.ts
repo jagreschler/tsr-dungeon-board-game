@@ -1,4 +1,4 @@
-import type { TraceTuple } from "../traced-space.ts";
+import type { TraceTuple } from "../../traced-space.ts";
 
 export const corridorTuples4: TraceTuple[] = [
   ["corridor-668-1347", 3, 643, 1311, 51, 73],

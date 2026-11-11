@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { dungeonBoard } from "./dungeon-board.ts";
 import { findSpace } from "./find-space.ts";
-import { listNeighborSpacesAHeroCanStepTo } from "./list-neighbor-spaces-a-hero-can-step-to.ts";
+import { listNeighborSpacesAHeroCanStepTo } from "../movement/list-neighbor-spaces-a-hero-can-step-to.ts";
 import { listSpacesByKind } from "./list-spaces.ts";
 
 const INNER_GOLD_ROOMS = [

@@ -1,7 +1,7 @@
 import type { Board } from "../board/board.ts";
 import { findSpace } from "../board/find-space.ts";
-import type { FoundSecretDoor } from "../board/list-neighbor-spaces-a-hero-can-step-to.ts";
-import { listNeighborSpacesAHeroCanStepTo } from "../board/list-neighbor-spaces-a-hero-can-step-to.ts";
+import type { FoundSecretDoor } from "./list-neighbor-spaces-a-hero-can-step-to.ts";
+import { listNeighborSpacesAHeroCanStepTo } from "./list-neighbor-spaces-a-hero-can-step-to.ts";
 import { listReachableSpaceIdentifiers } from "./list-reachable-space-identifiers.ts";
 
 export const SPACES_A_HERO_MAY_MOVE = 5;
