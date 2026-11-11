@@ -87,9 +87,10 @@ body {
   right: 0.75rem;
   bottom: 0.6rem;
   margin: 0;
-  color: rgba(243, 226, 196, 0.55);
+  color: #cbb892;
   font-family: system-ui, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
   line-height: 1.2;
 }
 
