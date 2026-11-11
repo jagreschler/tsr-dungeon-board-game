@@ -292,9 +292,10 @@ were left alone.
 
 **Open — not resolved.** To do: find and fix any spaces, doors, or
 connections missing from the map data compared to the 1981 reference
-sources. The first known case is now fixed (see the 11 Nov 2026
-corridor-1116-162 note below). Keep looking for other missing squares,
-doors, and links.
+sources. The corridor-1116-162 case is fixed. Level 4 sure items from
+the map-data audit are fixed (see the 11 Nov 2026 DUN-12 note below).
+Keep looking for other missing squares, doors, and links; later levels
+and the level 4 "likely" items are still open.
 
 ## DUN-11 — corridor-1116-162 continues south through a secret door (11 Nov 2026)
 
@@ -316,3 +317,30 @@ Secret-door data was only room-or-chamber to corridor before this, but
 the link tuple and movement code already treat any two spaces the same
 way, so this corridor-to-corridor door needed no extra handling. The
 corridor count is now 355. Other map gaps stay open.
+
+## DUN-12 — Level 4 sure map-data gaps (11 Nov 2026)
+
+Jason asked to fix the map-data audit one color zone at a time, sure
+items first. This slice is level 4 only. The corridor-1116-162 column
+was already fixed on DUN-11 and is not repeated here. Every item was
+checked against the 1:1 line drawing; none of the sure items had to be
+dropped.
+
+Under room-4-02 the vertical hall has S marks between
+`corridor-1244-256`, `corridor-1244-318`, and `corridor-1244-381`. Those
+two joins are secret doors now, not open halls. The drawing also shows
+thick walls between `corridor-1296-313` and the upper and lower squares,
+so the diagonal open links that skipped around the S marks are gone. The
+real east-west join into `corridor-1244-318` stays open.
+
+Also added, all as drawn:
+
+- secret door: room-4-06 to corridor-887-972
+- open: Torture Chamber to corridor-1155-1317
+- doors: room-4-09 to corridor-949-1298, room-4-10 to
+  corridor-1122-1246, room-4-12 to corridor-815-1426, room-4-13 to
+  corridor-889-1441, room-4-14 to corridor-1300-1523, room-4-17 to
+  corridor-713-1517, room-4-18 to corridor-2044-1485
+
+Level 4 "likely" items (folded squares, room-to-room gray gaps, the
+room-4-07 / room-4-08 secret marks) stay for a later pass.

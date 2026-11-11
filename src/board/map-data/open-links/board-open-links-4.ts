@@ -78,6 +78,7 @@ export const openLinks4: LinkTuple[] = [
   ["corridor-261-1309", "corridor-261-1348", "open"],
   ["corridor-261-1348", "corridor-261-1400", "open"],
   ["corridor-1429-1312", "corridor-1428-1371", "open"],
+  ["torture-chamber", "corridor-1155-1317", "open"],
   ["corridor-1155-1317", "corridor-1186-1317", "open"],
   ["corridor-1186-1317", "corridor-1218-1319", "open"],
   ["corridor-1218-1319", "corridor-1252-1319", "open"],
