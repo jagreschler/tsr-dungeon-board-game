@@ -4,7 +4,7 @@ import { roomTuples2 } from "../rooms/board-rooms-2.ts";
 import { roomOutlines } from "./room-outlines.ts";
 import type { OutlinePoint } from "../../traced-space.ts";
 
-// Pixel size of the rotated Jasper tracing image the outlines were taken from.
+// Pixel size of the rotated reference tracing image the outlines were taken from.
 const REFERENCE_BOARD_IMAGE_WIDTH = 2200;
 const REFERENCE_BOARD_IMAGE_HEIGHT = 1702;
 const OUTLINE_BOX_SLACK_IN_PIXELS = 40;

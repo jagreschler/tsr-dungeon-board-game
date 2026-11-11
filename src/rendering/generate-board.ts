@@ -7,6 +7,8 @@ import { BOARD_PADDING } from "../board/board-grid.ts";
 import { boxFromPlacement } from "../board/placement-box.ts";
 import { SVG_NAMESPACE } from "./svg-namespace.ts";
 
+const STONE_FLOOR_FILL = "#3a2e24";
+
 export class GenerateBoard {
   constructor(
     private readonly board: Board,
@@ -40,7 +42,7 @@ export class GenerateBoard {
     floor.setAttribute("y", String(parts[1] ?? 0));
     floor.setAttribute("width", String(parts[2] ?? 0));
     floor.setAttribute("height", String(parts[3] ?? 0));
-    floor.setAttribute("fill", "#1a1410");
+    floor.setAttribute("fill", STONE_FLOOR_FILL);
     svg.append(floor);
   }
 

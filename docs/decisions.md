@@ -53,7 +53,7 @@ PR does not invent any.
 
 - **Inner-ring gold vs orange/green.** On the 1981 photo the rooms around
   Start read orange or green under warm light; on the 1975 photo some of the
-  same rectangles read tan. Jasper's line art shows nine inner-ring rooms
+  same rectangles read tan. The fan line drawing shows nine inner-ring rooms
   around the Main Staircase. This PR treats that inner ring as the nine
   Level 1 rooms. Confirm each fill against a flatter 1981 scan when one is
   available.
@@ -67,10 +67,11 @@ PR does not invent any.
   west and southwest spokes are recorded with `destinationLevel: 4`. Other
   rounded stairs on Level 1 corridors are not in this PR; their destinations
   were not readable.
-- **Secret doors.** Jasper marks `S` on the west hall, the southwest cluster,
-  and east of Start. The 1981 photo's left third is covered by the rules
-  sheet, and dashed white secret doors are hard to see at this resolution.
-  The three secret doors in data follow Jasper and still need a photo check.
+- **Secret doors.** The fan line drawing marks `S` on the west hall, the
+  southwest cluster, and east of Start. The 1981 photo's left third is
+  covered by the rules sheet, and dashed white secret doors are hard to
+  see at this resolution. The three secret doors in data follow that
+  drawing and still need a photo check.
 - **Main Staircase vs Main Gallery.** Both labels sit on the central circle.
   This PR models them as two adjacent spaces (start vs safe chamber) so later
   rules can treat "return to Start" and "no monsters in the Main Gallery"
@@ -142,8 +143,8 @@ Chamber and room wall outlines are hand-traced numbers, so this test
 keeps a snapshot of every outline and fails by name if any coordinate
 changes. An intentional retrace updates the snapshot on purpose with
 `npx vitest run -u`. The same test checks that each outline has at
-least three points, every point sits inside the 2200×1702 Jasper
-tracing image, and the outline stays close to that space's traced box.
+least three points, every point sits inside the 2200×1702 reference
+  tracing image, and the outline stays close to that space's traced box.
 The four earlier tests were dropped only to match PR 4 byte-for-byte,
 and they still guard the room counts, corridor count, named chambers,
 and trace basics.
@@ -165,8 +166,8 @@ rename; tests now reject "Great Hall" in the UI and printed names.
 Traced from (downloaded to `/tmp` only; not committed — the photos are
 copyrighted):
 
-- Jasper line art, rotated 90° clockwise, for corridor squares, room
-  outlines, and `S` secret-door marks
+- Fan-made line drawing of the classic board, rotated 90° clockwise, for
+  corridor squares, room outlines, and `S` secret-door marks
 - Wayne's Books 1975 photo for printed chamber names and overall geometry
 - BGG pic950059 for zooming labels and doors
 - BGG pic756723 (1981 board, left third covered) for zone colors: gold,
@@ -243,3 +244,46 @@ files next to `main.ts`. They now sit in folders by what they are:
 `main.ts`, `dungeon-session.ts`, and `style.css` stay at the root.
 Pieces, movement, and rendering stay reusable for a later Clue game.
 Nothing about how the game plays changed; only import paths moved.
+
+## DUN-10 — Hover names for each space, and a local tracing overlay (11 Nov 2026)
+
+Jason could not tell which numbered room was which. Every space now has an
+SVG `<title>` so the browser shows a native tooltip on hover, like "Room 3-14,
+level 3". Named chambers keep their printed name ("Storeroom, level 3"). The
+green move glows carry the same title, because they sit on top of the spaces
+and would otherwise hide the tooltip. `describeSpace` is the one function that
+builds that sentence.
+
+A local-only overlay of a fan-made line drawing of the classic board can be
+toggled with the B key during `npm run dev`, so traces can be checked against
+the source image.
+The PNG stays out of the repo: it is a reference copy, not for redistribution,
+and this site is public. Drop it in gitignored `local-reference/` if you have
+it. The overlay is off by default, does nothing if the file is missing, and
+is stripped from the production build. Trace coordinates already match the
+image pixels (0,0 origin, 2200×1702), so the overlay is drawn at that size
+with no extra offset or scale.
+
+The overlay's black ink disappeared against the near-black board floor, so a
+solid gray `#808080` rectangle now sits under the PNG (same 2200×1702 box,
+same B-key toggle). The green move glow also washed out the line art, so
+while the overlay is on the board sets `data-reference-overlay-visible` and CSS
+drops the glow fill to 0.1 alpha and the stroke to 1px. Turning the overlay
+off restores the normal glow. The highlight shapes are not clipped to
+corridor outlines; that idea is deferred.
+
+## DUN-10 — Reference overlay, not a personal name (11 Nov 2026)
+
+Jason asked to keep personal names out of the code. Files, functions, CSS
+hooks, the local PNG filename, and these notes now say "reference overlay"
+and "fan-made line drawing of the classic board". The tracing credit stays;
+only the personal name went away. Nothing about how the overlay works
+changed.
+
+## DUN-10 — Lighter stone floor (11 Nov 2026)
+
+The board floor was near-black `#1a1410`, which made gaps between spaces
+hard to read as stone. It is now `#3a2e24`, a lighter brown that still
+reads as dark stone. The SVG floor rect and the `.dungeon-board`
+background use that same color. Chamber labels, door dots, and space ink
+were left alone.
