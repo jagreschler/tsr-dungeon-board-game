@@ -409,3 +409,15 @@ existing workflow.
 
 No tag is created on this branch. The first tag, `v0.2.0`, is made
 when this change merges to main.
+
+## DUN-16 — Four sure Level 5–6 links (11 Nov 2026)
+
+The line drawing shows door tabs on room-5-01 south into
+`corridor-1458-213`, room-5-04 east into `corridor-1991-179`, and
+room-6-08 east into `corridor-1817-781`. Wizard's Treasure Room also
+opens east into the unlinked square `corridor-1880-295` (no door tab;
+the chamber wall is open there). Those four links were on the
+reachability shortlist and look unambiguous.
+
+Adding them lets a hero reach 11 more spaces, so the known-unreachable
+list goes from 111 to 100. Other listed gaps stay for later passes.
