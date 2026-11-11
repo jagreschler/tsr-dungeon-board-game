@@ -347,6 +347,11 @@ Also added, all as drawn:
 Level 4 "likely" items (folded squares, room-to-room gray gaps, the
 room-4-07 / room-4-08 secret marks) stay for a later pass.
 
+## DUN-12 — Map-gap tests live in one file (11 Nov 2026)
+
+Map-gap checks now sit together in `src/board/map-gaps.test.ts`, one
+describe block per fix, so they do not scatter into one file per level.
+
 ## DUN-13 — Map reachability from the Main Staircase (11 Nov 2026)
 
 Jason wanted a test that walks the whole board from the Main Staircase
