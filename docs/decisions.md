@@ -373,3 +373,13 @@ component that does not yet join Start). Those identifiers live in an
 explicit named list. The test fails if a space is unreachable and not
 on the list, or if a listed space becomes reachable. The list can only
 shrink as later map-data fixes land. The goal is an empty list.
+
+## DUN-14 — First reachability fix: room-3-11 east door (11 Nov 2026)
+
+room-3-11 already had its west door into `corridor-478-1032`, but that
+whole west corridor run was cut off from Start. The 1981 line drawing
+shows a second door tab on the east wall, into `corridor-654-1072`,
+which is already on the reachable graph. Adding that one ordinary door
+lets a hero walk into the room from the east and out through the west
+door, so the 14 spaces in that cluster drop off the known-unreachable
+list (125 → 111). Other listed gaps stay for later passes.
