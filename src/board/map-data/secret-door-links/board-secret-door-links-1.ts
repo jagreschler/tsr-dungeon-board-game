@@ -11,4 +11,5 @@ export const secretDoorLinks1: LinkTuple[] = [
   ["room-3-09", "corridor-706-1070", "secretDoor"],
   ["room-4-16", "corridor-1354-1517", "secretDoor"],
   ["room-4-16", "corridor-1452-1517", "secretDoor"],
+  ["corridor-1116-212", "corridor-1124-272", "secretDoor"],
 ];

@@ -292,6 +292,27 @@ were left alone.
 
 **Open — not resolved.** To do: find and fix any spaces, doors, or
 connections missing from the map data compared to the 1981 reference
-sources (first known case: corridor-1116-162 on level 4 dead-ends; the
-reference shows it continuing down through a secret door to
-corridor-1124-318).
+sources. The first known case is now fixed (see the 11 Nov 2026
+corridor-1116-162 note below). Keep looking for other missing squares,
+doors, and links.
+
+## DUN-11 — corridor-1116-162 continues south through a secret door (11 Nov 2026)
+
+The magenta hall east of the Crypt used to dead-end at
+`corridor-1116-162`. The fan line drawing (1:1 with the trace
+coordinates) and the BGG board photo both show that run continuing
+straight down: one more corridor square, a secret door drawn across the
+hall, then one more square that joins `corridor-1124-318`.
+
+Boxes measured from the line drawing:
+
+- `corridor-1116-212` — level 4, x1095 y189 w43 h47 — open from
+  `corridor-1116-162`
+- `corridor-1124-272` — level 4, x1102 y252 w44 h41 — open into
+  `corridor-1124-318`
+- those two squares join with a `secretDoor` link, hidden until found
+
+Secret-door data was only room-or-chamber to corridor before this, but
+the link tuple and movement code already treat any two spaces the same
+way, so this corridor-to-corridor door needed no extra handling. The
+corridor count is now 355. Other map gaps stay open.
