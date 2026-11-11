@@ -261,3 +261,11 @@ it. The overlay is off by default, does nothing if the file is missing, and
 is stripped from the production build. Trace coordinates already match the
 image pixels (0,0 origin, 2200×1702), so the overlay is drawn at that size
 with no extra offset or scale.
+
+The overlay's black ink disappeared against the near-black board floor, so a
+solid gray `#808080` rectangle now sits under the PNG (same 2200×1702 box,
+same B-key toggle). The green move glow also washed out the line art, so
+while the overlay is on the board sets `data-jasper-overlay-visible` and CSS
+drops the glow fill to 0.1 alpha and the stroke to 1px. Turning the overlay
+off restores the normal glow. The highlight shapes are not clipped to
+corridor outlines; that idea is deferred.

@@ -6,7 +6,7 @@ import {
 export type OverlayFileIsPresent = () => Promise<boolean>;
 
 type OverlayState = {
-  image: SVGImageElement | undefined;
+  group: SVGGElement | undefined;
   visible: boolean;
   showing: boolean;
 };
@@ -21,7 +21,7 @@ export function bindJasperOverlay(
   }
 
   const overlay: OverlayState = {
-    image: undefined,
+    group: undefined,
     visible: false,
     showing: false,
   };
@@ -47,7 +47,8 @@ async function toggleOverlay(
   }
 
   if (overlay.visible) {
-    overlay.image?.setAttribute("display", "none");
+    overlay.group?.setAttribute("display", "none");
+    svg.removeAttribute("data-jasper-overlay-visible");
     overlay.visible = false;
     return;
   }
@@ -77,15 +78,16 @@ async function showOverlay(
   overlay: OverlayState,
   overlayFileIsPresent: OverlayFileIsPresent,
 ): Promise<void> {
-  if (overlay.image === undefined) {
+  if (overlay.group === undefined) {
     const present = await overlayFileIsPresent();
     if (present === false) {
       return;
     }
 
-    overlay.image = appendJasperOverlay(svg);
+    overlay.group = appendJasperOverlay(svg);
   }
 
-  overlay.image.removeAttribute("display");
+  overlay.group.removeAttribute("display");
+  svg.setAttribute("data-jasper-overlay-visible", "true");
   overlay.visible = true;
 }
