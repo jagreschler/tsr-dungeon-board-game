@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { dungeonBoard } from "../board/dungeon-board.ts";
 import { listSpacesAHeroCanMoveTo } from "./list-spaces-a-hero-can-move-to.ts";
+import { wallSeparatedSpacePairs } from "./wall-separated-space-pairs.ts";
 
 describe("listSpacesAHeroCanMoveTo", () => {
   it("lets a hero step through an ordinary door at no extra cost", () => {
@@ -55,6 +56,19 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(reachable.has("main-gallery")).toBe(true);
     expect(reachable.has("corridor-1252-704")).toBe(true);
   });
+
+  it.each(wallSeparatedSpacePairs)(
+    "does not jump walls from $fromSpaceIdentifier to $toSpaceIdentifier",
+    ({ fromSpaceIdentifier, toSpaceIdentifier }) => {
+      const reachable = listSpacesAHeroCanMoveTo(
+        dungeonBoard,
+        fromSpaceIdentifier,
+        [],
+      );
+
+      expect(reachable.has(toSpaceIdentifier)).toBe(false);
+    },
+  );
 
   it("does not land on another pawn in a corridor", () => {
     const reachable = listSpacesAHeroCanMoveTo(

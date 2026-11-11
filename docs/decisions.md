@@ -421,3 +421,19 @@ reachability shortlist and look unambiguous.
 
 Adding them lets a hero reach 11 more spaces, so the known-unreachable
 list goes from 111 to 100. Other listed gaps stay for later passes.
+
+## DUN-17 — No open hall through the gold/magenta wall (11 Nov 2026)
+
+A hero on `corridor-1068-485` (level 1, gold) could highlight
+`corridor-1053-429` (level 4, magenta) in one turn. Movement only
+walks recorded connections; it does not invent grid neighbors. The
+1981 drawing has a wall between those halls. Five `open` links in
+`board-open-links-1.ts` crossed that wall: 1053-429 to 1068-485 and
+to 1016-486, 999-432 to 1016-486, 1122-456 to 1053-429, and 1122-417
+to 1122-456. Those tuples are gone. Same-level joins on each side of
+the wall stay. The known-unreachable list is unchanged (100).
+Wall-separated pairs for the one-move highlight live in
+`src/movement/wall-separated-space-pairs.ts`; the movement test walks
+that table so a new pair is data only.
+Also listed: 1122-417/1122-456 and 1122-417/1053-429; the leftover
+open hall from 1122-417 to 1053-429 is gone. Unreachable count stays 100.
