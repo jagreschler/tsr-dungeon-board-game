@@ -432,3 +432,6 @@ walks recorded connections; it does not invent grid neighbors. The
 to 1016-486, 999-432 to 1016-486, 1122-456 to 1053-429, and 1122-417
 to 1122-456. Those tuples are gone. Same-level joins on each side of
 the wall stay. The known-unreachable list is unchanged (100).
+Wall-separated pairs for the one-move highlight live in
+`src/movement/wall-separated-space-pairs.ts`; the movement test walks
+that table so a new pair is data only.
