@@ -279,3 +279,11 @@ hooks, the local PNG filename, and these notes now say "reference overlay"
 and "fan-made line drawing of the classic board". The tracing credit stays;
 only the personal name went away. Nothing about how the overlay works
 changed.
+
+## DUN-10 — Lighter stone floor (11 Nov 2026)
+
+The board floor was near-black `#1a1410`, which made gaps between spaces
+hard to read as stone. It is now `#3a2e24`, a lighter brown that still
+reads as dark stone. The SVG floor rect and the `.dungeon-board`
+background use that same color. Chamber labels, door dots, and space ink
+were left alone.

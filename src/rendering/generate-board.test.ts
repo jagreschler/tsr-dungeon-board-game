@@ -171,6 +171,13 @@ describe("GenerateBoard", () => {
     expect(svg.getAttribute("aria-label")?.includes("Level 1")).toBe(false);
   });
 
+  it("paints a lighter stone floor under the spaces", () => {
+    const svg = boardSvg();
+    const floor = svg.querySelector("rect");
+
+    expect(floor?.getAttribute("fill")).toBe("#3a2e24");
+  });
+
   it("draws one shape group per space", () => {
     const svg = boardSvg();
     const groups = svg.querySelectorAll("[data-space-identifier]");
