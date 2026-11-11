@@ -50,7 +50,7 @@ body {
   border: 1px solid rgba(243, 226, 196, 0.18);
 }
 
-.dungeon-board[data-jasper-overlay-visible] {
+.dungeon-board[data-reference-overlay-visible] {
   --move-glow-fill: rgba(80, 220, 120, 0.1);
   --move-glow-stroke-width: 1px;
 }
@@ -67,7 +67,7 @@ body {
   stroke-width: var(--move-glow-stroke-width);
 }
 
-.dungeon-board[data-jasper-overlay-visible] [data-move-highlight] {
+.dungeon-board[data-reference-overlay-visible] [data-move-highlight] {
   filter: drop-shadow(0 0 2px rgba(90, 255, 150, 0.35));
 }
 

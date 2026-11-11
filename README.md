@@ -15,14 +15,14 @@ npm run dev
 
 Vite serves the app under `/tsr-dungeon-board-game/`, the same path GitHub Pages will use. Open the local URL it prints.
 
-### Local Jasper overlay
+### Local reference overlay
 
-The rooms were traced from Jasper's fan line drawing of the board. That image is a reference copy, not for redistribution, so it is not in this public repo.
+The rooms were traced from a fan-made line drawing of the classic board. That image is a reference copy, not for redistribution, so it is not in this public repo.
 
 To line the drawing up with the traced spaces while working locally:
 
 1. Create a `local-reference/` folder at the repo root (gitignored).
-2. Save the map as `local-reference/jasper-dungeon-map-standard-orientation.png` (2200×1702, the standard board orientation).
+2. Save the map as `local-reference/reference-board-map.png` (2200×1702, the standard board orientation).
 3. Run `npm run dev` and press **B** to show the drawing at 50% opacity. Press **B** again to hide it.
 
 The overlay is off by default. If the file is missing, the key does nothing. The production build never includes or references the image.

@@ -5,11 +5,11 @@ import { heroPiece } from "./pieces/hero-piece.ts";
 import { DungeonSession } from "./dungeon-session.ts";
 
 describe("DungeonSession", () => {
-  it("leaves the Jasper overlay off until B is pressed", () => {
+  it("leaves the reference overlay off until B is pressed", () => {
     const play = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
     const svg = play.element();
 
-    expect(svg.querySelector("[data-jasper-overlay]") === null).toBe(true);
+    expect(svg.querySelector("[data-reference-overlay]") === null).toBe(true);
   });
 
   it("moves the Hero onto a highlighted space when that glow is clicked", () => {

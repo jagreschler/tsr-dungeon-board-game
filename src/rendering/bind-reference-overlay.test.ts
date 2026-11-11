@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { bindJasperOverlay } from "./bind-jasper-overlay.ts";
+import { bindReferenceOverlay } from "./bind-reference-overlay.ts";
 import { paintMoveGlow } from "./paint-move-glow.ts";
 import { SVG_NAMESPACE } from "./svg-namespace.ts";
 
@@ -67,21 +67,21 @@ function glowStrokeWidth(board: HTMLElement): string {
   return getComputedStyle(board).getPropertyValue("--move-glow-stroke-width").trim();
 }
 
-describe("bindJasperOverlay", () => {
+describe("bindReferenceOverlay", () => {
   it("shows the overlay on B and hides it on B again", async () => {
     const svg = boardSvg();
     unbinders.push(
-      bindJasperOverlay(svg, true, async () => {
+      bindReferenceOverlay(svg, true, async () => {
         return true;
       }),
     );
 
-    expect(svg.querySelector("[data-jasper-overlay]") === null).toBe(true);
+    expect(svg.querySelector("[data-reference-overlay]") === null).toBe(true);
 
     pressB();
     await Promise.resolve();
 
-    const overlay = svg.querySelector("[data-jasper-overlay]");
+    const overlay = svg.querySelector("[data-reference-overlay]");
     expect(overlay === null).toBe(false);
     expect(overlay?.getAttribute("pointer-events")).toBe("none");
     expect(overlay?.getAttribute("display") === "none").toBe(false);
@@ -98,7 +98,7 @@ describe("bindJasperOverlay", () => {
     expect(image?.getAttribute("width")).toBe("2200");
     expect(image?.getAttribute("height")).toBe("1702");
     expect(image?.getAttribute("href") ?? "").toContain(
-      "jasper-dungeon-map-standard-orientation.png",
+      "reference-board-map.png",
     );
 
     pressB();
@@ -110,20 +110,20 @@ describe("bindJasperOverlay", () => {
   it("draws a gray backing under the overlay image and toggles it with B", async () => {
     const svg = boardSvg();
     unbinders.push(
-      bindJasperOverlay(svg, true, async () => {
+      bindReferenceOverlay(svg, true, async () => {
         return true;
       }),
     );
 
-    expect(svg.querySelector("[data-jasper-overlay-backing]") === null).toBe(
+    expect(svg.querySelector("[data-reference-overlay-backing]") === null).toBe(
       true,
     );
 
     pressB();
     await Promise.resolve();
 
-    const overlay = svg.querySelector("[data-jasper-overlay]");
-    const backing = svg.querySelector("[data-jasper-overlay-backing]");
+    const overlay = svg.querySelector("[data-reference-overlay]");
+    const backing = svg.querySelector("[data-reference-overlay-backing]");
     const image = overlay?.querySelector("image");
     expect(backing === null).toBe(false);
     expect(backing?.tagName.toLowerCase()).toBe("rect");
@@ -137,13 +137,13 @@ describe("bindJasperOverlay", () => {
     expect(overlay?.nextElementSibling?.getAttribute("data-play-overlay")).toBe(
       "true",
     );
-    expect(svg.getAttribute("data-jasper-overlay-visible")).toBe("true");
+    expect(svg.getAttribute("data-reference-overlay-visible")).toBe("true");
 
     pressB();
     await Promise.resolve();
 
     expect(overlay?.getAttribute("display")).toBe("none");
-    expect(svg.hasAttribute("data-jasper-overlay-visible")).toBe(false);
+    expect(svg.hasAttribute("data-reference-overlay-visible")).toBe(false);
   });
 
   it("softens the move glow while the overlay is on and restores it when off", async () => {
@@ -151,7 +151,7 @@ describe("bindJasperOverlay", () => {
     document.body.append(svg);
     const glow = paintedGlow(svg);
     unbinders.push(
-      bindJasperOverlay(svg, true, async () => {
+      bindReferenceOverlay(svg, true, async () => {
         return true;
       }),
     );
@@ -164,13 +164,13 @@ describe("bindJasperOverlay", () => {
     pressB();
     await Promise.resolve();
 
-    expect(svg.getAttribute("data-jasper-overlay-visible")).toBe("true");
+    expect(svg.getAttribute("data-reference-overlay-visible")).toBe("true");
     expect(glow.getAttribute("fill") ?? "").toContain("0.42");
     expect(glow.getAttribute("stroke-width")).toBe("3");
     const overlayOnBoard = glowBoard();
     overlayOnBoard.setAttribute(
-      "data-jasper-overlay-visible",
-      svg.getAttribute("data-jasper-overlay-visible") ?? "",
+      "data-reference-overlay-visible",
+      svg.getAttribute("data-reference-overlay-visible") ?? "",
     );
     expect(glowFill(overlayOnBoard)).toContain("0.1");
     expect(glowStrokeWidth(overlayOnBoard)).toBe("1px");
@@ -178,7 +178,7 @@ describe("bindJasperOverlay", () => {
     pressB();
     await Promise.resolve();
 
-    expect(svg.hasAttribute("data-jasper-overlay-visible")).toBe(false);
+    expect(svg.hasAttribute("data-reference-overlay-visible")).toBe(false);
     expect(glowFill(glowBoard())).toContain("0.42");
     expect(glowStrokeWidth(glowBoard())).toBe("3px");
   });
@@ -186,7 +186,7 @@ describe("bindJasperOverlay", () => {
   it("does nothing when the local image is missing", async () => {
     const svg = boardSvg();
     unbinders.push(
-      bindJasperOverlay(svg, true, async () => {
+      bindReferenceOverlay(svg, true, async () => {
         return false;
       }),
     );
@@ -194,13 +194,13 @@ describe("bindJasperOverlay", () => {
     pressB();
     await Promise.resolve();
 
-    expect(svg.querySelector("[data-jasper-overlay]") === null).toBe(true);
+    expect(svg.querySelector("[data-reference-overlay]") === null).toBe(true);
   });
 
   it("does not listen for B when not in local development", async () => {
     const svg = boardSvg();
     unbinders.push(
-      bindJasperOverlay(svg, false, async () => {
+      bindReferenceOverlay(svg, false, async () => {
         return true;
       }),
     );
@@ -208,6 +208,6 @@ describe("bindJasperOverlay", () => {
     pressB();
     await Promise.resolve();
 
-    expect(svg.querySelector("[data-jasper-overlay]") === null).toBe(true);
+    expect(svg.querySelector("[data-reference-overlay]") === null).toBe(true);
   });
 });

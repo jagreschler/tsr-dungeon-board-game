@@ -1,7 +1,7 @@
 import {
-  appendJasperOverlay,
-  jasperOverlayFileIsPresent,
-} from "./append-jasper-overlay.ts";
+  appendReferenceOverlay,
+  referenceOverlayFileIsPresent,
+} from "./append-reference-overlay.ts";
 
 export type OverlayFileIsPresent = () => Promise<boolean>;
 
@@ -11,10 +11,10 @@ type OverlayState = {
   showing: boolean;
 };
 
-export function bindJasperOverlay(
+export function bindReferenceOverlay(
   svg: SVGSVGElement,
   isLocal: boolean,
-  overlayFileIsPresent: OverlayFileIsPresent = jasperOverlayFileIsPresent,
+  overlayFileIsPresent: OverlayFileIsPresent = referenceOverlayFileIsPresent,
 ): () => void {
   if (isLocal === false) {
     return () => {};
@@ -48,7 +48,7 @@ async function toggleOverlay(
 
   if (overlay.visible) {
     overlay.group?.setAttribute("display", "none");
-    svg.removeAttribute("data-jasper-overlay-visible");
+    svg.removeAttribute("data-reference-overlay-visible");
     overlay.visible = false;
     return;
   }
@@ -84,10 +84,10 @@ async function showOverlay(
       return;
     }
 
-    overlay.group = appendJasperOverlay(svg);
+    overlay.group = appendReferenceOverlay(svg);
   }
 
   overlay.group.removeAttribute("display");
-  svg.setAttribute("data-jasper-overlay-visible", "true");
+  svg.setAttribute("data-reference-overlay-visible", "true");
   overlay.visible = true;
 }
