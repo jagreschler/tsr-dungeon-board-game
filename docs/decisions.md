@@ -287,3 +287,11 @@ hard to read as stone. It is now `#3a2e24`, a lighter brown that still
 reads as dark stone. The SVG floor rect and the `.dungeon-board`
 background use that same color. Chamber labels, door dots, and space ink
 were left alone.
+
+## Open: map data gaps (10 Nov 2026)
+
+**Open — not resolved.** To do: find and fix any spaces, doors, or
+connections missing from the map data compared to the 1981 reference
+sources (first known case: corridor-1116-162 on level 4 dead-ends; the
+reference shows it continuing down through a secret door to
+corridor-1124-318).
