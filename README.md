@@ -29,7 +29,7 @@ The overlay is off by default. If the file is missing, the key does nothing. The
 
 ### Local monster card preview
 
-Monster draws are not in the game yet. In `npm run dev` only, press **G** to preview the Level 1 Goblins clip and card. Press **Shift+G** to skip the clip and show the card only. Production builds do not bind this key.
+Monster draws are not in the game yet. In `npm run dev` only, press **G** to preview the Level 1 Goblins clip and card, or **H** for Hobgoblins. Press **Shift+G** or **Shift+H** to skip the clip and show the card only. Production builds do not bind these keys.
 
 ## Test
 

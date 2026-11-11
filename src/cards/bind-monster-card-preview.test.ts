@@ -46,6 +46,30 @@ describe("bindMonsterCardPreview", () => {
     expect(overlay?.textContent?.includes("Lightning 6")).toBe(true);
   });
 
+  it("shows the hobgoblins clip on H during local development", () => {
+    unbinders.push(bindMonsterCardPreview(boardSvg(), true));
+
+    pressKey("h");
+
+    const overlay = document.querySelector("[data-monster-card-overlay]");
+    expect(overlay === null).toBe(false);
+    expect(overlay?.querySelector("video") === null).toBe(false);
+    expect(
+      overlay?.querySelector("video")?.getAttribute("src") ?? "",
+    ).toContain("L1-hobgoblins.mp4");
+  });
+
+  it("shows the hobgoblins card with no clip on Shift+H", () => {
+    unbinders.push(bindMonsterCardPreview(boardSvg(), true));
+
+    pressKey("h", true);
+
+    const overlay = document.querySelector("[data-monster-card-overlay]");
+    expect(overlay?.querySelector("video") === null).toBe(true);
+    expect(overlay?.textContent?.includes("Hobgoblins")).toBe(true);
+    expect(overlay?.textContent?.includes("Lightning 3")).toBe(true);
+  });
+
   it("does not listen for G when not in local development", () => {
     unbinders.push(bindMonsterCardPreview(boardSvg(), false));
 

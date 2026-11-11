@@ -37,7 +37,8 @@ function showPreviewIfNeeded(
   host: HTMLElement,
   event: KeyboardEvent,
 ): void {
-  if (event.repeat || isPreviewKey(event) === false) {
+  const monsterName = monsterNameForPreviewKey(event);
+  if (event.repeat || monsterName === undefined) {
     return;
   }
 
@@ -45,8 +46,8 @@ function showPreviewIfNeeded(
     return;
   }
 
-  const assets = lookupMonsterCard(1, "Goblins");
-  const combatValues = monsterCombatValues("Goblins");
+  const assets = lookupMonsterCard(1, monsterName);
+  const combatValues = monsterCombatValues(monsterName);
   if (event.shiftKey) {
     overlay.show({ ...assets, clipHref: undefined }, combatValues);
     return;
@@ -55,14 +56,20 @@ function showPreviewIfNeeded(
   overlay.show(assets, combatValues);
 }
 
-function isPreviewKey(event: KeyboardEvent): boolean {
-  if (event.key !== "g" && event.key !== "G") {
-    return false;
-  }
-
-  return (
+function monsterNameForPreviewKey(event: KeyboardEvent): string | undefined {
+  if (
     event.ctrlKey === false &&
     event.metaKey === false &&
     event.altKey === false
-  );
+  ) {
+    const key = event.key.toLowerCase();
+    if (key === "g") {
+      return "Goblins";
+    }
+    if (key === "h") {
+      return "Hobgoblins";
+    }
+  }
+
+  return undefined;
 }

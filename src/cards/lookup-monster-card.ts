@@ -11,10 +11,11 @@ type CatalogEntry = {
 
 const catalog: CatalogEntry[] = [
   { level: 1, name: "Goblins", hasClip: true },
+  { level: 1, name: "Hobgoblins", hasClip: true },
 ];
 
 export function monsterSlug(monsterName: string): string {
-  return monsterName.trim().toLowerCase();
+  return monsterName.trim().toLowerCase().replace(/\s+/g, "-");
 }
 
 export function monsterCardHrefs(
