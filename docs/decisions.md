@@ -383,3 +383,29 @@ which is already on the reachable graph. Adding that one ordinary door
 lets a hero walk into the room from the east and out through the west
 door, so the 14 spaces in that cluster drop off the known-unreachable
 list (125 → 111). Other listed gaps stay for later passes.
+
+## DUN-15 — Version badge keeps its dots (11 Nov 2026)
+
+The corner badge is `v` plus the `package.json` version, the same
+string Afterlight uses. The live page already had `v0.1.0` in the DOM,
+but the parchment color was only 55% opaque, so the periods vanished
+and the badge read as `010`. The label is now a stronger tan, a little
+larger, and tabular numerals. A page test checks the full `v0.2.0`
+string, including the dots.
+
+## DUN-15 — Tag the version on main (11 Nov 2026)
+
+Afterlight tags each version bump on the merge commit after it lands
+on main. That tag was created by hand. Dungeon! already created a
+GitHub Release when a `v*` tag was pushed, but nothing made the tag.
+
+A workflow on push to main reads `package.json` and, if `v<version>`
+does not exist yet, runs the same `gh release create --generate-notes`
+command as the tag workflow. That creates the tag and the release
+together. GitHub will not start another workflow from a tag written
+with `GITHUB_TOKEN`, so this job does not rely on the tag-push
+workflow to fire. Tags pushed from outside Actions still use that
+existing workflow.
+
+No tag is created on this branch. The first tag, `v0.2.0`, is made
+when this change merges to main.
