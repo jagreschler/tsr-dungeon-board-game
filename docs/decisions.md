@@ -295,7 +295,9 @@ connections missing from the map data compared to the 1981 reference
 sources. The corridor-1116-162 case is fixed. Level 4 sure items from
 the map-data audit are fixed (see the 11 Nov 2026 DUN-12 note below).
 Keep looking for other missing squares, doors, and links; later levels
-and the level 4 "likely" items are still open.
+and the level 4 "likely" items are still open. Remaining cut-off spaces
+are named in the DUN-13 reachability list, which should shrink as those
+fixes land.
 
 ## DUN-11 — corridor-1116-162 continues south through a secret door (11 Nov 2026)
 
@@ -357,3 +359,17 @@ are hard to read, and the real check is whether a hero can reach the
 spaces, which the reachability test covers. The pair checks are gone.
 Door, secret-door, and open kinds, and the removed diagonal shortcuts,
 are now checked only by eye against the reference drawing.
+
+## DUN-13 — Map reachability from the Main Staircase (11 Nov 2026)
+
+Jason wanted a test that walks the whole board from the Main Staircase
+and fails if any space is cut off. Open halls, ordinary doors, and
+secret doors all count, because a secret door can be found. The walk
+reuses the existing neighbor helper and graph search, with no extra
+step limit and without stopping in rooms.
+
+Some spaces are still unreachable (no links at all, or sitting in a
+component that does not yet join Start). Those identifiers live in an
+explicit named list. The test fails if a space is unreachable and not
+on the list, or if a listed space becomes reachable. The list can only
+shrink as later map-data fixes land. The goal is an empty list.
