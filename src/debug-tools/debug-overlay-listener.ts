@@ -5,7 +5,7 @@ import { appendStoredLinkMarks } from "./append-stored-link-marks.ts";
 import type { DebugMode } from "./debug-mode.ts";
 
 export class DebugOverlayListener {
-  private keysAreBound = false;
+  private firstDrawDone = false;
 
   constructor(private readonly debugMode: DebugMode) {}
 
@@ -23,29 +23,21 @@ export class DebugOverlayListener {
     const detail = event.detail as OverlayDrawnDetail;
     appendStoredLinkMarks(detail.overlay, detail.board, detail.layout);
     appendMoveStepLabels(detail.overlay, detail.layout, detail.stepCounts);
-    this.applyStartingVisibilityIfNeeded(detail.svg);
-    this.bindKeysIfNeeded(detail.svg);
+    this.setUpOnFirstDraw(detail.svg);
   }
 
-  private applyStartingVisibilityIfNeeded(svg: SVGSVGElement): void {
-    if (this.keysAreBound) {
+  private setUpOnFirstDraw(svg: SVGSVGElement): void {
+    if (this.firstDrawDone) {
       return;
     }
 
+    this.firstDrawDone = true;
     if (this.debugMode.hasLinks()) {
       svg.setAttribute("data-stored-link-marks-visible", "true");
     }
     if (this.debugMode.hasSteps()) {
       svg.setAttribute("data-move-step-labels-visible", "true");
     }
-  }
-
-  private bindKeysIfNeeded(svg: SVGSVGElement): void {
-    if (this.keysAreBound) {
-      return;
-    }
-
-    this.keysAreBound = true;
     void import("./bind-reference-overlay.ts").then((module) => {
       module.bindReferenceOverlay(svg, true);
     });
