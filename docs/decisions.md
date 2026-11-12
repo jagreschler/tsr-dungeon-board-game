@@ -686,6 +686,30 @@ drawn; it is not also responsible for every debug side effect.
 That is the same pattern as OverlayDrawn. No `queueMicrotask`
 and no `document.body` fallback.
 
+## DUN-31 — room-west west door onto corridor-916-921 (12 Nov 2026)
+
+The 1981 drawing shows a door gap at room-west's west corner,
+around x 943, y 910, opening onto `corridor-916-921`. That link
+was missing, so a hero on that gold hall square could not step
+into the room. The stored door is
+`["corridor-916-921", "room-west", "door"]`. The L overlay mark
+runs from the hall-square center to hall-white facing that gap
+on the west wall, so the yellow door line does not cross gray
+abyss. The existing `corridor-1057-974` / `room-west` door is
+unchanged; Jason has not decided on that one yet.
+
+## DUN-31 — room-west west door onto corridor-916-921 (12 Nov 2026)
+
+The 1981 drawing shows a door gap at room-west's west corner,
+around x 943, y 910, opening onto `corridor-916-921`. That link
+was missing, so a hero on that gold hall square could not step
+into the room. The stored door is
+`["corridor-916-921", "room-west", "door"]`. The L overlay mark
+runs from the hall-square center to hall-white facing that gap
+on the west wall, so the yellow door line does not cross gray
+abyss. The existing `corridor-1057-974` / `room-west` door is
+unchanged; Jason has not decided on that one yet.
+
 ## DUN-30 — Tidy src folders (12 Nov 2026)
 
 `place-board.ts`, its test, and `board-events.ts` belong with the

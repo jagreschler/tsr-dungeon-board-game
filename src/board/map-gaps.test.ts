@@ -2,7 +2,10 @@ import { describe, expect, it } from "vitest";
 import { dungeonBoard } from "./dungeon-board.ts";
 import { findSpace } from "./find-space.ts";
 import { listNeighborSpacesAHeroCanStepTo } from "../movement/list-neighbor-spaces-a-hero-can-step-to.ts";
-import { listSpacesAHeroCanMoveTo } from "../movement/list-spaces-a-hero-can-move-to.ts";
+import {
+  listMoveStepCounts,
+  listSpacesAHeroCanMoveTo,
+} from "../movement/list-spaces-a-hero-can-move-to.ts";
 
 const NORTH = "corridor-1116-162";
 const UPPER = "corridor-1116-212";
@@ -81,5 +84,21 @@ describe("corridor-1116-162 south gap", () => {
     ).toBe(true);
     expect(afterFinding.has(LOWER)).toBe(true);
     expect(afterFinding.has(SOUTH)).toBe(true);
+  });
+});
+
+describe("room-west west door", () => {
+  it("lets a hero on corridor-916-921 step into room-west", () => {
+    const neighbors = listNeighborSpacesAHeroCanStepTo(
+      dungeonBoard,
+      "corridor-916-921",
+      [],
+    );
+    const steps = listMoveStepCounts(dungeonBoard, "corridor-916-921", []);
+
+    expect(
+      neighbors.some((space) => space.identifier === "room-west"),
+    ).toBe(true);
+    expect(steps.get("room-west")).toBe(1);
   });
 });
