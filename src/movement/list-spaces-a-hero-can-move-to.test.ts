@@ -70,6 +70,30 @@ describe("listSpacesAHeroCanMoveTo", () => {
     },
   );
 
+  it("does not reach skip-link squares more than five spaces from Start", () => {
+    const reachable = listSpacesAHeroCanMoveTo(
+      dungeonBoard,
+      "main-staircase",
+      [],
+    );
+
+    expect(reachable.has("corridor-926-664")).toBe(false);
+    expect(reachable.has("corridor-1176-1177")).toBe(false);
+    expect(reachable.has("corridor-1204-1177")).toBe(false);
+    expect(reachable.has("corridor-836-966")).toBe(false);
+  });
+
+  it("still reaches the west stairs neighbors in five honest steps", () => {
+    const reachable = listSpacesAHeroCanMoveTo(
+      dungeonBoard,
+      "main-staircase",
+      [],
+    );
+
+    expect(reachable.has("corridor-792-768")).toBe(true);
+    expect(reachable.has("room-3-04")).toBe(true);
+  });
+
   it("does not land on another pawn in a corridor", () => {
     const reachable = listSpacesAHeroCanMoveTo(
       dungeonBoard,

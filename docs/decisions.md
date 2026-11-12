@@ -439,6 +439,23 @@ cards use a red border. The overlay publishes `CardRevealed` and
 `OverlayClosed` so later encounter rules can listen without living
 inside the picture code.
 
+## DUN-22 — Drop open-hall skip links near Start (12 Nov 2026)
+
+From Start the five-step glow reached squares that look more than five
+printed spaces away. The search itself was fine (cap 5, one step per
+space). Seven `open` corridor links jumped over a square in between:
+909-774/986-786, stairs-west/926-664, 1201-1052/1202-1112,
+1202-1112/1176-1177, 1202-1112/1204-1177, 1196-1020/1221-1092, and
+966-968/887-972. Those tuples are gone. The honest neighbor links on
+each side were already in the data, so nothing was stranded. Door
+links and the Start rim stubs stay. Known-unreachable count stays 100.
+
+After the cuts, `corridor-926-664`, the south-column end squares
+1176-1177 and 1204-1177, and `corridor-836-966` are outside a five-step
+walk from Start. `corridor-792-768` and `room-3-04` remain in range:
+the west stairs is four honest spaces from Start, and both sit on that
+stair. Other skip links elsewhere on the board are left for later.
+
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 
 Same pattern as Hobgoblins, one monster. Files are
