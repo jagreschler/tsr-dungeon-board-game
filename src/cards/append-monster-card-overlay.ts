@@ -77,8 +77,9 @@ function cardStep(
 
 function statsCaption(combatValues: MonsterCombatValues): HTMLElement {
   const caption = document.createElement("div");
-  caption.className = "monster-card-stats";
+  caption.className = "monster-card-stats monster-card-stats-ink";
   caption.setAttribute("data-monster-card-stats", "true");
+  caption.setAttribute("data-stats-box", "true");
 
   const name = document.createElement("p");
   name.className = "monster-card-stats-name";

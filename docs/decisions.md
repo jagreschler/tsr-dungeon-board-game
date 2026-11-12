@@ -439,6 +439,28 @@ cards use a red border. The overlay publishes `CardRevealed` and
 `OverlayClosed` so later encounter rules can listen without living
 inside the picture code.
 
+## DUN-19 — Hobgoblins card and clip (11 Nov 2026)
+
+Same pattern as Goblins, one monster. Files are
+`public/cards/L1-hobgoblins.jpg` and `.mp4`. Local **H** plays the
+clip then the card; **Shift+H** shows the card only. File names
+hyphenate spaces (`Giant Lizard` → `L1-giant-lizard`) so later
+multi-word monsters drop in the same way.
+
+Hobgoblins combat numbers are the 1981 TSR card list as posted on
+Magister Rex (Lightning 3, Fireball 3, Wizard 6, Superhero 3, Hero
+5, Elf 4):
+https://magisterrex.wordpress.com/2011/04/11/whats-in-that-game-box-dungeon-fantasy-boardgame/
+
+## DUN-19 — Caption ink, centering, and serif (11 Nov 2026)
+
+The caption used cream page text, so it vanished on the parchment, and
+it sat too low and too wide for the printed stats box. Shared caption
+CSS now uses the same dark `--ink` and Georgia serif as the rest of
+the game (name and numbers together), and it centers that block inside
+the parchment area. Goblins and Hobgoblins share this one caption
+style.
+
 ## DUN-17 — No open hall through the gold/magenta wall (11 Nov 2026)
 
 A hero on `corridor-1068-485` (level 1, gold) could highlight

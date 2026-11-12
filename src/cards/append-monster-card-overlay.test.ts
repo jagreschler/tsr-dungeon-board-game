@@ -1,0 +1,59 @@
+import { afterEach, describe, expect, it } from "vitest";
+import { appendMonsterCardOverlay } from "./append-monster-card-overlay.ts";
+import { lookupMonsterCard } from "./lookup-monster-card.ts";
+import { monsterCombatValues } from "./monster-combat-values.ts";
+
+afterEach(() => {
+  document.body.replaceChildren();
+});
+
+function showCard(monsterName: string): HTMLElement {
+  const assets = lookupMonsterCard(1, monsterName);
+  const values = monsterCombatValues(monsterName);
+  if (values === undefined) {
+    throw new Error(`missing combat values for ${monsterName}`);
+  }
+
+  return appendMonsterCardOverlay(
+    document.body,
+    { ...assets, clipHref: undefined },
+    values,
+  );
+}
+
+function statsCaption(monsterName: string): HTMLElement {
+  const caption = showCard(monsterName).querySelector(
+    "[data-monster-card-stats]",
+  );
+  if (caption instanceof HTMLElement === false) {
+    throw new Error("missing stats caption");
+  }
+
+  return caption;
+}
+
+describe("appendMonsterCardOverlay stats caption", () => {
+  it("uses dark ink, the shared serif, and the parchment stats-box", () => {
+    const caption = statsCaption("Hobgoblins");
+
+    expect(caption.classList.contains("monster-card-stats-ink")).toBe(true);
+    expect(caption.classList.contains("monster-card-stats")).toBe(true);
+    expect(caption.getAttribute("data-stats-box")).toBe("true");
+    expect(caption.querySelector(".monster-card-stats-name") === null).toBe(
+      false,
+    );
+    expect(caption.querySelector(".monster-card-stats-columns") === null).toBe(
+      false,
+    );
+  });
+
+  it("uses the same caption classes for Goblins and Hobgoblins", () => {
+    const goblins = statsCaption("Goblins");
+    const hobgoblins = statsCaption("Hobgoblins");
+
+    expect(goblins.className).toBe(hobgoblins.className);
+    expect(goblins.getAttribute("data-stats-box")).toBe(
+      hobgoblins.getAttribute("data-stats-box"),
+    );
+  });
+});
