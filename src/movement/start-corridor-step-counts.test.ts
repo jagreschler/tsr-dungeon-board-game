@@ -46,7 +46,7 @@ function listStartCorridorStepViolations(): string[] {
       continue;
     }
 
-    if (Math.abs(fromSteps - toSteps) <= 1) {
+    if (fromSteps !== toSteps) {
       continue;
     }
 
@@ -83,7 +83,7 @@ describe("Start corridor step counts", () => {
     expect(steps.get("corridor-1011-741")).toBe(3);
   });
 
-  it("gives linked Start-glow corridors step counts at most one apart", () => {
+  it("does not give linked Start-glow corridor neighbors the same step count", () => {
     expect(listStartCorridorStepViolations()).toEqual([]);
   });
 });

@@ -494,10 +494,14 @@ coming back.
 The biggest cut was Start to `corridor-1252-704` (25.6px of gray).
 That square still joins `1319-730` and the gold rooms on the northeast
 spoke, but that spoke no longer has an open-hall path back to Start.
-`room-east` still has its secret door onto `1417-934`. Linked
-corridors in the five-step glow may share a step count when two honest
-paths are the same length. From Start, 28 spaces remain in range.
-Known-unreachable went from 117 to 252.
+`room-east` still has its secret door onto `1417-934`. From Start, 28
+spaces remain in range. Known-unreachable went from 117 to 252.
+
+Two linked corridor neighbors in the five-step glow must never share a
+step number. A same-step allowance (equal counts when two paths are
+the same length) was tried and reverted: it was an unrequested change
+and it broke that rule. The test is strict again. If a leftover pair
+still shares a number, the test stays red until that link is cut.
 
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 
