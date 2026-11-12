@@ -6,11 +6,28 @@ export type MonsterStatsBox = {
   ink: CaptionInk;
 };
 
-export type MonsterCardAssets = {
-  imageHref: string | undefined;
+export type UndefinedMonsterCard = {
+  imageHref: undefined;
+  clipHref: undefined;
+  statsBox: MonsterStatsBox;
+};
+
+export type PlainMonsterCard = {
+  imageHref: undefined;
+  clipHref: undefined;
+  statsBox: MonsterStatsBox;
+};
+
+export type ArtMonsterCard = {
+  imageHref: string;
   clipHref: string | undefined;
   statsBox: MonsterStatsBox;
 };
+
+export type MonsterCardAssets =
+  | UndefinedMonsterCard
+  | PlainMonsterCard
+  | ArtMonsterCard;
 
 type CatalogEntry = {
   level: number;
@@ -62,7 +79,7 @@ export function monsterCardHrefs(
   level: number,
   monsterName: string,
   hasClip: boolean,
-): MonsterCardAssets {
+): ArtMonsterCard {
   const fileStem = `L${level}-${monsterSlug(monsterName)}`;
   const basePath = `${import.meta.env.BASE_URL}cards/${fileStem}`;
   const clipHref = hasClip ? `${basePath}.mp4` : undefined;
@@ -84,19 +101,21 @@ export function lookupMonsterCard(
   });
 
   if (entry === undefined) {
-    return {
+    const card: UndefinedMonsterCard = {
       imageHref: undefined,
       clipHref: undefined,
       statsBox: DEFAULT_STATS_BOX,
     };
+    return card;
   }
 
   if (entry.hasArt === false) {
-    return {
+    const card: PlainMonsterCard = {
       imageHref: undefined,
       clipHref: undefined,
       statsBox: PLAIN_CARD_STATS_BOX,
     };
+    return card;
   }
 
   return {

@@ -442,12 +442,21 @@ inside the picture code.
 ## DUN-21 — Level 1 monster draw on entering a gold room (12 Nov 2026)
 
 When a pawn ends its move in an uncleared Level 1 room, the session
-publishes `MonsterRoomEntered`. `MonsterEncounter` takes the top card
-of the Level 1 monster deck, publishes `MonsterCardDrawn`, and shows
-the existing reveal overlay (clip if we have one, then the card).
-There is no combat yet, so Close treats the monster as unfought with
-no loot and puts that card on the bottom of the pile, the 1981 rule
-for that case.
+publishes `RoomEntered` with `{ roomType: "monster" }` on the
+CustomEvent detail. `MonsterCardStock` listens with
+`listenForRoomEntered(session, "monster")`, reads
+`event.detail.roomType`, and draws only when that matches. It takes
+the top card of the Level 1 monster deck and publishes
+`MonsterCardDrawn`. `MonsterCardScreen` listens for that draw and
+shows the existing reveal overlay (clip if we have one, then the
+card). Overlay close still publishes `OverlayClosed`; the stock puts
+the unfought card on the bottom of the pile, the 1981 rule for that
+case. Event-name constants start with `EVENT_` so they autocomplete
+together (`EVENT_ROOM_ENTERED`, `EVENT_MONSTER_CARD_DRAWN`,
+`EVENT_CARD_REVEALED`, `EVENT_OVERLAY_CLOSED`). The map has no
+`"monster"` space kind; `RoomType` is a separate filter (`monster` or
+`chamber` so far). Only uncleared Level 1 rooms publish
+`roomType: "monster"` today.
 
 The deck is the 1981 Magister Rex Level 1 list of 7 cards (Giant
 Lizard, Giant Rats x2, Goblins x2, Hobgoblins, Skeleton), shuffled

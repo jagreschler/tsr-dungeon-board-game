@@ -73,6 +73,11 @@ describe("lookupMonsterCard", () => {
 
     expect(skeleton.imageHref).toBe(undefined);
     expect(skeleton.clipHref).toBe(undefined);
+    expect(skeleton.statsBox).toEqual({
+      topPercent: 22,
+      heightPercent: 56,
+      ink: "dark",
+    });
     expect(rats.imageHref).toBe(undefined);
     expect(rats.clipHref).toBe(undefined);
   });
@@ -82,6 +87,11 @@ describe("lookupMonsterCard", () => {
 
     expect(assets.imageHref).toBe(undefined);
     expect(assets.clipHref).toBe(undefined);
+    expect(assets.statsBox).toEqual({
+      topPercent: 74.8,
+      heightPercent: 16,
+      ink: "dark",
+    });
   });
 
   it("omits the clip when the monster has card art but no clip file", () => {

@@ -1,16 +1,18 @@
 import type { Board } from "./board/board.ts";
 import { findSpace } from "./board/find-space.ts";
 import { isUnclearedLevel1Room } from "./board/is-uncleared-level-1-room.ts";
+import {
+  EVENT_ROOM_ENTERED,
+  type RoomEnteredDetail,
+} from "./board/room-type.ts";
 import type { BoardLayout } from "./board/space-placement.ts";
 import { MonsterCardOverlay } from "./cards/monster-card-overlay.ts";
+import { MonsterCardScreen } from "./cards/monster-card-screen.ts";
+import { MonsterCardStock } from "./cards/monster-card-stock.ts";
 import {
   MonsterDeck,
   shuffledLevel1MonsterDeck,
 } from "./cards/monster-deck.ts";
-import {
-  MONSTER_ROOM_ENTERED_EVENT,
-  MonsterEncounter,
-} from "./cards/monster-encounter.ts";
 import { GenerateBoard } from "./rendering/generate-board.ts";
 import { GenerateHeroPiece } from "./rendering/generate-hero-piece.ts";
 import { GenerateMoveHighlights } from "./rendering/generate-move-highlights.ts";
@@ -39,11 +41,12 @@ export class DungeonSession extends EventTarget {
     svg.append(overlay);
     this.overlay = overlay;
     this.drawOverlay();
-    const encounter = new MonsterEncounter(
-      this.monsterDeck,
-      new MonsterCardOverlay(overlayHost(svg)),
-    );
-    encounter.bindTo(this);
+    const cardOverlay = new MonsterCardOverlay(overlayHost(svg));
+    const stock = new MonsterCardStock(this.monsterDeck);
+    const screen = new MonsterCardScreen(cardOverlay);
+    stock.listenForRoomEntered(this, "monster");
+    stock.listenForOverlayClosed(cardOverlay);
+    screen.listenForMonsterCardDrawn(stock);
     if (import.meta.env.DEV) {
       void import("./rendering/bind-reference-overlay.ts").then((module) => {
         module.bindReferenceOverlay(svg, true);
@@ -103,7 +106,11 @@ export class DungeonSession extends EventTarget {
       return;
     }
 
-    this.dispatchEvent(new CustomEvent(MONSTER_ROOM_ENTERED_EVENT));
+    this.dispatchEvent(
+      new CustomEvent<RoomEnteredDetail>(EVENT_ROOM_ENTERED, {
+        detail: { roomType: "monster" },
+      }),
+    );
   }
 }
 
