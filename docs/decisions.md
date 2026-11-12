@@ -688,27 +688,19 @@ and no `document.body` fallback.
 
 ## DUN-31 — room-west west door onto corridor-916-921 (12 Nov 2026)
 
-The 1981 drawing shows a door gap at room-west's west corner,
-around x 943, y 910, opening onto `corridor-916-921`. That link
-was missing, so a hero on that gold hall square could not step
-into the room. The stored door is
-`["corridor-916-921", "room-west", "door"]`. The L overlay mark
-runs from the hall-square center to hall-white facing that gap
-on the west wall, so the yellow door line does not cross gray
-abyss. The existing `corridor-1057-974` / `room-west` door is
-unchanged; Jason has not decided on that one yet.
-
-## DUN-31 — room-west west door onto corridor-916-921 (12 Nov 2026)
-
-The 1981 drawing shows a door gap at room-west's west corner,
-around x 943, y 910, opening onto `corridor-916-921`. That link
-was missing, so a hero on that gold hall square could not step
-into the room. The stored door is
-`["corridor-916-921", "room-west", "door"]`. The L overlay mark
-runs from the hall-square center to hall-white facing that gap
-on the west wall, so the yellow door line does not cross gray
-abyss. The existing `corridor-1057-974` / `room-west` door is
-unchanged; Jason has not decided on that one yet.
+The 1981 drawing and photo show a door gap at room-west's west
+corner, around x 943, y 910, opening onto `corridor-916-921`.
+That link was missing. There is no door on the southeast wall
+onto `corridor-1057-974`; that stored door was a fake. The
+only stored door is now `["corridor-916-921", "room-west",
+"door"]`. The L overlay mark runs from the hall-square center
+to hall-white facing the west gap, so the yellow door line
+does not cross gray abyss. A hero can still reach room-west
+from Start by walking the southwest gold hall to
+`corridor-916-921` and stepping through that door. That is
+six spaces, so room-west is no longer in Start's five-step
+glow (it had been three steps through the fake southeast
+door).
 
 ## DUN-30 — Tidy src folders (12 Nov 2026)
 

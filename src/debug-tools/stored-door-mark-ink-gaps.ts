@@ -32,7 +32,6 @@ export const storedDoorMarkInkGaps: ReadonlyMap<string, StoredDoorMarkInkGap> =
     ["kings-treasure-room room-6-03", { start: { x: 1962.5, y: 778.5 }, end: { x: 1996.5, y: 720.5 } }],
     ["corridor-1252-704 room-east-northeast", { start: { x: 1252.5, y: 704 }, end: { x: 1219.5, y: 700.5 } }],
     ["corridor-1319-730 room-east", { start: { x: 1319.5, y: 730 }, end: { x: 1338.5, y: 755.5 } }],
-    ["corridor-1057-974 room-west", { start: { x: 1057.5, y: 974 }, end: { x: 1052.5, y: 962.5 } }],
     ["corridor-916-921 room-west", { start: { x: 916, y: 921.5 }, end: { x: 934, y: 919.5 } }],
     ["corridor-1197-970 room-southeast", { start: { x: 1197.5, y: 970.5 }, end: { x: 1215.5, y: 975.5 } }],
     ["council-room room-3-06", { start: { x: 566.5, y: 845 }, end: { x: 483.5, y: 821.5 } }],

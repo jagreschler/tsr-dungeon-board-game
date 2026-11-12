@@ -5,7 +5,6 @@ import { listNeighborSpacesAHeroCanStepTo } from "../movement/list-neighbor-spac
 import { listSpacesByKind } from "./list-spaces.ts";
 
 const INNER_GOLD_ROOMS = [
-  "room-west",
   "room-east",
   "room-southeast",
   "room-east-northeast",

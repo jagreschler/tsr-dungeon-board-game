@@ -44,7 +44,8 @@ describe("listSpacesAHeroCanMoveTo", () => {
       [],
     );
 
-    expect(reachable.has("room-west")).toBe(true);
+    expect(reachable.has("room-south")).toBe(true);
+    expect(reachable.has("room-west")).toBe(false);
     const pastTheLibrary = listSpacesAHeroCanMoveTo(
       dungeonBoard,
       "kings-library",
@@ -121,6 +122,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(steps.get("corridor-966-968")).toBe(4);
     expect(steps.get("corridor-916-921")).toBe(5);
     expect(steps.get("room-4-06")).toBe(5);
+    expect(steps.has("room-west")).toBe(false);
     expect(steps.has("corridor-869-893")).toBe(false);
   });
 
@@ -148,7 +150,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
 
     expect(reachable.has("stairs-west")).toBe(true);
     expect(reachable.has("corridor-909-774")).toBe(true);
-    expect(reachable.size).toBe(29);
+    expect(reachable.size).toBe(28);
   });
 
   it("does not land on another pawn in a corridor", () => {

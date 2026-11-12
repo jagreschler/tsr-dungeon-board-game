@@ -101,4 +101,18 @@ describe("room-west west door", () => {
     ).toBe(true);
     expect(steps.get("room-west")).toBe(1);
   });
+
+  it("does not link corridor-1057-974 to room-west", () => {
+    expect(connectionKind("corridor-1057-974", "room-west")).toBe(undefined);
+    expect(connectionKind("room-west", "corridor-1057-974")).toBe(undefined);
+
+    const neighbors = listNeighborSpacesAHeroCanStepTo(
+      dungeonBoard,
+      "corridor-1057-974",
+      [],
+    );
+    expect(
+      neighbors.some((space) => space.identifier === "room-west"),
+    ).toBe(false);
+  });
 });
