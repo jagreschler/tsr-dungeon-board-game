@@ -439,6 +439,27 @@ cards use a red border. The overlay publishes `CardRevealed` and
 `OverlayClosed` so later encounter rules can listen without living
 inside the picture code.
 
+## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
+
+Same pattern as Hobgoblins, one monster. Files are
+`public/cards/L1-giant-lizard.jpg` and `.mp4`. Local **L** plays the
+clip then the card; **Shift+L** shows the card only. The hyphenated
+slug from DUN-19 already maps `Giant Lizard` to those files. The
+shared dark serif caption is unchanged.
+
+Giant Lizard combat numbers are the 1981 TSR card list as posted on
+Magister Rex (Lightning 2, Fireball 2, Wizard 5, Superhero 2, Hero
+4, Elf 5):
+https://magisterrex.wordpress.com/2011/04/11/whats-in-that-game-box-dungeon-fantasy-boardgame/
+
+The Giant Lizard art has a taller parchment box that starts higher
+than Goblins and Hobgoblins. A single caption offset sat too low and
+overlapped the gem. Lookup now carries each card's stats-box
+(`topPercent` / `heightPercent`), defaulting to the Goblins/Hobgoblins
+layout. The shared caption still uses the same dark serif; it only
+changes where that block sits so the name and numbers stay centered
+inside that card's own parchment.
+
 ## DUN-19 — Hobgoblins card and clip (11 Nov 2026)
 
 Same pattern as Goblins, one monster. Files are

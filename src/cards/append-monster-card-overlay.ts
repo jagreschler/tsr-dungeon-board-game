@@ -1,4 +1,7 @@
-import type { MonsterCardAssets } from "./lookup-monster-card.ts";
+import type {
+  MonsterCardAssets,
+  MonsterStatsBox,
+} from "./lookup-monster-card.ts";
 import type { MonsterCombatValues } from "./monster-combat-values.ts";
 
 export function appendMonsterCardOverlay(
@@ -64,7 +67,7 @@ function cardStep(
   image.src = assets.imageHref ?? "";
   image.alt = combatValues.name;
 
-  card.append(image, statsCaption(combatValues));
+  card.append(image, statsCaption(combatValues, assets.statsBox));
 
   const close = document.createElement("button");
   close.type = "button";
@@ -75,11 +78,16 @@ function cardStep(
   return step;
 }
 
-function statsCaption(combatValues: MonsterCombatValues): HTMLElement {
+function statsCaption(
+  combatValues: MonsterCombatValues,
+  statsBox: MonsterStatsBox,
+): HTMLElement {
   const caption = document.createElement("div");
   caption.className = "monster-card-stats monster-card-stats-ink";
   caption.setAttribute("data-monster-card-stats", "true");
   caption.setAttribute("data-stats-box", "true");
+  caption.style.top = `${statsBox.topPercent}%`;
+  caption.style.height = `${statsBox.heightPercent}%`;
 
   const name = document.createElement("p");
   name.className = "monster-card-stats-name";

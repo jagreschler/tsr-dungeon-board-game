@@ -69,6 +69,9 @@ function monsterNameForPreviewKey(event: KeyboardEvent): string | undefined {
     if (key === "h") {
       return "Hobgoblins";
     }
+    if (key === "l") {
+      return "Giant Lizard";
+    }
   }
 
   return undefined;

@@ -70,6 +70,30 @@ describe("bindMonsterCardPreview", () => {
     expect(overlay?.textContent?.includes("Lightning 3")).toBe(true);
   });
 
+  it("shows the giant lizard clip on L during local development", () => {
+    unbinders.push(bindMonsterCardPreview(boardSvg(), true));
+
+    pressKey("l");
+
+    const overlay = document.querySelector("[data-monster-card-overlay]");
+    expect(overlay === null).toBe(false);
+    expect(overlay?.querySelector("video") === null).toBe(false);
+    expect(
+      overlay?.querySelector("video")?.getAttribute("src") ?? "",
+    ).toContain("L1-giant-lizard.mp4");
+  });
+
+  it("shows the giant lizard card with no clip on Shift+L", () => {
+    unbinders.push(bindMonsterCardPreview(boardSvg(), true));
+
+    pressKey("l", true);
+
+    const overlay = document.querySelector("[data-monster-card-overlay]");
+    expect(overlay?.querySelector("video") === null).toBe(true);
+    expect(overlay?.textContent?.includes("Giant Lizard")).toBe(true);
+    expect(overlay?.textContent?.includes("Lightning 2")).toBe(true);
+  });
+
   it("does not listen for G when not in local development", () => {
     unbinders.push(bindMonsterCardPreview(boardSvg(), false));
 
