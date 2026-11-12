@@ -2,9 +2,9 @@ import { afterEach, describe, expect, it } from "vitest";
 import { lookupMonsterCard } from "./lookup-monster-card.ts";
 import { monsterCombatValues } from "./monster-combat-values.ts";
 import {
-  CARD_REVEALED_EVENT,
+  EVENT_CARD_REVEALED,
+  EVENT_OVERLAY_CLOSED,
   MonsterCardOverlay,
-  OVERLAY_CLOSED_EVENT,
 } from "./monster-card-overlay.ts";
 
 const revealedEvents: string[] = [];
@@ -16,11 +16,11 @@ afterEach(() => {
 
 function goblinsOverlay(): MonsterCardOverlay {
   const overlay = new MonsterCardOverlay(document.body);
-  overlay.addEventListener(CARD_REVEALED_EVENT, () => {
-    revealedEvents.push(CARD_REVEALED_EVENT);
+  overlay.addEventListener(EVENT_CARD_REVEALED, () => {
+    revealedEvents.push(EVENT_CARD_REVEALED);
   });
-  overlay.addEventListener(OVERLAY_CLOSED_EVENT, () => {
-    revealedEvents.push(OVERLAY_CLOSED_EVENT);
+  overlay.addEventListener(EVENT_OVERLAY_CLOSED, () => {
+    revealedEvents.push(EVENT_OVERLAY_CLOSED);
   });
   return overlay;
 }
@@ -73,7 +73,7 @@ describe("MonsterCardOverlay", () => {
     expect(overlay?.querySelector("[data-close-card]")?.textContent).toBe(
       "Close",
     );
-    expect(revealedEvents).toEqual([CARD_REVEALED_EVENT]);
+    expect(revealedEvents).toEqual([EVENT_CARD_REVEALED]);
   });
 
   it("falls back to the card when there is no clip", () => {
@@ -93,7 +93,7 @@ describe("MonsterCardOverlay", () => {
     );
     expect(text.includes("Goblins")).toBe(true);
     expect(text.includes("Lightning 6")).toBe(true);
-    expect(revealedEvents).toEqual([CARD_REVEALED_EVENT]);
+    expect(revealedEvents).toEqual([EVENT_CARD_REVEALED]);
   });
 
   it("removes the overlay when Close is pressed", () => {
@@ -109,9 +109,26 @@ describe("MonsterCardOverlay", () => {
       true,
     );
     expect(revealedEvents).toEqual([
-      CARD_REVEALED_EVENT,
-      OVERLAY_CLOSED_EVENT,
+      EVENT_CARD_REVEALED,
+      EVENT_OVERLAY_CLOSED,
     ]);
+  });
+
+  it("shows a plain parchment card when the monster has no art", () => {
+    const assets = lookupMonsterCard(1, "Skeleton");
+    const values = monsterCombatValues("Skeleton");
+    goblinsOverlay().show(assets, values);
+
+    const overlay = document.querySelector("[data-monster-card-overlay]");
+    const card = overlay?.querySelector("[data-monster-card]");
+    const text = overlay?.textContent ?? "";
+
+    expect(card?.getAttribute("data-card-style")).toBe("red");
+    expect(card?.hasAttribute("data-plain-card")).toBe(true);
+    expect(card?.querySelector("img") === null).toBe(true);
+    expect(text.includes("Skeleton")).toBe(true);
+    expect(text.includes("Lightning 2")).toBe(true);
+    expect(revealedEvents).toEqual([EVENT_CARD_REVEALED]);
   });
 
   it("shows the card when the muted clip ends", () => {
@@ -125,6 +142,6 @@ describe("MonsterCardOverlay", () => {
     expect(
       document.querySelector("[data-card-step]")?.hasAttribute("hidden"),
     ).toBe(false);
-    expect(revealedEvents).toEqual([CARD_REVEALED_EVENT]);
+    expect(revealedEvents).toEqual([EVENT_CARD_REVEALED]);
   });
 });

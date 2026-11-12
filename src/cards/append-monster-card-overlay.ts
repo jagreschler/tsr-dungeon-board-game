@@ -63,11 +63,15 @@ function cardStep(
   card.setAttribute("data-card-style", "red");
   card.className = "monster-card";
 
-  const image = document.createElement("img");
-  image.src = assets.imageHref ?? "";
-  image.alt = combatValues.name;
-
-  card.append(image, statsCaption(combatValues, assets.statsBox));
+  if (assets.imageHref === undefined) {
+    card.setAttribute("data-plain-card", "true");
+    card.append(statsCaption(combatValues, assets.statsBox));
+  } else {
+    const image = document.createElement("img");
+    image.src = assets.imageHref;
+    image.alt = combatValues.name;
+    card.append(image, statsCaption(combatValues, assets.statsBox));
+  }
 
   const close = document.createElement("button");
   close.type = "button";
@@ -83,7 +87,11 @@ function statsCaption(
   statsBox: MonsterStatsBox,
 ): HTMLElement {
   const caption = document.createElement("div");
-  caption.className = "monster-card-stats monster-card-stats-ink";
+  const inkClass =
+    statsBox.ink === "parchment"
+      ? "monster-card-stats-parchment"
+      : "monster-card-stats-ink";
+  caption.className = `monster-card-stats ${inkClass}`;
   caption.setAttribute("data-monster-card-stats", "true");
   caption.setAttribute("data-stats-box", "true");
   caption.style.top = `${statsBox.topPercent}%`;
