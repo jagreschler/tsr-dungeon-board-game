@@ -9,7 +9,21 @@ export function listReachableSpaceIdentifiers(
   maximumStepCount: number,
   rules: SpaceReachabilityRules,
 ): Set<string> {
-  const reachable = new Set<string>();
+  return new Set(
+    listReachableSpaceStepCounts(
+      startSpaceIdentifier,
+      maximumStepCount,
+      rules,
+    ).keys(),
+  );
+}
+
+export function listReachableSpaceStepCounts(
+  startSpaceIdentifier: string,
+  maximumStepCount: number,
+  rules: SpaceReachabilityRules,
+): Map<string, number> {
+  const reachable = new Map<string, number>();
   const visited = new Set<string>([startSpaceIdentifier]);
   const queue: { spaceIdentifier: string; steps: number }[] = [
     { spaceIdentifier: startSpaceIdentifier, steps: 0 },
@@ -35,8 +49,9 @@ export function listReachableSpaceIdentifiers(
         continue;
       }
 
+      const steps = current.steps + 1;
       visited.add(neighborIdentifier);
-      reachable.add(neighborIdentifier);
+      reachable.set(neighborIdentifier, steps);
 
       if (
         rules.isStoppingSpace !== undefined &&
@@ -47,7 +62,7 @@ export function listReachableSpaceIdentifiers(
 
       queue.push({
         spaceIdentifier: neighborIdentifier,
-        steps: current.steps + 1,
+        steps,
       });
     }
   }

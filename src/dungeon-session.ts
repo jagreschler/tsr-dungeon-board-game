@@ -15,8 +15,10 @@ import {
 } from "./cards/monster-deck.ts";
 import { GenerateBoard } from "./rendering/generate-board.ts";
 import { GenerateHeroPiece } from "./rendering/generate-hero-piece.ts";
+import { appendMoveStepLabels } from "./rendering/append-move-step-labels.ts";
+import { appendStoredLinkMarks } from "./rendering/append-stored-link-marks.ts";
 import { GenerateMoveHighlights } from "./rendering/generate-move-highlights.ts";
-import { listSpacesAHeroCanMoveTo } from "./movement/list-spaces-a-hero-can-move-to.ts";
+import { listMoveStepCounts } from "./movement/list-spaces-a-hero-can-move-to.ts";
 import { placePieceOnSpace, type Piece } from "./pieces/piece.ts";
 import { SVG_NAMESPACE } from "./rendering/svg-namespace.ts";
 
@@ -54,6 +56,12 @@ export class DungeonSession extends EventTarget {
       void import("./cards/bind-monster-card-preview.ts").then((module) => {
         module.bindMonsterCardPreview(svg, true);
       });
+      void import("./rendering/bind-move-step-labels.ts").then((module) => {
+        module.bindMoveStepLabels(svg, true);
+      });
+      void import("./rendering/bind-stored-link-marks.ts").then((module) => {
+        module.bindStoredLinkMarks(svg, true);
+      });
     }
     return svg;
   }
@@ -63,7 +71,7 @@ export class DungeonSession extends EventTarget {
       return;
     }
 
-    const reachable = listSpacesAHeroCanMoveTo(
+    const stepCounts = listMoveStepCounts(
       this.board,
       this.piece.spaceIdentifier,
       [],
@@ -71,7 +79,7 @@ export class DungeonSession extends EventTarget {
     const highlights = new GenerateMoveHighlights(
       this.board,
       this.layout,
-      reachable,
+      new Set(stepCounts.keys()),
     ).element();
     highlights.addEventListener("click", (event) => {
       this.onHighlightClick(event);
@@ -81,6 +89,10 @@ export class DungeonSession extends EventTarget {
       highlights,
       new GenerateHeroPiece(this.piece, this.layout).element(),
     );
+    if (import.meta.env.DEV) {
+      appendStoredLinkMarks(this.overlay, this.board, this.layout);
+      appendMoveStepLabels(this.overlay, this.layout, stepCounts);
+    }
   }
 
   private onHighlightClick(event: Event): void {

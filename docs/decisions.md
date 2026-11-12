@@ -439,6 +439,78 @@ cards use a red border. The overlay publishes `CardRevealed` and
 `OverlayClosed` so later encounter rules can listen without living
 inside the picture code.
 
+## DUN-22 — Drop open-hall skip links near Start (12 Nov 2026)
+
+From Start the five-step glow reached squares that look more than five
+printed spaces away. The search itself was fine (cap 5, one step per
+space). Open corridor links jumped over a square in between. The
+first cut dropped seven tuples near Start. That was not enough: the
+glow still used twelve more skip links in the five-step graph,
+including `main-staircase`/`1057-974` (via `1098-942`) and
+`stairs-west`/`942-774` (via `909-774`). Those twelve are gone too.
+The honest neighbor links on each side were already in the data, so
+nothing was stranded. Door links stay. Known-unreachable count stays
+100.
+
+The first seven: 909-774/986-786, stairs-west/926-664,
+1201-1052/1202-1112, 1202-1112/1176-1177, 1202-1112/1204-1177,
+1196-1020/1221-1092, and 966-968/887-972.
+
+The twelve that still inflated the Start glow: main-staircase/1057-974,
+stairs-west/942-774, 1367-754/1438-716, 1367-754/1433-780,
+1408-754/1429-681, 1408-754/1482-762, 1408-754/1433-817,
+1429-681/1482-762, 1482-762/1499-850, 1491-803/1512-872,
+839-887/916-921, and 1221-1092/1190-1139.
+
+The next cut treated `corridor-1018-1011` as magenta and dropped its
+gold neighbors. That was wrong: on the printed board it is the third
+gold flagstone on the southwest spoke, mis-tagged as level 4. It is
+level 1 again, and the two gold-to-gold opens are back. Honest steps
+from Start: 1098-942 (1), 1057-974 (2), 1018-1011 (3), 966-968 (4),
+916-921 (5). `room-4-06` is the door off that fourth square.
+
+East of Start the gold hall is honest through 1438-716 and 1433-817.
+The three level-6 squares that showed as 5 sat across a wall
+(1482-762, 1491-803, 1499-850). Those six gold-to-blue `open` links
+are gone. That L6 run has no other path back to Start yet, so it
+joins known-unreachable (117). From Start, 37 spaces remain in range.
+
+Local **D** draws the BFS step count on each highlighted space. It is
+dev-only, next to **B**.
+
+Two more Start skip links. Start was open to `corridor-1319-730`, the
+second northeast square, so that square showed 1 beside `1252-704`.
+The west stub `1045-800` was open to `1011-741`, the north bump that
+sits on `986-786`, so those two showed 2 beside 2. Those tuples are
+gone. `1011-741` is three.
+
+An open hall is only a real step if the two printed squares share an
+edge on the B overlay (ink outlines touching, or a few pixels of ink).
+Gray floor between them is a skip. 34 `open` tuples had a gray gap of
+3px or more; those are gone. Door links were not touched. No new
+links were added. A checked-in list of those 34 pairs keeps them from
+coming back.
+
+The biggest cut was Start to `corridor-1252-704` (25.6px of gray).
+That square still joins `1319-730` and the gold rooms on the northeast
+spoke, but that spoke no longer has an open-hall path back to Start.
+`room-east` still has its secret door onto `1417-934`. From Start, 28
+spaces remain in range. Known-unreachable went from 117 to 252.
+
+Two linked corridor neighbors in the five-step glow must never share a
+step number. A same-step allowance (equal counts when two paths are
+the same length) was tried and reverted: it was an unrequested change
+and it broke that rule. The test is strict again. Jason approved
+cutting the corner-only open `1358-918` / `1385-982`; `1385-982` is
+now 4 via the real edge through `1417-934`.
+
+Local **L** draws every stored board link once, center to center: open
+halls bright green, ordinary doors yellow, secret doors purple dashed.
+It is dev-only, next to **B** and **D**. The group uses a data
+attribute on the board and a separate display rule, same pattern as
+**D**. Plain **L** used to preview Giant Lizard; that card is Shift+L
+so the overlay can have **L**.
+
 ## DUN-23 — Giant Rats card and clip (12 Nov 2026)
 
 Same pattern as Hobgoblins and Giant Lizard. Files are

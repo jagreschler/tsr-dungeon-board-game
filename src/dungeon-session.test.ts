@@ -24,6 +24,22 @@ describe("DungeonSession", () => {
     expect(svg.querySelector("[data-reference-overlay]") === null).toBe(true);
   });
 
+  it("leaves the step-count labels off until D is pressed", () => {
+    const play = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
+    const svg = play.element();
+
+    expect(svg.querySelector("[data-move-step-labels]") === null).toBe(false);
+    expect(svg.hasAttribute("data-move-step-labels-visible")).toBe(false);
+  });
+
+  it("leaves the stored-link marks off until L is pressed", () => {
+    const play = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
+    const svg = play.element();
+
+    expect(svg.querySelector("[data-stored-link-marks]") === null).toBe(false);
+    expect(svg.hasAttribute("data-stored-link-marks-visible")).toBe(false);
+  });
+
   it("moves the Hero onto a highlighted space when that glow is clicked", () => {
     const play = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
     const svg = play.element();

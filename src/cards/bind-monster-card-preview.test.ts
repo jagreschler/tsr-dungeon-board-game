@@ -70,17 +70,14 @@ describe("bindMonsterCardPreview", () => {
     expect(overlay?.textContent?.includes("Lightning 3")).toBe(true);
   });
 
-  it("shows the giant lizard clip on L during local development", () => {
+  it("does not show the giant lizard clip on L", () => {
     unbinders.push(bindMonsterCardPreview(boardSvg(), true));
 
     pressKey("l");
 
-    const overlay = document.querySelector("[data-monster-card-overlay]");
-    expect(overlay === null).toBe(false);
-    expect(overlay?.querySelector("video") === null).toBe(false);
-    expect(
-      overlay?.querySelector("video")?.getAttribute("src") ?? "",
-    ).toContain("L1-giant-lizard.mp4");
+    expect(document.querySelector("[data-monster-card-overlay]") === null).toBe(
+      true,
+    );
   });
 
   it("shows the giant lizard card with no clip on Shift+L", () => {

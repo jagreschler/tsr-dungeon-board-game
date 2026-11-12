@@ -9,4 +9,12 @@ describe("board corridors", () => {
 
     expect(corridors.length).toBe(355);
   });
+
+  it("treats the southwest gold flagstone 1018-1011 as level 1", () => {
+    const space = dungeonTraces.find((trace) => {
+      return trace.identifier === "corridor-1018-1011";
+    });
+
+    expect(space?.level).toBe(1);
+  });
 });
