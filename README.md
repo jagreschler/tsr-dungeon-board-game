@@ -33,7 +33,7 @@ In `npm run dev` only, press **L** to draw every stored board link as a line bet
 
 ### Local monster card preview
 
-Monster draws are not in the game yet. In `npm run dev` only, press **G** to preview the Level 1 Goblins clip and card, or **H** for Hobgoblins. Press **Shift+G**, **Shift+H**, or **Shift+L** to skip the clip and show the card only (Giant Lizard is Shift+L, because **L** is the stored-link overlay). Production builds do not bind these keys.
+Entering an occupied Level 1 (gold) room draws a monster from that level's deck. In `npm run dev` only, press **G** to preview Goblins, **H** for Hobgoblins, or **R** for Giant Rats. Press **Shift+G**, **Shift+H**, **Shift+R**, or **Shift+L** to skip the clip and show the card only (Giant Lizard is Shift+L, because **L** is the stored-link overlay). Production builds do not bind these keys.
 
 ## Test
 

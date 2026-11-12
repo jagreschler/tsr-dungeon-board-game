@@ -72,6 +72,9 @@ function monsterNameForPreviewKey(event: KeyboardEvent): string | undefined {
     if (key === "l" && event.shiftKey) {
       return "Giant Lizard";
     }
+    if (key === "r") {
+      return "Giant Rats";
+    }
   }
 
   return undefined;

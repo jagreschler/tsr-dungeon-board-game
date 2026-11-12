@@ -91,6 +91,30 @@ describe("bindMonsterCardPreview", () => {
     expect(overlay?.textContent?.includes("Lightning 2")).toBe(true);
   });
 
+  it("shows the giant rats clip on R during local development", () => {
+    unbinders.push(bindMonsterCardPreview(boardSvg(), true));
+
+    pressKey("r");
+
+    const overlay = document.querySelector("[data-monster-card-overlay]");
+    expect(overlay === null).toBe(false);
+    expect(overlay?.querySelector("video") === null).toBe(false);
+    expect(
+      overlay?.querySelector("video")?.getAttribute("src") ?? "",
+    ).toContain("L1-giant-rats.mp4");
+  });
+
+  it("shows the giant rats card with no clip on Shift+R", () => {
+    unbinders.push(bindMonsterCardPreview(boardSvg(), true));
+
+    pressKey("r", true);
+
+    const overlay = document.querySelector("[data-monster-card-overlay]");
+    expect(overlay?.querySelector("video") === null).toBe(true);
+    expect(overlay?.textContent?.includes("Giant Rats")).toBe(true);
+    expect(overlay?.textContent?.includes("Lightning 7")).toBe(true);
+  });
+
   it("does not listen for G when not in local development", () => {
     unbinders.push(bindMonsterCardPreview(boardSvg(), false));
 

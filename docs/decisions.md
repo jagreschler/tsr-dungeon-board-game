@@ -511,6 +511,64 @@ attribute on the board and a separate display rule, same pattern as
 **D**. Plain **L** used to preview Giant Lizard; that card is Shift+L
 so the overlay can have **L**.
 
+## DUN-23 — Giant Rats card and clip (12 Nov 2026)
+
+Same pattern as Hobgoblins and Giant Lizard. Files are
+`public/cards/L1-giant-rats.jpg` and `.mp4`. Catalog entry is
+`hasClip: true` with art (no `hasArt: false`). Local **R** plays the
+clip then the card; **Shift+R** shows the card only. Combat numbers
+stay the 1981 Magister Rex list already in `monster-combat-values`
+(Lightning 7, Fireball 2, Wizard 6, Superhero 3, Hero 4, Elf 5). The
+parchment panel is measured at 74/17 with dark `--ink`, so the
+caption stays readable and vertically centered in that box.
+
+## DUN-21 — Level 1 monster draw on entering a gold room (12 Nov 2026)
+
+When a pawn ends its move in an occupied Level 1 room, the session
+publishes `RoomEntered` with `{ roomType: "monster" }` on the
+CustomEvent detail. `MonsterCardDealer` listens with
+`listenForRoomEntered(session, "monster")`, reads
+`event.detail.roomType`, and draws only when that matches. It takes
+the top card of the Level 1 monster deck and publishes
+`MonsterCardDrawn`. `MonsterCardPresenter` listens for that draw and
+shows the existing reveal overlay (clip if we have one, then the
+card). Overlay close still publishes `OverlayClosed`; the dealer puts
+the unfought card on the bottom of the pile, the 1981 rule for that
+case. Event-name constants start with `EVENT_` so they autocomplete
+together (`EVENT_ROOM_ENTERED`, `EVENT_MONSTER_CARD_DRAWN`,
+`EVENT_CARD_REVEALED`, `EVENT_OVERLAY_CLOSED`). The map has no
+`"monster"` space kind; `RoomType` is a separate filter (`monster` or
+`chamber` so far). Only occupied Level 1 rooms publish
+`roomType: "monster"` today.
+
+Possible future refactor: whenever we do that refactoring, if we
+do, pull a generic `CardDeck` class out of `MonsterCardDealer` and
+`MonsterDeck`, but only once another card type (like Clue's weapons
+or rooms) actually needs one.
+
+The deck is the 1981 Magister Rex Level 1 list of 7 cards (Giant
+Lizard, Giant Rats x2, Goblins x2, Hobgoblins, Skeleton), shuffled
+once per game. Giant Rats and Skeleton have no art yet, so they use
+a plain parchment card with the shared caption and a red border.
+
+Start, the Main Gallery, and corridors never draw. Other levels and
+chambers do nothing yet. Rooms are not cleared yet, so every entry
+into a gold room draws again. Local G / H / L previews still work.
+
+The Goblins art's stats box is dark red, not parchment, so the shared
+dark `--ink` caption vanished on it. Lookup now carries caption `ink`
+on the same per-card stats-box as the parchment bounds. Goblins uses
+`--parchment` ink; Hobgoblins, Giant Lizard, and the no-art cards stay
+dark on parchment. The real-turn overlay was already rendering the
+caption; it was just unreadable on that art.
+
+Goblins' dark-red panel is taller than the default 74.8/16 bounds
+(that box sat at the top of the panel). Its own stats-box is 76/20 so
+the name and numbers sit in the middle of that red fill. Hobgoblins
+keeps 74.8/16 and Giant Lizard keeps 67/19.
+
+https://magisterrex.wordpress.com/2011/04/11/whats-in-that-game-box-dungeon-fantasy-boardgame/
+
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 
 Same pattern as Hobgoblins, one monster. Files are

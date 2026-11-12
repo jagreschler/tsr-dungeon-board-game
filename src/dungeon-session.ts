@@ -1,5 +1,18 @@
 import type { Board } from "./board/board.ts";
+import { findSpace } from "./board/find-space.ts";
+import { isOccupiedLevel1Room } from "./board/is-occupied-level-1-room.ts";
+import {
+  EVENT_ROOM_ENTERED,
+  type RoomEnteredDetail,
+} from "./board/room-type.ts";
 import type { BoardLayout } from "./board/space-placement.ts";
+import { MonsterCardOverlay } from "./cards/monster-card-overlay.ts";
+import { MonsterCardDealer } from "./cards/monster-card-dealer.ts";
+import { MonsterCardPresenter } from "./cards/monster-card-presenter.ts";
+import {
+  MonsterDeck,
+  shuffledLevel1MonsterDeck,
+} from "./cards/monster-deck.ts";
 import { GenerateBoard } from "./rendering/generate-board.ts";
 import { GenerateHeroPiece } from "./rendering/generate-hero-piece.ts";
 import { appendMoveStepLabels } from "./rendering/append-move-step-labels.ts";
@@ -9,7 +22,7 @@ import { listMoveStepCounts } from "./movement/list-spaces-a-hero-can-move-to.ts
 import { placePieceOnSpace, type Piece } from "./pieces/piece.ts";
 import { SVG_NAMESPACE } from "./rendering/svg-namespace.ts";
 
-export class DungeonSession {
+export class DungeonSession extends EventTarget {
   private piece: Piece;
   private overlay: SVGGElement | undefined;
 
@@ -17,7 +30,9 @@ export class DungeonSession {
     private readonly board: Board,
     private readonly layout: BoardLayout,
     piece: Piece,
+    private readonly monsterDeck: MonsterDeck = shuffledLevel1MonsterDeck(),
   ) {
+    super();
     this.piece = placePieceOnSpace(piece, piece.spaceIdentifier);
   }
 
@@ -28,6 +43,12 @@ export class DungeonSession {
     svg.append(overlay);
     this.overlay = overlay;
     this.drawOverlay();
+    const cardOverlay = new MonsterCardOverlay(overlayHost(svg));
+    const dealer = new MonsterCardDealer(this.monsterDeck);
+    const presenter = new MonsterCardPresenter(cardOverlay);
+    dealer.listenForRoomEntered(this, "monster");
+    dealer.listenForOverlayClosed(cardOverlay);
+    presenter.listenForMonsterCardDrawn(dealer);
     if (import.meta.env.DEV) {
       void import("./rendering/bind-reference-overlay.ts").then((module) => {
         module.bindReferenceOverlay(svg, true);
@@ -88,5 +109,28 @@ export class DungeonSession {
 
     this.piece = placePieceOnSpace(this.piece, spaceIdentifier);
     this.drawOverlay();
+    this.publishMonsterRoomIfNeeded(spaceIdentifier);
   }
+
+  private publishMonsterRoomIfNeeded(spaceIdentifier: string): void {
+    const space = findSpace(this.board, spaceIdentifier);
+    if (isOccupiedLevel1Room(space) === false) {
+      return;
+    }
+
+    this.dispatchEvent(
+      new CustomEvent<RoomEnteredDetail>(EVENT_ROOM_ENTERED, {
+        detail: { roomType: "monster" },
+      }),
+    );
+  }
+}
+
+function overlayHost(svg: SVGSVGElement): HTMLElement {
+  const app = svg.closest("#app");
+  if (app instanceof HTMLElement) {
+    return app;
+  }
+
+  return svg.parentElement ?? document.body;
 }
