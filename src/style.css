@@ -90,6 +90,34 @@ body {
   stroke-width: 5px;
 }
 
+[data-stored-link-marks] {
+  display: none;
+  pointer-events: none;
+}
+
+.dungeon-board[data-stored-link-marks-visible] [data-stored-link-marks] {
+  display: unset;
+}
+
+[data-stored-link-mark] {
+  fill: none;
+  stroke-width: 5px;
+  stroke-linecap: round;
+}
+
+[data-stored-link-mark][data-link-kind="open"] {
+  stroke: #39ff14;
+}
+
+[data-stored-link-mark][data-link-kind="door"] {
+  stroke: #ffe44d;
+}
+
+[data-stored-link-mark][data-link-kind="secretDoor"] {
+  stroke: #c44cff;
+  stroke-dasharray: 14 10;
+}
+
 @keyframes move-glow-pulse {
   0%,
   100% {

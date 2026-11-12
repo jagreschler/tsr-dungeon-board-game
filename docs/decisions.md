@@ -504,6 +504,13 @@ and it broke that rule. The test is strict again. Jason approved
 cutting the corner-only open `1358-918` / `1385-982`; `1385-982` is
 now 4 via the real edge through `1417-934`.
 
+Local **L** draws every stored board link once, center to center: open
+halls bright green, ordinary doors yellow, secret doors purple dashed.
+It is dev-only, next to **B** and **D**. The group uses a data
+attribute on the board and a separate display rule, same pattern as
+**D**. Plain **L** used to preview Giant Lizard; that card is Shift+L
+so the overlay can have **L**.
+
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 
 Same pattern as Hobgoblins, one monster. Files are

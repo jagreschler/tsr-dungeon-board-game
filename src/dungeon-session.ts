@@ -3,6 +3,7 @@ import type { BoardLayout } from "./board/space-placement.ts";
 import { GenerateBoard } from "./rendering/generate-board.ts";
 import { GenerateHeroPiece } from "./rendering/generate-hero-piece.ts";
 import { appendMoveStepLabels } from "./rendering/append-move-step-labels.ts";
+import { appendStoredLinkMarks } from "./rendering/append-stored-link-marks.ts";
 import { GenerateMoveHighlights } from "./rendering/generate-move-highlights.ts";
 import { listMoveStepCounts } from "./movement/list-spaces-a-hero-can-move-to.ts";
 import { placePieceOnSpace, type Piece } from "./pieces/piece.ts";
@@ -37,6 +38,9 @@ export class DungeonSession {
       void import("./rendering/bind-move-step-labels.ts").then((module) => {
         module.bindMoveStepLabels(svg, true);
       });
+      void import("./rendering/bind-stored-link-marks.ts").then((module) => {
+        module.bindStoredLinkMarks(svg, true);
+      });
     }
     return svg;
   }
@@ -65,6 +69,7 @@ export class DungeonSession {
       new GenerateHeroPiece(this.piece, this.layout).element(),
     );
     if (import.meta.env.DEV) {
+      appendStoredLinkMarks(this.overlay, this.board, this.layout);
       appendMoveStepLabels(this.overlay, this.layout, stepCounts);
     }
   }
