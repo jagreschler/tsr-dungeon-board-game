@@ -25,13 +25,25 @@ To line the drawing up with the traced spaces while working locally:
 2. Save the map as `local-reference/reference-board-map.png` (2200×1702, the standard board orientation).
 3. Run `npm run dev` and press **B** to show the drawing at 50% opacity. Press **B** again to hide it.
 
-The overlay is off by default. If the file is missing, the key does nothing. The production build never includes or references the image.
+The overlay is off by default. If the file is missing, the key does nothing. We never publish that image.
 
 ### Local stored-link overlay
 
-In `npm run dev` only, press **L** to draw every stored board link once: open halls in bright green from center to center, ordinary doors in yellow from the hall square to the printed ink gap in the room wall, secret doors in purple dashes the same way. Press **L** again to hide it. Works with **B** and **D**. Production builds do not bind this key.
+In `npm run dev`, press **L** to draw every stored board link once: open halls in bright green from center to center, ordinary doors in yellow from the hall square to the printed ink gap in the room wall, secret doors in purple dashes the same way. Press **L** again to hide it. Works with **B** and **D**.
 
 **B**, **L**, and **D** live in `src/debug-tools/`.
+
+### Debug mode on the live site
+
+The production site binds no debug keys unless the address has `?debug`. Then **L** and **D** work as they do in `npm run dev`. **B** still needs the local reference image.
+
+`debugOptions` turns an overlay on without a key:
+
+- [links](https://jagreschler.github.io/tsr-dungeon-board-game/?debug&debugOptions=links) — `?debug&debugOptions=links`
+- [steps](https://jagreschler.github.io/tsr-dungeon-board-game/?debug&debugOptions=steps) — `?debug&debugOptions=steps`
+- [both](https://jagreschler.github.io/tsr-dungeon-board-game/?debug&debugOptions=links,steps) — `?debug&debugOptions=links,steps`
+
+Without `?debug`, production is unchanged: no keys, nothing showing.
 
 ### Local monster card preview
 

@@ -18,6 +18,8 @@ const mapDebugModules = [
   "bind-reference-overlay.test.ts",
   "bind-stored-link-marks.ts",
   "bind-stored-link-marks.test.ts",
+  "debug-mode.ts",
+  "debug-mode.test.ts",
   "read-reference-board-luminance.ts",
   "stored-door-mark-ends.ts",
   "stored-door-mark-ink-gaps.ts",
