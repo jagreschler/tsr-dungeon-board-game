@@ -15,6 +15,7 @@ import {
 } from "./cards/monster-deck.ts";
 import { appendMoveStepLabels } from "./debug-tools/append-move-step-labels.ts";
 import { appendStoredLinkMarks } from "./debug-tools/append-stored-link-marks.ts";
+import { DebugMode } from "./debug-tools/debug-mode.ts";
 import { GenerateBoard } from "./rendering/generate-board.ts";
 import { GenerateHeroPiece } from "./rendering/generate-hero-piece.ts";
 import { GenerateMoveHighlights } from "./rendering/generate-move-highlights.ts";
@@ -22,18 +23,29 @@ import { listMoveStepCounts } from "./movement/list-spaces-a-hero-can-move-to.ts
 import { placePieceOnSpace, type Piece } from "./pieces/piece.ts";
 import { SVG_NAMESPACE } from "./rendering/svg-namespace.ts";
 
+type SessionOptions = {
+  debugMode?: DebugMode;
+  isLocal?: boolean;
+};
+
 export class DungeonSession extends EventTarget {
   private piece: Piece;
   private overlay: SVGGElement | undefined;
+  private readonly debugMode: DebugMode;
+  private readonly isLocal: boolean;
 
   constructor(
     private readonly board: Board,
     private readonly layout: BoardLayout,
     piece: Piece,
     private readonly monsterDeck: MonsterDeck = shuffledLevel1MonsterDeck(),
+    options: SessionOptions = {},
   ) {
     super();
     this.piece = placePieceOnSpace(piece, piece.spaceIdentifier);
+    this.debugMode =
+      options.debugMode ?? new DebugMode(window.location.search);
+    this.isLocal = options.isLocal ?? import.meta.env.DEV;
   }
 
   element(): SVGSVGElement {
@@ -43,24 +55,32 @@ export class DungeonSession extends EventTarget {
     svg.append(overlay);
     this.overlay = overlay;
     this.drawOverlay();
+    if (this.debugMode.hasLinks()) {
+      svg.setAttribute("data-stored-link-marks-visible", "true");
+    }
+    if (this.debugMode.hasSteps()) {
+      svg.setAttribute("data-move-step-labels-visible", "true");
+    }
     const cardOverlay = new MonsterCardOverlay(overlayHost(svg));
     const dealer = new MonsterCardDealer(this.monsterDeck);
     const presenter = new MonsterCardPresenter(cardOverlay);
     dealer.listenForRoomEntered(this, "monster");
     dealer.listenForOverlayClosed(cardOverlay);
     presenter.listenForMonsterCardDrawn(dealer);
-    if (import.meta.env.DEV) {
+    if (this.mapDebugIsOn()) {
       void import("./debug-tools/bind-reference-overlay.ts").then((module) => {
         module.bindReferenceOverlay(svg, true);
-      });
-      void import("./cards/bind-monster-card-preview.ts").then((module) => {
-        module.bindMonsterCardPreview(svg, true);
       });
       void import("./debug-tools/bind-move-step-labels.ts").then((module) => {
         module.bindMoveStepLabels(svg, true);
       });
       void import("./debug-tools/bind-stored-link-marks.ts").then((module) => {
         module.bindStoredLinkMarks(svg, true);
+      });
+    }
+    if (this.isLocal) {
+      void import("./cards/bind-monster-card-preview.ts").then((module) => {
+        module.bindMonsterCardPreview(svg, true);
       });
     }
     return svg;
@@ -89,10 +109,14 @@ export class DungeonSession extends EventTarget {
       highlights,
       new GenerateHeroPiece(this.piece, this.layout).element(),
     );
-    if (import.meta.env.DEV) {
+    if (this.mapDebugIsOn()) {
       appendStoredLinkMarks(this.overlay, this.board, this.layout);
       appendMoveStepLabels(this.overlay, this.layout, stepCounts);
     }
+  }
+
+  private mapDebugIsOn(): boolean {
+    return this.isLocal || this.debugMode.isOn();
   }
 
   private onHighlightClick(event: Event): void {

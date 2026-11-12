@@ -584,6 +584,27 @@ The Vite plugin that serves the local PNG stays in `vite.config.ts`.
 Nothing about how the overlays look or how the game plays changed;
 only import paths moved.
 
+## DUN-27 — Debug mode from the web address (12 Nov 2026)
+
+Jason wants the L and D map tools on the live GitHub Pages site, not
+only in `npm run dev`. `?debug` in the address turns debug mode on.
+`debugOptions` names which overlays start visible: `links` is L,
+`steps` is D, comma-separated. Example:
+`?debug&debugOptions=links,steps`.
+
+Without `?debug`, production is unchanged: no B/L/D keys, and those
+overlays are not in the board. With `?debug`, the keys work on the
+live site too. `npm run dev` still turns the tools on with no query.
+
+The address is parsed in one small class, `DebugMode`, in
+`src/debug-tools/`. `main.ts` stays thin. Monster-card preview keys
+stay local-only.
+
+**B stays local.** The reference drawing is a fan copy we do not
+publish. The B key can bind when debug is on, but the overlay still
+no-ops if the gitignored PNG is missing. A later PR will add a button
+to load a file from the user's own computer.
+
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 
 Jason: a door line may not cross gray abyss. For a real shared wall,
