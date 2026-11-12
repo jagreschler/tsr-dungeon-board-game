@@ -500,8 +500,9 @@ spaces remain in range. Known-unreachable went from 117 to 252.
 Two linked corridor neighbors in the five-step glow must never share a
 step number. A same-step allowance (equal counts when two paths are
 the same length) was tried and reverted: it was an unrequested change
-and it broke that rule. The test is strict again. If a leftover pair
-still shares a number, the test stays red until that link is cut.
+and it broke that rule. The test is strict again. Jason approved
+cutting the corner-only open `1358-918` / `1385-982`; `1385-982` is
+now 4 via the real edge through `1417-934`.
 
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 

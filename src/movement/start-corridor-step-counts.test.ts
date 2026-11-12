@@ -83,6 +83,24 @@ describe("Start corridor step counts", () => {
     expect(steps.get("corridor-1011-741")).toBe(3);
   });
 
+  it("does not link the corner-only 1358-918 to 1385-982", () => {
+    const steps = listMoveStepCounts(dungeonBoard, "main-staircase", []);
+
+    expect(
+      spacesAreLinked("corridor-1358-918", "corridor-1385-982"),
+    ).toBe(false);
+    expect(
+      spacesAreLinked("corridor-1385-982", "corridor-1358-918"),
+    ).toBe(false);
+    expect(
+      spacesAreLinked("corridor-1358-918", "corridor-1417-934"),
+    ).toBe(true);
+    expect(
+      spacesAreLinked("corridor-1417-934", "corridor-1385-982"),
+    ).toBe(true);
+    expect(steps.get("corridor-1385-982")).toBe(4);
+  });
+
   it("does not give linked Start-glow corridor neighbors the same step count", () => {
     expect(listStartCorridorStepViolations()).toEqual([]);
   });
