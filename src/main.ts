@@ -1,12 +1,11 @@
 import "./style.css";
 import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
-import { MonsterCardPreviewListener } from "./cards/monster-card-preview-listener.ts";
 import { DebugMode } from "./debug-tools/debug-mode.ts";
-import { DebugOverlayListener } from "./debug-tools/debug-overlay-listener.ts";
-import { ReferenceImagePicker } from "./debug-tools/reference-image-picker.ts";
+import { DebugTools } from "./debug-tools/debug-tools.ts";
 import { heroPiece } from "./pieces/hero-piece.ts";
 import { DungeonSession } from "./dungeon-session.ts";
+import { placeBoard } from "./place-board.ts";
 
 const app = document.querySelector("#app");
 
@@ -22,14 +21,9 @@ app.append(title);
 const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
 const debugMode = new DebugMode(window.location.search, import.meta.env.DEV);
 if (debugMode.isOn()) {
-  new DebugOverlayListener(debugMode).listenForOverlayDrawn(session);
-  new MonsterCardPreviewListener().listenForOverlayDrawn(session);
-  const board = session.element();
-  app.append(board);
-  new ReferenceImagePicker(board).place();
-} else {
-  app.append(session.element());
+  new DebugTools(debugMode).listen(session);
 }
+placeBoard(app, session);
 
 const appVersion = document.createElement("p");
 appVersion.className = "app-version";

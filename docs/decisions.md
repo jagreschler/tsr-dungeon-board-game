@@ -637,12 +637,9 @@ reference image** control in `src/debug-tools/` is wired only when
 `debugMode.isOn()`. `main.ts` stays thin. There are no new
 `import.meta.env` checks.
 
-The picker is `ReferenceImagePicker`. All debug wiring lives in
-one `if (debugMode.isOn())` in `main.ts`: OverlayDrawn listeners
-attach first, then the board is created and appended, then the
-picker is placed immediately after the svg. No `queueMicrotask`
-and no `document.body` fallback. Production takes the `else` and
-only appends the board.
+The picker is `ReferenceImagePicker`. `DebugTools` wires it, and
+the L/D and G/H/R listeners, from board lifecycle events. `main.ts`
+only checks `debugMode.isOn()` and calls `DebugTools.listen`.
 
 The button opens a file picker. `ReferenceImageFile` reads the
 file locally (`URL.createObjectURL`), checks 2200×1702, and
@@ -661,6 +658,29 @@ the image is still used.
 No localStorage. That would remember the last file across visits,
 but the browser cannot keep the real file, only a copy, and this
 PR stays small. A later change can add it if we want.
+
+## DUN-29 — Lifecycle events instead of inline order in main.ts (12 Nov 2026)
+
+Jason asked to combine the two debug blocks in `main.ts`. The
+order still matters (OverlayDrawn listeners before the first
+draw, picker after the svg is attached), but `main.ts` should
+not know that sequence.
+
+Board setup now publishes `EVENT_BOARD_BEFORE_DRAW`
+(`board-before-draw`) right before the svg is created, and
+`EVENT_BOARD_DRAWN` (`board-drawn`) once that svg is on the
+page. Those constants live in `board-events.ts`. `placeBoard`
+is the one function that fires them, creates the svg, and
+appends it.
+
+`DebugTools` subscribes at startup: OverlayDrawn listeners
+attach on `board-before-draw`, and the picker places itself on
+`board-drawn`, immediately after the svg. Production still
+publishes the lifecycle events; it just has no debug listeners.
+A class that draws the board says the board was drawn; it is
+not also responsible for every debug side effect. That is the
+same pattern as OverlayDrawn. No `queueMicrotask` and no
+`document.body` fallback.
 
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 

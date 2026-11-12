@@ -22,6 +22,8 @@ const mapDebugModules = [
   "debug-mode.test.ts",
   "debug-overlay-listener.ts",
   "debug-overlay-listener.test.ts",
+  "debug-tools.ts",
+  "debug-tools.test.ts",
   "reference-image-events.ts",
   "reference-image-file.ts",
   "reference-image-file.test.ts",
@@ -47,8 +49,9 @@ describe("map debug tools folder", () => {
     expect(session.includes("debug-tools")).toBe(false);
     expect(session.includes("import.meta.env")).toBe(false);
     expect(session.includes("bind-monster-card-preview")).toBe(false);
-    expect(main.includes("DebugOverlayListener")).toBe(true);
-    expect(main.includes("MonsterCardPreviewListener")).toBe(true);
+    expect(main.includes("DebugTools")).toBe(true);
+    expect(main.includes("DebugOverlayListener")).toBe(false);
+    expect(main.includes("MonsterCardPreviewListener")).toBe(false);
     expect(existsSync(resolve("src/cards/bind-monster-card-preview.ts"))).toBe(
       true,
     );
