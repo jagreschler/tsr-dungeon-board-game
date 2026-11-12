@@ -4,7 +4,7 @@ import { boxFromPlacement } from "../board/placement-box.ts";
 import { findPlacement } from "../board/find-placement.ts";
 import type { BoardLayout } from "../board/space-placement.ts";
 import { storedDoorMarkEnds } from "./stored-door-mark-ends.ts";
-import { SVG_NAMESPACE } from "./svg-namespace.ts";
+import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 export function appendStoredLinkMarks(
   parent: SVGElement,

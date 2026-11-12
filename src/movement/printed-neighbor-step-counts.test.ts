@@ -8,7 +8,7 @@ import {
   REFERENCE_BOARD_IMAGE_PATH,
   readReferenceBoardLuminance,
   type ReferenceBoardLuminance,
-} from "../rendering/read-reference-board-luminance.ts";
+} from "../debug-tools/read-reference-board-luminance.ts";
 import { listMoveStepCounts } from "./list-spaces-a-hero-can-move-to.ts";
 
 const hasReferenceBoard = existsSync(REFERENCE_BOARD_IMAGE_PATH);

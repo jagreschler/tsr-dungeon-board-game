@@ -6,7 +6,7 @@ import { centerOfBox } from "../board/board-grid.ts";
 import { boxFromPlacement } from "../board/placement-box.ts";
 import { findPlacement } from "../board/find-placement.ts";
 import { appendStoredLinkMarks } from "./append-stored-link-marks.ts";
-import { SVG_NAMESPACE } from "./svg-namespace.ts";
+import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 function pairKey(left: string, right: string, kind: string): string {
   return `${[left, right].sort().join(" ")} ${kind}`;

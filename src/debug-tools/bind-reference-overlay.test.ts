@@ -3,8 +3,8 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { bindReferenceOverlay } from "./bind-reference-overlay.ts";
-import { paintMoveGlow } from "./paint-move-glow.ts";
-import { SVG_NAMESPACE } from "./svg-namespace.ts";
+import { paintMoveGlow } from "../rendering/paint-move-glow.ts";
+import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 const boardStyles = readFileSync(
   join(dirname(fileURLToPath(import.meta.url)), "../style.css"),

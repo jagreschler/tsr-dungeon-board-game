@@ -2,7 +2,7 @@ import { centerOfBox } from "../board/board-grid.ts";
 import { boxFromPlacement } from "../board/placement-box.ts";
 import { findPlacement } from "../board/find-placement.ts";
 import type { BoardLayout } from "../board/space-placement.ts";
-import { SVG_NAMESPACE } from "./svg-namespace.ts";
+import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 export function appendMoveStepLabels(
   parent: SVGElement,

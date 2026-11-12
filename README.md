@@ -31,6 +31,8 @@ The overlay is off by default. If the file is missing, the key does nothing. The
 
 In `npm run dev` only, press **L** to draw every stored board link once: open halls in bright green from center to center, ordinary doors in yellow from the hall square to the printed ink gap in the room wall, secret doors in purple dashes the same way. Press **L** again to hide it. Works with **B** and **D**. Production builds do not bind this key.
 
+**B**, **L**, and **D** live in `src/debug-tools/`.
+
 ### Local monster card preview
 
 Entering an occupied Level 1 (gold) room draws a monster from that level's deck. In `npm run dev` only, press **G** to preview Goblins, **H** for Hobgoblins, or **R** for Giant Rats. Press **Shift+G**, **Shift+H**, **Shift+R**, or **Shift+L** to skip the clip and show the card only (Giant Lizard is Shift+L, because **L** is the stored-link overlay). Production builds do not bind these keys.
