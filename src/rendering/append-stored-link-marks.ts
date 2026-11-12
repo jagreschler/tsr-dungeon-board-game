@@ -3,6 +3,7 @@ import { centerOfBox } from "../board/board-grid.ts";
 import { boxFromPlacement } from "../board/placement-box.ts";
 import { findPlacement } from "../board/find-placement.ts";
 import type { BoardLayout } from "../board/space-placement.ts";
+import { storedDoorMarkEnds } from "./stored-door-mark-ends.ts";
 import { SVG_NAMESPACE } from "./svg-namespace.ts";
 
 export function appendStoredLinkMarks(
@@ -36,8 +37,21 @@ export function appendStoredLinkMarks(
       continue;
     }
 
-    const from = centerOfBox(boxFromPlacement(fromPlacement));
-    const to = centerOfBox(boxFromPlacement(toPlacement));
+    const centers = {
+      start: centerOfBox(boxFromPlacement(fromPlacement)),
+      end: centerOfBox(boxFromPlacement(toPlacement)),
+    };
+    const doorEnds =
+      connection.kind === "door" || connection.kind === "secretDoor"
+        ? storedDoorMarkEnds(
+            board,
+            layout,
+            connection.fromSpaceIdentifier,
+            connection.toSpaceIdentifier,
+          )
+        : undefined;
+    const from = doorEnds?.start ?? centers.start;
+    const to = doorEnds?.end ?? centers.end;
     const line = document.createElementNS(SVG_NAMESPACE, "line");
     line.setAttribute("data-stored-link-mark", "true");
     line.setAttribute("data-link-kind", connection.kind);

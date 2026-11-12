@@ -511,6 +511,17 @@ attribute on the board and a separate display rule, same pattern as
 **D**. Plain **L** used to preview Giant Lizard; that card is Shift+L
 so the overlay can have **L**.
 
+## DUN-23 — Door overlay lines stop on the wall (12 Nov 2026)
+
+Jason: a door line may not cross gray abyss. For a real shared wall,
+**L** now draws the yellow/purple mark from the hall square's center
+to the door on that wall, not through the room center. Open halls stay
+center to center. The point lives in overlay/display code
+(`storedDoorMarkEnds`); movement and stored link data are unchanged.
+Twenty-three wrong door/secret partners still skip gray; those stay
+for a later data fix and are named in the overlay test so this change
+does not paper over them.
+
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 
 Same pattern as Hobgoblins, one monster. Files are
