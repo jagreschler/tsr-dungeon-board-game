@@ -12,6 +12,7 @@ type CatalogEntry = {
 const catalog: CatalogEntry[] = [
   { level: 1, name: "Goblins", hasClip: true },
   { level: 1, name: "Hobgoblins", hasClip: true },
+  { level: 1, name: "Giant Lizard", hasClip: true },
 ];
 
 export function monsterSlug(monsterName: string): string {

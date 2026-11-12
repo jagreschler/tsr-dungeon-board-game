@@ -26,6 +26,18 @@ describe("monsterCombatValues", () => {
     expect(values?.elf).toBe(4);
   });
 
+  it("returns the 1981 Giant Lizard numbers", () => {
+    const values = monsterCombatValues("Giant Lizard");
+
+    expect(values?.name).toBe("Giant Lizard");
+    expect(values?.lightning).toBe(2);
+    expect(values?.fireball).toBe(2);
+    expect(values?.wizard).toBe(5);
+    expect(values?.superhero).toBe(2);
+    expect(values?.hero).toBe(4);
+    expect(values?.elf).toBe(5);
+  });
+
   it("returns undefined for an unknown monster", () => {
     expect(monsterCombatValues("Owlbear")).toBe(undefined);
   });

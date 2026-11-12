@@ -27,6 +27,13 @@ describe("lookupMonsterCard", () => {
     expect(assets.clipHref ?? "").toContain("L1-hobgoblins.mp4");
   });
 
+  it("returns the giant lizard card image and clip from L1-giant-lizard files", () => {
+    const assets = lookupMonsterCard(1, "Giant Lizard");
+
+    expect(assets.imageHref ?? "").toContain("L1-giant-lizard.jpg");
+    expect(assets.clipHref ?? "").toContain("L1-giant-lizard.mp4");
+  });
+
   it("hyphenates multi-word monster names in the file stem", () => {
     const assets = monsterCardHrefs(1, "Giant Lizard", true);
 
