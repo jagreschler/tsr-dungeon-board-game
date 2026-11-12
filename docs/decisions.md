@@ -458,10 +458,10 @@ together (`EVENT_ROOM_ENTERED`, `EVENT_MONSTER_CARD_DRAWN`,
 `chamber` so far). Only occupied Level 1 rooms publish
 `roomType: "monster"` today.
 
-A generic `CardDeck` is a later idea, not for now. Once another card
-type actually needs it (for example Clue's weapon or room cards),
-extract that class from `MonsterCardDealer` and `MonsterDeck`; until
-then, keep the monster-specific version.
+Possible future refactor: whenever we do that refactoring, if we
+do, pull a generic `CardDeck` class out of `MonsterCardDealer` and
+`MonsterDeck`, but only once another card type (like Clue's weapons
+or rooms) actually needs one.
 
 The deck is the 1981 Magister Rex Level 1 list of 7 cards (Giant
 Lizard, Giant Rats x2, Goblins x2, Hobgoblins, Skeleton), shuffled
