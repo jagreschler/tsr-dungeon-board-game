@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { bindReferenceOverlay } from "./bind-reference-overlay.ts";
-import { EVENT_REFERENCE_IMAGE_LOADED } from "./load-reference-image-button.ts";
+import { EVENT_REFERENCE_IMAGE_LOADED } from "./reference-image-events.ts";
 import { paintMoveGlow } from "../rendering/paint-move-glow.ts";
 import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 

@@ -6,7 +6,7 @@ import {
 import {
   EVENT_REFERENCE_IMAGE_LOADED,
   type ReferenceImageLoadedDetail,
-} from "./load-reference-image-button.ts";
+} from "./reference-image-events.ts";
 
 export type OverlayFileIsPresent = () => Promise<boolean>;
 

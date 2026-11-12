@@ -6,49 +6,57 @@ import { heroPiece } from "../pieces/hero-piece.ts";
 import { bindReferenceOverlay } from "./bind-reference-overlay.ts";
 import {
   EVENT_REFERENCE_IMAGE_LOADED,
-  LoadReferenceImageButton,
   type ReferenceImageLoadedDetail,
-} from "./load-reference-image-button.ts";
+} from "./reference-image-events.ts";
+import { ReferenceImageFile } from "./reference-image-file.ts";
+import { ReferenceImagePicker } from "./reference-image-picker.ts";
 
 afterEach(() => {
   document.body.replaceChildren();
 });
 
-describe("LoadReferenceImageButton", () => {
-  it("does not add the button unless it is listening", async () => {
-    const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
-    const svg = session.element();
+describe("ReferenceImagePicker", () => {
+  it("does not add the picker unless it is placed", () => {
+    const svg = boardSvg();
     document.body.append(svg);
-    await Promise.resolve();
 
     expect(document.querySelector("[data-load-reference-image]") === null).toBe(
       true,
     );
   });
 
-  it("adds a Load reference image button after OverlayDrawn", async () => {
-    const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
-    new LoadReferenceImageButton().listenForOverlayDrawn(session);
-    const svg = session.element();
+  it("places the picker immediately after the board on the page", () => {
+    const svg = boardSvg();
     document.body.append(svg);
-    await Promise.resolve();
+    new ReferenceImagePicker(svg).place();
 
-    const button = document.querySelector("[data-load-reference-image] button");
-    expect(button === null).toBe(false);
-    expect(button?.textContent).toBe("Load reference image");
+    expect(svg.nextElementSibling?.getAttribute("data-load-reference-image")).toBe(
+      "true",
+    );
+    expect(
+      document.querySelector("[data-load-reference-image] button")?.textContent,
+    ).toBe("Load reference image");
   });
 
-  it("does not add a second button after a Hero move", async () => {
-    const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
-    new LoadReferenceImageButton().listenForOverlayDrawn(session);
-    const svg = session.element();
-    document.body.append(svg);
+  it("does not fall back onto the page if the board is not attached yet", async () => {
+    const svg = boardSvg();
+    new ReferenceImagePicker(svg).place();
     await Promise.resolve();
 
-    svg
-      .querySelector("[data-move-highlight='main-gallery']")
-      ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    await Promise.resolve();
+    expect(document.querySelector("[data-load-reference-image]") === null).toBe(
+      true,
+    );
+
+    document.body.append(svg);
+    expect(svg.nextElementSibling === null).toBe(true);
+  });
+
+  it("does not add a second picker if place is called again", () => {
+    const svg = boardSvg();
+    document.body.append(svg);
+    const picker = new ReferenceImagePicker(svg);
+    picker.place();
+    picker.place();
 
     expect(document.querySelectorAll("[data-load-reference-image]").length).toBe(
       1,
@@ -56,20 +64,19 @@ describe("LoadReferenceImageButton", () => {
   });
 
   it("publishes ReferenceImageLoaded from a picked 2200×1702 file and leaves no warning", async () => {
-    const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
-    new LoadReferenceImageButton(async () => {
-      return { width: 2200, height: 1702 };
-    }).listenForOverlayDrawn(session);
-    const svg = session.element();
-    document.body.append(svg);
-    await Promise.resolve();
+    const svg = placedPicker(
+      new ReferenceImageFile(async () => {
+        return { width: 2200, height: 1702 };
+      }),
+    );
 
     let loaded: ReferenceImageLoadedDetail | undefined;
-    svg.addEventListener(EVENT_REFERENCE_IMAGE_LOADED, ((
-      event: CustomEvent<ReferenceImageLoadedDetail>,
-    ) => {
-      loaded = event.detail;
-    }) as EventListener);
+    svg.addEventListener(EVENT_REFERENCE_IMAGE_LOADED, (event) => {
+      if ((event instanceof CustomEvent) === false) {
+        return;
+      }
+      loaded = event.detail as ReferenceImageLoadedDetail;
+    });
 
     await chooseFile(pngFile("jasper-dungeon-map-standard-orientation.png"));
 
@@ -81,20 +88,19 @@ describe("LoadReferenceImageButton", () => {
   });
 
   it("still loads a wrong-size image and shows a short size warning", async () => {
-    const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
-    new LoadReferenceImageButton(async () => {
-      return { width: 100, height: 50 };
-    }).listenForOverlayDrawn(session);
-    const svg = session.element();
-    document.body.append(svg);
-    await Promise.resolve();
+    const svg = placedPicker(
+      new ReferenceImageFile(async () => {
+        return { width: 100, height: 50 };
+      }),
+    );
 
     let loaded: ReferenceImageLoadedDetail | undefined;
-    svg.addEventListener(EVENT_REFERENCE_IMAGE_LOADED, ((
-      event: CustomEvent<ReferenceImageLoadedDetail>,
-    ) => {
-      loaded = event.detail;
-    }) as EventListener);
+    svg.addEventListener(EVENT_REFERENCE_IMAGE_LOADED, (event) => {
+      if ((event instanceof CustomEvent) === false) {
+        return;
+      }
+      loaded = event.detail as ReferenceImageLoadedDetail;
+    });
 
     await chooseFile(pngFile("tiny.png"));
 
@@ -108,13 +114,11 @@ describe("LoadReferenceImageButton", () => {
   });
 
   it("lets B show the picked image when the local PNG is missing", async () => {
-    const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
-    new LoadReferenceImageButton(async () => {
-      return { width: 2200, height: 1702 };
-    }).listenForOverlayDrawn(session);
-    const svg = session.element();
-    document.body.append(svg);
-    await Promise.resolve();
+    const svg = placedPicker(
+      new ReferenceImageFile(async () => {
+        return { width: 2200, height: 1702 };
+      }),
+    );
     bindReferenceOverlay(svg, true, async () => {
       return false;
     });
@@ -129,6 +133,18 @@ describe("LoadReferenceImageButton", () => {
     expect(svg.getAttribute("data-reference-overlay-visible")).toBe("true");
   });
 });
+
+function boardSvg(): SVGSVGElement {
+  const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
+  return session.element();
+}
+
+function placedPicker(imageFile: ReferenceImageFile): SVGSVGElement {
+  const svg = boardSvg();
+  document.body.append(svg);
+  new ReferenceImagePicker(svg, imageFile).place();
+  return svg;
+}
 
 function pngFile(name: string): File {
   return new File([new Uint8Array([137, 80, 78, 71])], name, {

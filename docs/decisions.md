@@ -633,20 +633,30 @@ the user's toggle state alone.
 
 The printed-board PNG is a fan copy we do not publish, so B is a
 no-op on the live site even with `?debug`. A small **Load
-reference image** button in `src/debug-tools/` is wired only when
-`debugMode.isOn()`, same OverlayDrawn pattern as DUN-28. `main.ts`
-stays thin. There are no new `import.meta.env` checks.
+reference image** control in `src/debug-tools/` is wired only when
+`debugMode.isOn()`. `main.ts` stays thin. There are no new
+`import.meta.env` checks.
 
-The button opens a file picker. The browser reads the file locally
-(`URL.createObjectURL`); nothing is uploaded. Then B shows that
-image in the same place as the local `reference-board-map.png`.
-Locally, if the PNG is already present, B still works as today;
-the button is another way to supply the image.
+The picker is `ReferenceImagePicker`. OverlayDrawn listeners still
+attach before `session.element()`, but the picker is placed from
+`main.ts` after `app.append(board)`, so it sits immediately after
+the svg with no `queueMicrotask` and no `document.body` fallback.
+`ChildNode.after` is a no-op until the svg has a parent; that is
+the attach signal.
 
-`LoadReferenceImageButton` publishes `EVENT_REFERENCE_IMAGE_LOADED`
-(`ReferenceImageLoaded`) on the board SVG. `bindReferenceOverlay`
-hears that event and uses the object URL. If the file is not
-2200×1702, a short message says so, and the image is still used.
+The button opens a file picker. `ReferenceImageFile` reads the
+file locally (`URL.createObjectURL`), checks 2200×1702, and
+revokes the previous object URL. Nothing is uploaded. Then B
+shows that image in the same place as the local
+`reference-board-map.png`. Locally, if the PNG is already present,
+B still works as today; the picker is another way to supply the
+image.
+
+`EVENT_REFERENCE_IMAGE_LOADED` (`ReferenceImageLoaded`) lives in
+`reference-image-events.ts`. The picker publishes it on the board
+SVG. `bindReferenceOverlay` hears that event and uses the object
+URL. If the file is not 2200×1702, a short message says so, and
+the image is still used.
 
 No localStorage. That would remember the last file across visits,
 but the browser cannot keep the real file, only a copy, and this

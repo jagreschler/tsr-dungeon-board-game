@@ -23,8 +23,11 @@ const mapDebugModules = [
   "debug-mode.test.ts",
   "debug-overlay-listener.ts",
   "debug-overlay-listener.test.ts",
-  "load-reference-image-button.ts",
-  "load-reference-image-button.test.ts",
+  "reference-image-events.ts",
+  "reference-image-file.ts",
+  "reference-image-file.test.ts",
+  "reference-image-picker.ts",
+  "reference-image-picker.test.ts",
   "read-reference-board-luminance.ts",
   "stored-door-mark-ends.ts",
   "stored-door-mark-ink-gaps.ts",
@@ -55,8 +58,8 @@ describe("map debug tools folder", () => {
   it("wires the card preview listener from debugMode.isOn(), including live ?debug", () => {
     const main = readFileSync(resolve("src/main.ts"), "utf8");
     const debugBlock = main.slice(
-      main.indexOf("if (debugMode.isOn())"),
-      main.indexOf("app.append(session.element())"),
+      main.indexOf("if (debugOn)"),
+      main.indexOf("app.append(board)"),
     );
 
     expect((main.match(/import\.meta\.env\.DEV/g) ?? []).length).toBe(1);
