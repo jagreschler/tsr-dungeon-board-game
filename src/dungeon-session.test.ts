@@ -2,7 +2,6 @@ import { afterEach, describe, expect, it } from "vitest";
 import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
 import { MonsterDeck } from "./cards/monster-deck.ts";
-import { DebugMode } from "./debug-tools/debug-mode.ts";
 import { heroPiece } from "./pieces/hero-piece.ts";
 import { createPiece } from "./pieces/piece.ts";
 import { DungeonSession } from "./dungeon-session.ts";
@@ -25,20 +24,14 @@ describe("DungeonSession", () => {
     expect(svg.querySelector("[data-reference-overlay]") === null).toBe(true);
   });
 
-  it("leaves the step-count labels off until D is pressed", () => {
+  it("draws no debug overlays on its own", () => {
     const play = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
     const svg = play.element();
 
-    expect(svg.querySelector("[data-move-step-labels]") === null).toBe(false);
-    expect(svg.hasAttribute("data-move-step-labels-visible")).toBe(false);
-  });
-
-  it("leaves the stored-link marks off until L is pressed", () => {
-    const play = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
-    const svg = play.element();
-
-    expect(svg.querySelector("[data-stored-link-marks]") === null).toBe(false);
+    expect(svg.querySelector("[data-stored-link-marks]") === null).toBe(true);
+    expect(svg.querySelector("[data-move-step-labels]") === null).toBe(true);
     expect(svg.hasAttribute("data-stored-link-marks-visible")).toBe(false);
+    expect(svg.hasAttribute("data-move-step-labels-visible")).toBe(false);
   });
 
   it("moves the Hero onto a highlighted space when that glow is clicked", () => {
@@ -135,74 +128,6 @@ describe("DungeonSession", () => {
     expect(document.querySelector("[data-monster-card-overlay]") === null).toBe(
       true,
     );
-  });
-
-  it("draws no debug overlays on a production board without ?debug", () => {
-    const svg = new DungeonSession(
-      dungeonBoard,
-      dungeonLayout,
-      heroPiece,
-      undefined,
-      { debugMode: new DebugMode(""), isLocal: false },
-    ).element();
-
-    expect(svg.querySelector("[data-stored-link-marks]") === null).toBe(true);
-    expect(svg.querySelector("[data-move-step-labels]") === null).toBe(true);
-    expect(svg.hasAttribute("data-stored-link-marks-visible")).toBe(false);
-    expect(svg.hasAttribute("data-move-step-labels-visible")).toBe(false);
-  });
-
-  it("shows the L overlay when the address asks for links", () => {
-    const svg = new DungeonSession(
-      dungeonBoard,
-      dungeonLayout,
-      heroPiece,
-      undefined,
-      {
-        debugMode: new DebugMode("?debug&debugOptions=links"),
-        isLocal: false,
-      },
-    ).element();
-
-    expect(svg.querySelector("[data-stored-link-marks]") === null).toBe(false);
-    expect(svg.getAttribute("data-stored-link-marks-visible")).toBe("true");
-    expect(svg.hasAttribute("data-move-step-labels-visible")).toBe(false);
-  });
-
-  it("shows the D overlay when the address asks for steps", () => {
-    const svg = new DungeonSession(
-      dungeonBoard,
-      dungeonLayout,
-      heroPiece,
-      undefined,
-      {
-        debugMode: new DebugMode("?debug&debugOptions=steps"),
-        isLocal: false,
-      },
-    ).element();
-
-    expect(svg.querySelector("[data-move-step-labels]") === null).toBe(false);
-    expect(svg.getAttribute("data-move-step-labels-visible")).toBe("true");
-    expect(svg.hasAttribute("data-stored-link-marks-visible")).toBe(false);
-  });
-
-  it("binds L on a production board when the address has ?debug", async () => {
-    const svg = new DungeonSession(
-      dungeonBoard,
-      dungeonLayout,
-      heroPiece,
-      undefined,
-      { debugMode: new DebugMode("?debug"), isLocal: false },
-    ).element();
-
-    expect(svg.querySelector("[data-stored-link-marks]") === null).toBe(false);
-    expect(svg.hasAttribute("data-stored-link-marks-visible")).toBe(false);
-
-    await import("./debug-tools/bind-stored-link-marks.ts");
-    await Promise.resolve();
-    window.dispatchEvent(new KeyboardEvent("keydown", { key: "l" }));
-
-    expect(svg.getAttribute("data-stored-link-marks-visible")).toBe("true");
   });
 });
 

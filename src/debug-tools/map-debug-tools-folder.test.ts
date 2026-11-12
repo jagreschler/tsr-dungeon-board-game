@@ -20,6 +20,8 @@ const mapDebugModules = [
   "bind-stored-link-marks.test.ts",
   "debug-mode.ts",
   "debug-mode.test.ts",
+  "debug-overlay-listener.ts",
+  "debug-overlay-listener.test.ts",
   "read-reference-board-luminance.ts",
   "stored-door-mark-ends.ts",
   "stored-door-mark-ink-gaps.ts",
@@ -35,24 +37,11 @@ describe("map debug tools folder", () => {
 
   it("binds B, L, and D from that folder, and leaves G/H/R in cards", () => {
     const session = readFileSync(resolve("src/dungeon-session.ts"), "utf8");
+    const main = readFileSync(resolve("src/main.ts"), "utf8");
 
-    expect(session.includes("./debug-tools/bind-reference-overlay.ts")).toBe(
-      true,
-    );
-    expect(session.includes("./debug-tools/bind-stored-link-marks.ts")).toBe(
-      true,
-    );
-    expect(session.includes("./debug-tools/bind-move-step-labels.ts")).toBe(
-      true,
-    );
+    expect(session.includes("debug-tools")).toBe(false);
     expect(session.includes("./cards/bind-monster-card-preview.ts")).toBe(true);
-    expect(session.includes("./rendering/bind-reference-overlay.ts")).toBe(
-      false,
-    );
-    expect(session.includes("./rendering/bind-stored-link-marks.ts")).toBe(
-      false,
-    );
-    expect(session.includes("./rendering/bind-move-step-labels.ts")).toBe(false);
+    expect(main.includes("DebugOverlayListener")).toBe(true);
     expect(existsSync(resolve("src/cards/bind-monster-card-preview.ts"))).toBe(
       true,
     );

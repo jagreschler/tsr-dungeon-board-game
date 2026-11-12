@@ -21,9 +21,15 @@ describe("EVENT_OVERLAY_DRAWN", () => {
       overlayDrawnCount += 1;
     });
 
-    session.element();
+    const svg = session.element();
 
     expect(overlayDrawnCount).toBe(1);
+
+    svg
+      .querySelector("[data-move-highlight='main-gallery']")
+      ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+    expect(overlayDrawnCount).toBe(2);
   });
 });
 
@@ -63,5 +69,19 @@ describe("DebugOverlayListener", () => {
     expect(svg.querySelector("[data-move-step-labels]") === null).toBe(false);
     expect(svg.getAttribute("data-move-step-labels-visible")).toBe("true");
     expect(svg.hasAttribute("data-stored-link-marks-visible")).toBe(false);
+  });
+
+  it("binds L when debug mode is on", async () => {
+    const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
+    new DebugOverlayListener(new DebugMode("?debug")).listenForOverlayDrawn(
+      session,
+    );
+    const svg = session.element();
+
+    await import("./bind-stored-link-marks.ts");
+    await Promise.resolve();
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "l" }));
+
+    expect(svg.getAttribute("data-stored-link-marks-visible")).toBe("true");
   });
 });

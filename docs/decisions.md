@@ -605,6 +605,20 @@ publish. The B key can bind when debug is on, but the overlay still
 no-ops if the gitignored PNG is missing. A later PR will add a button
 to load a file from the user's own computer.
 
+## DUN-28 — OverlayDrawn, not debug code in DungeonSession (12 Nov 2026)
+
+Jason: DungeonSession should not set debug attributes itself. When it
+finishes drawing the play overlay it publishes one event,
+`EVENT_OVERLAY_DRAWN` (`OverlayDrawn`). There is no start/end pair.
+
+`DebugOverlayListener` in `src/debug-tools/` hears that event and
+adds the L and D overlays from `debugMode` / `debugOptions`, and
+binds B/L/D. `main.ts` wires the listener only when debug mode is on
+(`npm run dev`, or `?debug` on the live site) and stays thin.
+
+DungeonSession holds no debug-tools imports. Monster-card preview
+keys stay local-only in the session. Behavior is unchanged.
+
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 
 Jason: a door line may not cross gray abyss. For a real shared wall,

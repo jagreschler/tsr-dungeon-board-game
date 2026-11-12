@@ -1,6 +1,8 @@
 import "./style.css";
 import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
+import { DebugMode } from "./debug-tools/debug-mode.ts";
+import { DebugOverlayListener } from "./debug-tools/debug-overlay-listener.ts";
 import { heroPiece } from "./pieces/hero-piece.ts";
 import { DungeonSession } from "./dungeon-session.ts";
 
@@ -15,7 +17,12 @@ title.className = "title";
 title.textContent = "Dungeon!";
 app.append(title);
 
-app.append(new DungeonSession(dungeonBoard, dungeonLayout, heroPiece).element());
+const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
+const debugMode = new DebugMode(window.location.search);
+if (import.meta.env.DEV || debugMode.isOn()) {
+  new DebugOverlayListener(debugMode).listenForOverlayDrawn(session);
+}
+app.append(session.element());
 
 const appVersion = document.createElement("p");
 appVersion.className = "app-version";
