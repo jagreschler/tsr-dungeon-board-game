@@ -637,12 +637,12 @@ reference image** control in `src/debug-tools/` is wired only when
 `debugMode.isOn()`. `main.ts` stays thin. There are no new
 `import.meta.env` checks.
 
-The picker is `ReferenceImagePicker`. OverlayDrawn listeners still
-attach before `session.element()`, but the picker is placed from
-`main.ts` after `app.append(board)`, so it sits immediately after
-the svg with no `queueMicrotask` and no `document.body` fallback.
-`ChildNode.after` is a no-op until the svg has a parent; that is
-the attach signal.
+The picker is `ReferenceImagePicker`. All debug wiring lives in
+one `if (debugMode.isOn())` in `main.ts`: OverlayDrawn listeners
+attach first, then the board is created and appended, then the
+picker is placed immediately after the svg. No `queueMicrotask`
+and no `document.body` fallback. Production takes the `else` and
+only appends the board.
 
 The button opens a file picker. `ReferenceImageFile` reads the
 file locally (`URL.createObjectURL`), checks 2200×1702, and

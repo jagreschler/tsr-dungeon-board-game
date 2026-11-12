@@ -21,15 +21,14 @@ app.append(title);
 
 const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
 const debugMode = new DebugMode(window.location.search, import.meta.env.DEV);
-const debugOn = debugMode.isOn();
-if (debugOn) {
+if (debugMode.isOn()) {
   new DebugOverlayListener(debugMode).listenForOverlayDrawn(session);
   new MonsterCardPreviewListener().listenForOverlayDrawn(session);
-}
-const board = session.element();
-app.append(board);
-if (debugOn) {
+  const board = session.element();
+  app.append(board);
   new ReferenceImagePicker(board).place();
+} else {
+  app.append(session.element());
 }
 
 const appVersion = document.createElement("p");

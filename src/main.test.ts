@@ -35,6 +35,11 @@ describe("title page", () => {
     );
     expect(highlights.length > 0).toBe(true);
 
+    const board = document.querySelector("#app .dungeon-board");
+    expect(
+      board?.nextElementSibling?.getAttribute("data-reference-image-picker"),
+    ).toBe("true");
+
     expect(document.body.textContent?.includes("Level 1")).toBe(false);
     expect(document.body.textContent?.includes("Great Hall")).toBe(false);
   });
