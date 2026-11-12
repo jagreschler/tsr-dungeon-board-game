@@ -1,6 +1,6 @@
 import type { Space } from "./space.ts";
 
-export function isUnclearedLevel1Room(
+export function isOccupiedLevel1Room(
   space: Space | undefined,
 ): boolean {
   if (space === undefined) {

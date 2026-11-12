@@ -29,7 +29,7 @@ The overlay is off by default. If the file is missing, the key does nothing. The
 
 ### Local monster card preview
 
-Entering an uncleared Level 1 (gold) room draws a monster from that level's deck. In `npm run dev` only, press **G** to preview Goblins, **H** for Hobgoblins, or **L** for Giant Lizard. Press **Shift+G**, **Shift+H**, or **Shift+L** to skip the clip and show the card only. Production builds do not bind these keys.
+Entering an occupied Level 1 (gold) room draws a monster from that level's deck. In `npm run dev` only, press **G** to preview Goblins, **H** for Hobgoblins, or **L** for Giant Lizard. Press **Shift+G**, **Shift+H**, or **Shift+L** to skip the clip and show the card only. Production builds do not bind these keys.
 
 ## Test
 

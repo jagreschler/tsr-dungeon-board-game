@@ -441,7 +441,7 @@ inside the picture code.
 
 ## DUN-21 — Level 1 monster draw on entering a gold room (12 Nov 2026)
 
-When a pawn ends its move in an uncleared Level 1 room, the session
+When a pawn ends its move in an occupied Level 1 room, the session
 publishes `RoomEntered` with `{ roomType: "monster" }` on the
 CustomEvent detail. `MonsterCardDealer` listens with
 `listenForRoomEntered(session, "monster")`, reads
@@ -455,7 +455,7 @@ case. Event-name constants start with `EVENT_` so they autocomplete
 together (`EVENT_ROOM_ENTERED`, `EVENT_MONSTER_CARD_DRAWN`,
 `EVENT_CARD_REVEALED`, `EVENT_OVERLAY_CLOSED`). The map has no
 `"monster"` space kind; `RoomType` is a separate filter (`monster` or
-`chamber` so far). Only uncleared Level 1 rooms publish
+`chamber` so far). Only occupied Level 1 rooms publish
 `roomType: "monster"` today.
 
 The deck is the 1981 Magister Rex Level 1 list of 7 cards (Giant

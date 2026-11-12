@@ -1,6 +1,6 @@
 import type { Board } from "./board/board.ts";
 import { findSpace } from "./board/find-space.ts";
-import { isUnclearedLevel1Room } from "./board/is-uncleared-level-1-room.ts";
+import { isOccupiedLevel1Room } from "./board/is-occupied-level-1-room.ts";
 import {
   EVENT_ROOM_ENTERED,
   type RoomEnteredDetail,
@@ -102,7 +102,7 @@ export class DungeonSession extends EventTarget {
 
   private publishMonsterRoomIfNeeded(spaceIdentifier: string): void {
     const space = findSpace(this.board, spaceIdentifier);
-    if (isUnclearedLevel1Room(space) === false) {
+    if (isOccupiedLevel1Room(space) === false) {
       return;
     }
 
