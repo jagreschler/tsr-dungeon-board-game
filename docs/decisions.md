@@ -482,10 +482,22 @@ Two more Start skip links. Start was open to `corridor-1319-730`, the
 second northeast square, so that square showed 1 beside `1252-704`.
 The west stub `1045-800` was open to `1011-741`, the north bump that
 sits on `986-786`, so those two showed 2 beside 2. Those tuples are
-gone. `1319-730` is two steps from Start; `1011-741` is three. From
-Start, 36 spaces remain in range. Other same-step corridor pairs in
-the glow (`1385-982`/`1417-934`, `1433-780`/`1433-817`,
-`1438-716`/`1433-780`) are left for later.
+gone. `1011-741` is three.
+
+An open hall is only a real step if the two printed squares share an
+edge on the B overlay (ink outlines touching, or a few pixels of ink).
+Gray floor between them is a skip. 34 `open` tuples had a gray gap of
+3px or more; those are gone. Door links were not touched. No new
+links were added. A checked-in list of those 34 pairs keeps them from
+coming back.
+
+The biggest cut was Start to `corridor-1252-704` (25.6px of gray).
+That square still joins `1319-730` and the gold rooms on the northeast
+spoke, but that spoke no longer has an open-hall path back to Start.
+`room-east` still has its secret door onto `1417-934`. Linked
+corridors in the five-step glow may share a step count when two honest
+paths are the same length. From Start, 28 spaces remain in range.
+Known-unreachable went from 117 to 252.
 
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 

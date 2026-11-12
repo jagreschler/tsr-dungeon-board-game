@@ -122,8 +122,15 @@ describe("inner gold room doors", () => {
       }
 
       const hops = openHopCountFromStaircase(stubIdentifier);
-      expect(hops === undefined).toBe(false);
-      expect((hops ?? 99) <= 2).toBe(true);
+      const openCutFromStart =
+        stubIdentifier === "corridor-1252-704" ||
+        stubIdentifier === "corridor-1319-730";
+      if (openCutFromStart) {
+        expect(hops === undefined).toBe(true);
+      } else {
+        expect(hops === undefined).toBe(false);
+        expect((hops ?? 99) <= 2).toBe(true);
+      }
 
       const neighbors = listNeighborSpacesAHeroCanStepTo(
         dungeonBoard,
@@ -149,11 +156,31 @@ describe("inner gold room doors", () => {
 
     expect(goldRooms.length).toBe(9);
 
-    for (const room of goldRooms) {
+    const stillOpenFromStart = [
+      "room-north",
+      "room-west",
+      "room-south",
+      "room-southeast",
+      "room-east-southeast",
+    ];
+    const northeastSpoke = [
+      "room-northeast",
+      "room-northwest",
+      "room-east-northeast",
+      "room-east",
+    ];
+
+    for (const identifier of stillOpenFromStart) {
       expect(
-        reachable.has(room.identifier),
-        `${room.identifier} should be reachable from Start without secret doors`,
+        reachable.has(identifier),
+        `${identifier} should be reachable from Start without secret doors`,
       ).toBe(true);
+    }
+    for (const identifier of northeastSpoke) {
+      expect(
+        reachable.has(identifier),
+        `${identifier} sits on the northeast spoke cut off from Start by gray floor`,
+      ).toBe(false);
     }
   });
 });

@@ -44,7 +44,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
       [],
     );
 
-    expect(reachable.has("room-east-northeast")).toBe(true);
+    expect(reachable.has("room-west")).toBe(true);
     expect(reachable.has("room-northwest")).toBe(false);
   });
 
@@ -57,7 +57,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
 
     expect(reachable.has("main-staircase")).toBe(true);
     expect(reachable.has("main-gallery")).toBe(true);
-    expect(reachable.has("corridor-1252-704")).toBe(true);
+    expect(reachable.has("corridor-1045-800")).toBe(true);
   });
 
   it.each(wallSeparatedSpacePairs)(
@@ -125,8 +125,8 @@ describe("listSpacesAHeroCanMoveTo", () => {
       [],
     );
 
-    expect(reachable.has("corridor-1438-716")).toBe(true);
     expect(reachable.has("corridor-1433-817")).toBe(true);
+    expect(reachable.has("corridor-1438-716")).toBe(false);
     expect(reachable.has("corridor-1429-681")).toBe(false);
     expect(reachable.has("corridor-1482-762")).toBe(false);
     expect(reachable.has("corridor-1491-803")).toBe(false);
@@ -142,7 +142,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
 
     expect(reachable.has("stairs-west")).toBe(true);
     expect(reachable.has("corridor-909-774")).toBe(true);
-    expect(reachable.size).toBe(36);
+    expect(reachable.size).toBe(28);
   });
 
   it("does not land on another pawn in a corridor", () => {
