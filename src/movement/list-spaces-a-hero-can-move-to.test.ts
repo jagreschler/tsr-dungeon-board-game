@@ -90,6 +90,10 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(reachable.has("corridor-887-972")).toBe(false);
     expect(reachable.has("corridor-934-689")).toBe(false);
     expect(reachable.has("room-3-04")).toBe(false);
+    expect(reachable.has("corridor-1018-1011")).toBe(false);
+    expect(reachable.has("corridor-966-968")).toBe(false);
+    expect(reachable.has("corridor-916-921")).toBe(false);
+    expect(reachable.has("room-4-06")).toBe(false);
   });
 
   it("reaches the west stairs in five honest steps, not past them", () => {
@@ -101,7 +105,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
 
     expect(reachable.has("stairs-west")).toBe(true);
     expect(reachable.has("corridor-909-774")).toBe(true);
-    expect(reachable.size).toBe(40);
+    expect(reachable.size).toBe(36);
   });
 
   it("does not land on another pawn in a corridor", () => {

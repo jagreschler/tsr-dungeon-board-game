@@ -462,10 +462,16 @@ stairs-west/942-774, 1367-754/1438-716, 1367-754/1433-780,
 1429-681/1482-762, 1482-762/1499-850, 1491-803/1512-872,
 839-887/916-921, and 1221-1092/1190-1139.
 
-After the cuts, 40 spaces are reachable from Start in five honest
-steps. The west stairs is five spaces away, so `room-3-04` and
-`corridor-792-768` sit past the cap. Other skip links elsewhere on
-the board are left for later.
+After those cuts the glow still reached too far on the left of Start.
+Two more `open` links joined Level 1 gold halls to the Level 4 square
+`corridor-1018-1011`, which is not next to them as a same-level
+neighbor: 1057-974/1018-1011 and 966-968/1018-1011. Those are gone.
+The five-step path they faked was Start → 1098-942 → 1057-974 →
+1018-1011 → 966-968 → 916-921 (and the door into `room-4-06`).
+Honest gold walking does not reach those four in five spaces.
+`corridor-1018-1011` has no other way back to Start, so it joins the
+known-unreachable list (101). From Start, 36 spaces remain in range.
+The west stairs is still five honest Level 1 spaces.
 
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 

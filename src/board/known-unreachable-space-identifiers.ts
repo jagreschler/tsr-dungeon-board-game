@@ -1,4 +1,5 @@
 export const knownUnreachableSpaceIdentifiers: readonly string[] = [
+  "corridor-1018-1011",
   "corridor-1361-1114",
   "corridor-1361-1160",
   "corridor-1361-1203",
