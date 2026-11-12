@@ -1,5 +1,4 @@
 export const knownUnreachableSpaceIdentifiers: readonly string[] = [
-  "armory",
   "corridor-1001-1571",
   "corridor-1017-209",
   "corridor-1019-1495",
@@ -148,7 +147,6 @@ export const knownUnreachableSpaceIdentifiers: readonly string[] = [
   "corridor-360-270",
   "corridor-369-1576",
   "corridor-395-230",
-  "corridor-401-453",
   "corridor-410-1573",
   "corridor-415-304",
   "corridor-461-1236",
@@ -221,7 +219,6 @@ export const knownUnreachableSpaceIdentifiers: readonly string[] = [
   "room-2-03",
   "room-2-04",
   "room-2-06",
-  "room-2-08",
   "room-3-01",
   "room-3-02",
   "room-3-08",

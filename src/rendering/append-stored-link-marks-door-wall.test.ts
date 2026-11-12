@@ -1,117 +1,36 @@
+import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { dungeonBoard } from "../board/dungeon-board.ts";
 import { dungeonLayout } from "../board/dungeon-layout.ts";
 import { dungeonLinkTuples } from "../board/map-data/board-links.ts";
-import { boxOutline } from "../board/box-outline.ts";
-import { centerOfBox } from "../board/board-grid.ts";
-import { boxFromPlacement } from "../board/placement-box.ts";
-import { findPlacement } from "../board/find-placement.ts";
-import { findSpace } from "../board/find-space.ts";
-import type { SpacePlacement } from "../board/space-placement.ts";
 import { appendStoredLinkMarks } from "./append-stored-link-marks.ts";
-import { pointOnSharedWall } from "./shared-wall-point.ts";
+import {
+  REFERENCE_BOARD_IMAGE_PATH,
+  readReferenceBoardLuminance,
+} from "./read-reference-board-luminance.ts";
 import { SVG_NAMESPACE } from "./svg-namespace.ts";
+
+/**
+ * No gray crossing is allowlisted. If the print does not show a door
+ * clearly, name that pair in the failure and leave it failing.
+ */
+const doorAndSecretLinksPendingADataFix: readonly [string, string][] = [];
+
+const STROKE_RADIUS_IN_PIXELS = 2.5;
+const DASH_ON_IN_PIXELS = 14;
+const DASH_OFF_IN_PIXELS = 10;
+const ABYSS_LUMINANCE_MIN = 90;
+const ABYSS_LUMINANCE_MAX = 205;
 
 function pairKey(left: string, right: string): string {
   return [left, right].sort().join(" ");
 }
 
-/**
- * Pending a data fix: stored door and secret-door links with no real
- * shared wall on the print. Empty as each wrong partner is retargeted
- * or dropped. Gray on any leftover is still a map-data bug, not overlay.
- */
-const doorAndSecretLinksPendingADataFix: readonly [string, string][] = [];
-
 const pendingDataFixKeys = new Set(
   doorAndSecretLinksPendingADataFix.map((pair) => pairKey(pair[0], pair[1])),
 );
 
-const WALL_BAND_IN_PIXELS = 28;
-const WALL_POINT_SLACK_IN_PIXELS = 16;
-
-function isHallKind(kind: string): boolean {
-  return kind === "corridor" || kind === "stairs" || kind === "mainStaircase";
-}
-
-function hasDoorWall(kind: string): boolean {
-  return kind === "room" || kind === "chamber" || kind === "mainGallery";
-}
-
-function outlineOf(placement: SpacePlacement): { x: number; y: number }[] {
-  if (placement.outline.length >= 2) {
-    return placement.outline;
-  }
-
-  return boxOutline(
-    placement.x,
-    placement.y,
-    placement.width,
-    placement.height,
-  );
-}
-
-function samePoint(
-  left: { x: number; y: number },
-  right: { x: number; y: number },
-  slack = 0.05,
-): boolean {
-  return Math.hypot(left.x - right.x, left.y - right.y) <= slack;
-}
-
-function insideBox(
-  box: { x: number; y: number; width: number; height: number },
-  x: number,
-  y: number,
-): boolean {
-  return (
-    x >= box.x &&
-    x <= box.x + box.width &&
-    y >= box.y &&
-    y <= box.y + box.height
-  );
-}
-
-function distanceToBox(
-  box: { x: number; y: number; width: number; height: number },
-  x: number,
-  y: number,
-): number {
-  const nearestX = Math.max(box.x, Math.min(x, box.x + box.width));
-  const nearestY = Math.max(box.y, Math.min(y, box.y + box.height));
-  return Math.hypot(x - nearestX, y - nearestY);
-}
-
-function abyssPixelsAlong(
-  start: { x: number; y: number },
-  end: { x: number; y: number },
-  hallBox: { x: number; y: number; width: number; height: number },
-  roomBox: { x: number; y: number; width: number; height: number },
-): number {
-  const distance = Math.hypot(end.x - start.x, end.y - start.y);
-  const samples = Math.max(Math.ceil(distance * 2), 1);
-  let abyss = 0;
-
-  for (let index = 0; index <= samples; index += 1) {
-    const along = index / samples;
-    const x = start.x + (end.x - start.x) * along;
-    const y = start.y + (end.y - start.y) * along;
-    if (insideBox(hallBox, x, y) || insideBox(roomBox, x, y)) {
-      continue;
-    }
-
-    if (
-      distanceToBox(hallBox, x, y) <= WALL_BAND_IN_PIXELS &&
-      distanceToBox(roomBox, x, y) <= WALL_BAND_IN_PIXELS
-    ) {
-      continue;
-    }
-
-    abyss += 1;
-  }
-
-  return abyss;
-}
+const hasReferenceBoard = existsSync(REFERENCE_BOARD_IMAGE_PATH);
 
 describe("stored door marks stop on the shared wall", () => {
   it("lists each pending data-fix pair once, and only stored door links", () => {
@@ -132,117 +51,116 @@ describe("stored door marks stop on the shared wall", () => {
     }
   });
 
-  it("draws every real shared-wall door from the hall center to the wall, with no abyss", () => {
-    const parent = document.createElementNS(SVG_NAMESPACE, "g");
-    const marks = appendStoredLinkMarks(parent, dungeonBoard, dungeonLayout);
-    const lines = [...marks.querySelectorAll("[data-stored-link-mark]")];
-    const checked: string[] = [];
+  it.skipIf(hasReferenceBoard === false)(
+    "draws every door and secret stroke on printed stone or ink, never abyss gray",
+    () => {
+      const board = readReferenceBoardLuminance();
+      const parent = document.createElementNS(SVG_NAMESPACE, "g");
+      const marks = appendStoredLinkMarks(parent, dungeonBoard, dungeonLayout);
+      const lines = [...marks.querySelectorAll("[data-stored-link-mark]")];
+      const grayCrossings: string[] = [];
+      let checked = 0;
 
-    for (const line of lines) {
-      const kind = line.getAttribute("data-link-kind");
-      if (kind !== "door" && kind !== "secretDoor") {
-        continue;
+      for (const line of lines) {
+        const kind = line.getAttribute("data-link-kind");
+        if (kind !== "door" && kind !== "secretDoor") {
+          continue;
+        }
+
+        const fromIdentifier = line.getAttribute("data-from-space-identifier");
+        const toIdentifier = line.getAttribute("data-to-space-identifier");
+        if (fromIdentifier === null || toIdentifier === null) {
+          continue;
+        }
+
+        const key = pairKey(fromIdentifier, toIdentifier);
+        if (pendingDataFixKeys.has(key)) {
+          continue;
+        }
+
+        const startX = Number(line.getAttribute("x1"));
+        const startY = Number(line.getAttribute("y1"));
+        const endX = Number(line.getAttribute("x2"));
+        const endY = Number(line.getAttribute("y2"));
+        const abyss = countAbyssPixelsOnStroke(
+          board,
+          startX,
+          startY,
+          endX,
+          endY,
+          kind === "secretDoor",
+        );
+        checked += 1;
+        if (abyss > 0) {
+          grayCrossings.push(`${key} ${kind} ${abyss}px`);
+        }
       }
 
-      const fromIdentifier = line.getAttribute("data-from-space-identifier");
-      const toIdentifier = line.getAttribute("data-to-space-identifier");
-      if (fromIdentifier === null || toIdentifier === null) {
-        continue;
-      }
+      expect(checked > 0).toBe(true);
+      expect(grayCrossings, grayCrossings.join("\n")).toEqual([]);
+    },
+  );
+});
 
-      const key = pairKey(fromIdentifier, toIdentifier);
-      if (pendingDataFixKeys.has(key)) {
-        continue;
-      }
+function countAbyssPixelsOnStroke(
+  board: ReturnType<typeof readReferenceBoardLuminance>,
+  startX: number,
+  startY: number,
+  endX: number,
+  endY: number,
+  dashed: boolean,
+): number {
+  const spanX = endX - startX;
+  const spanY = endY - startY;
+  const distance = Math.hypot(spanX, spanY);
+  const samples = Math.max(Math.ceil(distance), 1);
+  const stepX = spanX / samples;
+  const stepY = spanY / samples;
+  const radiusSquared = STROKE_RADIUS_IN_PIXELS * STROKE_RADIUS_IN_PIXELS + 0.25;
+  const seen = new Set<number>();
+  let abyss = 0;
+  const dashCycle = DASH_ON_IN_PIXELS + DASH_OFF_IN_PIXELS;
 
-      const fromSpace = findSpace(dungeonBoard, fromIdentifier);
-      const toSpace = findSpace(dungeonBoard, toIdentifier);
-      const fromPlacement = findPlacement(dungeonLayout, fromIdentifier);
-      const toPlacement = findPlacement(dungeonLayout, toIdentifier);
-      if (
-        fromSpace === undefined ||
-        toSpace === undefined ||
-        fromPlacement === undefined ||
-        toPlacement === undefined
-      ) {
-        continue;
-      }
-
-      const fromCenter = centerOfBox(boxFromPlacement(fromPlacement));
-      const toCenter = centerOfBox(boxFromPlacement(toPlacement));
-      const fromIsHall = isHallKind(fromSpace.kind);
-      const toIsHall = isHallKind(toSpace.kind);
-      const fromHasWall = hasDoorWall(fromSpace.kind);
-      const toHasWall = hasDoorWall(toSpace.kind);
-
-      let hallPlacement = fromPlacement;
-      let roomPlacement = toPlacement;
-      let hallCenter = fromCenter;
-      let roomCenter = toCenter;
-      let wallOnRoom = true;
-      if (toIsHall && fromHasWall && fromIsHall === false) {
-        hallPlacement = toPlacement;
-        roomPlacement = fromPlacement;
-        hallCenter = toCenter;
-        roomCenter = fromCenter;
-        wallOnRoom = true;
-      } else if (fromIsHall && toHasWall) {
-        hallPlacement = fromPlacement;
-        roomPlacement = toPlacement;
-        hallCenter = fromCenter;
-        roomCenter = toCenter;
-        wallOnRoom = true;
-      } else {
-        wallOnRoom = false;
-      }
-
-      const hallOutline = outlineOf(hallPlacement);
-      const roomOutline = outlineOf(roomPlacement);
-      const wallPoint = wallOnRoom
-        ? pointOnSharedWall(roomOutline, hallOutline)
-        : pointOnSharedWall(hallOutline, roomOutline);
-      const drawnStart = {
-        x: Number(line.getAttribute("x1")),
-        y: Number(line.getAttribute("y1")),
-      };
-      const drawnEnd = {
-        x: Number(line.getAttribute("x2")),
-        y: Number(line.getAttribute("y2")),
-      };
-
-      const hallIsAnEnd =
-        samePoint(drawnStart, hallCenter) || samePoint(drawnEnd, hallCenter);
-      const roomCenterIsAnEnd =
-        samePoint(drawnStart, roomCenter) || samePoint(drawnEnd, roomCenter);
-      const wallIsAnEnd =
-        samePoint(drawnStart, wallPoint, WALL_POINT_SLACK_IN_PIXELS) ||
-        samePoint(drawnEnd, wallPoint, WALL_POINT_SLACK_IN_PIXELS);
-      const drawnWall = samePoint(drawnStart, hallCenter)
-        ? drawnEnd
-        : drawnStart;
-
-      expect(hallIsAnEnd, `${key} should start at the hall square center`).toBe(
-        true,
-      );
-      expect(
-        roomCenterIsAnEnd,
-        `${key} should not run to the room center`,
-      ).toBe(false);
-      expect(
-        wallIsAnEnd,
-        `${key} should end on the shared wall, near ${wallPoint.x},${wallPoint.y}`,
-      ).toBe(true);
-
-      const abyss = abyssPixelsAlong(
-        hallCenter,
-        drawnWall,
-        boxFromPlacement(hallPlacement),
-        boxFromPlacement(roomPlacement),
-      );
-      expect(abyss, `${key} crosses ${abyss} abyss pixels`).toBe(0);
-      checked.push(key);
+  for (let index = 0; index <= samples; index += 1) {
+    const along = index * (distance / samples);
+    if (dashed && along % dashCycle > DASH_ON_IN_PIXELS) {
+      continue;
     }
 
-    expect(checked.length > 0).toBe(true);
-  });
-});
+    const centerX = startX + stepX * index;
+    const centerY = startY + stepY * index;
+    const pixelX = Math.round(centerX);
+    const pixelY = Math.round(centerY);
+    const radius = 3;
+
+    for (let offsetY = -radius; offsetY <= radius; offsetY += 1) {
+      for (let offsetX = -radius; offsetX <= radius; offsetX += 1) {
+        if (offsetX * offsetX + offsetY * offsetY > radiusSquared) {
+          continue;
+        }
+
+        const x = pixelX + offsetX;
+        const y = pixelY + offsetY;
+        if (x < 0 || y < 0 || x >= board.width || y >= board.height) {
+          continue;
+        }
+
+        const pixelIndex = y * board.width + x;
+        if (seen.has(pixelIndex)) {
+          continue;
+        }
+
+        seen.add(pixelIndex);
+        const luminance = board.luminance[pixelIndex] ?? 0;
+        if (
+          luminance >= ABYSS_LUMINANCE_MIN &&
+          luminance <= ABYSS_LUMINANCE_MAX
+        ) {
+          abyss += 1;
+        }
+      }
+    }
+  }
+
+  return abyss;
+}

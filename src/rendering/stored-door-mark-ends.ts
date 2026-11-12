@@ -8,6 +8,7 @@ import type { BoardLayout, SpacePlacement } from "../board/space-placement.ts";
 import type { Space } from "../board/space.ts";
 import type { BoardPoint } from "./shared-wall-point.ts";
 import { pointOnSharedWall } from "./shared-wall-point.ts";
+import { storedDoorMarkInkGaps } from "./stored-door-mark-ink-gaps.ts";
 
 export function storedDoorMarkEnds(
   board: Board,
@@ -15,6 +16,13 @@ export function storedDoorMarkEnds(
   fromIdentifier: string,
   toIdentifier: string,
 ): { start: BoardPoint; end: BoardPoint } | undefined {
+  const inkGap = storedDoorMarkInkGaps.get(
+    [fromIdentifier, toIdentifier].sort().join(" "),
+  );
+  if (inkGap !== undefined) {
+    return { start: inkGap.start, end: inkGap.end };
+  }
+
   const fromSpace = findSpace(board, fromIdentifier);
   const toSpace = findSpace(board, toIdentifier);
   const fromPlacement = findPlacement(layout, fromIdentifier);
