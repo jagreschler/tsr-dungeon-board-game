@@ -162,10 +162,10 @@ describe("inner gold room doors", () => {
       "room-south",
       "room-southeast",
       "room-east-southeast",
+      "room-northwest",
     ];
     const northeastSpoke = [
       "room-northeast",
-      "room-northwest",
       "room-east-northeast",
       "room-east",
     ];

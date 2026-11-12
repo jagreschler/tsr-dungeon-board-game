@@ -17,35 +17,11 @@ function pairKey(left: string, right: string): string {
 }
 
 /**
- * Pending a data fix: these stored door and secret-door links have no
- * real shared wall on the print (wrong partner). Gray on these lines is
- * a map-data bug, not an overlay bug.
+ * Pending a data fix: stored door and secret-door links with no real
+ * shared wall on the print. Empty as each wrong partner is retargeted
+ * or dropped. Gray on any leftover is still a map-data bug, not overlay.
  */
-const doorAndSecretLinksPendingADataFix: readonly [string, string][] = [
-  ["room-2-03", "corridor-395-230"],
-  ["corridor-1045-800", "room-west"],
-  ["room-east-southeast", "corridor-1358-918"],
-  ["wizards-laboratory", "corridor-1509-326"],
-  ["room-east", "corridor-1417-934"],
-  ["room-2-02", "corridor-638-260"],
-  ["wizards-treasure-room", "wizards-laboratory"],
-  ["queens-treasure-room-annex", "room-5-14"],
-  ["room-4-09", "corridor-895-1283"],
-  ["room-4-04", "corridor-874-243"],
-  ["room-3-11", "corridor-478-1032"],
-  ["room-5-10", "corridor-1923-439"],
-  ["queens-treasure-room", "corridor-1815-1140"],
-  ["room-2-01", "room-2-02"],
-  ["armory", "room-2-05"],
-  ["room-northeast", "corridor-1436-640"],
-  ["room-2-09", "corridor-513-624"],
-  ["room-6-03", "room-6-04"],
-  ["room-5-09", "corridor-1354-371"],
-  ["room-3-08", "corridor-1554-877"],
-  ["room-3-14", "room-4-17"],
-  ["room-northwest", "room-east-northeast"],
-  ["room-2-02", "corridor-669-214"],
-];
+const doorAndSecretLinksPendingADataFix: readonly [string, string][] = [];
 
 const pendingDataFixKeys = new Set(
   doorAndSecretLinksPendingADataFix.map((pair) => pairKey(pair[0], pair[1])),
@@ -145,8 +121,10 @@ describe("stored door marks stop on the shared wall", () => {
         .map((tuple) => pairKey(tuple[0], tuple[1])),
     );
 
-    expect(doorAndSecretLinksPendingADataFix).toHaveLength(23);
-    expect(pendingDataFixKeys.size).toBe(23);
+    expect(doorAndSecretLinksPendingADataFix).toHaveLength(
+      pendingDataFixKeys.size,
+    );
+    expect(pendingDataFixKeys.size).toBe(0);
     for (const key of pendingDataFixKeys) {
       expect(storedKeys.has(key), `${key} should be a stored door or secret`).toBe(
         true,

@@ -511,6 +511,31 @@ attribute on the board and a separate display rule, same pattern as
 **D**. Plain **L** used to preview Giant Lizard; that card is Shift+L
 so the overlay can have **L**.
 
+## DUN-25 — Wrong door partners retargeted to the print (12 Nov 2026)
+
+The twenty-three L-overlay door/secret marks that still skipped gray
+were wrong stored partners, not overlay geometry. Each tuple was
+checked on the 1981 line drawing. Seventeen were retargeted or
+dropped; six were left because the print already shows that partner
+(or a second secret is unclear) and the wall-stub test is clean.
+
+Retargets: room-west onto `1057-974`, room-east-southeast onto
+`1385-982`, room-east's secret onto `1417-864` (the east wall; the
+west wall already has the ordinary door onto `1319-730`), room-2-03
+onto `320-231`, the laboratory onto `1551-356`, the annex onto
+`1820-1432`, room-5-10 onto `1924-504`, Queen's Treasure onto
+`1802-1189`, room-2-01 onto `395-230`, the Armory onto `401-453`,
+room-northeast onto `1319-730`, room-northwest onto `1011-741`,
+room-5-09 onto `1354-409`. Dropped extras whose real door was
+already stored: room-2-02/`638-260`, room-4-09/`895-1283`,
+room-4-04/`874-243`, room-3-11/`478-1032`. Kind never changed.
+
+From Start the five-step glow is 29 spaces (was 28), because
+room-northwest now opens onto the west hall. Known-unreachable is
+266 (was 252): the Armory and the west hall of room-3-11 were only
+reachable through the dropped wrong doors. The pending-data list in
+the overlay test is empty. The same-step corridor test stays strict.
+
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 
 Jason: a door line may not cross gray abyss. For a real shared wall,
