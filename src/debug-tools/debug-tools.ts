@@ -2,7 +2,7 @@ import {
   EVENT_BOARD_DRAWING,
   EVENT_BOARD_DRAWN,
   type BoardDrawnDetail,
-} from "../board-events.ts";
+} from "../rendering/board-events.ts";
 import { MonsterCardPreviewListener } from "../cards/monster-card-preview-listener.ts";
 import type { DebugMode } from "./debug-mode.ts";
 import { DebugOverlayListener } from "./debug-overlay-listener.ts";
