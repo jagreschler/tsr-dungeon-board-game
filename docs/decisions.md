@@ -677,7 +677,9 @@ svg, and appends it.
 `DebugTools` subscribes at startup: OverlayDrawn listeners
 attach on `BoardDrawing` once (`{ once: true }`, so a second
 `BoardDrawing` does not hook them again), and the picker places
-itself on `BoardDrawn`, immediately after the svg. Production
+itself on `BoardDrawn` once (same `{ once: true }`, because a
+new picker instance would not see the first one's `placed`
+flag). The picker sits immediately after the svg. Production
 still publishes the lifecycle events; it just has no debug
 listeners. A class that draws the board says the board was
 drawn; it is not also responsible for every debug side effect.

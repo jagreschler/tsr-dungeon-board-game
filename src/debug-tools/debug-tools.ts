@@ -20,9 +20,13 @@ export class DebugTools {
       },
       { once: true },
     );
-    session.addEventListener(EVENT_BOARD_DRAWN, (event) => {
-      this.placePicker(event);
-    });
+    session.addEventListener(
+      EVENT_BOARD_DRAWN,
+      (event) => {
+        this.placePicker(event);
+      },
+      { once: true },
+    );
   }
 
   private placePicker(event: Event): void {

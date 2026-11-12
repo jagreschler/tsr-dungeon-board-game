@@ -3,7 +3,11 @@ import { dungeonBoard } from "../board/dungeon-board.ts";
 import { dungeonLayout } from "../board/dungeon-layout.ts";
 import { DungeonSession } from "../dungeon-session.ts";
 import { heroPiece } from "../pieces/hero-piece.ts";
-import { EVENT_BOARD_DRAWING } from "../board-events.ts";
+import {
+  EVENT_BOARD_DRAWING,
+  EVENT_BOARD_DRAWN,
+  type BoardDrawnDetail,
+} from "../board-events.ts";
 import { placeBoard } from "../place-board.ts";
 import { DebugMode } from "./debug-mode.ts";
 import { DebugTools } from "./debug-tools.ts";
@@ -67,6 +71,20 @@ describe("DebugTools", () => {
     expect(svg.getAttribute("data-stored-link-marks-visible")).toBe("true");
   });
 
+  it("places only one picker if BoardDrawn fires twice", () => {
+    const { svg, session } = placedBoardWithDebug(new DebugMode("?debug"));
+
+    session.dispatchEvent(
+      new CustomEvent<BoardDrawnDetail>(EVENT_BOARD_DRAWN, {
+        detail: { svg },
+      }),
+    );
+
+    expect(
+      document.querySelectorAll("[data-reference-image-picker]").length,
+    ).toBe(1);
+  });
+
   it("does not wire debug tools when they are not listening", () => {
     const host = document.createElement("main");
     document.body.append(host);
@@ -81,6 +99,7 @@ describe("DebugTools", () => {
 
 function placedBoardWithDebug(debugMode: DebugMode): {
   host: HTMLElement;
+  session: DungeonSession;
   svg: SVGSVGElement;
 } {
   const host = document.createElement("main");
@@ -88,5 +107,5 @@ function placedBoardWithDebug(debugMode: DebugMode): {
   const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
   new DebugTools(debugMode).listen(session);
   const svg = placeBoard(host, session);
-  return { host, svg };
+  return { host, session, svg };
 }
