@@ -1,7 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { DebugMode } from "./debug-mode.ts";
 
 const debugToolsFolder = resolve("src/debug-tools");
 const renderingFolder = resolve("src/rendering");
@@ -23,6 +22,13 @@ const mapDebugModules = [
   "debug-mode.test.ts",
   "debug-overlay-listener.ts",
   "debug-overlay-listener.test.ts",
+  "debug-tools.ts",
+  "debug-tools.test.ts",
+  "reference-image-events.ts",
+  "reference-image-file.ts",
+  "reference-image-file.test.ts",
+  "reference-image-picker.ts",
+  "reference-image-picker.test.ts",
   "read-reference-board-luminance.ts",
   "stored-door-mark-ends.ts",
   "stored-door-mark-ink-gaps.ts",
@@ -43,23 +49,11 @@ describe("map debug tools folder", () => {
     expect(session.includes("debug-tools")).toBe(false);
     expect(session.includes("import.meta.env")).toBe(false);
     expect(session.includes("bind-monster-card-preview")).toBe(false);
-    expect(main.includes("DebugOverlayListener")).toBe(true);
-    expect(main.includes("MonsterCardPreviewListener")).toBe(true);
+    expect(main.includes("DebugTools")).toBe(true);
+    expect(main.includes("DebugOverlayListener")).toBe(false);
+    expect(main.includes("MonsterCardPreviewListener")).toBe(false);
     expect(existsSync(resolve("src/cards/bind-monster-card-preview.ts"))).toBe(
       true,
     );
-  });
-
-  it("wires the card preview listener from debugMode.isOn(), including live ?debug", () => {
-    const main = readFileSync(resolve("src/main.ts"), "utf8");
-    const debugBlock = main.slice(
-      main.indexOf("if (debugMode.isOn())"),
-      main.indexOf("app.append(session.element())"),
-    );
-
-    expect((main.match(/import\.meta\.env\.DEV/g) ?? []).length).toBe(1);
-    expect(main.includes("if (import.meta.env.DEV)")).toBe(false);
-    expect(debugBlock.includes("MonsterCardPreviewListener")).toBe(true);
-    expect(new DebugMode("?debug", false).isOn()).toBe(true);
   });
 });

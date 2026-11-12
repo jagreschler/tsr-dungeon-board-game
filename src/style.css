@@ -247,6 +247,33 @@ body {
   cursor: pointer;
 }
 
+[data-reference-image-picker] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+[data-reference-image-picker] button {
+  font-family: Georgia, "Palatino Linotype", Palatino, serif;
+  font-size: 0.95rem;
+  color: #140e0b;
+  background: #f3e2c4;
+  border: 1px solid #cbb892;
+  border-radius: 0.2rem;
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+}
+
+[data-reference-image-picker-message] {
+  margin: 0;
+  max-width: 28rem;
+  color: #f3e2c4;
+  font-family: Georgia, "Palatino Linotype", Palatino, serif;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 .app-version {
   position: fixed;
   right: 0.75rem;

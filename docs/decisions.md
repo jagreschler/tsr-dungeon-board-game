@@ -629,6 +629,63 @@ production, nothing is wired. DungeonSession has no
 OverlayDrawn only; later redraws re-append L/D marks but leave
 the user's toggle state alone.
 
+## DUN-29 — Load the reference drawing from the user's computer (12 Nov 2026)
+
+The printed-board PNG is a fan copy we do not publish, so B is a
+no-op on the live site even with `?debug`. A small **Load
+reference image** control in `src/debug-tools/` is wired only when
+`debugMode.isOn()`. `main.ts` stays thin. There are no new
+`import.meta.env` checks.
+
+The picker is `ReferenceImagePicker`. `DebugTools` wires it, and
+the L/D and G/H/R listeners, from board lifecycle events. `main.ts`
+only checks `debugMode.isOn()` and calls `DebugTools.listen`.
+
+The button opens a file picker. `ReferenceImageFile` reads the
+file locally (`URL.createObjectURL`), checks 2200×1702, and
+revokes the previous object URL. Nothing is uploaded. Then B
+shows that image in the same place as the local
+`reference-board-map.png`. Locally, if the PNG is already present,
+B still works as today; the picker is another way to supply the
+image.
+
+`EVENT_REFERENCE_IMAGE_LOADED` (`ReferenceImageLoaded`) lives in
+`reference-image-events.ts`. The picker publishes it on the board
+SVG. `bindReferenceOverlay` hears that event and uses the object
+URL. If the file is not 2200×1702, a short message says so, and
+the image is still used.
+
+No localStorage. That would remember the last file across visits,
+but the browser cannot keep the real file, only a copy, and this
+PR stays small. A later change can add it if we want.
+
+## DUN-29 — Lifecycle events instead of inline order in main.ts (12 Nov 2026)
+
+Jason asked to combine the two debug blocks in `main.ts`. The
+order still matters (OverlayDrawn listeners before the first
+draw, picker after the svg is attached), but `main.ts` should
+not know that sequence.
+
+Board setup now publishes `EVENT_BOARD_DRAWING` (`BoardDrawing`)
+just before the svg is created, and `EVENT_BOARD_DRAWN`
+(`BoardDrawn`) once that svg is on the page. Those names follow
+the existing `EVENT_` / PascalCase pattern (`EVENT_OVERLAY_DRAWN`
+= `"OverlayDrawn"`). The constants live in `board-events.ts`.
+`placeBoard` is the one function that fires them, creates the
+svg, and appends it.
+
+`DebugTools` subscribes at startup: OverlayDrawn listeners
+attach on `BoardDrawing` once (`{ once: true }`, so a second
+`BoardDrawing` does not hook them again), and the picker places
+itself on `BoardDrawn` once (same `{ once: true }`, because a
+new picker instance would not see the first one's `placed`
+flag). The picker sits immediately after the svg. Production
+still publishes the lifecycle events; it just has no debug
+listeners. A class that draws the board says the board was
+drawn; it is not also responsible for every debug side effect.
+That is the same pattern as OverlayDrawn. No `queueMicrotask`
+and no `document.body` fallback.
+
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 
 Jason: a door line may not cross gray abyss. For a real shared wall,
