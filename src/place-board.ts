@@ -1,5 +1,5 @@
 import {
-  EVENT_BOARD_BEFORE_DRAW,
+  EVENT_BOARD_DRAWING,
   EVENT_BOARD_DRAWN,
   type BoardDrawnDetail,
 } from "./board-events.ts";
@@ -9,7 +9,7 @@ export function placeBoard(
   host: HTMLElement,
   session: DungeonSession,
 ): SVGSVGElement {
-  session.dispatchEvent(new CustomEvent(EVENT_BOARD_BEFORE_DRAW));
+  session.dispatchEvent(new CustomEvent(EVENT_BOARD_DRAWING));
   const board = session.element();
   host.append(board);
   session.dispatchEvent(

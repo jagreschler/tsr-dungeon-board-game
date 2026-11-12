@@ -3,6 +3,7 @@ import { dungeonBoard } from "../board/dungeon-board.ts";
 import { dungeonLayout } from "../board/dungeon-layout.ts";
 import { DungeonSession } from "../dungeon-session.ts";
 import { heroPiece } from "../pieces/hero-piece.ts";
+import { EVENT_BOARD_DRAWING } from "../board-events.ts";
 import { placeBoard } from "../place-board.ts";
 import { DebugMode } from "./debug-mode.ts";
 import { DebugTools } from "./debug-tools.ts";
@@ -44,6 +45,26 @@ describe("DebugTools", () => {
     const overlay = document.querySelector("[data-monster-card-overlay]");
     expect(overlay === null).toBe(false);
     expect(overlay?.querySelector("video") === null).toBe(false);
+  });
+
+  it("hooks overlay listeners only once if BoardDrawing fires twice", async () => {
+    const host = document.createElement("main");
+    document.body.append(host);
+    const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
+    new DebugTools(new DebugMode("?debug")).listen(session);
+
+    session.dispatchEvent(new CustomEvent(EVENT_BOARD_DRAWING));
+    session.dispatchEvent(new CustomEvent(EVENT_BOARD_DRAWING));
+    const svg = placeBoard(host, session);
+
+    expect(svg.querySelectorAll("[data-stored-link-marks]").length).toBe(1);
+    expect(svg.querySelectorAll("[data-move-step-labels]").length).toBe(1);
+
+    await import("./bind-stored-link-marks.ts");
+    await Promise.resolve();
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "l" }));
+
+    expect(svg.getAttribute("data-stored-link-marks-visible")).toBe("true");
   });
 
   it("does not wire debug tools when they are not listening", () => {

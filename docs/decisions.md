@@ -666,21 +666,23 @@ order still matters (OverlayDrawn listeners before the first
 draw, picker after the svg is attached), but `main.ts` should
 not know that sequence.
 
-Board setup now publishes `EVENT_BOARD_BEFORE_DRAW`
-(`board-before-draw`) right before the svg is created, and
-`EVENT_BOARD_DRAWN` (`board-drawn`) once that svg is on the
-page. Those constants live in `board-events.ts`. `placeBoard`
-is the one function that fires them, creates the svg, and
-appends it.
+Board setup now publishes `EVENT_BOARD_DRAWING` (`BoardDrawing`)
+just before the svg is created, and `EVENT_BOARD_DRAWN`
+(`BoardDrawn`) once that svg is on the page. Those names follow
+the existing `EVENT_` / PascalCase pattern (`EVENT_OVERLAY_DRAWN`
+= `"OverlayDrawn"`). The constants live in `board-events.ts`.
+`placeBoard` is the one function that fires them, creates the
+svg, and appends it.
 
 `DebugTools` subscribes at startup: OverlayDrawn listeners
-attach on `board-before-draw`, and the picker places itself on
-`board-drawn`, immediately after the svg. Production still
-publishes the lifecycle events; it just has no debug listeners.
-A class that draws the board says the board was drawn; it is
-not also responsible for every debug side effect. That is the
-same pattern as OverlayDrawn. No `queueMicrotask` and no
-`document.body` fallback.
+attach on `BoardDrawing` once (`{ once: true }`, so a second
+`BoardDrawing` does not hook them again), and the picker places
+itself on `BoardDrawn`, immediately after the svg. Production
+still publishes the lifecycle events; it just has no debug
+listeners. A class that draws the board says the board was
+drawn; it is not also responsible for every debug side effect.
+That is the same pattern as OverlayDrawn. No `queueMicrotask`
+and no `document.body` fallback.
 
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 

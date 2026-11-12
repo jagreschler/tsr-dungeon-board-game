@@ -1,5 +1,5 @@
-export const EVENT_BOARD_BEFORE_DRAW = "board-before-draw";
-export const EVENT_BOARD_DRAWN = "board-drawn";
+export const EVENT_BOARD_DRAWING = "BoardDrawing";
+export const EVENT_BOARD_DRAWN = "BoardDrawn";
 
 export type BoardDrawnDetail = {
   svg: SVGSVGElement;

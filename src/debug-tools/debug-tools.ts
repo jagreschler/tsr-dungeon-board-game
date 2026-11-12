@@ -1,5 +1,5 @@
 import {
-  EVENT_BOARD_BEFORE_DRAW,
+  EVENT_BOARD_DRAWING,
   EVENT_BOARD_DRAWN,
   type BoardDrawnDetail,
 } from "../board-events.ts";
@@ -12,10 +12,14 @@ export class DebugTools {
   constructor(private readonly debugMode: DebugMode) {}
 
   listen(session: EventTarget): void {
-    session.addEventListener(EVENT_BOARD_BEFORE_DRAW, () => {
-      new DebugOverlayListener(this.debugMode).listenForOverlayDrawn(session);
-      new MonsterCardPreviewListener().listenForOverlayDrawn(session);
-    });
+    session.addEventListener(
+      EVENT_BOARD_DRAWING,
+      () => {
+        new DebugOverlayListener(this.debugMode).listenForOverlayDrawn(session);
+        new MonsterCardPreviewListener().listenForOverlayDrawn(session);
+      },
+      { once: true },
+    );
     session.addEventListener(EVENT_BOARD_DRAWN, (event) => {
       this.placePicker(event);
     });
