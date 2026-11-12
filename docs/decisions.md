@@ -452,6 +452,14 @@ Magister Rex (Lightning 2, Fireball 2, Wizard 5, Superhero 2, Hero
 4, Elf 5):
 https://magisterrex.wordpress.com/2011/04/11/whats-in-that-game-box-dungeon-fantasy-boardgame/
 
+The Giant Lizard art has a taller parchment box that starts higher
+than Goblins and Hobgoblins. A single caption offset sat too low and
+overlapped the gem. Lookup now carries each card's stats-box
+(`topPercent` / `heightPercent`), defaulting to the Goblins/Hobgoblins
+layout. The shared caption still uses the same dark serif; it only
+changes where that block sits so the name and numbers stay centered
+inside that card's own parchment.
+
 ## DUN-19 — Hobgoblins card and clip (11 Nov 2026)
 
 Same pattern as Goblins, one monster. Files are

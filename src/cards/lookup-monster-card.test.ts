@@ -34,6 +34,24 @@ describe("lookupMonsterCard", () => {
     expect(assets.clipHref ?? "").toContain("L1-giant-lizard.mp4");
   });
 
+  it("uses the default parchment stats-box for goblins and hobgoblins", () => {
+    expect(lookupMonsterCard(1, "Goblins").statsBox).toEqual({
+      topPercent: 74.8,
+      heightPercent: 16,
+    });
+    expect(lookupMonsterCard(1, "Hobgoblins").statsBox).toEqual({
+      topPercent: 74.8,
+      heightPercent: 16,
+    });
+  });
+
+  it("uses a taller, higher stats-box for giant lizard", () => {
+    expect(lookupMonsterCard(1, "Giant Lizard").statsBox).toEqual({
+      topPercent: 67,
+      heightPercent: 19,
+    });
+  });
+
   it("hyphenates multi-word monster names in the file stem", () => {
     const assets = monsterCardHrefs(1, "Giant Lizard", true);
 
