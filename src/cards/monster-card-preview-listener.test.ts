@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { dungeonBoard } from "../board/dungeon-board.ts";
 import { dungeonLayout } from "../board/dungeon-layout.ts";
+import { DebugMode } from "../debug-tools/debug-mode.ts";
 import { DungeonSession } from "../dungeon-session.ts";
 import { heroPiece } from "../pieces/hero-piece.ts";
 import { MonsterCardPreviewListener } from "./monster-card-preview-listener.ts";
@@ -10,9 +11,14 @@ afterEach(() => {
 });
 
 describe("MonsterCardPreviewListener", () => {
-  it("binds G when it hears OverlayDrawn", async () => {
+  it("binds G when debug mode is on via ?debug with isDev false", async () => {
+    const debugMode = new DebugMode("?debug", false);
+    expect(debugMode.isOn()).toBe(true);
+
     const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
-    new MonsterCardPreviewListener().listenForOverlayDrawn(session);
+    if (debugMode.isOn()) {
+      new MonsterCardPreviewListener().listenForOverlayDrawn(session);
+    }
     const svg = session.element();
     document.body.append(svg);
 

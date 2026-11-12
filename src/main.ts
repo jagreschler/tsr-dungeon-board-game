@@ -22,8 +22,6 @@ const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
 const debugMode = new DebugMode(window.location.search, import.meta.env.DEV);
 if (debugMode.isOn()) {
   new DebugOverlayListener(debugMode).listenForOverlayDrawn(session);
-}
-if (import.meta.env.DEV) {
   new MonsterCardPreviewListener().listenForOverlayDrawn(session);
 }
 app.append(session.element());

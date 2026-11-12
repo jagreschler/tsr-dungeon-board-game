@@ -616,15 +616,18 @@ adds the L and D overlays from `debugMode` / `debugOptions`, and
 binds B/L/D. `DebugMode` takes an `isDev` flag (passed in from
 `main.ts`, not read as a global) so `isOn()` is true in `npm run
 dev` as well as with `?debug`. `main.ts` then checks only
-`debugMode.isOn()` before wiring that listener.
+`debugMode.isOn()` before wiring the map and card-preview
+listeners. `main.ts` reads `import.meta.env.DEV` only once, as
+the flag passed into `DebugMode`.
 
 `MonsterCardPreviewListener` in `src/cards/` hears the same
-OverlayDrawn event and binds G/H/R. `main.ts` wires it only in
-dev. DungeonSession has no `import.meta.env` checks and no debug
-or card-preview code. Behavior is unchanged. `debugOptions`
-starting visibility is applied on the first OverlayDrawn only;
-later redraws re-append L/D marks but leave the user's toggle
-state alone.
+OverlayDrawn event and binds G/H/R. Those keys follow debug
+mode too, including `?debug` on the live site. With no query on
+production, nothing is wired. DungeonSession has no
+`import.meta.env` checks and no debug or card-preview code.
+`debugOptions` starting visibility is applied on the first
+OverlayDrawn only; later redraws re-append L/D marks but leave
+the user's toggle state alone.
 
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 
