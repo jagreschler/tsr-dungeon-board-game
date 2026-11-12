@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
@@ -22,6 +24,13 @@ describe("DungeonSession", () => {
     const svg = play.element();
 
     expect(svg.querySelector("[data-reference-overlay]") === null).toBe(true);
+  });
+
+  it("holds no import.meta.env checks and no card-preview binding", () => {
+    const source = readFileSync(resolve("src/dungeon-session.ts"), "utf8");
+
+    expect(source.includes("import.meta.env")).toBe(false);
+    expect(source.includes("bind-monster-card-preview")).toBe(false);
   });
 
   it("draws no debug overlays on its own", () => {

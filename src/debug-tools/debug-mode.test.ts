@@ -10,6 +10,22 @@ describe("DebugMode", () => {
     expect(mode.hasSteps()).toBe(false);
   });
 
+  it("is on in the dev environment with no query", () => {
+    const mode = new DebugMode("", true);
+
+    expect(mode.isOn()).toBe(true);
+    expect(mode.hasLinks()).toBe(false);
+    expect(mode.hasSteps()).toBe(false);
+  });
+
+  it("still ignores debugOptions in dev when ?debug is missing", () => {
+    const mode = new DebugMode("?debugOptions=links,steps", true);
+
+    expect(mode.isOn()).toBe(true);
+    expect(mode.hasLinks()).toBe(false);
+    expect(mode.hasSteps()).toBe(false);
+  });
+
   it("is on for ?debug, with overlays still off until named", () => {
     const mode = new DebugMode("?debug");
 
