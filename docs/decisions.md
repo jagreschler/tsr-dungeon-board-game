@@ -629,6 +629,29 @@ production, nothing is wired. DungeonSession has no
 OverlayDrawn only; later redraws re-append L/D marks but leave
 the user's toggle state alone.
 
+## DUN-29 — Load the reference drawing from the user's computer (12 Nov 2026)
+
+The printed-board PNG is a fan copy we do not publish, so B is a
+no-op on the live site even with `?debug`. A small **Load
+reference image** button in `src/debug-tools/` is wired only when
+`debugMode.isOn()`, same OverlayDrawn pattern as DUN-28. `main.ts`
+stays thin. There are no new `import.meta.env` checks.
+
+The button opens a file picker. The browser reads the file locally
+(`URL.createObjectURL`); nothing is uploaded. Then B shows that
+image in the same place as the local `reference-board-map.png`.
+Locally, if the PNG is already present, B still works as today;
+the button is another way to supply the image.
+
+`LoadReferenceImageButton` publishes `EVENT_REFERENCE_IMAGE_LOADED`
+(`ReferenceImageLoaded`) on the board SVG. `bindReferenceOverlay`
+hears that event and uses the object URL. If the file is not
+2200×1702, a short message says so, and the image is still used.
+
+No localStorage. That would remember the last file across visits,
+but the browser cannot keep the real file, only a copy, and this
+PR stays small. A later change can add it if we want.
+
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 
 Jason: a door line may not cross gray abyss. For a real shared wall,

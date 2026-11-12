@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { bindReferenceOverlay } from "./bind-reference-overlay.ts";
+import { EVENT_REFERENCE_IMAGE_LOADED } from "./load-reference-image-button.ts";
 import { paintMoveGlow } from "../rendering/paint-move-glow.ts";
 import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
@@ -195,6 +196,54 @@ describe("bindReferenceOverlay", () => {
     await Promise.resolve();
 
     expect(svg.querySelector("[data-reference-overlay]") === null).toBe(true);
+  });
+
+  it("shows a loaded image on B when the local PNG is missing", async () => {
+    const svg = boardSvg();
+    unbinders.push(
+      bindReferenceOverlay(svg, true, async () => {
+        return false;
+      }),
+    );
+
+    svg.dispatchEvent(
+      new CustomEvent(EVENT_REFERENCE_IMAGE_LOADED, {
+        detail: { href: "blob:picked-board", width: 2200, height: 1702 },
+      }),
+    );
+    pressB();
+    await Promise.resolve();
+
+    const image = svg.querySelector("[data-reference-overlay] image");
+    expect(image?.getAttribute("href")).toBe("blob:picked-board");
+    expect(svg.getAttribute("data-reference-overlay-visible")).toBe("true");
+  });
+
+  it("updates the overlay image if a file is loaded while B is on", async () => {
+    const svg = boardSvg();
+    unbinders.push(
+      bindReferenceOverlay(svg, true, async () => {
+        return true;
+      }),
+    );
+
+    pressB();
+    await Promise.resolve();
+    expect(
+      svg.querySelector("[data-reference-overlay] image")?.getAttribute("href") ??
+        "",
+    ).toContain("reference-board-map.png");
+
+    svg.dispatchEvent(
+      new CustomEvent(EVENT_REFERENCE_IMAGE_LOADED, {
+        detail: { href: "blob:picked-board", width: 2200, height: 1702 },
+      }),
+    );
+
+    expect(
+      svg.querySelector("[data-reference-overlay] image")?.getAttribute("href"),
+    ).toBe("blob:picked-board");
+    expect(svg.getAttribute("data-reference-overlay-visible")).toBe("true");
   });
 
   it("does not listen for B when not in local development", async () => {

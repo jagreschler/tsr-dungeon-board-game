@@ -4,6 +4,7 @@ import { dungeonLayout } from "./board/dungeon-layout.ts";
 import { MonsterCardPreviewListener } from "./cards/monster-card-preview-listener.ts";
 import { DebugMode } from "./debug-tools/debug-mode.ts";
 import { DebugOverlayListener } from "./debug-tools/debug-overlay-listener.ts";
+import { LoadReferenceImageButton } from "./debug-tools/load-reference-image-button.ts";
 import { heroPiece } from "./pieces/hero-piece.ts";
 import { DungeonSession } from "./dungeon-session.ts";
 
@@ -22,6 +23,7 @@ const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
 const debugMode = new DebugMode(window.location.search, import.meta.env.DEV);
 if (debugMode.isOn()) {
   new DebugOverlayListener(debugMode).listenForOverlayDrawn(session);
+  new LoadReferenceImageButton().listenForOverlayDrawn(session);
   new MonsterCardPreviewListener().listenForOverlayDrawn(session);
 }
 app.append(session.element());

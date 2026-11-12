@@ -23,6 +23,8 @@ const mapDebugModules = [
   "debug-mode.test.ts",
   "debug-overlay-listener.ts",
   "debug-overlay-listener.test.ts",
+  "load-reference-image-button.ts",
+  "load-reference-image-button.test.ts",
   "read-reference-board-luminance.ts",
   "stored-door-mark-ends.ts",
   "stored-door-mark-ink-gaps.ts",

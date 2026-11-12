@@ -1,8 +1,8 @@
 import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 const REFERENCE_BOARD_IMAGE_FILE = "reference-board-map.png";
-const REFERENCE_BOARD_IMAGE_WIDTH = 2200;
-const REFERENCE_BOARD_IMAGE_HEIGHT = 1702;
+export const REFERENCE_BOARD_IMAGE_WIDTH = 2200;
+export const REFERENCE_BOARD_IMAGE_HEIGHT = 1702;
 const REFERENCE_OVERLAY_BACKING_FILL = "#808080";
 
 export function referenceOverlayHref(): string {
@@ -18,11 +18,14 @@ export async function referenceOverlayFileIsPresent(): Promise<boolean> {
   }
 }
 
-export function appendReferenceOverlay(svg: SVGSVGElement): SVGGElement {
+export function appendReferenceOverlay(
+  svg: SVGSVGElement,
+  href = referenceOverlayHref(),
+): SVGGElement {
   const group = document.createElementNS(SVG_NAMESPACE, "g");
   group.setAttribute("data-reference-overlay", "true");
   group.setAttribute("pointer-events", "none");
-  group.append(backingRect(), overlayImage());
+  group.append(backingRect(), overlayImage(href));
 
   const playOverlay = svg.querySelector("[data-play-overlay]");
   if (playOverlay === null) {
@@ -46,9 +49,9 @@ function backingRect(): SVGRectElement {
   return backing;
 }
 
-function overlayImage(): SVGImageElement {
+function overlayImage(href: string): SVGImageElement {
   const image = document.createElementNS(SVG_NAMESPACE, "image");
-  image.setAttribute("href", referenceOverlayHref());
+  image.setAttribute("href", href);
   image.setAttribute("x", "0");
   image.setAttribute("y", "0");
   image.setAttribute("width", String(REFERENCE_BOARD_IMAGE_WIDTH));
