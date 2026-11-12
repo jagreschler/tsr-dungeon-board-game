@@ -478,6 +478,15 @@ joins known-unreachable (117). From Start, 37 spaces remain in range.
 Local **D** draws the BFS step count on each highlighted space. It is
 dev-only, next to **B**.
 
+Two more Start skip links. Start was open to `corridor-1319-730`, the
+second northeast square, so that square showed 1 beside `1252-704`.
+The west stub `1045-800` was open to `1011-741`, the north bump that
+sits on `986-786`, so those two showed 2 beside 2. Those tuples are
+gone. `1319-730` is two steps from Start; `1011-741` is three. From
+Start, 36 spaces remain in range. Other same-step corridor pairs in
+the glow (`1385-982`/`1417-934`, `1433-780`/`1433-817`,
+`1438-716`/`1433-780`) are left for later.
+
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 
 Same pattern as Hobgoblins, one monster. Files are
