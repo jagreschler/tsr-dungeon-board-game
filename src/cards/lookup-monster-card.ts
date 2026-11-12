@@ -13,12 +13,18 @@ type CatalogEntry = {
   level: number;
   name: string;
   hasClip: boolean;
+  hasArt?: boolean;
   statsBox?: MonsterStatsBox;
 };
 
 const DEFAULT_STATS_BOX: MonsterStatsBox = {
   topPercent: 74.8,
   heightPercent: 16,
+};
+
+const PLAIN_CARD_STATS_BOX: MonsterStatsBox = {
+  topPercent: 22,
+  heightPercent: 56,
 };
 
 const catalog: CatalogEntry[] = [
@@ -30,6 +36,8 @@ const catalog: CatalogEntry[] = [
     hasClip: true,
     statsBox: { topPercent: 67, heightPercent: 19 },
   },
+  { level: 1, name: "Giant Rats", hasClip: false, hasArt: false },
+  { level: 1, name: "Skeleton", hasClip: false, hasArt: false },
 ];
 
 export function monsterSlug(monsterName: string): string {
@@ -66,6 +74,14 @@ export function lookupMonsterCard(
       imageHref: undefined,
       clipHref: undefined,
       statsBox: DEFAULT_STATS_BOX,
+    };
+  }
+
+  if (entry.hasArt === false) {
+    return {
+      imageHref: undefined,
+      clipHref: undefined,
+      statsBox: PLAIN_CARD_STATS_BOX,
     };
   }
 

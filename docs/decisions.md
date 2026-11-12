@@ -439,6 +439,27 @@ cards use a red border. The overlay publishes `CardRevealed` and
 `OverlayClosed` so later encounter rules can listen without living
 inside the picture code.
 
+## DUN-21 — Level 1 monster draw on entering a gold room (12 Nov 2026)
+
+When a pawn ends its move in an uncleared Level 1 room, the session
+publishes `MonsterRoomEntered`. `MonsterEncounter` takes the top card
+of the Level 1 monster deck, publishes `MonsterCardDrawn`, and shows
+the existing reveal overlay (clip if we have one, then the card).
+There is no combat yet, so Close treats the monster as unfought with
+no loot and puts that card on the bottom of the pile, the 1981 rule
+for that case.
+
+The deck is the 1981 Magister Rex Level 1 list of 7 cards (Giant
+Lizard, Giant Rats x2, Goblins x2, Hobgoblins, Skeleton), shuffled
+once per game. Giant Rats and Skeleton have no art yet, so they use
+a plain parchment card with the shared caption and a red border.
+
+Start, the Main Gallery, and corridors never draw. Other levels and
+chambers do nothing yet. Rooms are not cleared yet, so every entry
+into a gold room draws again. Local G / H / L previews still work.
+
+https://magisterrex.wordpress.com/2011/04/11/whats-in-that-game-box-dungeon-fantasy-boardgame/
+
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 
 Same pattern as Hobgoblins, one monster. Files are

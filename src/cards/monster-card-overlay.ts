@@ -16,7 +16,7 @@ export class MonsterCardOverlay extends EventTarget {
     assets: MonsterCardAssets,
     combatValues: MonsterCombatValues | undefined,
   ): void {
-    if (combatValues === undefined || assets.imageHref === undefined) {
+    if (combatValues === undefined) {
       return;
     }
 

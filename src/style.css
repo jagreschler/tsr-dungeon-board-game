@@ -126,6 +126,11 @@ body {
   container-type: inline-size;
 }
 
+.monster-card[data-plain-card] {
+  background: var(--parchment);
+  aspect-ratio: 2 / 3;
+}
+
 .monster-card img {
   display: block;
   width: 100%;

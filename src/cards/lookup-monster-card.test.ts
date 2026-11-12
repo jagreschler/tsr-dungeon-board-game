@@ -59,6 +59,16 @@ describe("lookupMonsterCard", () => {
     expect(assets.clipHref ?? "").toContain("L1-giant-lizard.mp4");
   });
 
+  it("omits art and clip for skeleton and giant rats", () => {
+    const skeleton = lookupMonsterCard(1, "Skeleton");
+    const rats = lookupMonsterCard(1, "Giant Rats");
+
+    expect(skeleton.imageHref).toBe(undefined);
+    expect(skeleton.clipHref).toBe(undefined);
+    expect(rats.imageHref).toBe(undefined);
+    expect(rats.clipHref).toBe(undefined);
+  });
+
   it("omits the clip when the monster is unknown", () => {
     const assets = lookupMonsterCard(1, "Owlbear");
 
