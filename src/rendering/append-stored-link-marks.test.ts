@@ -42,7 +42,7 @@ describe("appendStoredLinkMarks", () => {
       "[data-stored-link-mark][data-link-kind='door']",
     );
     const secret = marks.querySelector(
-      "[data-stored-link-mark][data-link-kind='secretDoor'][data-from-space-identifier='room-east'][data-to-space-identifier='corridor-1417-934']",
+      "[data-stored-link-mark][data-link-kind='secretDoor'][data-from-space-identifier='room-east'][data-to-space-identifier='corridor-1417-864']",
     );
     const staircase = findPlacement(dungeonLayout, "main-staircase");
     const hall = findPlacement(dungeonLayout, "corridor-1098-942");

@@ -511,6 +511,63 @@ attribute on the board and a separate display rule, same pattern as
 **D**. Plain **L** used to preview Giant Lizard; that card is Shift+L
 so the overlay can have **L**.
 
+## DUN-25 — Wrong door partners retargeted to the print (12 Nov 2026)
+
+The twenty-three L-overlay door/secret marks that still skipped gray
+were wrong stored partners, not overlay geometry. Each tuple was
+checked on the 1981 line drawing. Seventeen were retargeted or
+dropped; six looked like remaining gray because the overlay aimed at
+the box edge instead of the printed ink gap.
+
+Retargets: room-west onto `1057-974`, room-east-southeast onto
+`1385-982`, room-east's secret onto `1417-864` (the east wall; the
+west wall already has the ordinary door onto `1319-730`), room-2-03
+onto `320-231`, the laboratory onto `1551-356`, the annex onto
+`1820-1432`, room-5-10 onto `1924-504`, Queen's Treasure onto
+`1802-1189`, room-2-01 onto `395-230`, the Armory onto `401-453`,
+room-northeast onto `1319-730`, room-northwest onto `1011-741`,
+room-5-09 onto `1354-409`. Dropped extras whose real door was
+already stored: room-2-02/`638-260`, room-4-09/`895-1283`,
+room-4-04/`874-243`, room-3-11/`478-1032`. Kind never changed.
+
+**Ink-gap overlay.** The L door/secret test no longer uses box math
+or a 28px wall band. It rasterizes each mark at the real 5px
+round-cap stroke (secrets dashed 14/10) and samples the local
+reference PNG; any abyss-gray pixel (luminance 90–205) fails. The
+allowlist stays empty. Marks aim at hall-white facing the printed
+door gap, not the AABB edge. CI skips that pixel test when the
+gitignored PNG is missing.
+
+**Unclear second S.** room-2-02's northeast secret onto `639-160` is
+on the print. A second secret onto `669-214` is not clearly printed;
+it was dropped rather than guessed or allowlisted.
+
+**Armory path.** The Armory door onto vestibule `401-453` is real.
+The print also shows an **S** on room-2-05's east wall into
+room-2-08, which already doors north into that vestibule. That
+secret is stored, so Armory, `401-453`, and room-2-08 are reachable
+again. No link was added through a wall.
+
+**room-3-11 west hall.** The print shows no door on room-3-11's west
+wall; gray abyss sits between that room and the north–south hall
+(`478-1032` and its neighbors). The dropped west door was the only
+stored path into those 13 squares, and it was a through-wall guess.
+An **S** on room-3-13's east wall faces that hall, but room-3-13 is
+itself off the Start graph. Those 13 corridors stay named
+unreachable. No door was invented.
+
+**Printed-neighbor steps.** On top of the strict same-step corridor
+test (unchanged): printed neighbors in Start's five-step glow, with
+no third space between them, fail when the gap is open floor and the
+steps are equal or differ by 2 or more, or when a stored link has a
+step difference other than 1. Ink-wall pairs do not fail; they are
+listed in the printed-neighbor test. No wall was opened to make numbers match.
+
+From Start the five-step glow is 29 spaces. Known-unreachable is
+263 (was 266 after the partner retargets, 252 on main): Armory,
+`401-453`, and room-2-08 came back; the 13-square west hall of
+room-3-11 did not.
+
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 
 Jason: a door line may not cross gray abyss. For a real shared wall,

@@ -29,7 +29,7 @@ The overlay is off by default. If the file is missing, the key does nothing. The
 
 ### Local stored-link overlay
 
-In `npm run dev` only, press **L** to draw every stored board link once: open halls in bright green from center to center, ordinary doors in yellow from the hall square's center to the door on the shared wall, secret doors in purple dashes the same way. Press **L** again to hide it. Works with **B** and **D**. Production builds do not bind this key.
+In `npm run dev` only, press **L** to draw every stored board link once: open halls in bright green from center to center, ordinary doors in yellow from the hall square to the printed ink gap in the room wall, secret doors in purple dashes the same way. Press **L** again to hide it. Works with **B** and **D**. Production builds do not bind this key.
 
 ### Local monster card preview
 
