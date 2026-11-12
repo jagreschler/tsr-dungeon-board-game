@@ -34,21 +34,29 @@ describe("lookupMonsterCard", () => {
     expect(assets.clipHref ?? "").toContain("L1-giant-lizard.mp4");
   });
 
-  it("uses the default parchment stats-box for goblins and hobgoblins", () => {
+  it("uses parchment caption ink on the Goblins dark-red stats box", () => {
     expect(lookupMonsterCard(1, "Goblins").statsBox).toEqual({
-      topPercent: 74.8,
-      heightPercent: 16,
+      topPercent: 76,
+      heightPercent: 20,
+      ink: "parchment",
     });
+  });
+
+  it("uses the default dark ink on parchment stats-boxes", () => {
     expect(lookupMonsterCard(1, "Hobgoblins").statsBox).toEqual({
       topPercent: 74.8,
       heightPercent: 16,
+      ink: "dark",
     });
+    expect(lookupMonsterCard(1, "Giant Lizard").statsBox.ink).toBe("dark");
+    expect(lookupMonsterCard(1, "Skeleton").statsBox.ink).toBe("dark");
   });
 
   it("uses a taller, higher stats-box for giant lizard", () => {
     expect(lookupMonsterCard(1, "Giant Lizard").statsBox).toEqual({
       topPercent: 67,
       heightPercent: 19,
+      ink: "dark",
     });
   });
 
@@ -59,11 +67,31 @@ describe("lookupMonsterCard", () => {
     expect(assets.clipHref ?? "").toContain("L1-giant-lizard.mp4");
   });
 
+  it("omits art and clip for skeleton and giant rats", () => {
+    const skeleton = lookupMonsterCard(1, "Skeleton");
+    const rats = lookupMonsterCard(1, "Giant Rats");
+
+    expect(skeleton.imageHref).toBe(undefined);
+    expect(skeleton.clipHref).toBe(undefined);
+    expect(skeleton.statsBox).toEqual({
+      topPercent: 22,
+      heightPercent: 56,
+      ink: "dark",
+    });
+    expect(rats.imageHref).toBe(undefined);
+    expect(rats.clipHref).toBe(undefined);
+  });
+
   it("omits the clip when the monster is unknown", () => {
     const assets = lookupMonsterCard(1, "Owlbear");
 
     expect(assets.imageHref).toBe(undefined);
     expect(assets.clipHref).toBe(undefined);
+    expect(assets.statsBox).toEqual({
+      topPercent: 74.8,
+      heightPercent: 16,
+      ink: "dark",
+    });
   });
 
   it("omits the clip when the monster has card art but no clip file", () => {

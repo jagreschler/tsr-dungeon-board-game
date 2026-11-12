@@ -44,10 +44,34 @@ const giantLizardCombatValues: MonsterCombatValues = {
   elf: 5,
 };
 
+// 1981 TSR numbers from the Magister Rex card list:
+// https://magisterrex.wordpress.com/2011/04/11/whats-in-that-game-box-dungeon-fantasy-boardgame/
+const giantRatsCombatValues: MonsterCombatValues = {
+  name: "Giant Rats",
+  lightning: 7,
+  fireball: 2,
+  wizard: 6,
+  superhero: 3,
+  hero: 4,
+  elf: 5,
+};
+
+const skeletonCombatValues: MonsterCombatValues = {
+  name: "Skeleton",
+  lightning: 2,
+  fireball: 2,
+  wizard: 6,
+  superhero: 3,
+  hero: 4,
+  elf: 5,
+};
+
 const combatValuesBySlug: Record<string, MonsterCombatValues> = {
   goblins: goblinsCombatValues,
   hobgoblins: hobgoblinsCombatValues,
   "giant-lizard": giantLizardCombatValues,
+  "giant-rats": giantRatsCombatValues,
+  skeleton: skeletonCombatValues,
 };
 
 export function monsterCombatValues(

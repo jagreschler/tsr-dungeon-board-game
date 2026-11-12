@@ -2,8 +2,8 @@ import { appendMonsterCardOverlay } from "./append-monster-card-overlay.ts";
 import type { MonsterCardAssets } from "./lookup-monster-card.ts";
 import type { MonsterCombatValues } from "./monster-combat-values.ts";
 
-export const CARD_REVEALED_EVENT = "CardRevealed";
-export const OVERLAY_CLOSED_EVENT = "OverlayClosed";
+export const EVENT_CARD_REVEALED = "CardRevealed";
+export const EVENT_OVERLAY_CLOSED = "OverlayClosed";
 
 export class MonsterCardOverlay extends EventTarget {
   private hasPublishedCardRevealed = false;
@@ -16,7 +16,7 @@ export class MonsterCardOverlay extends EventTarget {
     assets: MonsterCardAssets,
     combatValues: MonsterCombatValues | undefined,
   ): void {
-    if (combatValues === undefined || assets.imageHref === undefined) {
+    if (combatValues === undefined) {
       return;
     }
 
@@ -59,12 +59,12 @@ export class MonsterCardOverlay extends EventTarget {
     }
 
     this.hasPublishedCardRevealed = true;
-    this.dispatchEvent(new CustomEvent(CARD_REVEALED_EVENT));
+    this.dispatchEvent(new CustomEvent(EVENT_CARD_REVEALED));
   }
 
   private close(): void {
     this.removeOverlay();
-    this.dispatchEvent(new CustomEvent(OVERLAY_CLOSED_EVENT));
+    this.dispatchEvent(new CustomEvent(EVENT_OVERLAY_CLOSED));
   }
 
   private removeOverlay(): void {
