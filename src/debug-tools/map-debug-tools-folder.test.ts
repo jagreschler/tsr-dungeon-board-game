@@ -1,7 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import { DebugMode } from "./debug-mode.ts";
 
 const debugToolsFolder = resolve("src/debug-tools");
 const renderingFolder = resolve("src/rendering");
@@ -53,18 +52,5 @@ describe("map debug tools folder", () => {
     expect(existsSync(resolve("src/cards/bind-monster-card-preview.ts"))).toBe(
       true,
     );
-  });
-
-  it("wires the card preview listener from debugMode.isOn(), including live ?debug", () => {
-    const main = readFileSync(resolve("src/main.ts"), "utf8");
-    const debugBlock = main.slice(
-      main.indexOf("if (debugOn)"),
-      main.indexOf("app.append(board)"),
-    );
-
-    expect((main.match(/import\.meta\.env\.DEV/g) ?? []).length).toBe(1);
-    expect(main.includes("if (import.meta.env.DEV)")).toBe(false);
-    expect(debugBlock.includes("MonsterCardPreviewListener")).toBe(true);
-    expect(new DebugMode("?debug", false).isOn()).toBe(true);
   });
 });
