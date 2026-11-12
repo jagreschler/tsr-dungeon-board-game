@@ -31,7 +31,7 @@ export class ReferenceImagePicker {
 
   private controls(): HTMLElement {
     const root = document.createElement("div");
-    root.setAttribute("data-load-reference-image", "true");
+    root.setAttribute("data-reference-image-picker", "true");
 
     const button = document.createElement("button");
     button.type = "button";
@@ -43,7 +43,7 @@ export class ReferenceImagePicker {
     input.hidden = true;
 
     const message = document.createElement("p");
-    message.setAttribute("data-load-reference-image-message", "true");
+    message.setAttribute("data-reference-image-picker-message", "true");
     message.hidden = true;
 
     button.addEventListener("click", () => {

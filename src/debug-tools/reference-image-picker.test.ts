@@ -20,7 +20,7 @@ describe("ReferenceImagePicker", () => {
     const svg = boardSvg();
     document.body.append(svg);
 
-    expect(document.querySelector("[data-load-reference-image]") === null).toBe(
+    expect(document.querySelector("[data-reference-image-picker]") === null).toBe(
       true,
     );
   });
@@ -30,11 +30,11 @@ describe("ReferenceImagePicker", () => {
     document.body.append(svg);
     new ReferenceImagePicker(svg).place();
 
-    expect(svg.nextElementSibling?.getAttribute("data-load-reference-image")).toBe(
+    expect(svg.nextElementSibling?.getAttribute("data-reference-image-picker")).toBe(
       "true",
     );
     expect(
-      document.querySelector("[data-load-reference-image] button")?.textContent,
+      document.querySelector("[data-reference-image-picker] button")?.textContent,
     ).toBe("Load reference image");
   });
 
@@ -43,7 +43,7 @@ describe("ReferenceImagePicker", () => {
     new ReferenceImagePicker(svg).place();
     await Promise.resolve();
 
-    expect(document.querySelector("[data-load-reference-image]") === null).toBe(
+    expect(document.querySelector("[data-reference-image-picker]") === null).toBe(
       true,
     );
 
@@ -58,7 +58,7 @@ describe("ReferenceImagePicker", () => {
     picker.place();
     picker.place();
 
-    expect(document.querySelectorAll("[data-load-reference-image]").length).toBe(
+    expect(document.querySelectorAll("[data-reference-image-picker]").length).toBe(
       1,
     );
   });
@@ -154,7 +154,7 @@ function pngFile(name: string): File {
 
 async function chooseFile(file: File): Promise<void> {
   const input = document.querySelector(
-    "[data-load-reference-image] input[type='file']",
+    "[data-reference-image-picker] input[type='file']",
   );
   if ((input instanceof HTMLInputElement) === false) {
     throw new Error("missing file input");
@@ -171,7 +171,7 @@ async function chooseFile(file: File): Promise<void> {
 
 function warningMessage(): HTMLParagraphElement | null {
   const message = document.querySelector(
-    "[data-load-reference-image-message]",
+    "[data-reference-image-picker-message]",
   );
   if (message instanceof HTMLParagraphElement) {
     return message;
