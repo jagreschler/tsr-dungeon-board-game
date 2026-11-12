@@ -62,9 +62,12 @@ describe("appendMonsterCardOverlay stats caption", () => {
   });
 
   it("places the caption using each card's stats-box percents", () => {
+    const goblins = statsCaption("Goblins");
     const hobgoblins = statsCaption("Hobgoblins");
     const giantLizard = statsCaption("Giant Lizard");
 
+    expect(goblins.style.top).toBe("76%");
+    expect(goblins.style.height).toBe("20%");
     expect(hobgoblins.style.top).toBe("74.8%");
     expect(hobgoblins.style.height).toBe("16%");
     expect(giantLizard.style.top).toBe("67%");

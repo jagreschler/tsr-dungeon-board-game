@@ -465,6 +465,11 @@ on the same per-card stats-box as the parchment bounds. Goblins uses
 dark on parchment. The real-turn overlay was already rendering the
 caption; it was just unreadable on that art.
 
+Goblins' dark-red panel is taller than the default 74.8/16 bounds
+(that box sat at the top of the panel). Its own stats-box is 76/20 so
+the name and numbers sit in the middle of that red fill. Hobgoblins
+keeps 74.8/16 and Giant Lizard keeps 67/19.
+
 https://magisterrex.wordpress.com/2011/04/11/whats-in-that-game-box-dungeon-fantasy-boardgame/
 
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)

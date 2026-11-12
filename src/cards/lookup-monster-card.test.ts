@@ -36,8 +36,8 @@ describe("lookupMonsterCard", () => {
 
   it("uses parchment caption ink on the Goblins dark-red stats box", () => {
     expect(lookupMonsterCard(1, "Goblins").statsBox).toEqual({
-      topPercent: 74.8,
-      heightPercent: 16,
+      topPercent: 76,
+      heightPercent: 20,
       ink: "parchment",
     });
   });

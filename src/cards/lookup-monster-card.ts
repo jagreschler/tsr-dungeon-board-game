@@ -37,7 +37,11 @@ const catalog: CatalogEntry[] = [
     level: 1,
     name: "Goblins",
     hasClip: true,
-    statsBox: { ...DEFAULT_STATS_BOX, ink: "parchment" },
+    statsBox: {
+      topPercent: 76,
+      heightPercent: 20,
+      ink: "parchment",
+    },
   },
   { level: 1, name: "Hobgoblins", hasClip: true },
   {
