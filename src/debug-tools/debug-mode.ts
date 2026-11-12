@@ -2,26 +2,28 @@ const LINKS_OPTION = "links";
 const STEPS_OPTION = "steps";
 
 export class DebugMode {
-  private readonly on: boolean;
+  private readonly fromAddress: boolean;
+  private readonly isDev: boolean;
   private readonly options: ReadonlySet<string>;
 
-  constructor(search: string) {
+  constructor(search: string, isDev = false) {
     const query = search.startsWith("?") ? search.slice(1) : search;
     const params = new URLSearchParams(query);
-    this.on = params.has("debug");
+    this.fromAddress = params.has("debug");
+    this.isDev = isDev;
     this.options = namedOptions(params.get("debugOptions"));
   }
 
   isOn(): boolean {
-    return this.on;
+    return this.isDev || this.fromAddress;
   }
 
   hasLinks(): boolean {
-    return this.on && this.options.has(LINKS_OPTION);
+    return this.fromAddress && this.options.has(LINKS_OPTION);
   }
 
   hasSteps(): boolean {
-    return this.on && this.options.has(STEPS_OPTION);
+    return this.fromAddress && this.options.has(STEPS_OPTION);
   }
 }
 
