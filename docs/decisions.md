@@ -621,7 +621,10 @@ dev` as well as with `?debug`. `main.ts` then checks only
 `MonsterCardPreviewListener` in `src/cards/` hears the same
 OverlayDrawn event and binds G/H/R. `main.ts` wires it only in
 dev. DungeonSession has no `import.meta.env` checks and no debug
-or card-preview code. Behavior is unchanged.
+or card-preview code. Behavior is unchanged. `debugOptions`
+starting visibility is applied on the first OverlayDrawn only;
+later redraws re-append L/D marks but leave the user's toggle
+state alone.
 
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 

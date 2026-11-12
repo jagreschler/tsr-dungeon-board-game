@@ -23,13 +23,21 @@ export class DebugOverlayListener {
     const detail = event.detail as OverlayDrawnDetail;
     appendStoredLinkMarks(detail.overlay, detail.board, detail.layout);
     appendMoveStepLabels(detail.overlay, detail.layout, detail.stepCounts);
+    this.applyStartingVisibilityIfNeeded(detail.svg);
+    this.bindKeysIfNeeded(detail.svg);
+  }
+
+  private applyStartingVisibilityIfNeeded(svg: SVGSVGElement): void {
+    if (this.keysAreBound) {
+      return;
+    }
+
     if (this.debugMode.hasLinks()) {
-      detail.svg.setAttribute("data-stored-link-marks-visible", "true");
+      svg.setAttribute("data-stored-link-marks-visible", "true");
     }
     if (this.debugMode.hasSteps()) {
-      detail.svg.setAttribute("data-move-step-labels-visible", "true");
+      svg.setAttribute("data-move-step-labels-visible", "true");
     }
-    this.bindKeysIfNeeded(detail.svg);
   }
 
   private bindKeysIfNeeded(svg: SVGSVGElement): void {

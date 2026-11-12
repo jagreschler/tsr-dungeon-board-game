@@ -84,4 +84,40 @@ describe("DebugOverlayListener", () => {
 
     expect(svg.getAttribute("data-stored-link-marks-visible")).toBe("true");
   });
+
+  it("leaves the L overlay hidden after a Hero move", () => {
+    const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
+    new DebugOverlayListener(
+      new DebugMode("?debug&debugOptions=links"),
+    ).listenForOverlayDrawn(session);
+    const svg = session.element();
+
+    expect(svg.getAttribute("data-stored-link-marks-visible")).toBe("true");
+    svg.removeAttribute("data-stored-link-marks-visible");
+
+    svg
+      .querySelector("[data-move-highlight='main-gallery']")
+      ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+    expect(svg.hasAttribute("data-stored-link-marks-visible")).toBe(false);
+    expect(svg.querySelector("[data-stored-link-marks]") === null).toBe(false);
+  });
+
+  it("leaves the D overlay hidden after a Hero move", () => {
+    const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
+    new DebugOverlayListener(
+      new DebugMode("?debug&debugOptions=steps"),
+    ).listenForOverlayDrawn(session);
+    const svg = session.element();
+
+    expect(svg.getAttribute("data-move-step-labels-visible")).toBe("true");
+    svg.removeAttribute("data-move-step-labels-visible");
+
+    svg
+      .querySelector("[data-move-highlight='main-gallery']")
+      ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+    expect(svg.hasAttribute("data-move-step-labels-visible")).toBe(false);
+    expect(svg.querySelector("[data-move-step-labels]") === null).toBe(false);
+  });
 });
