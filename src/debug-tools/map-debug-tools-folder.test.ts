@@ -40,8 +40,10 @@ describe("map debug tools folder", () => {
     const main = readFileSync(resolve("src/main.ts"), "utf8");
 
     expect(session.includes("debug-tools")).toBe(false);
-    expect(session.includes("./cards/bind-monster-card-preview.ts")).toBe(true);
+    expect(session.includes("import.meta.env")).toBe(false);
+    expect(session.includes("bind-monster-card-preview")).toBe(false);
     expect(main.includes("DebugOverlayListener")).toBe(true);
+    expect(main.includes("MonsterCardPreviewListener")).toBe(true);
     expect(existsSync(resolve("src/cards/bind-monster-card-preview.ts"))).toBe(
       true,
     );

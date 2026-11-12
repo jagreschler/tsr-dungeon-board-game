@@ -1,6 +1,7 @@
 import "./style.css";
 import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
+import { MonsterCardPreviewListener } from "./cards/monster-card-preview-listener.ts";
 import { DebugMode } from "./debug-tools/debug-mode.ts";
 import { DebugOverlayListener } from "./debug-tools/debug-overlay-listener.ts";
 import { heroPiece } from "./pieces/hero-piece.ts";
@@ -18,9 +19,12 @@ title.textContent = "Dungeon!";
 app.append(title);
 
 const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
-const debugMode = new DebugMode(window.location.search);
-if (import.meta.env.DEV || debugMode.isOn()) {
+const debugMode = new DebugMode(window.location.search, import.meta.env.DEV);
+if (debugMode.isOn()) {
   new DebugOverlayListener(debugMode).listenForOverlayDrawn(session);
+}
+if (import.meta.env.DEV) {
+  new MonsterCardPreviewListener().listenForOverlayDrawn(session);
 }
 app.append(session.element());
 

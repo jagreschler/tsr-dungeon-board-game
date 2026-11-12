@@ -613,11 +613,15 @@ finishes drawing the play overlay it publishes one event,
 
 `DebugOverlayListener` in `src/debug-tools/` hears that event and
 adds the L and D overlays from `debugMode` / `debugOptions`, and
-binds B/L/D. `main.ts` wires the listener only when debug mode is on
-(`npm run dev`, or `?debug` on the live site) and stays thin.
+binds B/L/D. `DebugMode` takes an `isDev` flag (passed in from
+`main.ts`, not read as a global) so `isOn()` is true in `npm run
+dev` as well as with `?debug`. `main.ts` then checks only
+`debugMode.isOn()` before wiring that listener.
 
-DungeonSession holds no debug-tools imports. Monster-card preview
-keys stay local-only in the session. Behavior is unchanged.
+`MonsterCardPreviewListener` in `src/cards/` hears the same
+OverlayDrawn event and binds G/H/R. `main.ts` wires it only in
+dev. DungeonSession has no `import.meta.env` checks and no debug
+or card-preview code. Behavior is unchanged.
 
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 

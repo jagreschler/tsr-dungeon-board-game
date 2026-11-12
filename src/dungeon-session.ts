@@ -57,11 +57,6 @@ export class DungeonSession extends EventTarget {
     dealer.listenForRoomEntered(this, "monster");
     dealer.listenForOverlayClosed(cardOverlay);
     presenter.listenForMonsterCardDrawn(dealer);
-    if (import.meta.env.DEV) {
-      void import("./cards/bind-monster-card-preview.ts").then((module) => {
-        module.bindMonsterCardPreview(svg, true);
-      });
-    }
     return svg;
   }
 
