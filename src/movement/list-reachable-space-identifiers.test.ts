@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { listReachableSpaceIdentifiers } from "./list-reachable-space-identifiers.ts";
+import {
+  listReachableSpaceIdentifiers,
+  listReachableSpaceStepCounts,
+} from "./list-reachable-space-identifiers.ts";
 
 function neighborsFrom(
   edges: Record<string, readonly string[]>,
@@ -91,6 +94,22 @@ describe("listReachableSpaceIdentifiers", () => {
     expect(reachable.has("start")).toBe(true);
     expect(reachable.has("gallery")).toBe(true);
     expect(reachable.has("east-stub")).toBe(true);
+  });
+
+  it("records how many steps each reachable space is from start", () => {
+    const steps = listReachableSpaceStepCounts("a", 5, {
+      neighborsOf: neighborsFrom({
+        a: ["b"],
+        b: ["a", "c"],
+        c: ["b", "d"],
+        d: ["c"],
+      }),
+    });
+
+    expect(steps.get("b")).toBe(1);
+    expect(steps.get("c")).toBe(2);
+    expect(steps.get("d")).toBe(3);
+    expect(steps.has("a")).toBe(false);
   });
 
   it("does not include the space the piece already sits on", () => {

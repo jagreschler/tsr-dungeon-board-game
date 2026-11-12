@@ -2,7 +2,7 @@ import type { Board } from "../board/board.ts";
 import { findSpace } from "../board/find-space.ts";
 import type { FoundSecretDoor } from "./list-neighbor-spaces-a-hero-can-step-to.ts";
 import { listNeighborSpacesAHeroCanStepTo } from "./list-neighbor-spaces-a-hero-can-step-to.ts";
-import { listReachableSpaceIdentifiers } from "./list-reachable-space-identifiers.ts";
+import { listReachableSpaceStepCounts } from "./list-reachable-space-identifiers.ts";
 
 export const SPACES_A_HERO_MAY_MOVE = 5;
 
@@ -12,7 +12,23 @@ export function listSpacesAHeroCanMoveTo(
   foundSecretDoors: readonly FoundSecretDoor[] = [],
   occupiedSpaceIdentifiers: readonly string[] = [],
 ): Set<string> {
-  return listReachableSpaceIdentifiers(
+  return new Set(
+    listMoveStepCounts(
+      board,
+      fromSpaceIdentifier,
+      foundSecretDoors,
+      occupiedSpaceIdentifiers,
+    ).keys(),
+  );
+}
+
+export function listMoveStepCounts(
+  board: Board,
+  fromSpaceIdentifier: string,
+  foundSecretDoors: readonly FoundSecretDoor[] = [],
+  occupiedSpaceIdentifiers: readonly string[] = [],
+): Map<string, number> {
+  return listReachableSpaceStepCounts(
     fromSpaceIdentifier,
     SPACES_A_HERO_MAY_MOVE,
     {

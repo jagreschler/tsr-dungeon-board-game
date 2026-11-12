@@ -462,16 +462,21 @@ stairs-west/942-774, 1367-754/1438-716, 1367-754/1433-780,
 1429-681/1482-762, 1482-762/1499-850, 1491-803/1512-872,
 839-887/916-921, and 1221-1092/1190-1139.
 
-After those cuts the glow still reached too far on the left of Start.
-Two more `open` links joined Level 1 gold halls to the Level 4 square
-`corridor-1018-1011`, which is not next to them as a same-level
-neighbor: 1057-974/1018-1011 and 966-968/1018-1011. Those are gone.
-The five-step path they faked was Start → 1098-942 → 1057-974 →
-1018-1011 → 966-968 → 916-921 (and the door into `room-4-06`).
-Honest gold walking does not reach those four in five spaces.
-`corridor-1018-1011` has no other way back to Start, so it joins the
-known-unreachable list (101). From Start, 36 spaces remain in range.
-The west stairs is still five honest Level 1 spaces.
+The next cut treated `corridor-1018-1011` as magenta and dropped its
+gold neighbors. That was wrong: on the printed board it is the third
+gold flagstone on the southwest spoke, mis-tagged as level 4. It is
+level 1 again, and the two gold-to-gold opens are back. Honest steps
+from Start: 1098-942 (1), 1057-974 (2), 1018-1011 (3), 966-968 (4),
+916-921 (5). `room-4-06` is the door off that fourth square.
+
+East of Start the gold hall is honest through 1438-716 and 1433-817.
+The three level-6 squares that showed as 5 sat across a wall
+(1482-762, 1491-803, 1499-850). Those six gold-to-blue `open` links
+are gone. That L6 run has no other path back to Start yet, so it
+joins known-unreachable (117). From Start, 37 spaces remain in range.
+
+Local **D** draws the BFS step count on each highlighted space. It is
+dev-only, next to **B**.
 
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 

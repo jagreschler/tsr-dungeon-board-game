@@ -71,6 +71,25 @@ body {
   filter: drop-shadow(0 0 2px rgba(90, 255, 150, 0.35));
 }
 
+[data-move-step-labels] {
+  display: none;
+  pointer-events: none;
+}
+
+.dungeon-board[data-move-step-labels-visible] [data-move-step-labels] {
+  display: unset;
+}
+
+[data-move-step-label] {
+  fill: #f7fff8;
+  font-family: Georgia, "Palatino Linotype", Palatino, serif;
+  font-size: 28px;
+  font-weight: 700;
+  paint-order: stroke fill;
+  stroke: #102016;
+  stroke-width: 5px;
+}
+
 @keyframes move-glow-pulse {
   0%,
   100% {
