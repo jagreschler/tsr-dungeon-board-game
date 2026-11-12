@@ -1,20 +1,20 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { EVENT_MONSTER_CARD_DRAWN } from "./monster-card-stock.ts";
+import { EVENT_MONSTER_CARD_DRAWN } from "./monster-card-dealer.ts";
 import { MonsterCardOverlay } from "./monster-card-overlay.ts";
-import { MonsterCardScreen } from "./monster-card-screen.ts";
+import { MonsterCardPresenter } from "./monster-card-presenter.ts";
 
 afterEach(() => {
   document.body.replaceChildren();
 });
 
-describe("MonsterCardScreen", () => {
+describe("MonsterCardPresenter", () => {
   it("shows the overlay after MonsterCardDrawn", () => {
     const overlay = new MonsterCardOverlay(document.body);
-    const screen = new MonsterCardScreen(overlay);
-    const stock = new EventTarget();
-    screen.listenForMonsterCardDrawn(stock);
+    const presenter = new MonsterCardPresenter(overlay);
+    const dealer = new EventTarget();
+    presenter.listenForMonsterCardDrawn(dealer);
 
-    stock.dispatchEvent(
+    dealer.dispatchEvent(
       new CustomEvent(EVENT_MONSTER_CARD_DRAWN, {
         detail: { monsterName: "Skeleton" },
       }),

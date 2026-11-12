@@ -1,13 +1,13 @@
 import { lookupMonsterCard } from "./lookup-monster-card.ts";
 import { monsterCombatValues } from "./monster-combat-values.ts";
 import { MonsterCardOverlay } from "./monster-card-overlay.ts";
-import { EVENT_MONSTER_CARD_DRAWN } from "./monster-card-stock.ts";
+import { EVENT_MONSTER_CARD_DRAWN } from "./monster-card-dealer.ts";
 
-export class MonsterCardScreen {
+export class MonsterCardPresenter {
   constructor(private readonly overlay: MonsterCardOverlay) {}
 
-  listenForMonsterCardDrawn(stock: EventTarget): void {
-    stock.addEventListener(EVENT_MONSTER_CARD_DRAWN, (event) => {
+  listenForMonsterCardDrawn(dealer: EventTarget): void {
+    dealer.addEventListener(EVENT_MONSTER_CARD_DRAWN, (event) => {
       this.showDrawnCard(event);
     });
   }

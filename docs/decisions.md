@@ -443,13 +443,13 @@ inside the picture code.
 
 When a pawn ends its move in an uncleared Level 1 room, the session
 publishes `RoomEntered` with `{ roomType: "monster" }` on the
-CustomEvent detail. `MonsterCardStock` listens with
+CustomEvent detail. `MonsterCardDealer` listens with
 `listenForRoomEntered(session, "monster")`, reads
 `event.detail.roomType`, and draws only when that matches. It takes
 the top card of the Level 1 monster deck and publishes
-`MonsterCardDrawn`. `MonsterCardScreen` listens for that draw and
+`MonsterCardDrawn`. `MonsterCardPresenter` listens for that draw and
 shows the existing reveal overlay (clip if we have one, then the
-card). Overlay close still publishes `OverlayClosed`; the stock puts
+card). Overlay close still publishes `OverlayClosed`; the dealer puts
 the unfought card on the bottom of the pile, the 1981 rule for that
 case. Event-name constants start with `EVENT_` so they autocomplete
 together (`EVENT_ROOM_ENTERED`, `EVENT_MONSTER_CARD_DRAWN`,

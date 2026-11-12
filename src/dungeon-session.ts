@@ -7,8 +7,8 @@ import {
 } from "./board/room-type.ts";
 import type { BoardLayout } from "./board/space-placement.ts";
 import { MonsterCardOverlay } from "./cards/monster-card-overlay.ts";
-import { MonsterCardScreen } from "./cards/monster-card-screen.ts";
-import { MonsterCardStock } from "./cards/monster-card-stock.ts";
+import { MonsterCardDealer } from "./cards/monster-card-dealer.ts";
+import { MonsterCardPresenter } from "./cards/monster-card-presenter.ts";
 import {
   MonsterDeck,
   shuffledLevel1MonsterDeck,
@@ -42,11 +42,11 @@ export class DungeonSession extends EventTarget {
     this.overlay = overlay;
     this.drawOverlay();
     const cardOverlay = new MonsterCardOverlay(overlayHost(svg));
-    const stock = new MonsterCardStock(this.monsterDeck);
-    const screen = new MonsterCardScreen(cardOverlay);
-    stock.listenForRoomEntered(this, "monster");
-    stock.listenForOverlayClosed(cardOverlay);
-    screen.listenForMonsterCardDrawn(stock);
+    const dealer = new MonsterCardDealer(this.monsterDeck);
+    const presenter = new MonsterCardPresenter(cardOverlay);
+    dealer.listenForRoomEntered(this, "monster");
+    dealer.listenForOverlayClosed(cardOverlay);
+    presenter.listenForMonsterCardDrawn(dealer);
     if (import.meta.env.DEV) {
       void import("./rendering/bind-reference-overlay.ts").then((module) => {
         module.bindReferenceOverlay(svg, true);

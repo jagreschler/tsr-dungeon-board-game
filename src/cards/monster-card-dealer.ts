@@ -11,7 +11,7 @@ type MonsterCardDrawnDetail = {
   monsterName: string;
 };
 
-export class MonsterCardStock extends EventTarget {
+export class MonsterCardDealer extends EventTarget {
   private cardInPlay: string | undefined;
 
   constructor(private readonly deck: MonsterDeck) {
