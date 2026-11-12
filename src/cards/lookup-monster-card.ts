@@ -1,6 +1,9 @@
+export type CaptionInk = "dark" | "parchment";
+
 export type MonsterStatsBox = {
   topPercent: number;
   heightPercent: number;
+  ink: CaptionInk;
 };
 
 export type MonsterCardAssets = {
@@ -20,21 +23,28 @@ type CatalogEntry = {
 const DEFAULT_STATS_BOX: MonsterStatsBox = {
   topPercent: 74.8,
   heightPercent: 16,
+  ink: "dark",
 };
 
 const PLAIN_CARD_STATS_BOX: MonsterStatsBox = {
   topPercent: 22,
   heightPercent: 56,
+  ink: "dark",
 };
 
 const catalog: CatalogEntry[] = [
-  { level: 1, name: "Goblins", hasClip: true },
+  {
+    level: 1,
+    name: "Goblins",
+    hasClip: true,
+    statsBox: { ...DEFAULT_STATS_BOX, ink: "parchment" },
+  },
   { level: 1, name: "Hobgoblins", hasClip: true },
   {
     level: 1,
     name: "Giant Lizard",
     hasClip: true,
-    statsBox: { topPercent: 67, heightPercent: 19 },
+    statsBox: { topPercent: 67, heightPercent: 19, ink: "dark" },
   },
   { level: 1, name: "Giant Rats", hasClip: false, hasArt: false },
   { level: 1, name: "Skeleton", hasClip: false, hasArt: false },

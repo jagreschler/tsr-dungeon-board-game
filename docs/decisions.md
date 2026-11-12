@@ -458,6 +458,13 @@ Start, the Main Gallery, and corridors never draw. Other levels and
 chambers do nothing yet. Rooms are not cleared yet, so every entry
 into a gold room draws again. Local G / H / L previews still work.
 
+The Goblins art's stats box is dark red, not parchment, so the shared
+dark `--ink` caption vanished on it. Lookup now carries caption `ink`
+on the same per-card stats-box as the parchment bounds. Goblins uses
+`--parchment` ink; Hobgoblins, Giant Lizard, and the no-art cards stay
+dark on parchment. The real-turn overlay was already rendering the
+caption; it was just unreadable on that art.
+
 https://magisterrex.wordpress.com/2011/04/11/whats-in-that-game-box-dungeon-fantasy-boardgame/
 
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)

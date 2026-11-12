@@ -44,6 +44,28 @@ describe("DungeonSession", () => {
     ).toBe(false);
   });
 
+  it("shows a readable Goblins caption after a real gold-room draw", () => {
+    const session = new DungeonSession(
+      dungeonBoard,
+      dungeonLayout,
+      heroPiece,
+      new MonsterDeck(["Goblins"]),
+    );
+    const svg = session.element();
+    document.body.append(svg);
+    clickHighlight(svg, "room-south");
+    document.querySelector("[data-skip-clip]")?.dispatchEvent(
+      new MouseEvent("click", { bubbles: true }),
+    );
+
+    const caption = document.querySelector("[data-monster-card-stats]");
+    expect(caption?.textContent?.includes("Goblins")).toBe(true);
+    expect(caption?.textContent?.includes("Lightning 6")).toBe(true);
+    expect(caption?.classList.contains("monster-card-stats-parchment")).toBe(
+      true,
+    );
+  });
+
   it("draws a Level 1 monster when the Hero enters a gold room", () => {
     const session = new DungeonSession(
       dungeonBoard,

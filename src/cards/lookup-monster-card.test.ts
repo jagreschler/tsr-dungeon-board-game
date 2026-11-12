@@ -34,21 +34,29 @@ describe("lookupMonsterCard", () => {
     expect(assets.clipHref ?? "").toContain("L1-giant-lizard.mp4");
   });
 
-  it("uses the default parchment stats-box for goblins and hobgoblins", () => {
+  it("uses parchment caption ink on the Goblins dark-red stats box", () => {
     expect(lookupMonsterCard(1, "Goblins").statsBox).toEqual({
       topPercent: 74.8,
       heightPercent: 16,
+      ink: "parchment",
     });
+  });
+
+  it("uses the default dark ink on parchment stats-boxes", () => {
     expect(lookupMonsterCard(1, "Hobgoblins").statsBox).toEqual({
       topPercent: 74.8,
       heightPercent: 16,
+      ink: "dark",
     });
+    expect(lookupMonsterCard(1, "Giant Lizard").statsBox.ink).toBe("dark");
+    expect(lookupMonsterCard(1, "Skeleton").statsBox.ink).toBe("dark");
   });
 
   it("uses a taller, higher stats-box for giant lizard", () => {
     expect(lookupMonsterCard(1, "Giant Lizard").statsBox).toEqual({
       topPercent: 67,
       heightPercent: 19,
+      ink: "dark",
     });
   });
 

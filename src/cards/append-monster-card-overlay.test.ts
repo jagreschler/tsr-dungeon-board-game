@@ -47,13 +47,17 @@ describe("appendMonsterCardOverlay stats caption", () => {
     );
   });
 
-  it("uses the same caption classes for Goblins and Hobgoblins", () => {
+  it("uses parchment caption ink for Goblins and dark ink for Hobgoblins", () => {
     const goblins = statsCaption("Goblins");
     const hobgoblins = statsCaption("Hobgoblins");
 
-    expect(goblins.className).toBe(hobgoblins.className);
-    expect(goblins.getAttribute("data-stats-box")).toBe(
-      hobgoblins.getAttribute("data-stats-box"),
+    expect(goblins.classList.contains("monster-card-stats-parchment")).toBe(
+      true,
+    );
+    expect(goblins.classList.contains("monster-card-stats-ink")).toBe(false);
+    expect(hobgoblins.classList.contains("monster-card-stats-ink")).toBe(true);
+    expect(hobgoblins.classList.contains("monster-card-stats-parchment")).toBe(
+      false,
     );
   });
 
