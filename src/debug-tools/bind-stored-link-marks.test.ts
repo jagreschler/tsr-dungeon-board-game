@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { bindStoredLinkMarks } from "./bind-stored-link-marks.ts";
-import { SVG_NAMESPACE } from "./svg-namespace.ts";
+import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 const unbinders: Array<() => void> = [];
 

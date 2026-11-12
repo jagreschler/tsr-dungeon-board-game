@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import { dungeonBoard } from "../board/dungeon-board.ts";
 import { dungeonLayout } from "../board/dungeon-layout.ts";
 import { appendMoveStepLabels } from "./append-move-step-labels.ts";
-import { GenerateMoveHighlights } from "./generate-move-highlights.ts";
-import { SVG_NAMESPACE } from "./svg-namespace.ts";
+import { GenerateMoveHighlights } from "../rendering/generate-move-highlights.ts";
+import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 describe("appendMoveStepLabels", () => {
   it("writes the BFS step count on each highlighted space", () => {

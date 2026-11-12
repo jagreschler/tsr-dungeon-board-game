@@ -13,10 +13,10 @@ import {
   MonsterDeck,
   shuffledLevel1MonsterDeck,
 } from "./cards/monster-deck.ts";
+import { appendMoveStepLabels } from "./debug-tools/append-move-step-labels.ts";
+import { appendStoredLinkMarks } from "./debug-tools/append-stored-link-marks.ts";
 import { GenerateBoard } from "./rendering/generate-board.ts";
 import { GenerateHeroPiece } from "./rendering/generate-hero-piece.ts";
-import { appendMoveStepLabels } from "./rendering/append-move-step-labels.ts";
-import { appendStoredLinkMarks } from "./rendering/append-stored-link-marks.ts";
 import { GenerateMoveHighlights } from "./rendering/generate-move-highlights.ts";
 import { listMoveStepCounts } from "./movement/list-spaces-a-hero-can-move-to.ts";
 import { placePieceOnSpace, type Piece } from "./pieces/piece.ts";
@@ -50,16 +50,16 @@ export class DungeonSession extends EventTarget {
     dealer.listenForOverlayClosed(cardOverlay);
     presenter.listenForMonsterCardDrawn(dealer);
     if (import.meta.env.DEV) {
-      void import("./rendering/bind-reference-overlay.ts").then((module) => {
+      void import("./debug-tools/bind-reference-overlay.ts").then((module) => {
         module.bindReferenceOverlay(svg, true);
       });
       void import("./cards/bind-monster-card-preview.ts").then((module) => {
         module.bindMonsterCardPreview(svg, true);
       });
-      void import("./rendering/bind-move-step-labels.ts").then((module) => {
+      void import("./debug-tools/bind-move-step-labels.ts").then((module) => {
         module.bindMoveStepLabels(svg, true);
       });
-      void import("./rendering/bind-stored-link-marks.ts").then((module) => {
+      void import("./debug-tools/bind-stored-link-marks.ts").then((module) => {
         module.bindStoredLinkMarks(svg, true);
       });
     }

@@ -6,8 +6,8 @@ import { findSpace } from "../board/find-space.ts";
 import { boxFromPlacement } from "../board/placement-box.ts";
 import type { BoardLayout, SpacePlacement } from "../board/space-placement.ts";
 import type { Space } from "../board/space.ts";
-import type { BoardPoint } from "./shared-wall-point.ts";
-import { pointOnSharedWall } from "./shared-wall-point.ts";
+import type { BoardPoint } from "../rendering/shared-wall-point.ts";
+import { pointOnSharedWall } from "../rendering/shared-wall-point.ts";
 import { storedDoorMarkInkGaps } from "./stored-door-mark-ink-gaps.ts";
 
 export function storedDoorMarkEnds(

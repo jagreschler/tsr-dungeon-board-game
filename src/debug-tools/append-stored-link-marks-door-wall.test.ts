@@ -8,7 +8,7 @@ import {
   REFERENCE_BOARD_IMAGE_PATH,
   readReferenceBoardLuminance,
 } from "./read-reference-board-luminance.ts";
-import { SVG_NAMESPACE } from "./svg-namespace.ts";
+import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 /**
  * No gray crossing is allowlisted. If the print does not show a door

@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { bindMoveStepLabels } from "./bind-move-step-labels.ts";
-import { SVG_NAMESPACE } from "./svg-namespace.ts";
+import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 const unbinders: Array<() => void> = [];
 

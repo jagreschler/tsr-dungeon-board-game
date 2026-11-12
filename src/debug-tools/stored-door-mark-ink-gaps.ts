@@ -1,4 +1,4 @@
-import type { BoardPoint } from "./shared-wall-point.ts";
+import type { BoardPoint } from "../rendering/shared-wall-point.ts";
 
 export type StoredDoorMarkInkGap = {
   start: BoardPoint;

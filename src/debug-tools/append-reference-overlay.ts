@@ -1,4 +1,4 @@
-import { SVG_NAMESPACE } from "./svg-namespace.ts";
+import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 const REFERENCE_BOARD_IMAGE_FILE = "reference-board-map.png";
 const REFERENCE_BOARD_IMAGE_WIDTH = 2200;

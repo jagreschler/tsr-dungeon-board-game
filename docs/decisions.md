@@ -568,6 +568,22 @@ From Start the five-step glow is 29 spaces. Known-unreachable is
 `401-453`, and room-2-08 came back; the 13-square west hall of
 room-3-11 did not.
 
+## DUN-26 — Map debug tools live in one folder (12 Nov 2026)
+
+B, L, and D are local map-inspection tools, not the game. They had
+been mixed into `src/rendering/` next to the code that draws the
+board. They now live in `src/debug-tools/`: the reference overlay
+(B), the stored-link overlay (L), the step-number overlay (D), the
+dev-only key bindings, the helpers that draw those marks, and the
+PNG luminance reader the pixel tests use.
+
+Monster-card preview keys (G, H, R, and Shift) stay in `src/cards/`.
+Those preview a card, not the map. Overlay CSS stays in `style.css`.
+The Vite plugin that serves the local PNG stays in `vite.config.ts`.
+`main.ts` is unchanged. Production still binds none of these keys.
+Nothing about how the overlays look or how the game plays changed;
+only import paths moved.
+
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 
 Jason: a door line may not cross gray abyss. For a real shared wall,
