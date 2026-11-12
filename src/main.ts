@@ -5,7 +5,7 @@ import { DebugMode } from "./debug-tools/debug-mode.ts";
 import { DebugTools } from "./debug-tools/debug-tools.ts";
 import { heroPiece } from "./pieces/hero-piece.ts";
 import { DungeonSession } from "./dungeon-session.ts";
-import { placeBoard } from "./place-board.ts";
+import { placeBoard } from "./rendering/place-board.ts";
 
 const app = document.querySelector("#app");
 

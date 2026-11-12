@@ -7,8 +7,8 @@ import {
   EVENT_BOARD_DRAWING,
   EVENT_BOARD_DRAWN,
   type BoardDrawnDetail,
-} from "../board-events.ts";
-import { placeBoard } from "../place-board.ts";
+} from "../rendering/board-events.ts";
+import { placeBoard } from "../rendering/place-board.ts";
 import { DebugMode } from "./debug-mode.ts";
 import { DebugTools } from "./debug-tools.ts";
 

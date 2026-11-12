@@ -1,13 +1,13 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { dungeonBoard } from "./board/dungeon-board.ts";
-import { dungeonLayout } from "./board/dungeon-layout.ts";
+import { dungeonBoard } from "../board/dungeon-board.ts";
+import { dungeonLayout } from "../board/dungeon-layout.ts";
 import {
   EVENT_BOARD_DRAWING,
   EVENT_BOARD_DRAWN,
   type BoardDrawnDetail,
 } from "./board-events.ts";
-import { DungeonSession } from "./dungeon-session.ts";
-import { heroPiece } from "./pieces/hero-piece.ts";
+import { DungeonSession } from "../dungeon-session.ts";
+import { heroPiece } from "../pieces/hero-piece.ts";
 import { placeBoard } from "./place-board.ts";
 
 afterEach(() => {

@@ -3,7 +3,7 @@ import {
   EVENT_BOARD_DRAWN,
   type BoardDrawnDetail,
 } from "./board-events.ts";
-import type { DungeonSession } from "./dungeon-session.ts";
+import type { DungeonSession } from "../dungeon-session.ts";
 
 export function placeBoard(
   host: HTMLElement,

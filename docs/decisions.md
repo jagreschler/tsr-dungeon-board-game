@@ -686,6 +686,16 @@ drawn; it is not also responsible for every debug side effect.
 That is the same pattern as OverlayDrawn. No `queueMicrotask`
 and no `document.body` fallback.
 
+## DUN-30 — Tidy src folders (12 Nov 2026)
+
+`place-board.ts`, its test, and `board-events.ts` belong with the
+code that puts the board on the page, so they moved into
+`src/rendering/`. `main.ts` and `dungeon-session.ts` stay at the
+`src/` root. The two version tests in `src/` were renamed to
+kebab-case (`app-version.test.ts`, `read-app-version.test.ts`) to
+match the files they test. Nothing about how the game plays
+changed; only paths and test file names moved.
+
 ## DUN-24 — Door overlay lines stop on the wall (12 Nov 2026)
 
 Jason: a door line may not cross gray abyss. For a real shared wall,
