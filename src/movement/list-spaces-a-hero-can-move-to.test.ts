@@ -81,17 +81,27 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(reachable.has("corridor-1176-1177")).toBe(false);
     expect(reachable.has("corridor-1204-1177")).toBe(false);
     expect(reachable.has("corridor-836-966")).toBe(false);
+    expect(reachable.has("corridor-1190-1139")).toBe(false);
+    expect(reachable.has("corridor-1436-640")).toBe(false);
+    expect(reachable.has("corridor-1512-872")).toBe(false);
+    expect(reachable.has("corridor-792-768")).toBe(false);
+    expect(reachable.has("corridor-839-887")).toBe(false);
+    expect(reachable.has("corridor-869-893")).toBe(false);
+    expect(reachable.has("corridor-887-972")).toBe(false);
+    expect(reachable.has("corridor-934-689")).toBe(false);
+    expect(reachable.has("room-3-04")).toBe(false);
   });
 
-  it("still reaches the west stairs neighbors in five honest steps", () => {
+  it("reaches the west stairs in five honest steps, not past them", () => {
     const reachable = listSpacesAHeroCanMoveTo(
       dungeonBoard,
       "main-staircase",
       [],
     );
 
-    expect(reachable.has("corridor-792-768")).toBe(true);
-    expect(reachable.has("room-3-04")).toBe(true);
+    expect(reachable.has("stairs-west")).toBe(true);
+    expect(reachable.has("corridor-909-774")).toBe(true);
+    expect(reachable.size).toBe(40);
   });
 
   it("does not land on another pawn in a corridor", () => {

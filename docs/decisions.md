@@ -443,18 +443,29 @@ inside the picture code.
 
 From Start the five-step glow reached squares that look more than five
 printed spaces away. The search itself was fine (cap 5, one step per
-space). Seven `open` corridor links jumped over a square in between:
-909-774/986-786, stairs-west/926-664, 1201-1052/1202-1112,
-1202-1112/1176-1177, 1202-1112/1204-1177, 1196-1020/1221-1092, and
-966-968/887-972. Those tuples are gone. The honest neighbor links on
-each side were already in the data, so nothing was stranded. Door
-links and the Start rim stubs stay. Known-unreachable count stays 100.
+space). Open corridor links jumped over a square in between. The
+first cut dropped seven tuples near Start. That was not enough: the
+glow still used twelve more skip links in the five-step graph,
+including `main-staircase`/`1057-974` (via `1098-942`) and
+`stairs-west`/`942-774` (via `909-774`). Those twelve are gone too.
+The honest neighbor links on each side were already in the data, so
+nothing was stranded. Door links stay. Known-unreachable count stays
+100.
 
-After the cuts, `corridor-926-664`, the south-column end squares
-1176-1177 and 1204-1177, and `corridor-836-966` are outside a five-step
-walk from Start. `corridor-792-768` and `room-3-04` remain in range:
-the west stairs is four honest spaces from Start, and both sit on that
-stair. Other skip links elsewhere on the board are left for later.
+The first seven: 909-774/986-786, stairs-west/926-664,
+1201-1052/1202-1112, 1202-1112/1176-1177, 1202-1112/1204-1177,
+1196-1020/1221-1092, and 966-968/887-972.
+
+The twelve that still inflated the Start glow: main-staircase/1057-974,
+stairs-west/942-774, 1367-754/1438-716, 1367-754/1433-780,
+1408-754/1429-681, 1408-754/1482-762, 1408-754/1433-817,
+1429-681/1482-762, 1482-762/1499-850, 1491-803/1512-872,
+839-887/916-921, and 1221-1092/1190-1139.
+
+After the cuts, 40 spaces are reachable from Start in five honest
+steps. The west stairs is five spaces away, so `room-3-04` and
+`corridor-792-768` sit past the cap. Other skip links elsewhere on
+the board are left for later.
 
 ## DUN-20 — Giant Lizard card and clip (12 Nov 2026)
 
