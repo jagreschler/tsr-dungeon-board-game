@@ -439,6 +439,17 @@ cards use a red border. The overlay publishes `CardRevealed` and
 `OverlayClosed` so later encounter rules can listen without living
 inside the picture code.
 
+## DUN-23 — Giant Rats card and clip (12 Nov 2026)
+
+Same pattern as Hobgoblins and Giant Lizard. Files are
+`public/cards/L1-giant-rats.jpg` and `.mp4`. Catalog entry is
+`hasClip: true` with art (no `hasArt: false`). Local **R** plays the
+clip then the card; **Shift+R** shows the card only. Combat numbers
+stay the 1981 Magister Rex list already in `monster-combat-values`
+(Lightning 7, Fireball 2, Wizard 6, Superhero 3, Hero 4, Elf 5). The
+parchment panel is measured at 74/17 with dark `--ink`, so the
+caption stays readable and vertically centered in that box.
+
 ## DUN-21 — Level 1 monster draw on entering a gold room (12 Nov 2026)
 
 When a pawn ends its move in an occupied Level 1 room, the session

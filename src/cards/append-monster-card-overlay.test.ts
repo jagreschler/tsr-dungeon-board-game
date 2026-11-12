@@ -72,5 +72,10 @@ describe("appendMonsterCardOverlay stats caption", () => {
     expect(hobgoblins.style.height).toBe("16%");
     expect(giantLizard.style.top).toBe("67%");
     expect(giantLizard.style.height).toBe("19%");
+
+    const giantRats = statsCaption("Giant Rats");
+    expect(giantRats.style.top).toBe("74%");
+    expect(giantRats.style.height).toBe("17%");
+    expect(giantRats.classList.contains("monster-card-stats-ink")).toBe(true);
   });
 });

@@ -67,7 +67,12 @@ const catalog: CatalogEntry[] = [
     hasClip: true,
     statsBox: { topPercent: 67, heightPercent: 19, ink: "dark" },
   },
-  { level: 1, name: "Giant Rats", hasClip: false, hasArt: false },
+  {
+    level: 1,
+    name: "Giant Rats",
+    hasClip: true,
+    statsBox: { topPercent: 74, heightPercent: 17, ink: "dark" },
+  },
   { level: 1, name: "Skeleton", hasClip: false, hasArt: false },
 ];
 

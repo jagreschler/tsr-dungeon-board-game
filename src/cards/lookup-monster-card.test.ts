@@ -60,6 +60,14 @@ describe("lookupMonsterCard", () => {
     });
   });
 
+  it("uses the parchment stats-box and dark ink for giant rats", () => {
+    expect(lookupMonsterCard(1, "Giant Rats").statsBox).toEqual({
+      topPercent: 74,
+      heightPercent: 17,
+      ink: "dark",
+    });
+  });
+
   it("hyphenates multi-word monster names in the file stem", () => {
     const assets = monsterCardHrefs(1, "Giant Lizard", true);
 
@@ -67,9 +75,15 @@ describe("lookupMonsterCard", () => {
     expect(assets.clipHref ?? "").toContain("L1-giant-lizard.mp4");
   });
 
-  it("omits art and clip for skeleton and giant rats", () => {
+  it("returns the giant rats card image and clip from L1-giant-rats files", () => {
+    const assets = lookupMonsterCard(1, "Giant Rats");
+
+    expect(assets.imageHref ?? "").toContain("L1-giant-rats.jpg");
+    expect(assets.clipHref ?? "").toContain("L1-giant-rats.mp4");
+  });
+
+  it("omits art and clip for skeleton", () => {
     const skeleton = lookupMonsterCard(1, "Skeleton");
-    const rats = lookupMonsterCard(1, "Giant Rats");
 
     expect(skeleton.imageHref).toBe(undefined);
     expect(skeleton.clipHref).toBe(undefined);
@@ -78,8 +92,6 @@ describe("lookupMonsterCard", () => {
       heightPercent: 56,
       ink: "dark",
     });
-    expect(rats.imageHref).toBe(undefined);
-    expect(rats.clipHref).toBe(undefined);
   });
 
   it("omits the clip when the monster is unknown", () => {
