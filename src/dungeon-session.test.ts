@@ -68,7 +68,7 @@ describe("DungeonSession", () => {
       dungeonBoard,
       dungeonLayout,
       heroPiece,
-      new MonsterDeck(["Goblins"]),
+      { monsterDeck: new MonsterDeck(["Goblins"]) },
     );
     const svg = session.element();
     document.body.append(svg);
@@ -90,7 +90,7 @@ describe("DungeonSession", () => {
       dungeonBoard,
       dungeonLayout,
       heroPiece,
-      new MonsterDeck(["Skeleton"]),
+      { monsterDeck: new MonsterDeck(["Skeleton"]) },
     );
     const svg = session.element();
     document.body.append(svg);
@@ -105,12 +105,35 @@ describe("DungeonSession", () => {
     )).toBe("room-south");
   });
 
+  it("highlights the far side of a secret door only when that door is found", () => {
+    const hero = createPiece("hero", "hero", "corridor-1116-212");
+    const foundSecretDoor = {
+      fromSpaceIdentifier: "corridor-1116-212",
+      toSpaceIdentifier: "corridor-1124-272",
+    };
+    const opened = new DungeonSession(dungeonBoard, dungeonLayout, hero, {
+      foundSecretDoors: [foundSecretDoor],
+    });
+    const closed = new DungeonSession(dungeonBoard, dungeonLayout, hero);
+
+    expect(
+      opened
+        .element()
+        .querySelector("[data-move-highlight='corridor-1124-272']"),
+    ).not.toBeNull();
+    expect(
+      closed
+        .element()
+        .querySelector("[data-move-highlight='corridor-1124-272']"),
+    ).toBeNull();
+  });
+
   it("does not draw in the Main Gallery, a corridor, or a Level 2 room", () => {
     const session = new DungeonSession(
       dungeonBoard,
       dungeonLayout,
       heroPiece,
-      new MonsterDeck(["Goblins"]),
+      { monsterDeck: new MonsterDeck(["Goblins"]) },
     );
     const svg = session.element();
     document.body.append(svg);
@@ -129,7 +152,7 @@ describe("DungeonSession", () => {
       dungeonBoard,
       dungeonLayout,
       createPiece("hero", "hero", "corridor-638-260"),
-      new MonsterDeck(["Goblins"]),
+      { monsterDeck: new MonsterDeck(["Goblins"]) },
     );
     const level2Svg = level2.element();
     document.body.append(level2Svg);

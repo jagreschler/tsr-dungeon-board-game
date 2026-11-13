@@ -16,6 +16,7 @@ import {
 import { GenerateBoard } from "./rendering/generate-board.ts";
 import { GenerateHeroPiece } from "./rendering/generate-hero-piece.ts";
 import { GenerateMoveHighlights } from "./rendering/generate-move-highlights.ts";
+import type { FoundSecretDoor } from "./movement/list-neighbor-spaces-a-hero-can-step-to.ts";
 import { listMoveStepCounts } from "./movement/list-spaces-a-hero-can-move-to.ts";
 import { placePieceOnSpace, type Piece } from "./pieces/piece.ts";
 import { SVG_NAMESPACE } from "./rendering/svg-namespace.ts";
@@ -33,14 +34,21 @@ export type OverlayDrawnDetail = {
 export class DungeonSession extends EventTarget {
   private piece: Piece;
   private overlay: SVGGElement | undefined;
+  private readonly monsterDeck: MonsterDeck;
+  private readonly foundSecretDoors: readonly FoundSecretDoor[];
 
   constructor(
     private readonly board: Board,
     private readonly layout: BoardLayout,
     piece: Piece,
-    private readonly monsterDeck: MonsterDeck = shuffledLevel1MonsterDeck(),
+    options: {
+      monsterDeck?: MonsterDeck;
+      foundSecretDoors?: readonly FoundSecretDoor[];
+    } = {},
   ) {
     super();
+    this.monsterDeck = options.monsterDeck ?? shuffledLevel1MonsterDeck();
+    this.foundSecretDoors = options.foundSecretDoors ?? [];
     this.piece = placePieceOnSpace(piece, piece.spaceIdentifier);
   }
 
@@ -68,7 +76,7 @@ export class DungeonSession extends EventTarget {
     const stepCounts = listMoveStepCounts(
       this.board,
       this.piece.spaceIdentifier,
-      [],
+      this.foundSecretDoors,
     );
     const highlights = new GenerateMoveHighlights(
       this.board,
