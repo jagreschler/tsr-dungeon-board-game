@@ -2,8 +2,18 @@ import type { LinkTuple } from "../../traced-space.ts";
 
 export const doorLinks1: LinkTuple[] = [
   ["crypt", "room-4-04", "door"],
+  ["crypt", "corridor-1053-429", "door"],
+  ["crypt", "corridor-1068-210", "door"],
+
   ["wizards-treasure-room", "wizards-laboratory", "door"],
+  
   ["armory", "corridor-401-453", "door"],
+  ["armory", "corridor-512-513", "door"],
+  ["armory", "corridor-618-414", "door"],
+  ["armory", "corridor-583-295", "door"],
+  ["armory", "corridor-415-304", "door"],
+  
+
   ["wizards-laboratory", "corridor-1551-356", "door"],
   ["kings-treasure-room", "room-6-03", "door"],
   ["corridor-1252-704", "room-east-northeast", "door"],
@@ -17,7 +27,7 @@ export const doorLinks1: LinkTuple[] = [
   ["torture-chamber", "room-4-09", "door"],
   ["storeroom", "room-3-14", "door"],
   ["queens-treasure-room-annex", "corridor-1820-1432", "door"],
-  ["room-north", "corridor-1068-485", "door"],
+  ["room-north", "corridor-1118-486", "door"],
   ["room-northeast", "corridor-1319-730", "door"],
   ["room-northwest", "corridor-1011-741", "door"],
   ["room-east-southeast", "corridor-1385-982", "door"],
@@ -29,7 +39,7 @@ export const doorLinks1: LinkTuple[] = [
   ["room-2-06", "corridor-618-414", "door"],
   ["room-2-07", "corridor-337-584", "door"],
   ["room-2-08", "corridor-401-453", "door"],
-  ["room-2-09", "corridor-513-624", "door"],
+  
   ["room-3-01", "corridor-669-214", "door"],
   ["room-3-02", "corridor-778-257", "door"],
   ["room-3-03", "corridor-966-505", "door"],
@@ -52,7 +62,7 @@ export const doorLinks1: LinkTuple[] = [
   ["room-4-05", "corridor-1238-437", "door"],
   ["room-4-06", "corridor-966-968", "door"],
   ["room-4-07", "room-4-11", "door"],
-  ["room-4-08", "room-4-10", "door"],
+  
   ["room-4-09", "corridor-949-1298", "door"],
   ["room-4-10", "corridor-1176-1177", "door"],
   ["room-4-10", "corridor-1122-1246", "door"],
