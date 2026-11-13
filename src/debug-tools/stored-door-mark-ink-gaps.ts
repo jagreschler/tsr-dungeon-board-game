@@ -78,8 +78,8 @@ export const storedDoorMarkInkGaps: ReadonlyMap<string, StoredDoorMarkInkGap> =
     ["room-4-07 room-4-11", { start: { x: 1441, y: 1168 }, end: { x: 1420.5, y: 1210.5 } }],
     ["room-4-08 room-4-10", { start: { x: 1280, y: 1168 }, end: { x: 1246.5, y: 1207.5 } }],
     ["corridor-949-1298 room-4-09", { start: { x: 949, y: 1298.5 }, end: { x: 956.5, y: 1279.5 } }],
-    ["corridor-1176-1177 room-4-10", { start: { x: 1176, y: 1177 }, end: { x: 1191.5, y: 1188.5 } }],
-    ["corridor-1122-1246 room-4-10", { start: { x: 1122.5, y: 1246 }, end: { x: 1148.5, y: 1246.5 } }],
+    
+    
     ["corridor-1361-1203 room-4-11", { start: { x: 1361, y: 1203 }, end: { x: 1353.5, y: 1225.5 } }],
     ["corridor-738-1344 room-4-12", { start: { x: 738.5, y: 1344 }, end: { x: 757.5, y: 1328.5 } }],
     ["corridor-815-1426 room-4-12", { start: { x: 815.5, y: 1426 }, end: { x: 805.5, y: 1398.5 } }],
@@ -88,7 +88,7 @@ export const storedDoorMarkInkGaps: ReadonlyMap<string, StoredDoorMarkInkGap> =
     ["room-4-14 room-4-15", { start: { x: 1284, y: 1448 }, end: { x: 1241.5, y: 1445.5 } }],
     ["corridor-1300-1523 room-4-14", { start: { x: 1300, y: 1523.5 }, end: { x: 1295.5, y: 1498.5 } }],
     ["corridor-1118-1493 room-4-15", { start: { x: 1118, y: 1493.5 }, end: { x: 1137.5, y: 1490.5 } }],
-    ["corridor-1351-1372 room-4-16", { start: { x: 1351.5, y: 1372 }, end: { x: 1374.5, y: 1390.5 } }],
+    
     ["corridor-815-1426 room-4-17", { start: { x: 815.5, y: 1426 }, end: { x: 824.5, y: 1453.5 } }],
     ["corridor-713-1517 room-4-17", { start: { x: 713, y: 1517.5 }, end: { x: 729.5, y: 1515.5 } }],
     ["corridor-2090-1478 room-4-18", { start: { x: 2090.5, y: 1478.5 }, end: { x: 2105.5, y: 1500.5 } }],

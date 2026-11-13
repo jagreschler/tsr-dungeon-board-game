@@ -2,7 +2,7 @@ import type { LinkTuple } from "../../traced-space.ts";
 
 export const openLinks2: LinkTuple[] = [
   ["corridor-1357-483", "corridor-1356-537", "open"],
-  ["corridor-1357-483", "corridor-1391-547", "open"],
+  
   ["corridor-794-491", "corridor-749-533", "open"],
   ["corridor-1068-485", "corridor-1016-486", "open"],
   ["corridor-1068-485", "corridor-1118-486", "open"],
@@ -23,7 +23,7 @@ export const openLinks2: LinkTuple[] = [
   
   ["corridor-1869-551", "corridor-1925-566", "open"],
   ["corridor-1391-547", "corridor-1443-554", "open"],
-  ["corridor-1391-547", "corridor-1455-562", "open"],
+  
   ["corridor-1443-554", "corridor-1455-562", "open"],
   ["corridor-1443-554", "corridor-1437-598", "open"],
   ["corridor-1443-554", "corridor-1476-598", "open"],
@@ -42,7 +42,7 @@ export const openLinks2: LinkTuple[] = [
   ["corridor-513-571", "corridor-513-624", "open"],
   ["corridor-513-624", "corridor-513-674", "open"],
   ["corridor-337-584", "corridor-335-640", "open"],
-  ["corridor-337-584", "corridor-339-666", "open"],
+  
   ["corridor-980-593", "corridor-955-619", "open"],
   ["corridor-1437-598", "corridor-1476-598", "open"],
   ["corridor-1437-598", "corridor-1436-640", "open"],
@@ -51,7 +51,7 @@ export const openLinks2: LinkTuple[] = [
   ["corridor-955-619", "corridor-962-664", "open"],
   
   ["corridor-335-640", "corridor-339-666", "open"],
-  ["corridor-335-640", "corridor-346-723", "open"],
+  
   ["corridor-622-632", "corridor-622-673", "open"],
   ["corridor-1799-637", "corridor-1751-635", "open"],
   ["corridor-1719-635", "corridor-1751-635", "open"],

@@ -6,11 +6,6 @@ export type GrayGapOpenLink = {
 
 export const grayGapOpenLinks: readonly GrayGapOpenLink[] = [
   {
-    fromSpaceIdentifier: "main-staircase",
-    toSpaceIdentifier: "corridor-1252-704",
-    grayPx: 25.6,
-  },
-  {
     fromSpaceIdentifier: "corridor-1454-489",
     toSpaceIdentifier: "corridor-1455-562",
     grayPx: 16.0,

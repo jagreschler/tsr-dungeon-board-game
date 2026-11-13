@@ -2,10 +2,10 @@ import type { LinkTuple } from "../../traced-space.ts";
 
 export const openLinks1: LinkTuple[] = [
   ["main-staircase", "main-gallery", "open"],
-  ["main-staircase", "corridor-1045-800", "open"],
-  ["main-staircase", "corridor-1304-898", "open"],
-  ["main-staircase", "corridor-1098-942", "open"],
-  ["main-staircase", "corridor-1197-970", "open"],
+  ["main-gallery", "corridor-1045-800", "open"],
+  ["main-gallery", "corridor-1304-898", "open"],
+  ["main-gallery", "corridor-1098-942", "open"],
+  ["main-gallery", "corridor-1197-970", "open"],
   ["stairs-west", "corridor-934-689", "open"],
   ["stairs-west", "corridor-792-768", "open"],
   ["stairs-west", "corridor-909-774", "open"],
@@ -23,18 +23,19 @@ export const openLinks1: LinkTuple[] = [
   ["corridor-669-214", "corridor-691-261", "open"],
   ["corridor-1458-213", "corridor-1459-263", "open"],
   ["corridor-1017-209", "corridor-1068-210", "open"],
+  ["corridor-1116-212", "corridor-1068-210", "open"],
   ["corridor-1017-209", "corridor-966-218", "open"],
   ["wizards-treasure-room", "corridor-1880-295", "open"],
   ["corridor-966-218", "corridor-919-231", "open"],
   ["corridor-1764-226", "corridor-1709-223", "open"],
   ["corridor-395-230", "corridor-360-270", "open"],
-  ["corridor-395-230", "corridor-415-304", "open"],
+  
   ["corridor-1653-222", "corridor-1709-223", "open"],
   ["corridor-320-231", "corridor-360-270", "open"],
   ["corridor-919-231", "corridor-874-243", "open"],
   ["corridor-834-243", "corridor-874-243", "open"],
   ["corridor-834-243", "corridor-778-257", "open"],
-  ["corridor-638-260", "corridor-691-261", "open"],
+  
   ["corridor-638-260", "corridor-583-295", "open"],
   ["corridor-778-257", "corridor-731-261", "open"],
   ["corridor-1459-263", "corridor-1474-313", "open"],
@@ -55,7 +56,9 @@ export const openLinks1: LinkTuple[] = [
   ["corridor-1354-371", "corridor-1354-409", "open"],
   ["corridor-1354-371", "corridor-1354-445", "open"],
   ["corridor-1122-374", "corridor-1122-417", "open"],
-  ["corridor-618-382", "corridor-618-414", "open"],
+  ["corridor-1122-456", "corridor-1122-417", "open"],
+
+  
   ["corridor-618-414", "corridor-653-429", "open"],
   ["corridor-1354-409", "corridor-1354-445", "open"],
   ["corridor-1354-445", "corridor-1357-483", "open"],
@@ -70,7 +73,7 @@ export const openLinks1: LinkTuple[] = [
   ["corridor-867-438", "corridor-838-449", "open"],
   ["corridor-911-434", "corridor-951-434", "open"],
   ["corridor-1789-445", "corridor-1789-496", "open"],
-  ["corridor-1789-445", "corridor-1829-522", "open"],
+  
   ["corridor-838-449", "corridor-794-491", "open"],
   ["corridor-1357-483", "corridor-1408-491", "open"],
 ];

@@ -4,7 +4,7 @@ export const knownUnreachableSpaceIdentifiers: readonly string[] = [
   "corridor-1019-1495",
   "corridor-1037-1571",
   "corridor-1047-1494",
-  "corridor-1068-210",
+  
   "corridor-1081-1494",
   "corridor-1085-1571",
   "corridor-1118-1493",
@@ -21,7 +21,7 @@ export const knownUnreachableSpaceIdentifiers: readonly string[] = [
   "corridor-1292-1324",
   "corridor-1300-1523",
   "corridor-1311-1366",
-  "corridor-1351-1372",
+  
   "corridor-1354-1517",
   "corridor-1361-1114",
   "corridor-1361-1160",
@@ -169,7 +169,7 @@ export const knownUnreachableSpaceIdentifiers: readonly string[] = [
   "corridor-566-1577",
   "corridor-583-295",
   "corridor-617-1575",
-  "corridor-618-382",
+  
   "corridor-618-414",
   "corridor-638-260",
   "corridor-639-160",
@@ -197,7 +197,7 @@ export const knownUnreachableSpaceIdentifiers: readonly string[] = [
   "corridor-874-243",
   "corridor-886-1171",
   "corridor-889-1209",
-  "corridor-889-1238",
+  
   "corridor-889-1441",
   "corridor-891-1573",
   "corridor-895-1283",
