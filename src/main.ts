@@ -24,8 +24,9 @@ const session = new DungeonSession(
   dungeonBoard,
   dungeonLayout,
   heroPiece,
-  undefined,
-  debugMode.isOn() ? everySecretDoor(dungeonBoard) : undefined,
+  debugMode.isOn()
+    ? { foundSecretDoors: everySecretDoor(dungeonBoard) }
+    : {},
 );
 if (debugMode.isOn()) {
   new DebugTools(debugMode).listen(session);

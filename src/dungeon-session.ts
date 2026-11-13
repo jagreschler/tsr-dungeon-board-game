@@ -34,15 +34,21 @@ export type OverlayDrawnDetail = {
 export class DungeonSession extends EventTarget {
   private piece: Piece;
   private overlay: SVGGElement | undefined;
+  private readonly monsterDeck: MonsterDeck;
+  private readonly foundSecretDoors: readonly FoundSecretDoor[];
 
   constructor(
     private readonly board: Board,
     private readonly layout: BoardLayout,
     piece: Piece,
-    private readonly monsterDeck: MonsterDeck = shuffledLevel1MonsterDeck(),
-    private readonly foundSecretDoors: readonly FoundSecretDoor[] = [],
+    options: {
+      monsterDeck?: MonsterDeck;
+      foundSecretDoors?: readonly FoundSecretDoor[];
+    } = {},
   ) {
     super();
+    this.monsterDeck = options.monsterDeck ?? shuffledLevel1MonsterDeck();
+    this.foundSecretDoors = options.foundSecretDoors ?? [];
     this.piece = placePieceOnSpace(piece, piece.spaceIdentifier);
   }
 
