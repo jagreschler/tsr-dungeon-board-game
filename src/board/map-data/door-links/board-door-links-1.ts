@@ -26,7 +26,10 @@ export const specialtyRoomDoorLinks1: LinkTuple[] = [
   ["kitchen", "corridor-338-1028", "door"],
 
   ["queens-treasure-room", "corridor-1802-1189", "door"],
-  ["queens-treasure-room-annex", "corridor-1820-1432", "door"],
+
+  ["queens-treasure-room-annex", "corridor-1562-1398", "open"],
+  ["queens-treasure-room-annex", "corridor-1685-1309", "open"],
+  ["queens-treasure-room-annex", "corridor-1820-1432", "open"],
   
   ["storeroom", "corridor-498-1502", "door"],
   ["storeroom", "corridor-477-1350", "door"],
@@ -89,7 +92,8 @@ export const room3xxDoorLinks1: LinkTuple[] = [
 
   ["room-3-11", "corridor-654-1072", "door"],
   ["room-3-12", "corridor-644-1194", "door"],
-  ["room-3-13", "room-3-15", "door"],
+  ["room-3-13", "corridor-464-1279", "door"],
+  
   ["room-3-14", "corridor-738-1344", "door"],
 
   ["room-3-15", "corridor-467-1502", "door"],
@@ -118,7 +122,7 @@ export const room4xxDoorLinks1: LinkTuple[] = [
   ["room-4-14", "corridor-1300-1523", "door"],
 
   ["room-4-15", "corridor-1118-1493", "door"],
-  ["room-4-16", "corridor-1351-1372", "door"],
+  ["room-4-16", "corridor-1384-1372", "door"],
   ["room-4-17", "corridor-815-1426", "door"],
   ["room-4-17", "corridor-713-1517", "door"],
   ["room-4-18", "corridor-2090-1478", "door"],
@@ -144,7 +148,7 @@ export const room5xxDoorLinks1: LinkTuple[] = [
   ["room-5-13", "corridor-2038-1183", "door"],
   ["room-5-14", "corridor-1848-1268", "door"],
   ["room-5-15", "corridor-2001-1383", "door"],
-  ["room-5-16", "corridor-1940-1431", "door"],
+  ["room-5-16", "corridor-1875-1433", "door"],
 ] 
 
 export const room6xxDoorLinks1: LinkTuple[] = [

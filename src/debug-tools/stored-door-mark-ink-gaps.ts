@@ -88,7 +88,7 @@ export const storedDoorMarkInkGaps: ReadonlyMap<string, StoredDoorMarkInkGap> =
     ["room-4-14 room-4-15", { start: { x: 1284, y: 1448 }, end: { x: 1241.5, y: 1445.5 } }],
     ["corridor-1300-1523 room-4-14", { start: { x: 1300, y: 1523.5 }, end: { x: 1295.5, y: 1498.5 } }],
     ["corridor-1118-1493 room-4-15", { start: { x: 1118, y: 1493.5 }, end: { x: 1137.5, y: 1490.5 } }],
-    ["corridor-1351-1372 room-4-16", { start: { x: 1351.5, y: 1372 }, end: { x: 1374.5, y: 1390.5 } }],
+    
     ["corridor-815-1426 room-4-17", { start: { x: 815.5, y: 1426 }, end: { x: 824.5, y: 1453.5 } }],
     ["corridor-713-1517 room-4-17", { start: { x: 713, y: 1517.5 }, end: { x: 729.5, y: 1515.5 } }],
     ["corridor-2090-1478 room-4-18", { start: { x: 2090.5, y: 1478.5 }, end: { x: 2105.5, y: 1500.5 } }],
