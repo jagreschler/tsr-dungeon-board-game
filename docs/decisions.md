@@ -686,6 +686,19 @@ drawn; it is not also responsible for every debug side effect.
 That is the same pattern as OverlayDrawn. No `queueMicrotask`
 and no `document.body` fallback.
 
+## DUN-32 — Debug mode treats every secret door as found (13 Nov 2026)
+
+Jason wants to walk the whole map while he checks links. With debug
+mode on, `main.ts` asks `everySecretDoor` for every secret-door
+connection and passes that list into `DungeonSession` as doors the
+party has already found. The session only stores the list and gives
+it to movement. It does not know about debug mode, and it does not
+read the environment.
+
+With debug mode off, the session still starts from an empty list, so
+a secret door stays blocked. Searching for secret doors by the 1981
+rules comes later.
+
 ## DUN-30 — Tidy src folders (12 Nov 2026)
 
 `place-board.ts`, its test, and `board-events.ts` belong with the

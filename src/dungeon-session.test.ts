@@ -105,6 +105,33 @@ describe("DungeonSession", () => {
     )).toBe("room-south");
   });
 
+  it("highlights the far side of a secret door only when that door is found", () => {
+    const hero = createPiece("hero", "hero", "corridor-1116-212");
+    const foundSecretDoor = {
+      fromSpaceIdentifier: "corridor-1116-212",
+      toSpaceIdentifier: "corridor-1124-272",
+    };
+    const opened = new DungeonSession(
+      dungeonBoard,
+      dungeonLayout,
+      hero,
+      undefined,
+      [foundSecretDoor],
+    );
+    const closed = new DungeonSession(dungeonBoard, dungeonLayout, hero);
+
+    expect(
+      opened
+        .element()
+        .querySelector("[data-move-highlight='corridor-1124-272']") === null,
+    ).toBe(false);
+    expect(
+      closed
+        .element()
+        .querySelector("[data-move-highlight='corridor-1124-272']") === null,
+    ).toBe(true);
+  });
+
   it("does not draw in the Main Gallery, a corridor, or a Level 2 room", () => {
     const session = new DungeonSession(
       dungeonBoard,
