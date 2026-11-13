@@ -70,7 +70,7 @@ export const room3xxDoorLinks1: LinkTuple[] = [
   ["room-3-03", "corridor-966-505", "door"],
   ["room-3-04", "stairs-west", "door"],
   ["room-3-05", "corridor-346-723", "door"],
-  ["room-3-06", "corridor-404-725", "door"],
+  ["room-3-06", "corridor-454-728", "door"],
   ["room-3-07", "corridor-716-951", "door"],
   ["room-3-08", "corridor-1554-877", "door"],
   ["room-3-09", "corridor-836-966", "door"],
