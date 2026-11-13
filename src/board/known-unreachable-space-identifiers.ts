@@ -197,7 +197,7 @@ export const knownUnreachableSpaceIdentifiers: readonly string[] = [
   "corridor-874-243",
   "corridor-886-1171",
   "corridor-889-1209",
-  "corridor-889-1238",
+  
   "corridor-889-1441",
   "corridor-891-1573",
   "corridor-895-1283",

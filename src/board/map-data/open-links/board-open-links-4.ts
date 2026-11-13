@@ -43,9 +43,9 @@ export const openLinks4: LinkTuple[] = [
   ["corridor-1849-1208", "corridor-1848-1268", "open"],
   ["corridor-277-1197", "corridor-260-1239", "open"],
   ["corridor-798-1206", "corridor-749-1251", "open"],
-  ["corridor-889-1209", "corridor-889-1238", "open"],
+  
   ["corridor-889-1209", "corridor-895-1283", "open"],
-  ["corridor-889-1238", "corridor-895-1283", "open"],
+  
   ["corridor-461-1236", "corridor-464-1279", "open"],
   ["corridor-646-1239", "corridor-646-1281", "open"],
   ["corridor-646-1281", "corridor-622-1314", "open"],
@@ -60,9 +60,9 @@ export const openLinks4: LinkTuple[] = [
   ["corridor-1573-1258", "corridor-1514-1283", "open"],
   ["corridor-895-1283", "corridor-949-1298", "open"],
   ["corridor-1514-1283", "corridor-1478-1291", "open"],
-  ["corridor-464-1279", "corridor-464-1313", "open"],
+  
   ["corridor-464-1279", "corridor-477-1350", "open"],
-  ["corridor-464-1313", "corridor-477-1350", "open"],
+  
   ["corridor-703-1299", "corridor-668-1347", "open"],
   ["corridor-1478-1291", "corridor-1429-1312", "open"],
   ["corridor-2091-1305", "corridor-2092-1362", "open"],
