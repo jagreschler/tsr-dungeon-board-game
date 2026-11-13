@@ -24,6 +24,8 @@ const mapDebugModules = [
   "debug-overlay-listener.test.ts",
   "debug-tools.ts",
   "debug-tools.test.ts",
+  "every-secret-door.ts",
+  "every-secret-door.test.ts",
   "reference-image-events.ts",
   "reference-image-file.ts",
   "reference-image-file.test.ts",

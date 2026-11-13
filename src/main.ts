@@ -3,6 +3,7 @@ import { dungeonBoard } from "./board/dungeon-board.ts";
 import { dungeonLayout } from "./board/dungeon-layout.ts";
 import { DebugMode } from "./debug-tools/debug-mode.ts";
 import { DebugTools } from "./debug-tools/debug-tools.ts";
+import { everySecretDoor } from "./debug-tools/every-secret-door.ts";
 import { heroPiece } from "./pieces/hero-piece.ts";
 import { DungeonSession } from "./dungeon-session.ts";
 import { placeBoard } from "./rendering/place-board.ts";
@@ -18,8 +19,15 @@ title.className = "title";
 title.textContent = "Dungeon!";
 app.append(title);
 
-const session = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
 const debugMode = new DebugMode(window.location.search, import.meta.env.DEV);
+const session = new DungeonSession(
+  dungeonBoard,
+  dungeonLayout,
+  heroPiece,
+  debugMode.isOn()
+    ? { foundSecretDoors: everySecretDoor(dungeonBoard) }
+    : {},
+);
 if (debugMode.isOn()) {
   new DebugTools(debugMode).listen(session);
 }
