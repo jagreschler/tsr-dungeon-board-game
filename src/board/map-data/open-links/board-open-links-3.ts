@@ -8,7 +8,9 @@ export const openLinks3: LinkTuple[] = [
   ["corridor-741-751", "corridor-741-792", "open"],
   ["corridor-2095-751", "corridor-2095-803", "open"],
   ["corridor-1367-754", "corridor-1408-754", "open"],
+
   ["corridor-1482-762", "corridor-1491-803", "open"],
+  ["corridor-1482-762", "corridor-1433-780", "open"],
   
   ["corridor-1817-781", "corridor-1817-836", "open"],
   ["corridor-909-774", "corridor-942-774", "open"],
@@ -27,7 +29,7 @@ export const openLinks3: LinkTuple[] = [
   ["corridor-733-832", "corridor-778-863", "open"],
   ["corridor-733-832", "corridor-738-893", "open"],
   ["corridor-1499-850", "corridor-1512-872", "open"],
-  ["corridor-1499-850", "corridor-1554-877", "open"],
+  
   ["corridor-2093-855", "corridor-2093-920", "open"],
   ["corridor-778-863", "corridor-839-887", "open"],
   ["corridor-778-863", "corridor-738-893", "open"],
@@ -35,7 +37,7 @@ export const openLinks3: LinkTuple[] = [
   ["corridor-1512-872", "corridor-1554-877", "open"],
   ["corridor-1554-877", "corridor-1598-876", "open"],
   ["corridor-1598-876", "corridor-1640-889", "open"],
-  ["corridor-1598-876", "corridor-1669-907", "open"],
+  
   ["corridor-1640-889", "corridor-1669-907", "open"],
   ["corridor-839-887", "corridor-869-893", "open"],
   ["corridor-1807-884", "corridor-1761-888", "open"],
@@ -61,7 +63,7 @@ export const openLinks3: LinkTuple[] = [
   ["corridor-709-1013", "corridor-706-1070", "open"],
   ["corridor-1196-1020", "corridor-1201-1052", "open"],
   ["corridor-1903-1027", "corridor-1918-1074", "open"],
-  ["corridor-2073-1043", "corridor-2009-1075", "open"],
+  
   ["corridor-2073-1043", "corridor-2035-1086", "open"],
   ["corridor-338-1028", "corridor-338-1067", "open"],
   ["corridor-338-1067", "corridor-342-1109", "open"],
