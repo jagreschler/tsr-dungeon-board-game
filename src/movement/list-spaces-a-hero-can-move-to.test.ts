@@ -34,7 +34,8 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(fromTreasure.has("corridor-1828-214")).toBe(true);
     expect(fromTreasure.has("corridor-1764-226")).toBe(false);
     expect(fromTreasure.has("corridor-1709-223")).toBe(false);
-    expect(fromRoomEast.has("corridor-1319-730")).toBe(true);
+    expect(fromRoomEast.has("corridor-1319-730")).toBe(false);
+    expect(fromRoomEast.has("corridor-1417-864")).toBe(false);
   });
 
   it("stops in a room or chamber and does not continue past it", () => {
