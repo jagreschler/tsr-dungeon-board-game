@@ -36,7 +36,7 @@ describe("appendStoredLinkMarks", () => {
     expect(drawnKeys.sort()).toEqual([...storedKeys].sort());
 
     const open = marks.querySelector(
-      "[data-stored-link-mark][data-link-kind='open'][data-from-space-identifier='main-staircase'][data-to-space-identifier='corridor-1098-942']",
+      "[data-stored-link-mark][data-link-kind='open'][data-from-space-identifier='main-gallery'][data-to-space-identifier='corridor-1098-942']",
     );
     const door = marks.querySelector(
       "[data-stored-link-mark][data-link-kind='door']",
@@ -44,9 +44,9 @@ describe("appendStoredLinkMarks", () => {
     const secret = marks.querySelector(
       "[data-stored-link-mark][data-link-kind='secretDoor'][data-from-space-identifier='room-east'][data-to-space-identifier='corridor-1417-864']",
     );
-    const staircase = findPlacement(dungeonLayout, "main-staircase");
+    const gallery = findPlacement(dungeonLayout, "main-gallery");
     const hall = findPlacement(dungeonLayout, "corridor-1098-942");
-    const from = centerOfBox(boxFromPlacement(staircase!));
+    const from = centerOfBox(boxFromPlacement(gallery!));
     const to = centerOfBox(boxFromPlacement(hall!));
 
     expect(open?.tagName).toBe("line");
