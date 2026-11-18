@@ -836,3 +836,15 @@ Wall-separated pairs for the one-move highlight live in
 that table so a new pair is data only.
 Also listed: 1122-417/1122-456 and 1122-417/1053-429; the leftover
 open hall from 1122-417 to 1053-429 is gone. Unreachable count stays 100.
+
+## 2026-11-18 — One kind on a link
+
+Wizard's Treasure Room was stored twice onto the same squares. Jason
+added ordinary doors onto `corridor-1828-214` and `corridor-1880-295`
+and left the older links in place: a secret door on `1828-214`, and
+the open hall on `1880-295` from DUN-16. Movement walks a door whether
+or not a secret has been found, so the secret did not block, and the
+open hall made the new door do nothing. A pair of spaces keeps one
+kind. These two pairs keep the ordinary doors he added. The leftover
+secret door and the leftover open hall are gone. `1764-226` is still
+a secret door, and that one still blocks until it is found.

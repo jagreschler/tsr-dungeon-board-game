@@ -31,7 +31,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
     );
 
     expect(fromTreasure.has("wizards-laboratory")).toBe(true);
-    expect(fromTreasure.has("corridor-1828-214")).toBe(false);
+    expect(fromTreasure.has("corridor-1828-214")).toBe(true);
     expect(fromTreasure.has("corridor-1764-226")).toBe(false);
     expect(fromTreasure.has("corridor-1709-223")).toBe(false);
     expect(fromRoomEast.has("corridor-1319-730")).toBe(true);
