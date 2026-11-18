@@ -848,3 +848,13 @@ open hall made the new door do nothing. A pair of spaces keeps one
 kind. These two pairs keep the ordinary doors he added. The leftover
 secret door and the leftover open hall are gone. `1764-226` is still
 a secret door, and that one still blocks until it is found.
+
+## 2026-11-18 — A room may open into a hall
+
+The board check required every numbered room to have a door or a
+secret door. Jason joined room-3-16 to `corridor-2044-1485` and
+`corridor-1937-1568`, and room-6-06 to `corridor-1680-637`, with open
+links and no door. That is the same kind he used where a chamber wall
+has no door tab. A numbered room now passes when it has a door, a
+secret door, or an open link onto a real space. A room with no link
+at all still fails.

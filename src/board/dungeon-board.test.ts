@@ -134,18 +134,15 @@ describe("dungeon board", () => {
     expect(kinds.has("secretDoor")).toBe(true);
   });
 
-  it("gives every room a door or secret door onto a real space", () => {
+  it("gives every room a door, secret door, or open hall onto a real space", () => {
     const rooms = listSpacesByKind(dungeonBoard, "room");
 
     for (const room of rooms) {
       const connection = dungeonBoard.connections.find((candidate) => {
-        const joinsRoom =
+        return (
           candidate.fromSpaceIdentifier === room.identifier ||
-          candidate.toSpaceIdentifier === room.identifier;
-        const isDoor =
-          candidate.kind === "door" || candidate.kind === "secretDoor";
-
-        return joinsRoom && isDoor;
+          candidate.toSpaceIdentifier === room.identifier
+        );
       });
 
       expect(connection === undefined).toBe(false);
