@@ -7,16 +7,16 @@ function pairKey(left: string, right: string): string {
 }
 
 describe("gray-gap open links", () => {
-  it("lists 34 printed gray-floor skips and one corner-only skip", () => {
+  it("lists 32 printed gray-floor skips and one corner-only skip", () => {
     const keys = grayGapOpenLinks.map((link) => {
       return pairKey(link.fromSpaceIdentifier, link.toSpaceIdentifier);
     });
     const graySkips = grayGapOpenLinks.filter((link) => link.grayPx > 0);
     const cornerSkips = grayGapOpenLinks.filter((link) => link.grayPx === 0);
 
-    expect(grayGapOpenLinks).toHaveLength(35);
-    expect(new Set(keys).size).toBe(35);
-    expect(graySkips).toHaveLength(34);
+    expect(grayGapOpenLinks).toHaveLength(33);
+    expect(new Set(keys).size).toBe(33);
+    expect(graySkips).toHaveLength(32);
     expect(cornerSkips).toHaveLength(1);
     const cornerSkip = cornerSkips[0];
     if (cornerSkip === undefined) {

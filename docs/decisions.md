@@ -836,3 +836,48 @@ Wall-separated pairs for the one-move highlight live in
 that table so a new pair is data only.
 Also listed: 1122-417/1122-456 and 1122-417/1053-429; the leftover
 open hall from 1122-417 to 1053-429 is gone. Unreachable count stays 100.
+
+## 2026-11-18 — One kind on a link
+
+Wizard's Treasure Room was stored twice onto the same squares. Jason
+added ordinary doors onto `corridor-1828-214` and `corridor-1880-295`
+and left the older links in place: a secret door on `1828-214`, and
+the open hall on `1880-295` from DUN-16. Movement walks a door whether
+or not a secret has been found, so the secret did not block, and the
+open hall made the new door do nothing. A pair of spaces keeps one
+kind. These two pairs keep the ordinary doors he added. The leftover
+secret door and the leftover open hall are gone. `1764-226` is still
+a secret door, and that one still blocks until it is found.
+
+## 2026-11-18 — A room may open into a hall
+
+The board check required every numbered room to have a door or a
+secret door. Jason joined room-3-16 to `corridor-2044-1485` and
+`corridor-1937-1568`, and room-6-06 to `corridor-1680-637`, with open
+links and no door. That is the same kind he used where a chamber wall
+has no door tab. A numbered room now passes when it has a door, a
+secret door, or an open link onto a real space. A room with no link
+at all still fails.
+
+## 2026-11-18 — Kitchen and Guard Room corner
+
+Jason checked the printed board around the Kitchen and the Guard Room
+(about x 460–540, y 930–1000). The real squares there are
+`corridor-522-949` and `corridor-480-996`. `corridor-489-949` was an
+extra square with no links, which is why it was the last unreachable
+space. `corridor-480-960` sat between the two real squares and was the
+only thing joining them. Both extra squares are gone. `522-949` now
+opens straight into `480-996`. The Guard Room door on `522-949` stays,
+and `480-996` still steps down to `corridor-478-1032`. Nothing on the
+board is unreachable from the Main Staircase.
+
+## 2026-11-18 — room-north door mark
+
+room-north's door link was already onto `corridor-1118-486`. The
+stored door mark was still named `corridor-1068-485 room-north`, and
+its line sat on that old square, from (1068.5, 485) to (1063.5,
+502.5). Jason checked the overlay. The printed door is the gap in the
+wall between `corridor-1118-486` and room-north just below it. The
+mark now uses that pair. It starts at the corridor center (1118,
+486.5) and ends at the gap on the corridor's south edge (1119,
+504.5).
