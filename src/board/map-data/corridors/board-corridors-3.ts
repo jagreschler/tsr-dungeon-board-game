@@ -1,7 +1,6 @@
 import type { TraceTuple } from "../../traced-space.ts";
 
 export const corridorTuples3: TraceTuple[] = [
-  ["corridor-480-960", 3, 462, 942, 36, 36],
   ["corridor-480-996", 3, 462, 978, 36, 36],
   ["corridor-887-972", 4, 858, 943, 59, 58],
   ["corridor-1057-974", 1, 1030, 947, 55, 54],

@@ -1,3 +1,1 @@
-export const knownUnreachableSpaceIdentifiers: readonly string[] = [
-  "corridor-489-949",
-];
+export const knownUnreachableSpaceIdentifiers: readonly string[] = [];

@@ -858,3 +858,15 @@ links and no door. That is the same kind he used where a chamber wall
 has no door tab. A numbered room now passes when it has a door, a
 secret door, or an open link onto a real space. A room with no link
 at all still fails.
+
+## 2026-11-18 — Kitchen and Guard Room corner
+
+Jason checked the printed board around the Kitchen and the Guard Room
+(about x 460–540, y 930–1000). The real squares there are
+`corridor-522-949` and `corridor-480-996`. `corridor-489-949` was an
+extra square with no links, which is why it was the last unreachable
+space. `corridor-480-960` sat between the two real squares and was the
+only thing joining them. Both extra squares are gone. `522-949` now
+opens straight into `480-996`. The Guard Room door on `522-949` stays,
+and `480-996` still steps down to `corridor-478-1032`. Nothing on the
+board is unreachable from the Main Staircase.
