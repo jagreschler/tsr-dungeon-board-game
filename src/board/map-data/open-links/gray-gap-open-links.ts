@@ -101,11 +101,6 @@ export const grayGapOpenLinks: readonly GrayGapOpenLink[] = [
     grayPx: 10.0,
   },
   {
-    fromSpaceIdentifier: "corridor-1369-1311",
-    toSpaceIdentifier: "corridor-1351-1372",
-    grayPx: 10.0,
-  },
-  {
     fromSpaceIdentifier: "corridor-1022-153",
     toSpaceIdentifier: "corridor-1017-209",
     grayPx: 9.9,
