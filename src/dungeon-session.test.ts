@@ -72,7 +72,7 @@ describe("DungeonSession", () => {
     );
     const svg = session.element();
     document.body.append(svg);
-    clickHighlight(svg, "room-south");
+    clickHighlight(svg, "room-northwest");
     document.querySelector("[data-skip-clip]")?.dispatchEvent(
       new MouseEvent("click", { bubbles: true }),
     );
@@ -95,14 +95,14 @@ describe("DungeonSession", () => {
     const svg = session.element();
     document.body.append(svg);
 
-    clickHighlight(svg, "room-south");
+    clickHighlight(svg, "room-northwest");
 
     const overlay = document.querySelector("[data-monster-card-overlay]");
     expect(overlay === null).toBe(false);
     expect(overlay?.textContent?.includes("Skeleton")).toBe(true);
     expect(svg.querySelector("[data-piece-kind='hero']")?.getAttribute(
       "data-space-identifier",
-    )).toBe("room-south");
+    )).toBe("room-northwest");
   });
 
   it("does not draw in the Main Gallery, a corridor, or a Level 2 room", () => {
@@ -120,7 +120,7 @@ describe("DungeonSession", () => {
       true,
     );
 
-    clickHighlight(svg, "corridor-1098-942");
+    clickHighlight(svg, "corridor-1045-800");
     expect(document.querySelector("[data-monster-card-overlay]") === null).toBe(
       true,
     );

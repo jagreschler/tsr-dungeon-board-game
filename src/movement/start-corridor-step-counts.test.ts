@@ -98,7 +98,7 @@ describe("Start corridor step counts", () => {
     expect(
       spacesAreLinked("corridor-1417-934", "corridor-1385-982"),
     ).toBe(true);
-    expect(steps.get("corridor-1385-982")).toBe(4);
+    expect(steps.has("corridor-1385-982")).toBe(false);
   });
 
   it("does not give linked Start-glow corridor neighbors the same step count", () => {

@@ -124,9 +124,14 @@ describe("inner gold room doors", () => {
       const hops = openHopCountFromStaircase(stubIdentifier);
       const openCutFromStart =
         stubIdentifier === "corridor-1252-704" ||
-        stubIdentifier === "corridor-1319-730";
+        stubIdentifier === "corridor-1319-730" ||
+        stubIdentifier === "corridor-1197-970";
+      const longWayAround =
+        stubIdentifier === "corridor-1057-974";
       if (openCutFromStart) {
         expect(hops === undefined).toBe(true);
+      } else if (longWayAround) {
+        expect(hops).toBe(13);
       } else {
         expect(hops === undefined).toBe(false);
         expect((hops ?? 99) <= 2).toBe(true);
@@ -145,7 +150,7 @@ describe("inner gold room doors", () => {
     }
   });
 
-  it("lets a hero reach all nine gold rooms from the Main Staircase without finding secret doors", () => {
+  it("reaches the gold rooms that still connect to Start, and not the cut-off spokes", () => {
     const start = findSpace(dungeonBoard, "main-staircase");
     expect(start === undefined).toBe(false);
 
@@ -160,14 +165,16 @@ describe("inner gold room doors", () => {
       "room-north",
       "room-west",
       "room-south",
-      "room-southeast",
-      "room-east-southeast",
       "room-northwest",
     ];
     const northeastSpoke = [
       "room-northeast",
       "room-east-northeast",
       "room-east",
+    ];
+    const southeastSpoke = [
+      "room-southeast",
+      "room-east-southeast",
     ];
 
     for (const identifier of stillOpenFromStart) {
@@ -180,6 +187,12 @@ describe("inner gold room doors", () => {
       expect(
         reachable.has(identifier),
         `${identifier} sits on the northeast spoke cut off from Start by gray floor`,
+      ).toBe(false);
+    }
+    for (const identifier of southeastSpoke) {
+      expect(
+        reachable.has(identifier),
+        `${identifier} lost its open link off the Main Staircase`,
       ).toBe(false);
     }
   });

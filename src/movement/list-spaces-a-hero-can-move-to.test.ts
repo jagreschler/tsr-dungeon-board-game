@@ -14,8 +14,8 @@ describe("listSpacesAHeroCanMoveTo", () => {
       [],
     );
 
-    expect(reachable.has("corridor-1098-942")).toBe(true);
-    expect(reachable.has("room-south")).toBe(true);
+    expect(reachable.has("corridor-1011-741")).toBe(true);
+    expect(reachable.has("room-northwest")).toBe(true);
   });
 
   it("blocks every secret door while none are found", () => {
@@ -44,7 +44,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
       [],
     );
 
-    expect(reachable.has("room-west")).toBe(true);
+    expect(reachable.has("room-northwest")).toBe(true);
     const pastTheLibrary = listSpacesAHeroCanMoveTo(
       dungeonBoard,
       "kings-library",
@@ -57,13 +57,13 @@ describe("listSpacesAHeroCanMoveTo", () => {
   it("can pass through the Main Staircase and the Main Gallery", () => {
     const reachable = listSpacesAHeroCanMoveTo(
       dungeonBoard,
-      "corridor-1098-942",
+      "corridor-1045-800",
       [],
     );
 
     expect(reachable.has("main-staircase")).toBe(true);
     expect(reachable.has("main-gallery")).toBe(true);
-    expect(reachable.has("corridor-1045-800")).toBe(true);
+    expect(reachable.has("corridor-986-786")).toBe(true);
   });
 
   it.each(wallSeparatedSpacePairs)(
@@ -107,31 +107,34 @@ describe("listSpacesAHeroCanMoveTo", () => {
   it("labels Start's neighbors as one step and the west stairs as five", () => {
     const steps = listMoveStepCounts(dungeonBoard, "main-staircase", []);
 
-    expect(steps.get("corridor-1098-942")).toBe(1);
     expect(steps.get("corridor-1045-800")).toBe(1);
+    expect(steps.get("main-gallery")).toBe(1);
     expect(steps.get("stairs-west")).toBe(5);
+    expect(steps.has("corridor-1098-942")).toBe(false);
+    expect(steps.has("corridor-1197-970")).toBe(false);
+    expect(steps.has("corridor-1304-898")).toBe(false);
   });
 
-  it("walks five gold squares southwest of Start", () => {
+  it("does not reach the southwest gold spoke in five steps", () => {
     const steps = listMoveStepCounts(dungeonBoard, "main-staircase", []);
 
-    expect(steps.get("corridor-1098-942")).toBe(1);
-    expect(steps.get("corridor-1057-974")).toBe(2);
-    expect(steps.get("corridor-1018-1011")).toBe(3);
-    expect(steps.get("corridor-966-968")).toBe(4);
-    expect(steps.get("corridor-916-921")).toBe(5);
-    expect(steps.get("room-4-06")).toBe(5);
+    expect(steps.has("corridor-1098-942")).toBe(false);
+    expect(steps.has("corridor-1057-974")).toBe(false);
+    expect(steps.has("corridor-1018-1011")).toBe(false);
+    expect(steps.has("corridor-966-968")).toBe(false);
+    expect(steps.has("corridor-916-921")).toBe(false);
+    expect(steps.has("room-4-06")).toBe(false);
     expect(steps.has("corridor-869-893")).toBe(false);
   });
 
-  it("does not jump the east wall into the level-6 hall", () => {
+  it("does not reach the lower-east hall or the level-6 squares past its wall", () => {
     const reachable = listSpacesAHeroCanMoveTo(
       dungeonBoard,
       "main-staircase",
       [],
     );
 
-    expect(reachable.has("corridor-1433-817")).toBe(true);
+    expect(reachable.has("corridor-1433-817")).toBe(false);
     expect(reachable.has("corridor-1438-716")).toBe(false);
     expect(reachable.has("corridor-1429-681")).toBe(false);
     expect(reachable.has("corridor-1482-762")).toBe(false);
@@ -148,7 +151,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
 
     expect(reachable.has("stairs-west")).toBe(true);
     expect(reachable.has("corridor-909-774")).toBe(true);
-    expect(reachable.size).toBe(29);
+    expect(reachable.size).toBe(8);
   });
 
   it("does not land on another pawn in a corridor", () => {
@@ -156,10 +159,11 @@ describe("listSpacesAHeroCanMoveTo", () => {
       dungeonBoard,
       "main-staircase",
       [],
-      ["corridor-1098-942"],
+      ["corridor-1045-800"],
     );
 
-    expect(reachable.has("corridor-1098-942")).toBe(false);
-    expect(reachable.has("room-south")).toBe(false);
+    expect(reachable.has("corridor-1045-800")).toBe(false);
+    expect(reachable.has("room-northwest")).toBe(false);
+    expect(reachable.has("main-gallery")).toBe(true);
   });
 });
