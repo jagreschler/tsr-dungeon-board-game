@@ -45,14 +45,15 @@ describe("listSpacesAHeroCanMoveTo", () => {
       [],
     );
 
-    expect(reachable.has("room-west")).toBe(true);
-    const pastTheLibrary = listSpacesAHeroCanMoveTo(
+    expect(reachable.has("room-south")).toBe(true);
+    expect(reachable.has("room-west")).toBe(false);
+    const pastTheKitchen = listSpacesAHeroCanMoveTo(
       dungeonBoard,
-      "kings-library",
+      "corridor-338-786",
       [],
     );
-    expect(pastTheLibrary.has("room-3-08")).toBe(true);
-    expect(pastTheLibrary.has("corridor-1554-877")).toBe(false);
+    expect(pastTheKitchen.has("kitchen")).toBe(true);
+    expect(pastTheKitchen.has("corridor-338-1028")).toBe(false);
   });
 
   it("can pass through the Main Staircase and the Main Gallery", () => {
@@ -158,10 +159,11 @@ describe("listSpacesAHeroCanMoveTo", () => {
       dungeonBoard,
       "main-staircase",
       [],
-      ["corridor-1098-942"],
+      ["corridor-1196-1020"],
     );
 
-    expect(reachable.has("corridor-1098-942")).toBe(false);
+    expect(reachable.has("corridor-1196-1020")).toBe(false);
     expect(reachable.has("room-south")).toBe(false);
+    expect(reachable.has("room-southeast")).toBe(false);
   });
 });
