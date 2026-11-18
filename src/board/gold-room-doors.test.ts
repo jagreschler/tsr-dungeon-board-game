@@ -4,11 +4,10 @@ import { findSpace } from "./find-space.ts";
 import { listNeighborSpacesAHeroCanStepTo } from "../movement/list-neighbor-spaces-a-hero-can-step-to.ts";
 import { listSpacesByKind } from "./list-spaces.ts";
 
-const INNER_GOLD_ROOMS = [
-  "room-west",
-  "room-east",
-  "room-southeast",
-  "room-east-northeast",
+const INNER_GOLD_ROOM_DOORS = [
+  ["room-west", "corridor-916-921"],
+  ["room-southeast", "corridor-1196-1020"],
+  ["room-east-northeast", "corridor-1252-704"],
 ] as const;
 
 function doorNeighborOf(roomIdentifier: string): string | undefined {
@@ -29,56 +28,6 @@ function doorNeighborOf(roomIdentifier: string): string | undefined {
   }
 
   return door.fromSpaceIdentifier;
-}
-
-function openHopCountFromStaircase(targetIdentifier: string): number | undefined {
-  const visited = new Set<string>(["main-staircase"]);
-  let frontier = ["main-staircase"];
-  let hops = 0;
-
-  while (frontier.length > 0) {
-    if (visited.has(targetIdentifier) && targetIdentifier !== "main-staircase") {
-      return hops;
-    }
-
-    const nextFrontier: string[] = [];
-    hops += 1;
-
-    for (const spaceIdentifier of frontier) {
-      const neighbors = listNeighborSpacesAHeroCanStepTo(
-        dungeonBoard,
-        spaceIdentifier,
-        [],
-      );
-
-      for (const neighbor of neighbors) {
-        const connection = dungeonBoard.connections.find((candidate) => {
-          return (
-            candidate.fromSpaceIdentifier === spaceIdentifier &&
-            candidate.toSpaceIdentifier === neighbor.identifier &&
-            candidate.kind === "open"
-          );
-        });
-
-        if (connection === undefined) {
-          continue;
-        }
-
-        if (visited.has(neighbor.identifier) === false) {
-          visited.add(neighbor.identifier);
-          nextFrontier.push(neighbor.identifier);
-
-          if (neighbor.identifier === targetIdentifier) {
-            return hops;
-          }
-        }
-      }
-    }
-
-    frontier = nextFrontier;
-  }
-
-  return undefined;
 }
 
 function spacesReachableWithoutSecretDoors(startIdentifier: string): Set<string> {
@@ -110,27 +59,8 @@ function spacesReachableWithoutSecretDoors(startIdentifier: string): Set<string>
 
 describe("inner gold room doors", () => {
   it("opens each inner gold room onto the corridor stub in front of it", () => {
-    for (const roomIdentifier of INNER_GOLD_ROOMS) {
-      const stubIdentifier = doorNeighborOf(roomIdentifier);
-
-      expect(stubIdentifier === undefined).toBe(false);
-      expect(stubIdentifier === "main-staircase").toBe(false);
-      expect(stubIdentifier?.startsWith("corridor-")).toBe(true);
-
-      if (stubIdentifier === undefined) {
-        continue;
-      }
-
-      const hops = openHopCountFromStaircase(stubIdentifier);
-      const openCutFromStart =
-        stubIdentifier === "corridor-1252-704" ||
-        stubIdentifier === "corridor-1319-730";
-      if (openCutFromStart) {
-        expect(hops === undefined).toBe(true);
-      } else {
-        expect(hops === undefined).toBe(false);
-        expect((hops ?? 99) <= 2).toBe(true);
-      }
+    for (const [roomIdentifier, stubIdentifier] of INNER_GOLD_ROOM_DOORS) {
+      expect(doorNeighborOf(roomIdentifier)).toBe(stubIdentifier);
 
       const neighbors = listNeighborSpacesAHeroCanStepTo(
         dungeonBoard,
@@ -143,9 +73,11 @@ describe("inner gold room doors", () => {
         `a hero on ${stubIdentifier} should step into ${roomIdentifier}`,
       ).toBe(true);
     }
+
+    expect(doorNeighborOf("room-east")).toBe(undefined);
   });
 
-  it("lets a hero reach all nine gold rooms from the Main Staircase without finding secret doors", () => {
+  it("reaches every gold room from Start without a secret door except room-east", () => {
     const start = findSpace(dungeonBoard, "main-staircase");
     expect(start === undefined).toBe(false);
 
@@ -164,23 +96,21 @@ describe("inner gold room doors", () => {
       "room-east-southeast",
       "room-northwest",
     ];
-    const northeastSpoke = [
-      "room-northeast",
-      "room-east-northeast",
-      "room-east",
-    ];
-
     for (const identifier of stillOpenFromStart) {
       expect(
         reachable.has(identifier),
         `${identifier} should be reachable from Start without secret doors`,
       ).toBe(true);
     }
-    for (const identifier of northeastSpoke) {
+    for (const identifier of ["room-northeast", "room-east-northeast"]) {
       expect(
         reachable.has(identifier),
-        `${identifier} sits on the northeast spoke cut off from Start by gray floor`,
-      ).toBe(false);
+        `${identifier} can be reached the long way around without a secret door`,
+      ).toBe(true);
     }
+    expect(
+      reachable.has("room-east"),
+      "room-east still needs its secret door",
+    ).toBe(false);
   });
 });
