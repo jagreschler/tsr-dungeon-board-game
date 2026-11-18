@@ -105,34 +105,35 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(reachable.has("corridor-869-893")).toBe(false);
   });
 
-  it("labels Start's neighbors as one step and the west stairs as five", () => {
+  it("labels the Main Gallery as one step and the old Start exits as two", () => {
     const steps = listMoveStepCounts(dungeonBoard, "main-staircase", []);
 
-    expect(steps.get("corridor-1098-942")).toBe(1);
-    expect(steps.get("corridor-1045-800")).toBe(1);
-    expect(steps.get("stairs-west")).toBe(5);
+    expect(steps.get("main-gallery")).toBe(1);
+    expect(steps.get("corridor-1098-942")).toBe(2);
+    expect(steps.get("corridor-1045-800")).toBe(2);
+    expect(steps.has("stairs-west")).toBe(false);
   });
 
-  it("walks five gold squares southwest of Start", () => {
+  it("walks the southwest gold squares one step farther because of the gallery", () => {
     const steps = listMoveStepCounts(dungeonBoard, "main-staircase", []);
 
-    expect(steps.get("corridor-1098-942")).toBe(1);
-    expect(steps.get("corridor-1057-974")).toBe(2);
-    expect(steps.get("corridor-1018-1011")).toBe(3);
-    expect(steps.get("corridor-966-968")).toBe(4);
-    expect(steps.get("corridor-916-921")).toBe(5);
-    expect(steps.get("room-4-06")).toBe(5);
+    expect(steps.get("corridor-1098-942")).toBe(2);
+    expect(steps.get("corridor-1057-974")).toBe(3);
+    expect(steps.get("corridor-1018-1011")).toBe(4);
+    expect(steps.get("corridor-966-968")).toBe(5);
+    expect(steps.has("corridor-916-921")).toBe(false);
+    expect(steps.has("room-4-06")).toBe(false);
     expect(steps.has("corridor-869-893")).toBe(false);
   });
 
-  it("does not jump the east wall into the level-6 hall", () => {
+  it("does not reach the east gold square or the level-6 hall in five steps", () => {
     const reachable = listSpacesAHeroCanMoveTo(
       dungeonBoard,
       "main-staircase",
       [],
     );
 
-    expect(reachable.has("corridor-1433-817")).toBe(true);
+    expect(reachable.has("corridor-1433-817")).toBe(false);
     expect(reachable.has("corridor-1438-716")).toBe(false);
     expect(reachable.has("corridor-1429-681")).toBe(false);
     expect(reachable.has("corridor-1482-762")).toBe(false);
@@ -140,16 +141,16 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(reachable.has("corridor-1499-850")).toBe(false);
   });
 
-  it("reaches the west stairs in five honest steps, not past them", () => {
+  it("reaches the square before the west stairs in five steps, not the stairs", () => {
     const reachable = listSpacesAHeroCanMoveTo(
       dungeonBoard,
       "main-staircase",
       [],
     );
 
-    expect(reachable.has("stairs-west")).toBe(true);
+    expect(reachable.has("stairs-west")).toBe(false);
     expect(reachable.has("corridor-909-774")).toBe(true);
-    expect(reachable.size).toBe(29);
+    expect(reachable.size).toBe(22);
   });
 
   it("does not land on another pawn in a corridor", () => {
