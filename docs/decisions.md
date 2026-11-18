@@ -870,3 +870,14 @@ only thing joining them. Both extra squares are gone. `522-949` now
 opens straight into `480-996`. The Guard Room door on `522-949` stays,
 and `480-996` still steps down to `corridor-478-1032`. Nothing on the
 board is unreachable from the Main Staircase.
+
+## 2026-11-18 — room-north door mark
+
+room-north's door link was already onto `corridor-1118-486`. The
+stored door mark was still named `corridor-1068-485 room-north`, and
+its line sat on that old square, from (1068.5, 485) to (1063.5,
+502.5). Jason checked the overlay. The printed door is the gap in the
+wall between `corridor-1118-486` and room-north just below it. The
+mark now uses that pair. It starts at the corridor center (1118,
+486.5) and ends at the gap on the corridor's south edge (1119,
+504.5).
