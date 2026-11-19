@@ -1048,3 +1048,82 @@ to `corridor-1799-637`. The east square keeps the open halls to
 The old room ids and their wall outlines are gone. Numbered rooms
 per level were 9, 9, 17, 18, 15, and 13. They are now 9, 8, 16, 18,
 15, and 11. Corridors were 340. They are now 346.
+
+## DUN-37 — Missing rooms, a split, and three merged halls (19 Nov 2026)
+
+Jason's color photo is the board where it disagrees with the line
+map. Three rooms were missing or stored as one shape. One false
+door hid a real gap. Three pairs of corridor markers were one hall
+each.
+
+**The red room inside the Queen's Treasure Room.** The photo shows
+a red level 5 room in the west lobe of the yellow chamber, about
+x1494–1608 and y1097–1192. That is `room-5-17`. The chamber outline
+stops at the yellow wall, about x1606. The printed S on the east
+wall is a secret door to `queens-treasure-room`. Jason confirmed
+that secret door. The other three sides are solid walls. The
+chamber's existing door south to
+`corridor-1573-1258` stays on the yellow room. It is south of the
+red room.
+
+**The green room east of the Kitchen.** The photo shows a green
+level 2 room, about x370–447 and y982–1092. The line map is gray
+there. The board has nine green rooms and the data had eight, so
+this is `room-2-10`. Jason confirmed it has one door, east to
+`corridor-478-1032`. The west and south walls are solid.
+
+**room-3-08 is two cyan rooms.** Both pictures show a wall with an
+S between them. `room-3-08` stays the lower room because its door
+onto `corridor-1662-1078` is on the lower east wall. The upper room
+is `room-6-13`. Both stay level 6. The only new link is that secret
+door. The upper room is reachable only after the party finds it.
+
+**The yellow square between room-6-07 and room-6-09.** The photo
+shows a small yellow space, box 1546,737 42×37. Its center floors
+to `corridor-1567-755` (level 6). Two printed S marks sit on its
+walls, so both joins are secret doors: north to room-6-07 and
+southeast to room-6-09. room-6-07's outline used to cover that
+square. The dip is cut off so the yellow floor shows.
+
+**room-4-14 and room-4-15 are not joined.** The stored door and its
+mark are gone. No replacement link was added. Removing only that
+door made both room-4-13 and room-4-15 unreachable. The missing
+link was the ordinary doorway from `corridor-1167-1389` (the
+flagstone split off the torture chamber) south into room-4-15.
+Both the line map and the photo show a gap there, not an S. The S
+on the west side of that square is the secret door that was already
+stored to the torture chamber. With that ordinary door in place,
+room-4-13 is reachable again once secret doors are found: torture
+chamber, secret door into the square, door into room-4-15, then the
+open halls west to room-4-13.
+
+The old reachability test already walked every space. It did not
+fail because room-4-13 was reachable through the false door. The
+known-unreachable list was empty, so it was not hiding this room.
+The test now expects that list of gaps to be empty and expects the
+reachable set to be the same size as the board. The empty allowlist
+file is gone, so a later gap cannot be waved through.
+
+**Three doubled halls on the south row.** Each pair was two markers
+on one yellow space. The kept square uses the union box, the first
+id's level (4), and a new id from the floored center. Outside links
+move once. The join between the pair, and a neighbor stored twice,
+drop.
+
+- `corridor-1085-1571` and `corridor-1124-1571` become
+  `corridor-1105-1571`, box 1066,1553 78×36.
+- `corridor-1161-1569` and `corridor-1195-1569` become
+  `corridor-1178-1569`, box 1144,1551 68×37.
+- `corridor-1219-1570` and `corridor-1249-1570` become
+  `corridor-1234-1570`, box 1204,1553 60×34.
+
+The row is now four open halls: `corridor-1037-1571` to
+`corridor-1105-1571` to `corridor-1178-1569` to `corridor-1234-1570`
+to `corridor-1285-1569`. None of the old ids had a door mark. The
+gray-floor ban between `corridor-1195-1569` and `corridor-1249-1570`
+is deleted. Renaming it would forbid the real open hall between the
+merged squares. That list is now 29 gray skips and one corner skip.
+
+Numbered rooms per level were 9, 8, 16, 18, 15, and 11. They are
+now 9, 9, 16, 18, 16, and 12. Corridors were 346. They are now 344
+(three merges, plus the yellow square).

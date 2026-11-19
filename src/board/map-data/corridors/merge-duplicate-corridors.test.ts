@@ -33,6 +33,12 @@ const removedCorridorIdentifiers = [
   "corridor-2009-1075",
   "corridor-1443-554",
   "corridor-1455-562",
+  "corridor-1085-1571",
+  "corridor-1124-1571",
+  "corridor-1161-1569",
+  "corridor-1195-1569",
+  "corridor-1219-1570",
+  "corridor-1249-1570",
 ] as const;
 
 type KeptSquare = {
@@ -165,6 +171,42 @@ const keptSquares: readonly KeptSquare[] = [
     links: [
       ["corridor-1918-1074", "open"],
       ["corridor-2035-1086", "open"],
+    ],
+  },
+  {
+    identifier: "corridor-1105-1571",
+    level: 4,
+    x: 1066,
+    y: 1553,
+    width: 78,
+    height: 36,
+    links: [
+      ["corridor-1037-1571", "open"],
+      ["corridor-1178-1569", "open"],
+    ],
+  },
+  {
+    identifier: "corridor-1178-1569",
+    level: 4,
+    x: 1144,
+    y: 1551,
+    width: 68,
+    height: 37,
+    links: [
+      ["corridor-1105-1571", "open"],
+      ["corridor-1234-1570", "open"],
+    ],
+  },
+  {
+    identifier: "corridor-1234-1570",
+    level: 4,
+    x: 1204,
+    y: 1553,
+    width: 60,
+    height: 34,
+    links: [
+      ["corridor-1178-1569", "open"],
+      ["corridor-1285-1569", "open"],
     ],
   },
 ];

@@ -2,10 +2,9 @@ import { describe, expect, it } from "vitest";
 import { dungeonBoard } from "./dungeon-board.ts";
 import { listNeighborSpacesAHeroCanStepTo } from "../movement/list-neighbor-spaces-a-hero-can-step-to.ts";
 import { listConnectedSpaceIdentifiers } from "../movement/list-connected-space-identifiers.ts";
-import { knownUnreachableSpaceIdentifiers } from "./known-unreachable-space-identifiers.ts";
 
 describe("map reachability", () => {
-  it("can reach every space from the Main Staircase except the known gaps", () => {
+  it("can reach every space from the Main Staircase once secret doors are found", () => {
     const reachable = listConnectedSpaceIdentifiers(
       "main-staircase",
       (spaceIdentifier) => {
@@ -22,7 +21,8 @@ describe("map reachability", () => {
       .filter((identifier) => reachable.has(identifier) === false)
       .sort();
 
-    expect(unreachable).toEqual([...knownUnreachableSpaceIdentifiers].sort());
+    expect(unreachable).toEqual([]);
+    expect(reachable.size).toBe(dungeonBoard.spaces.length);
   });
 });
 

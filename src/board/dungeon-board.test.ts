@@ -7,11 +7,11 @@ import type { Level } from "./level.ts";
 
 const ROOMS_PER_LEVEL: Record<Level, number> = {
   1: 9,
-  2: 8,
+  2: 9,
   3: 16,
   4: 18,
-  5: 15,
-  6: 11,
+  5: 16,
+  6: 12,
 };
 
 const CHAMBERS_PER_LEVEL: Record<Level, number> = {

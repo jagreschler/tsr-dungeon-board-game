@@ -3,11 +3,11 @@ import { dungeonTraces } from "../dungeon-traces.ts";
 
 const roomsPerLevel = {
   1: 9,
-  2: 8,
+  2: 9,
   3: 16,
   4: 18,
-  5: 15,
-  6: 11,
+  5: 16,
+  6: 12,
 } as const;
 
 describe("board rooms", () => {

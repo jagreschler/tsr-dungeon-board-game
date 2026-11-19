@@ -212,6 +212,27 @@ exports[`room outlines > room-2-09 outline matches the reference tracing 1`] = `
 ]
 `;
 
+exports[`room outlines > room-2-10 outline matches the reference tracing 1`] = `
+[
+  {
+    "x": 370,
+    "y": 982,
+  },
+  {
+    "x": 447,
+    "y": 982,
+  },
+  {
+    "x": 447,
+    "y": 1092,
+  },
+  {
+    "x": 370,
+    "y": 1092,
+  },
+]
+`;
+
 exports[`room outlines > room-3-01 outline matches the reference tracing 1`] = `
 [
   {
@@ -402,20 +423,12 @@ exports[`room outlines > room-3-07 outline matches the reference tracing 1`] = `
 exports[`room outlines > room-3-08 outline matches the reference tracing 1`] = `
 [
   {
-    "x": 1532,
-    "y": 930,
+    "x": 1527,
+    "y": 1032,
   },
   {
-    "x": 1591,
-    "y": 932,
-  },
-  {
-    "x": 1592,
-    "y": 1011,
-  },
-  {
-    "x": 1568,
-    "y": 1015,
+    "x": 1546,
+    "y": 1032,
   },
   {
     "x": 1565,
@@ -432,22 +445,6 @@ exports[`room outlines > room-3-08 outline matches the reference tracing 1`] = `
   {
     "x": 1527,
     "y": 1094,
-  },
-  {
-    "x": 1527,
-    "y": 1034,
-  },
-  {
-    "x": 1546,
-    "y": 1032,
-  },
-  {
-    "x": 1546,
-    "y": 1016,
-  },
-  {
-    "x": 1526,
-    "y": 1010,
   },
 ]
 `;
@@ -1670,6 +1667,27 @@ exports[`room outlines > room-5-16 outline matches the reference tracing 1`] = `
 ]
 `;
 
+exports[`room outlines > room-5-17 outline matches the reference tracing 1`] = `
+[
+  {
+    "x": 1494,
+    "y": 1119,
+  },
+  {
+    "x": 1608,
+    "y": 1097,
+  },
+  {
+    "x": 1606,
+    "y": 1177,
+  },
+  {
+    "x": 1507,
+    "y": 1192,
+  },
+]
+`;
+
 exports[`room outlines > room-6-03 outline matches the reference tracing 1`] = `
 [
   {
@@ -1789,32 +1807,8 @@ exports[`room outlines > room-6-07 outline matches the reference tracing 1`] = `
     "y": 738,
   },
   {
-    "x": 1580,
-    "y": 739,
-  },
-  {
-    "x": 1578,
-    "y": 745,
-  },
-  {
-    "x": 1578,
-    "y": 755,
-  },
-  {
-    "x": 1590,
-    "y": 761,
-  },
-  {
-    "x": 1553,
-    "y": 761,
-  },
-  {
-    "x": 1563,
-    "y": 755,
-  },
-  {
-    "x": 1562,
-    "y": 741,
+    "x": 1546,
+    "y": 737,
   },
   {
     "x": 1535,
@@ -2012,6 +2006,43 @@ exports[`room outlines > room-6-12 outline matches the reference tracing 1`] = `
   {
     "x": 1937,
     "y": 975,
+  },
+]
+`;
+
+exports[`room outlines > room-6-13 outline matches the reference tracing 1`] = `
+[
+  {
+    "x": 1526,
+    "y": 1010,
+  },
+  {
+    "x": 1532,
+    "y": 930,
+  },
+  {
+    "x": 1591,
+    "y": 932,
+  },
+  {
+    "x": 1592,
+    "y": 1011,
+  },
+  {
+    "x": 1568,
+    "y": 1015,
+  },
+  {
+    "x": 1565,
+    "y": 1032,
+  },
+  {
+    "x": 1546,
+    "y": 1032,
+  },
+  {
+    "x": 1546,
+    "y": 1016,
   },
 ]
 `;
