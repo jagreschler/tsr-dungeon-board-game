@@ -1,5 +1,5 @@
 import { boxOutline } from "./box-outline.ts";
-import { createSpace, type Space } from "./space.ts";
+import { createRoom, createSpace, type Space } from "./space.ts";
 import {
   createSpacePlacement,
   type SpacePlacement,
@@ -7,12 +7,17 @@ import {
 import type { TracedSpace } from "./traced-space.ts";
 
 export function spaceFromTrace(trace: TracedSpace): Space {
-  return createSpace(trace.identifier, trace.kind, trace.level, {
+  const extras = {
     isStart: trace.isStart,
     isSafe: trace.isSafe,
     printedName: trace.printedName,
-    destinationLevel: trace.destinationLevel,
-  });
+  };
+
+  if (trace.kind === "room") {
+    return createRoom(trace.identifier, trace.level, extras);
+  }
+
+  return createSpace(trace.identifier, trace.kind, extras);
 }
 
 export function placementFromTrace(trace: TracedSpace): SpacePlacement {

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { dungeonBoard } from "../board/dungeon-board.ts";
+import { findSpace } from "../board/find-space.ts";
 import {
   listMoveStepCounts,
   listSpacesAHeroCanMoveTo,
@@ -112,7 +113,10 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(steps.get("main-gallery")).toBe(1);
     expect(steps.get("corridor-1098-942")).toBe(2);
     expect(steps.get("corridor-1045-800")).toBe(2);
-    expect(steps.has("stairs-west")).toBe(false);
+    expect(findSpace(dungeonBoard, "corridor-855-765") === undefined).toBe(
+      false,
+    );
+    expect(steps.has("corridor-855-765")).toBe(false);
   });
 
   it("walks the southwest gold squares one step farther because of the gallery", () => {
@@ -142,14 +146,17 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(reachable.has("corridor-1499-850")).toBe(false);
   });
 
-  it("reaches the square before the west stairs in five steps, not the stairs", () => {
+  it("reaches the square before the west stair corridor in five steps, not the oval", () => {
     const reachable = listSpacesAHeroCanMoveTo(
       dungeonBoard,
       "main-staircase",
       [],
     );
 
-    expect(reachable.has("stairs-west")).toBe(false);
+    expect(findSpace(dungeonBoard, "corridor-855-765") === undefined).toBe(
+      false,
+    );
+    expect(reachable.has("corridor-855-765")).toBe(false);
     expect(reachable.has("corridor-909-774")).toBe(true);
     expect(reachable.size).toBe(22);
   });

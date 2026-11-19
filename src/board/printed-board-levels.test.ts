@@ -26,17 +26,31 @@ const printedBoardLevels = [
   ["room-4-06", 1],
   ["room-4-18", 5],
   ["room-3-08", 6],
-  ["armory", 3],
-  ["kitchen", 2],
 ] as const;
 
+const yellowChambers = ["armory", "kitchen"] as const;
+
 describe("printed board levels", () => {
-  it("gives each audited room and chamber the level of its printed color", () => {
+  it("gives each audited room the level of its printed color", () => {
     for (const [identifier, level] of printedBoardLevels) {
       const space = findSpace(dungeonBoard, identifier);
 
       expect(space === undefined, identifier).toBe(false);
-      expect(space?.level, identifier).toBe(level);
+      expect(space?.kind, identifier).toBe("room");
+      if (space?.kind === "room") {
+        expect(space.level, identifier).toBe(level);
+      }
+    }
+  });
+
+  it("does not give the Armory or the Kitchen a level", () => {
+    for (const identifier of yellowChambers) {
+      const space = findSpace(dungeonBoard, identifier);
+
+      expect(space?.kind, identifier).toBe("chamber");
+      if (space !== undefined) {
+        expect("level" in space, identifier).toBe(false);
+      }
     }
   });
 });

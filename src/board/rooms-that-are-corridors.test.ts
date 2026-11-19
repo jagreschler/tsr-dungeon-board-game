@@ -33,12 +33,21 @@ function expectBox(
   expect(boxFromPlacement(placement)).toEqual(box);
 }
 
-function expectKind(identifier: string, kind: string, level: number) {
+function expectKind(identifier: string, kind: string, level?: number) {
   const space = findSpace(dungeonBoard, identifier);
 
   expect(space === undefined, `${identifier} is missing`).toBe(false);
   expect(space?.kind).toBe(kind);
-  expect(space?.level).toBe(level);
+  if (space === undefined) {
+    return;
+  }
+
+  if (space.kind === "room") {
+    expect(space.level).toBe(level);
+    return;
+  }
+
+  expect("level" in space).toBe(false);
 }
 
 function doorMark(left: string, right: string) {
@@ -183,8 +192,8 @@ describe("rooms that are corridors", () => {
   describe("the yellow hall that was room-2-05", () => {
     const hall = "corridor-336-520";
 
-    it("is a level-2 corridor on the old room's box", () => {
-      expectKind(hall, "corridor", 2);
+    it("is a corridor on the old room's box", () => {
+      expectKind(hall, "corridor");
       expectBox(hall, { x: 316, y: 481, width: 40, height: 79 });
     });
 
@@ -222,10 +231,10 @@ describe("rooms that are corridors", () => {
     const room = "room-4-16";
     const nub = "corridor-1411-1515";
 
-    it("keeps the magenta room and adds the south flagstone as a level-4 corridor", () => {
+    it("keeps the magenta room and adds the south flagstone as a corridor", () => {
       expectKind(room, "room", 4);
       expectBox(room, { x: 1345, y: 1405, width: 91, height: 76 });
-      expectKind(nub, "corridor", 4);
+      expectKind(nub, "corridor");
       expectBox(nub, { x: 1385, y: 1496, width: 53, height: 38 });
     });
 
@@ -255,10 +264,10 @@ describe("rooms that are corridors", () => {
     const upper = "corridor-1986-1495";
     const lower = "corridor-1982-1555";
 
-    it("is two level-3 corridors from the line map, joined by an open hall", () => {
-      expectKind(upper, "corridor", 3);
+    it("is two corridors from the line map, joined by an open hall", () => {
+      expectKind(upper, "corridor");
       expectBox(upper, { x: 1964, y: 1466, width: 45, height: 58 });
-      expectKind(lower, "corridor", 3);
+      expectKind(lower, "corridor");
       expectBox(lower, { x: 1959, y: 1524, width: 46, height: 63 });
       expect(connectionKind(upper, lower)).toBe("open");
       expect(connectionKind(lower, upper)).toBe("open");
@@ -281,10 +290,10 @@ describe("rooms that are corridors", () => {
     const west = "corridor-1858-626";
     const east = "corridor-1920-626";
 
-    it("replaces room-6-01 and room-6-02 with level-6 corridors on the same boxes", () => {
-      expectKind(west, "corridor", 6);
+    it("replaces room-6-01 and room-6-02 with corridors on the same boxes", () => {
+      expectKind(west, "corridor");
       expectBox(west, { x: 1827, y: 596, width: 62, height: 60 });
-      expectKind(east, "corridor", 6);
+      expectKind(east, "corridor");
       expectBox(east, { x: 1889, y: 596, width: 62, height: 60 });
     });
 

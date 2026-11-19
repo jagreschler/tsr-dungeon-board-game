@@ -1127,3 +1127,33 @@ merged squares. That list is now 29 gray skips and one corner skip.
 Numbered rooms per level were 9, 8, 16, 18, 15, and 11. They are
 now 9, 9, 16, 18, 16, and 12. Corridors were 346. They are now 344
 (three merges, plus the yellow square).
+
+## DUN-38 — Only colored rooms carry a level (19 Nov 2026)
+
+A level sets monster difficulty, and monsters are fought only in the
+colored rooms. `level` exists only on a room. A corridor, a chamber,
+the Main Gallery, and the Main Staircase do not have one. The type is
+a room member plus one member for each other kind, so the compiler
+rejects a level anywhere else. `createRoom` builds a room.
+`createSpace` builds everything else. There is no `destinationLevel`.
+
+The 1981 rulebook calls stairs rounded corridor spaces. They change
+how the board looks and nothing about play. The old `stairs-west`
+oval is now `corridor-855-765`, the floored center of its box
+(811, 741, 89 by 48). Its door, secret door, and open halls moved
+with it. The `stairs` kind is gone. The renderer still paints that
+one corridor as a tan rounded rectangle with three stripes, because
+that is how the oval was drawn. The only list of those painted
+squares is `src/rendering/board-decorations.ts`. Gameplay and the
+board types do not read it. Another stair oval is another line in
+that list. The Main Staircase is still the start,
+with no level. Monster cards still have their own levels.
+
+A tooltip says "level N" only for a numbered room. `data-space-level`
+and the room-color fill are used only for rooms. Corridors stay gold,
+except the painted stair oval. Chambers and the Main Gallery stay
+cream. The rest of the board paint did not change. See
+`docs/screenshots/dun-38-after-full.png`.
+
+Numbered rooms per level stay 9, 9, 16, 18, 16, and 12. Corridors
+were 344. They are 345, because the stair oval is a corridor now.

@@ -3,5 +3,4 @@ export type SpaceKind =
   | "chamber"
   | "corridor"
   | "mainStaircase"
-  | "mainGallery"
-  | "stairs";
+  | "mainGallery";

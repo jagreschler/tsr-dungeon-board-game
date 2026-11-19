@@ -7,7 +7,6 @@ import type { TracedSpace } from "./traced-space.ts";
 const sampleTrace: TracedSpace = {
   identifier: "main-staircase",
   kind: "mainStaircase",
-  level: 1,
   x: 10,
   y: 20,
   width: 30,

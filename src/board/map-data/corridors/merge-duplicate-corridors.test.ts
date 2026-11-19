@@ -43,7 +43,6 @@ const removedCorridorIdentifiers = [
 
 type KeptSquare = {
   identifier: string;
-  level: number;
   x: number;
   y: number;
   width: number;
@@ -54,7 +53,6 @@ type KeptSquare = {
 const keptSquares: readonly KeptSquare[] = [
   {
     identifier: "corridor-348-1576",
-    level: 3,
     x: 306,
     y: 1554,
     width: 84,
@@ -66,7 +64,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-1433-799",
-    level: 1,
     x: 1412,
     y: 762,
     width: 42,
@@ -78,7 +75,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-338-1048",
-    level: 3,
     x: 318,
     y: 1009,
     width: 41,
@@ -91,7 +87,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-986-1571",
-    level: 4,
     x: 956,
     y: 1554,
     width: 60,
@@ -103,7 +98,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-1735-635",
-    level: 6,
     x: 1703,
     y: 617,
     width: 64,
@@ -115,7 +109,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-2034-558",
-    level: 5,
     x: 2003,
     y: 541,
     width: 62,
@@ -127,7 +120,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-1457-598",
-    level: 5,
     x: 1418,
     y: 578,
     width: 78,
@@ -139,7 +131,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-1456-640",
-    level: 1,
     x: 1417,
     y: 618,
     width: 78,
@@ -151,7 +142,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-1449-562",
-    level: 5,
     x: 1403,
     y: 530,
     width: 93,
@@ -163,7 +153,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-1990-1075",
-    level: 6,
     x: 1951,
     y: 1056,
     width: 78,
@@ -175,7 +164,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-1105-1571",
-    level: 4,
     x: 1066,
     y: 1553,
     width: 78,
@@ -187,7 +175,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-1178-1569",
-    level: 4,
     x: 1144,
     y: 1551,
     width: 68,
@@ -199,7 +186,6 @@ const keptSquares: readonly KeptSquare[] = [
   },
   {
     identifier: "corridor-1234-1570",
-    level: 4,
     x: 1204,
     y: 1553,
     width: 60,
@@ -229,7 +215,10 @@ describe("merged duplicate corridor squares", () => {
       const placement = findPlacement(dungeonLayout, kept.identifier);
 
       expect(space?.kind).toBe("corridor");
-      expect(space?.level).toBe(kept.level);
+      expect(space === undefined).toBe(false);
+      if (space !== undefined) {
+        expect("level" in space).toBe(false);
+      }
       expect(placement?.x).toBe(kept.x);
       expect(placement?.y).toBe(kept.y);
       expect(placement?.width).toBe(kept.width);

@@ -1,5 +1,9 @@
 import { applySpaceOutline } from "./outlines/apply-space-outline.ts";
-import type { TraceTuple, TracedSpace } from "../traced-space.ts";
+import type {
+  CorridorTraceTuple,
+  TraceTuple,
+  TracedSpace,
+} from "../traced-space.ts";
 import { tuplesToTraces } from "../traced-space.ts";
 import { namedTraces } from "./chambers/named-traces.ts";
 import { roomTuples1 } from "./rooms/board-rooms-1.ts";
@@ -14,7 +18,7 @@ const roomTuples: TraceTuple[] = [
   ...roomTuples2,
 ];
 
-const corridorTuples: TraceTuple[] = [
+const corridorTuples: CorridorTraceTuple[] = [
   ...corridorTuples1,
   ...corridorTuples2,
   ...corridorTuples3,

@@ -4,7 +4,6 @@ export const namedChambersWest: TracedSpace[] = [
   {
     identifier: "crypt",
     kind: "chamber",
-    level: 4,
     x: 969,
     y: 228,
     width: 116,
@@ -15,7 +14,6 @@ export const namedChambersWest: TracedSpace[] = [
   {
     identifier: "armory",
     kind: "chamber",
-    level: 3,
     x: 399,
     y: 309,
     width: 201,
@@ -26,7 +24,6 @@ export const namedChambersWest: TracedSpace[] = [
   {
     identifier: "council-room",
     kind: "chamber",
-    level: 2,
     x: 482,
     y: 761,
     width: 167,
@@ -37,7 +34,6 @@ export const namedChambersWest: TracedSpace[] = [
   {
     identifier: "kitchen",
     kind: "chamber",
-    level: 2,
     x: 242,
     y: 812,
     width: 166,
@@ -48,7 +44,6 @@ export const namedChambersWest: TracedSpace[] = [
   {
     identifier: "torture-chamber",
     kind: "chamber",
-    level: 4,
     x: 983,
     y: 1267,
     width: 153,
@@ -59,7 +54,6 @@ export const namedChambersWest: TracedSpace[] = [
   {
     identifier: "storeroom",
     kind: "chamber",
-    level: 3,
     x: 481,
     y: 1333,
     width: 190,

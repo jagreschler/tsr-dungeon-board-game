@@ -33,16 +33,21 @@ function expectBox(
   expect(boxFromPlacement(placement)).toEqual(box);
 }
 
-function expectKind(
-  identifier: string,
-  kind: string,
-  level: number,
-) {
+function expectKind(identifier: string, kind: string, level?: number) {
   const space = findSpace(dungeonBoard, identifier);
 
   expect(space === undefined, `${identifier} is missing`).toBe(false);
   expect(space?.kind).toBe(kind);
-  expect(space?.level).toBe(level);
+  if (space === undefined) {
+    return;
+  }
+
+  if (space.kind === "room") {
+    expect(space.level).toBe(level);
+    return;
+  }
+
+  expect("level" in space).toBe(false);
 }
 
 function reachableWhenSecretsAreFound(): Set<string> {
@@ -63,13 +68,13 @@ describe("torture chamber secret-door split", () => {
   const chamber = "torture-chamber";
   const alcove = "corridor-1167-1389";
 
-  it("keeps the named chamber and adds the east alcove as a level-4 corridor", () => {
-    expectKind(chamber, "chamber", 4);
+  it("keeps the named chamber and adds the east alcove as a corridor", () => {
+    expectKind(chamber, "chamber");
     expect(findSpace(dungeonBoard, chamber)?.printedName).toBe(
       "Torture Chamber",
     );
     expectBox(chamber, { x: 983, y: 1267, width: 153, height: 143 });
-    expectKind(alcove, "corridor", 4);
+    expectKind(alcove, "corridor");
     expectBox(alcove, { x: 1143, y: 1370, width: 49, height: 39 });
   });
 
@@ -105,11 +110,11 @@ describe("room-2-05 secret-door split", () => {
   const hall = "corridor-336-520";
   const north = "corridor-351-449";
 
-  it("keeps the north flagstone and treats the old room as the level-2 corridor under it", () => {
+  it("keeps the north flagstone and treats the old room as the corridor under it", () => {
     expect(findSpace(dungeonBoard, "room-2-05")).toBeUndefined();
-    expectKind(hall, "corridor", 2);
+    expectKind(hall, "corridor");
     expectBox(hall, { x: 316, y: 481, width: 40, height: 79 });
-    expectKind(north, "corridor", 2);
+    expectKind(north, "corridor");
     expectBox(north, { x: 322, y: 434, width: 58, height: 31 });
   });
 
@@ -167,16 +172,14 @@ describe("room-3-13 secret-door split", () => {
 });
 
 describe("west stairs secret-door split", () => {
-  const stairs = "stairs-west";
+  const stairs = "corridor-855-765";
   const north = "corridor-897-706";
 
-  it("keeps the stair oval and adds the north flagstone as a level-1 corridor", () => {
-    const space = findSpace(dungeonBoard, stairs);
-
-    expectKind(stairs, "stairs", 1);
-    expect(space?.destinationLevel).toBe(4);
+  it("keeps the stair oval as a corridor and adds the north flagstone", () => {
+    expect(findSpace(dungeonBoard, "stairs-west")).toBeUndefined();
+    expectKind(stairs, "corridor");
     expectBox(stairs, { x: 811, y: 741, width: 89, height: 48 });
-    expectKind(north, "corridor", 1);
+    expectKind(north, "corridor");
     expectBox(north, { x: 870, y: 682, width: 54, height: 49 });
   });
 
@@ -189,7 +192,7 @@ describe("west stairs secret-door split", () => {
     expect(connectionKind(stairs, "corridor-792-768")).toBe("open");
     expect(connectionKind(stairs, "corridor-909-774")).toBe("open");
     expect(connectionKind(north, "room-3-04")).toBe(undefined);
-    expect(storedDoorMarkInkGaps.has("room-3-04 stairs-west")).toBe(true);
+    expect(storedDoorMarkInkGaps.has("corridor-855-765 room-3-04")).toBe(true);
   });
 
   it("blocks the north flagstone from the stairs until the secret door is found", () => {

@@ -1,31 +1,58 @@
 import type { Level } from "./level.ts";
 import type { SpaceKind } from "./space-kind.ts";
 
-export type Space = {
+type SpaceFields = {
   identifier: string;
-  kind: SpaceKind;
-  level: Level;
   isStart: boolean;
   isSafe: boolean;
   printedName?: string;
-  destinationLevel?: Level;
 };
 
-export function createSpace(
-  identifier: string,
-  kind: SpaceKind,
-  level: Level,
-  extras: Partial<
-    Pick<Space, "isStart" | "isSafe" | "destinationLevel" | "printedName">
-  > = {},
-): Space {
+export type RoomSpace = SpaceFields & {
+  kind: "room";
+  level: Level;
+};
+
+type LevelFreeKind = Exclude<SpaceKind, "room">;
+
+export type LevelFreeSpace = {
+  [Kind in LevelFreeKind]: SpaceFields & { kind: Kind };
+}[LevelFreeKind];
+
+export type Space = RoomSpace | LevelFreeSpace;
+
+type SpaceExtras = Partial<
+  Pick<SpaceFields, "isStart" | "isSafe" | "printedName">
+>;
+
+function spaceFields(identifier: string, extras: SpaceExtras): SpaceFields {
   return {
     identifier,
-    kind,
-    level,
     isStart: extras.isStart ?? false,
     isSafe: extras.isSafe ?? false,
     printedName: extras.printedName,
-    destinationLevel: extras.destinationLevel,
+  };
+}
+
+export function createRoom(
+  identifier: string,
+  level: Level,
+  extras: SpaceExtras = {},
+): RoomSpace {
+  return {
+    ...spaceFields(identifier, extras),
+    kind: "room",
+    level,
+  };
+}
+
+export function createSpace<Kind extends LevelFreeKind>(
+  identifier: string,
+  kind: Kind,
+  extras: SpaceExtras = {},
+): SpaceFields & { kind: Kind } {
+  return {
+    ...spaceFields(identifier, extras),
+    kind,
   };
 }

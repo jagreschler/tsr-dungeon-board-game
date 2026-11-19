@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { describeSpace } from "../board/describe-space.ts";
 import { dungeonBoard } from "../board/dungeon-board.ts";
 import { dungeonLayout } from "../board/dungeon-layout.ts";
+import { boardDecorations } from "./board-decorations.ts";
 import { GenerateBoard } from "./generate-board.ts";
 
 const ROOM_SELECTOR = ".dungeon-board [data-space-kind='room']";
@@ -185,6 +186,23 @@ describe("GenerateBoard", () => {
     expect(groups.length).toBe(dungeonBoard.spaces.length);
   });
 
+  it("marks a level only on numbered rooms", () => {
+    const svg = boardSvg();
+
+    for (const space of dungeonBoard.spaces) {
+      const group = svg.querySelector(
+        `[data-space-identifier='${space.identifier}']`,
+      );
+      const marked = group?.getAttribute("data-space-level");
+
+      if (space.kind === "room") {
+        expect(marked).toBe(String(space.level));
+      } else {
+        expect(marked).toBeNull();
+      }
+    }
+  });
+
   it("gives every space a native tooltip with its readable name", () => {
     const svg = boardSvg();
 
@@ -197,6 +215,40 @@ describe("GenerateBoard", () => {
       expect(title === null || title === undefined).toBe(false);
       expect(title?.textContent).toBe(describeSpace(space));
     }
+  });
+
+  it("paints a listed stair decoration and leaves a plain corridor plain", () => {
+    const svg = boardSvg();
+    const stairs = boardDecorations.filter((entry) => {
+      return entry.decoration === "stairs";
+    });
+    const plainIdentifier = "corridor-909-774";
+
+    expect(stairs.length > 0).toBe(true);
+    expect(
+      boardDecorations.some((entry) => entry.identifier === plainIdentifier),
+    ).toBe(false);
+
+    for (const entry of stairs) {
+      const group = svg.querySelector(
+        `[data-space-identifier='${entry.identifier}']`,
+      );
+      const rect = group?.querySelector("rect");
+
+      expect(group?.getAttribute("data-space-kind")).toBe("corridor");
+      expect(rect?.getAttribute("fill")).toBe("#c4a060");
+      expect(rect?.getAttribute("rx")).toBe("8");
+      expect(group?.querySelectorAll("line").length).toBe(3);
+    }
+
+    const plain = svg.querySelector(
+      `[data-space-identifier='${plainIdentifier}']`,
+    );
+    const plainRect = plain?.querySelector("rect");
+
+    expect(plainRect?.getAttribute("fill")).toBe("#d4b44a");
+    expect(plainRect?.getAttribute("rx")).toBe("1");
+    expect(plain?.querySelectorAll("line").length).toBe(0);
   });
 
   it("draws rooms and corridors with different fills", () => {
