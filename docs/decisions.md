@@ -881,3 +881,33 @@ wall between `corridor-1118-486` and room-north just below it. The
 mark now uses that pair. It starts at the corridor center (1118,
 486.5) and ends at the gap on the corridor's south edge (1119,
 504.5).
+
+## DUN-33 — Merge duplicate corridor squares (19 Nov 2026)
+
+Ten pairs of corridor markers were two boxes on one real flagstone.
+Each pair is now one square. The box is the union of the two old
+boxes, and the id uses the floored center, the same way the other
+corridor ids are named (`corridor-<x>-<y>`). Links that named either
+old id now name the kept square. The link that joined the two halves
+is gone, and a neighbor that was stored twice is stored once. The
+room-3-10 door mark follows `corridor-338-1048`. It starts at
+that square's center (338.5, 1048) and still ends on the same door
+gap (318.5, 1047.5).
+
+Corridor level is not used for monster fights. Jason said to leave
+every other level alone, and to keep the surviving square's level for
+the two pairs that disagreed. Pair 7 keeps level 5 from
+`corridor-1476-598` (the level 1 marker `corridor-1437-598` is the one
+that was deleted). Pair 8 keeps level 1 from `corridor-1436-640` (the
+level 6 marker `corridor-1475-640` is the one that was deleted). No
+board-color check was used for those two. Removing corridor levels
+altogether is a later change. The kept square in each pair is the
+first id Jason named. A tenth pair, `corridor-1443-554` and
+`corridor-1455-562`, is the same kind of double mark. The kept record
+is `corridor-1443-554` at level 5, now `corridor-1449-562` with bounds
+1403, 530, 93 by 64. Its open halls are `corridor-1391-547` and
+`corridor-1457-598`. It does not touch `corridor-1456-640`; the path
+goes through `corridor-1457-598`. The gray-floor bans from
+`corridor-1454-489` and `corridor-1408-491` follow that square, one
+ban each. There are 337 corridor squares, and every space is still
+reachable from the Main Staircase.

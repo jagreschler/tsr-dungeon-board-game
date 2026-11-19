@@ -6,11 +6,6 @@ export type GrayGapOpenLink = {
 
 export const grayGapOpenLinks: readonly GrayGapOpenLink[] = [
   {
-    fromSpaceIdentifier: "corridor-1454-489",
-    toSpaceIdentifier: "corridor-1455-562",
-    grayPx: 16.0,
-  },
-  {
     fromSpaceIdentifier: "corridor-869-893",
     toSpaceIdentifier: "corridor-836-966",
     grayPx: 16.0,
@@ -67,21 +62,16 @@ export const grayGapOpenLinks: readonly GrayGapOpenLink[] = [
   },
   {
     fromSpaceIdentifier: "corridor-1454-489",
-    toSpaceIdentifier: "corridor-1443-554",
+    toSpaceIdentifier: "corridor-1449-562",
     grayPx: 11.5,
   },
   {
     fromSpaceIdentifier: "corridor-1408-491",
-    toSpaceIdentifier: "corridor-1443-554",
+    toSpaceIdentifier: "corridor-1449-562",
     grayPx: 11.5,
   },
   {
-    fromSpaceIdentifier: "corridor-1408-491",
-    toSpaceIdentifier: "corridor-1455-562",
-    grayPx: 11.5,
-  },
-  {
-    fromSpaceIdentifier: "corridor-1475-640",
+    fromSpaceIdentifier: "corridor-1456-640",
     toSpaceIdentifier: "corridor-1537-637",
     grayPx: 10.5,
   },
@@ -147,12 +137,12 @@ export const grayGapOpenLinks: readonly GrayGapOpenLink[] = [
   },
   {
     fromSpaceIdentifier: "corridor-1438-716",
-    toSpaceIdentifier: "corridor-1433-780",
+    toSpaceIdentifier: "corridor-1433-799",
     grayPx: 7.0,
   },
   {
     fromSpaceIdentifier: "corridor-1408-754",
-    toSpaceIdentifier: "corridor-1433-780",
+    toSpaceIdentifier: "corridor-1433-799",
     grayPx: 6.9,
   },
   {
