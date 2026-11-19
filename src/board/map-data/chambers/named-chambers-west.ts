@@ -15,7 +15,7 @@ export const namedChambersWest: TracedSpace[] = [
   {
     identifier: "armory",
     kind: "chamber",
-    level: 2,
+    level: 3,
     x: 399,
     y: 309,
     width: 201,
@@ -37,7 +37,7 @@ export const namedChambersWest: TracedSpace[] = [
   {
     identifier: "kitchen",
     kind: "chamber",
-    level: 3,
+    level: 2,
     x: 242,
     y: 812,
     width: 166,

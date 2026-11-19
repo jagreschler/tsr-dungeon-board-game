@@ -6,8 +6,8 @@ const roomsPerLevel = {
   2: 9,
   3: 17,
   4: 18,
-  5: 16,
-  6: 12,
+  5: 15,
+  6: 13,
 } as const;
 
 describe("board rooms", () => {

@@ -14,12 +14,12 @@ import { SVG_NAMESPACE } from "./svg-namespace.ts";
 import type { BoardBox } from "../board/board-grid.ts";
 
 const ROOM_FILL: Record<Level, string> = {
-  1: "#e3b23c",
-  2: "#3f8f4a",
+  1: "#c8801b",
+  2: "#40b84a",
   3: "#e07020",
   4: "#c4458a",
   5: "#d23a32",
-  6: "#2f7cc0",
+  6: "#0dc4da",
 };
 
 const CORRIDOR_FILL = "#d4b44a";

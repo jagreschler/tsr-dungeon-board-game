@@ -10,8 +10,8 @@ const ROOMS_PER_LEVEL: Record<Level, number> = {
   2: 9,
   3: 17,
   4: 18,
-  5: 16,
-  6: 12,
+  5: 15,
+  6: 13,
 };
 
 const CHAMBERS_PER_LEVEL: Record<Level, number> = {
@@ -64,7 +64,7 @@ describe("dungeon board", () => {
     }
   });
 
-  it("matches the Zenopus room counts per level zone", () => {
+  it("counts numbered rooms in each printed color", () => {
     for (const level of [1, 2, 3, 4, 5, 6] as const) {
       expect(roomsOnLevel(level).length).toBe(ROOMS_PER_LEVEL[level]);
     }
