@@ -954,3 +954,44 @@ level 4), box 811,741 89×48. The flagstone north of the S is
 about (885, 735). The open hall to `934-689` moves onto that
 flagstone. The door to room-3-04 and the open halls to `792-768` and
 `909-774` stay on the stairs. Corridors are 340 (was 337).
+
+## DUN-35 — Room colors follow the printed board (19 Nov 2026)
+
+A room's fill is its level. The 1981 board was checked by laying
+Jason's color photo on the line map and sampling each room. Several
+numbered rooms were stored in the wrong color zone. Their levels now
+match the print. The Armory is level 3, with the orange rooms around
+it. The Kitchen is level 2, with the green rooms around it and the
+Guard Room. Corridor levels were not touched.
+
+Room ids were left as they are. `room-2-01` is now a level 3 room, and
+other ids are in the same boat. Renaming them so the number in the id
+matches the level is a later change.
+
+Four spaces are really corridors, not rooms: `room-2-05`, `room-3-16`,
+`room-6-01`, and `room-6-02`. They stay numbered rooms for now. A
+later change will turn them into corridors.
+
+Numbered rooms per level were 9, 9, 17, 18, 16, and 12. They are now
+9, 9, 17, 18, 15, and 13. Levels 1 through 4 stay put, including the
+extra level 3 room from the secret-door split (`room-3-17`). Level 5
+loses one room and level 6 gains it, because `room-3-08` is printed
+light cyan and only one red room (`room-4-18`) comes back the other
+way. The old tests expected the earlier census, so they now expect
+15 and 13.
+
+Named chambers still total one on level 1, two on levels 2, 3, 4, and
+6, and four on level 5. The Armory and the Kitchen traded levels, so
+those totals did not move.
+
+Stairs still point where they did. `stairs-west` is still level 1,
+down to level 4. Monster cards are still looked up by the monster's
+own level. The only room rule that cares about level is "an occupied
+level 1 room draws from the level 1 deck." `room-4-06` is that kind of
+room now. `room-north` is not, because the print is magenta there.
+
+The level 1 fill moved from `#e3b23c` to `#c8801b` so the tan-orange
+rooms are darker than the corridor gold `#d4b44a`. Level 2 moved from
+`#3f8f4a` to `#40b84a`. Level 6 moved from `#2f7cc0` to `#0dc4da`.
+Levels 3, 4, and 5 stay `#e07020`, `#c4458a`, and `#d23a32`. Chamber
+names stay on the cream chamber fill, and the door dots stay dark.
