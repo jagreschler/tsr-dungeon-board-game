@@ -16,7 +16,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
     );
 
     expect(reachable.has("corridor-1098-942")).toBe(true);
-    expect(reachable.has("room-south")).toBe(true);
+    expect(reachable.has("room-level-01-caramel-09")).toBe(true);
   });
 
   it("blocks every secret door while none are found", () => {
@@ -27,7 +27,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
     );
     const fromRoomEast = listSpacesAHeroCanMoveTo(
       dungeonBoard,
-      "room-east",
+      "room-level-01-caramel-04",
       [],
     );
 
@@ -46,8 +46,8 @@ describe("listSpacesAHeroCanMoveTo", () => {
       [],
     );
 
-    expect(reachable.has("room-south")).toBe(true);
-    expect(reachable.has("room-west")).toBe(false);
+    expect(reachable.has("room-level-01-caramel-09")).toBe(true);
+    expect(reachable.has("room-level-01-caramel-05")).toBe(false);
     const pastTheKitchen = listSpacesAHeroCanMoveTo(
       dungeonBoard,
       "corridor-338-786",
@@ -100,7 +100,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(reachable.has("corridor-839-887")).toBe(false);
     expect(reachable.has("corridor-887-972")).toBe(false);
     expect(reachable.has("corridor-934-689")).toBe(false);
-    expect(reachable.has("room-3-04")).toBe(false);
+    expect(reachable.has("room-level-02-green-02")).toBe(false);
     expect(reachable.has("corridor-1482-762")).toBe(false);
     expect(reachable.has("corridor-1491-803")).toBe(false);
     expect(reachable.has("corridor-1499-850")).toBe(false);
@@ -127,7 +127,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(steps.get("corridor-1018-1011")).toBe(4);
     expect(steps.get("corridor-966-968")).toBe(5);
     expect(steps.has("corridor-916-921")).toBe(false);
-    expect(steps.has("room-4-06")).toBe(false);
+    expect(steps.has("room-level-01-caramel-08")).toBe(false);
     expect(steps.has("corridor-869-893")).toBe(false);
   });
 
@@ -170,7 +170,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
     );
 
     expect(reachable.has("corridor-1196-1020")).toBe(false);
-    expect(reachable.has("room-south")).toBe(false);
-    expect(reachable.has("room-southeast")).toBe(false);
+    expect(reachable.has("room-level-01-caramel-09")).toBe(false);
+    expect(reachable.has("room-level-01-caramel-06")).toBe(false);
   });
 });

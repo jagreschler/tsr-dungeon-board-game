@@ -32,7 +32,7 @@ describe("GenerateMoveHighlights", () => {
   });
 
   it("gives each glow the same tooltip as the space under it", () => {
-    const reachable = new Set(["room-3-14", "storeroom"]);
+    const reachable = new Set(["room-level-03-orange-14", "storeroom"]);
     const group = new GenerateMoveHighlights(
       dungeonBoard,
       dungeonLayout,

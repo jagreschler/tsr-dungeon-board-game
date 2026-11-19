@@ -5,10 +5,10 @@ import { isOccupiedLevel1Room } from "./is-occupied-level-1-room.ts";
 
 describe("isOccupiedLevel1Room", () => {
   it("is true only for Level 1 rooms", () => {
-    expect(isOccupiedLevel1Room(findSpace(dungeonBoard, "room-south"))).toBe(
+    expect(isOccupiedLevel1Room(findSpace(dungeonBoard, "room-level-01-caramel-09"))).toBe(
       true,
     );
-    expect(isOccupiedLevel1Room(findSpace(dungeonBoard, "room-2-01"))).toBe(
+    expect(isOccupiedLevel1Room(findSpace(dungeonBoard, "room-level-03-orange-01"))).toBe(
       false,
     );
   });

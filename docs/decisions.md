@@ -1157,3 +1157,104 @@ cream. The rest of the board paint did not change. See
 
 Numbered rooms per level stay 9, 9, 16, 18, 16, and 12. Corridors
 were 344. They are 345, because the stair oval is a corridor now.
+
+## DUN-39 — Room ids name their level, color, and reading-order number (19 Nov 2026)
+
+Every colored room now has an id of the form `room-level-<LL>-<color>-<NN>`,
+for example `room-level-01-caramel-03`. The color words are caramel,
+green, orange, purple, red, and blue for levels 1 through 6. `LL` and
+`NN` are two digits. On each level the rooms are numbered `01` through
+`N` in reading order: the top of the room's box, then its left edge.
+There are no gaps. Old numbers were not kept, because every id changed
+format anyway. Compass names such as `room-north` are gone.
+
+Nothing else about a room moved. Levels, boxes, wall outlines, and
+links are the same rooms as before. The counts stay 9, 9, 16, 18, 16,
+and 12. The board paint is unchanged. See
+`docs/screenshots/dun-39-after-full.png`.
+
+Earlier entries in this log still use the ids those changes were made
+under. The live names are:
+
+| Old id | New id | Level |
+| --- | --- | --- |
+| `room-northeast` | `room-level-01-caramel-01` | 1 caramel |
+| `room-east-northeast` | `room-level-01-caramel-02` | 1 caramel |
+| `room-northwest` | `room-level-01-caramel-03` | 1 caramel |
+| `room-east` | `room-level-01-caramel-04` | 1 caramel |
+| `room-west` | `room-level-01-caramel-05` | 1 caramel |
+| `room-southeast` | `room-level-01-caramel-06` | 1 caramel |
+| `room-east-southeast` | `room-level-01-caramel-07` | 1 caramel |
+| `room-4-06` | `room-level-01-caramel-08` | 1 caramel |
+| `room-south` | `room-level-01-caramel-09` | 1 caramel |
+| `room-2-09` | `room-level-02-green-01` | 2 green |
+| `room-3-04` | `room-level-02-green-02` | 2 green |
+| `room-3-05` | `room-level-02-green-03` | 2 green |
+| `room-3-06` | `room-level-02-green-04` | 2 green |
+| `room-3-07` | `room-level-02-green-05` | 2 green |
+| `room-2-10` | `room-level-02-green-06` | 2 green |
+| `room-3-09` | `room-level-02-green-07` | 2 green |
+| `room-3-10` | `room-level-02-green-08` | 2 green |
+| `room-3-11` | `room-level-02-green-09` | 2 green |
+| `room-2-01` | `room-level-03-orange-01` | 3 orange |
+| `room-2-02` | `room-level-03-orange-02` | 3 orange |
+| `room-3-01` | `room-level-03-orange-03` | 3 orange |
+| `room-2-03` | `room-level-03-orange-04` | 3 orange |
+| `room-3-02` | `room-level-03-orange-05` | 3 orange |
+| `room-2-04` | `room-level-03-orange-06` | 3 orange |
+| `room-2-06` | `room-level-03-orange-07` | 3 orange |
+| `room-2-07` | `room-level-03-orange-08` | 3 orange |
+| `room-2-08` | `room-level-03-orange-09` | 3 orange |
+| `room-3-12` | `room-level-03-orange-10` | 3 orange |
+| `room-3-13` | `room-level-03-orange-11` | 3 orange |
+| `room-4-12` | `room-level-03-orange-12` | 3 orange |
+| `room-3-17` | `room-level-03-orange-13` | 3 orange |
+| `room-3-14` | `room-level-03-orange-14` | 3 orange |
+| `room-4-17` | `room-level-03-orange-15` | 3 orange |
+| `room-3-15` | `room-level-03-orange-16` | 3 orange |
+| `room-5-01` | `room-level-04-purple-01` | 4 purple |
+| `room-4-01` | `room-level-04-purple-02` | 4 purple |
+| `room-4-02` | `room-level-04-purple-03` | 4 purple |
+| `room-4-03` | `room-level-04-purple-04` | 4 purple |
+| `room-4-04` | `room-level-04-purple-05` | 4 purple |
+| `room-5-09` | `room-level-04-purple-06` | 4 purple |
+| `room-4-05` | `room-level-04-purple-07` | 4 purple |
+| `room-3-03` | `room-level-04-purple-08` | 4 purple |
+| `room-north` | `room-level-04-purple-09` | 4 purple |
+| `room-4-08` | `room-level-04-purple-10` | 4 purple |
+| `room-4-07` | `room-level-04-purple-11` | 4 purple |
+| `room-4-09` | `room-level-04-purple-12` | 4 purple |
+| `room-4-10` | `room-level-04-purple-13` | 4 purple |
+| `room-4-11` | `room-level-04-purple-14` | 4 purple |
+| `room-4-13` | `room-level-04-purple-15` | 4 purple |
+| `room-4-16` | `room-level-04-purple-16` | 4 purple |
+| `room-4-14` | `room-level-04-purple-17` | 4 purple |
+| `room-4-15` | `room-level-04-purple-18` | 4 purple |
+| `room-5-02` | `room-level-05-red-01` | 5 red |
+| `room-5-04` | `room-level-05-red-02` | 5 red |
+| `room-5-03` | `room-level-05-red-03` | 5 red |
+| `room-5-05` | `room-level-05-red-04` | 5 red |
+| `room-5-06` | `room-level-05-red-05` | 5 red |
+| `room-5-07` | `room-level-05-red-06` | 5 red |
+| `room-5-08` | `room-level-05-red-07` | 5 red |
+| `room-5-10` | `room-level-05-red-08` | 5 red |
+| `room-5-11` | `room-level-05-red-09` | 5 red |
+| `room-5-17` | `room-level-05-red-10` | 5 red |
+| `room-5-12` | `room-level-05-red-11` | 5 red |
+| `room-5-13` | `room-level-05-red-12` | 5 red |
+| `room-5-14` | `room-level-05-red-13` | 5 red |
+| `room-5-15` | `room-level-05-red-14` | 5 red |
+| `room-5-16` | `room-level-05-red-15` | 5 red |
+| `room-4-18` | `room-level-05-red-16` | 5 red |
+| `room-6-03` | `room-level-06-blue-01` | 6 blue |
+| `room-6-04` | `room-level-06-blue-02` | 6 blue |
+| `room-6-05` | `room-level-06-blue-03` | 6 blue |
+| `room-6-07` | `room-level-06-blue-04` | 6 blue |
+| `room-6-06` | `room-level-06-blue-05` | 6 blue |
+| `room-6-08` | `room-level-06-blue-06` | 6 blue |
+| `room-6-09` | `room-level-06-blue-07` | 6 blue |
+| `room-6-10` | `room-level-06-blue-08` | 6 blue |
+| `room-6-13` | `room-level-06-blue-09` | 6 blue |
+| `room-6-11` | `room-level-06-blue-10` | 6 blue |
+| `room-6-12` | `room-level-06-blue-11` | 6 blue |
+| `room-3-08` | `room-level-06-blue-12` | 6 blue |

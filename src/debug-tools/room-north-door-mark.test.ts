@@ -8,7 +8,7 @@ import { appendStoredLinkMarks } from "./append-stored-link-marks.ts";
 import { storedDoorMarkInkGaps } from "./stored-door-mark-ink-gaps.ts";
 import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
-describe("room-north door mark", () => {
+describe("room-level-04-purple-09 door mark", () => {
   it("draws the door on the south wall of corridor-1118-486", () => {
     const parent = document.createElementNS(SVG_NAMESPACE, "g");
     const marks = appendStoredLinkMarks(parent, dungeonBoard, dungeonLayout);
@@ -22,7 +22,7 @@ describe("room-north door mark", () => {
           .join(" ");
 
         return (
-          pair === "corridor-1118-486 room-north" &&
+          pair === "corridor-1118-486 room-level-04-purple-09" &&
           candidate.getAttribute("data-link-kind") === "door"
         );
       },
@@ -30,10 +30,10 @@ describe("room-north door mark", () => {
 
     expect(line === undefined).toBe(false);
     expect(
-      storedDoorMarkInkGaps.has("corridor-1068-485 room-north"),
+      storedDoorMarkInkGaps.has("corridor-1068-485 room-level-04-purple-09"),
     ).toBe(false);
     expect(
-      storedDoorMarkInkGaps.has("corridor-1118-486 room-north"),
+      storedDoorMarkInkGaps.has("corridor-1118-486 room-level-04-purple-09"),
     ).toBe(true);
 
     const corridor = findPlacement(dungeonLayout, "corridor-1118-486");

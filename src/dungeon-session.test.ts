@@ -72,7 +72,7 @@ describe("DungeonSession", () => {
     );
     const svg = session.element();
     document.body.append(svg);
-    clickHighlight(svg, "room-south");
+    clickHighlight(svg, "room-level-01-caramel-09");
     document.querySelector("[data-skip-clip]")?.dispatchEvent(
       new MouseEvent("click", { bubbles: true }),
     );
@@ -95,14 +95,14 @@ describe("DungeonSession", () => {
     const svg = session.element();
     document.body.append(svg);
 
-    clickHighlight(svg, "room-south");
+    clickHighlight(svg, "room-level-01-caramel-09");
 
     const overlay = document.querySelector("[data-monster-card-overlay]");
     expect(overlay === null).toBe(false);
     expect(overlay?.textContent?.includes("Skeleton")).toBe(true);
     expect(svg.querySelector("[data-piece-kind='hero']")?.getAttribute(
       "data-space-identifier",
-    )).toBe("room-south");
+    )).toBe("room-level-01-caramel-09");
   });
 
   it("highlights the far side of a secret door only when that door is found", () => {
@@ -156,7 +156,7 @@ describe("DungeonSession", () => {
     );
     const level2Svg = level2.element();
     document.body.append(level2Svg);
-    clickHighlight(level2Svg, "room-2-02");
+    clickHighlight(level2Svg, "room-level-03-orange-02");
     expect(document.querySelector("[data-monster-card-overlay]") === null).toBe(
       true,
     );

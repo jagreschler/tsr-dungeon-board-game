@@ -4,9 +4,9 @@ import { describeSpace } from "./describe-space.ts";
 
 describe("describeSpace", () => {
   it("names a numbered room from its kind and identifier", () => {
-    const space = createRoom("room-3-14", 3);
+    const space = createRoom("room-level-03-orange-14", 3);
 
-    expect(describeSpace(space)).toBe("Room 3-14, level 3");
+    expect(describeSpace(space)).toBe("Room Level 03 Orange 14, level 3");
   });
 
   it("uses the printed name when the space has one", () => {
@@ -35,9 +35,9 @@ describe("describeSpace", () => {
     expect(describeSpace(gallery)).toBe("Main Gallery");
   });
 
-  it("names an unnumbered room from its identifier", () => {
-    const goldRoom = createRoom("room-east-northeast", 1);
+  it("names a colored room from its level and color words", () => {
+    const goldRoom = createRoom("room-level-01-caramel-02", 1);
 
-    expect(describeSpace(goldRoom)).toBe("Room East Northeast, level 1");
+    expect(describeSpace(goldRoom)).toBe("Room Level 01 Caramel 02, level 1");
   });
 });
