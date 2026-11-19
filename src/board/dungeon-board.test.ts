@@ -8,7 +8,7 @@ import type { Level } from "./level.ts";
 const ROOMS_PER_LEVEL: Record<Level, number> = {
   1: 9,
   2: 9,
-  3: 16,
+  3: 17,
   4: 18,
   5: 16,
   6: 12,

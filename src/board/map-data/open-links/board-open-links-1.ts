@@ -6,7 +6,7 @@ export const openLinks1: LinkTuple[] = [
   ["main-gallery", "corridor-1304-898", "open"],
   ["main-gallery", "corridor-1098-942", "open"],
   ["main-gallery", "corridor-1197-970", "open"],
-  ["stairs-west", "corridor-934-689", "open"],
+  ["corridor-897-706", "corridor-934-689", "open"],
   ["stairs-west", "corridor-792-768", "open"],
   ["stairs-west", "corridor-909-774", "open"],
   ["corridor-1650-140", "corridor-1706-139", "open"],
