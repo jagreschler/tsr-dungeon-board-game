@@ -124,26 +124,26 @@ describe("room-2-05 secret-door split", () => {
     expect(connectionKind(north, "corridor-401-453")).toBe("open");
     expect(connectionKind(hall, "corridor-401-453")).toBe(undefined);
     expect(connectionKind(hall, "corridor-337-584")).toBe("open");
-    expect(connectionKind(hall, "room-2-07")).toBe("door");
-    expect(connectionKind(hall, "room-2-08")).toBe(undefined);
-    expect(connectionKind(north, "room-2-08")).toBe(undefined);
-    expect(connectionKind(north, "room-2-07")).toBe(undefined);
+    expect(connectionKind(hall, "room-level-03-orange-08")).toBe("door");
+    expect(connectionKind(hall, "room-level-03-orange-09")).toBe(undefined);
+    expect(connectionKind(north, "room-level-03-orange-09")).toBe(undefined);
+    expect(connectionKind(north, "room-level-03-orange-08")).toBe(undefined);
     expect(connectionKind(north, "corridor-337-584")).toBe(undefined);
   });
 
-  it("does not keep a secret-door mark from the south hall into room-2-08", () => {
-    expect(storedDoorMarkInkGaps.has("corridor-336-520 room-2-08")).toBe(
+  it("does not keep a secret-door mark from the south hall into room-level-03-orange-09", () => {
+    expect(storedDoorMarkInkGaps.has("corridor-336-520 room-level-03-orange-09")).toBe(
       false,
     );
-    expect(storedDoorMarkInkGaps.has("corridor-351-449 room-2-08")).toBe(
+    expect(storedDoorMarkInkGaps.has("corridor-351-449 room-level-03-orange-09")).toBe(
       false,
     );
   });
 });
 
-describe("room-3-13 secret-door split", () => {
-  const upper = "room-3-13";
-  const lower = "room-3-17";
+describe("room-level-03-orange-11 secret-door split", () => {
+  const upper = "room-level-03-orange-11";
+  const lower = "room-level-03-orange-13";
 
   it("splits the stacked orange rooms and keeps both on level 3", () => {
     expectKind(upper, "room", 3);
@@ -152,15 +152,15 @@ describe("room-3-13 secret-door split", () => {
     expectBox(lower, { x: 351, y: 1365, width: 70, height: 86 });
   });
 
-  it("puts the east hall door on the upper room and the room-3-15 mark on the lower room", () => {
+  it("puts the east hall door on the upper room and the room-level-03-orange-16 mark on the lower room", () => {
     expect(connectionKind(upper, lower)).toBe("secretDoor");
     expect(connectionKind(lower, upper)).toBe("secretDoor");
     expect(connectionKind(upper, "corridor-464-1279")).toBe("door");
     expect(connectionKind(lower, "corridor-464-1279")).toBe(undefined);
-    expect(connectionKind(upper, "room-3-15")).toBe(undefined);
-    expect(connectionKind(lower, "room-3-15")).toBe(undefined);
-    expect(storedDoorMarkInkGaps.has("room-3-13 room-3-15")).toBe(false);
-    expect(storedDoorMarkInkGaps.has("room-3-15 room-3-17")).toBe(true);
+    expect(connectionKind(upper, "room-level-03-orange-16")).toBe(undefined);
+    expect(connectionKind(lower, "room-level-03-orange-16")).toBe(undefined);
+    expect(storedDoorMarkInkGaps.has("room-level-03-orange-11 room-level-03-orange-16")).toBe(false);
+    expect(storedDoorMarkInkGaps.has("room-level-03-orange-13 room-level-03-orange-16")).toBe(true);
   });
 
   it("reaches both orange rooms from Start once the secret door is found", () => {
@@ -188,11 +188,11 @@ describe("west stairs secret-door split", () => {
     expect(connectionKind(north, stairs)).toBe("secretDoor");
     expect(connectionKind(north, "corridor-934-689")).toBe("open");
     expect(connectionKind(stairs, "corridor-934-689")).toBe(undefined);
-    expect(connectionKind(stairs, "room-3-04")).toBe("door");
+    expect(connectionKind(stairs, "room-level-02-green-02")).toBe("door");
     expect(connectionKind(stairs, "corridor-792-768")).toBe("open");
     expect(connectionKind(stairs, "corridor-909-774")).toBe("open");
-    expect(connectionKind(north, "room-3-04")).toBe(undefined);
-    expect(storedDoorMarkInkGaps.has("corridor-855-765 room-3-04")).toBe(true);
+    expect(connectionKind(north, "room-level-02-green-02")).toBe(undefined);
+    expect(storedDoorMarkInkGaps.has("corridor-855-765 room-level-02-green-02")).toBe(true);
   });
 
   it("blocks the north flagstone from the stairs until the secret door is found", () => {

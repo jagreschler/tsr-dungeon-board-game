@@ -9,10 +9,10 @@ import { listNeighborSpacesAHeroCanStepTo } from "../movement/list-neighbor-spac
 import { storedDoorMarkInkGaps } from "../debug-tools/stored-door-mark-ink-gaps.ts";
 import type { OutlinePoint } from "./traced-space.ts";
 
-const RED_ROOM = "room-5-17";
-const GREEN_ROOM = "room-2-10";
-const LOWER_CYAN_ROOM = "room-3-08";
-const UPPER_CYAN_ROOM = "room-6-13";
+const RED_ROOM = "room-level-05-red-10";
+const GREEN_ROOM = "room-level-02-green-06";
+const LOWER_CYAN_ROOM = "room-level-06-blue-12";
+const UPPER_CYAN_ROOM = "room-level-06-blue-09";
 const YELLOW_SQUARE = "corridor-1567-755";
 
 function connectionKind(left: string, right: string) {
@@ -102,10 +102,10 @@ describe("missing and split rooms", () => {
     expect(links.map((connection) => {
       return [connection.toSpaceIdentifier, connection.kind];
     })).toEqual([["corridor-478-1032", "door"]]);
-    expect(storedDoorMarkInkGaps.has("corridor-478-1032 room-2-10")).toBe(true);
+    expect(storedDoorMarkInkGaps.has("corridor-478-1032 room-level-02-green-06")).toBe(true);
   });
 
-  it("splits room-3-08 into two level 6 rooms joined by the printed secret door", () => {
+  it("splits room-level-06-blue-12 into two level 6 rooms joined by the printed secret door", () => {
     const upper = findSpace(dungeonBoard, UPPER_CYAN_ROOM);
     const lower = findSpace(dungeonBoard, LOWER_CYAN_ROOM);
     const upperPlacement = findPlacement(dungeonLayout, UPPER_CYAN_ROOM);
@@ -133,9 +133,9 @@ describe("missing and split rooms", () => {
     expect(connectionKind(UPPER_CYAN_ROOM, "corridor-1662-1078")).toBeUndefined();
   });
 
-  it("adds the yellow square between room-6-07 and room-6-09", () => {
+  it("adds the yellow square between room-level-06-blue-04 and room-level-06-blue-07", () => {
     const square = findSpace(dungeonBoard, YELLOW_SQUARE);
-    const room = findPlacement(dungeonLayout, "room-6-07");
+    const room = findPlacement(dungeonLayout, "room-level-06-blue-04");
 
     expect(square?.kind).toBe("corridor");
     expect(room === undefined).toBe(false);
@@ -151,25 +151,25 @@ describe("missing and split rooms", () => {
 
     const box = boxFromPlacement(placement);
     expect(pointInPolygon(box.x + box.width / 2, box.y + box.height / 2, room.outline)).toBe(false);
-    expect(connectionKind(YELLOW_SQUARE, "room-6-07")).toBe("secretDoor");
-    expect(connectionKind(YELLOW_SQUARE, "room-6-09")).toBe("secretDoor");
+    expect(connectionKind(YELLOW_SQUARE, "room-level-06-blue-04")).toBe("secretDoor");
+    expect(connectionKind(YELLOW_SQUARE, "room-level-06-blue-07")).toBe("secretDoor");
   });
 
-  it("does not link room-4-14 to room-4-15", () => {
-    expect(connectionKind("room-4-14", "room-4-15")).toBeUndefined();
-    expect(connectionKind("room-4-15", "room-4-14")).toBeUndefined();
-    expect(storedDoorMarkInkGaps.has("room-4-14 room-4-15")).toBe(false);
+  it("does not link room-level-04-purple-17 to room-level-04-purple-18", () => {
+    expect(connectionKind("room-level-04-purple-17", "room-level-04-purple-18")).toBeUndefined();
+    expect(connectionKind("room-level-04-purple-18", "room-level-04-purple-17")).toBeUndefined();
+    expect(storedDoorMarkInkGaps.has("room-level-04-purple-17 room-level-04-purple-18")).toBe(false);
   });
 
-  it("joins the torture-chamber square to room-4-15 with a door", () => {
-    expect(connectionKind("corridor-1167-1389", "room-4-15")).toBe("door");
-    expect(storedDoorMarkInkGaps.has("corridor-1167-1389 room-4-15")).toBe(true);
+  it("joins the torture-chamber square to room-level-04-purple-18 with a door", () => {
+    expect(connectionKind("corridor-1167-1389", "room-level-04-purple-18")).toBe("door");
+    expect(storedDoorMarkInkGaps.has("corridor-1167-1389 room-level-04-purple-18")).toBe(true);
   });
 
-  it("can reach room-4-13 from the Main Staircase once secret doors are found", () => {
+  it("can reach room-level-04-purple-15 from the Main Staircase once secret doors are found", () => {
     const reachable = reachableWhenSecretsAreFound();
 
-    expect(reachable.has("room-4-13")).toBe(true);
+    expect(reachable.has("room-level-04-purple-15")).toBe(true);
     expect(reachable.has(RED_ROOM)).toBe(true);
     expect(reachable.has(GREEN_ROOM)).toBe(true);
     expect(reachable.has(UPPER_CYAN_ROOM)).toBe(true);

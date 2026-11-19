@@ -5,9 +5,9 @@ import { listNeighborSpacesAHeroCanStepTo } from "../movement/list-neighbor-spac
 import { listSpacesByKind } from "./list-spaces.ts";
 
 const INNER_GOLD_ROOM_DOORS = [
-  ["room-west", "corridor-916-921"],
-  ["room-southeast", "corridor-1196-1020"],
-  ["room-east-northeast", "corridor-1252-704"],
+  ["room-level-01-caramel-05", "corridor-916-921"],
+  ["room-level-01-caramel-06", "corridor-1196-1020"],
+  ["room-level-01-caramel-02", "corridor-1252-704"],
 ] as const;
 
 function doorNeighborOf(roomIdentifier: string): string | undefined {
@@ -74,10 +74,10 @@ describe("inner gold room doors", () => {
       ).toBe(true);
     }
 
-    expect(doorNeighborOf("room-east")).toBe(undefined);
+    expect(doorNeighborOf("room-level-01-caramel-04")).toBe(undefined);
   });
 
-  it("reaches every gold room from Start without a secret door except room-east", () => {
+  it("reaches every gold room from Start without a secret door except room-level-01-caramel-04", () => {
     const start = findSpace(dungeonBoard, "main-staircase");
     expect(start === undefined).toBe(false);
 
@@ -89,12 +89,12 @@ describe("inner gold room doors", () => {
     expect(goldRooms.length).toBe(9);
 
     const stillOpenFromStart = [
-      "room-north",
-      "room-west",
-      "room-south",
-      "room-southeast",
-      "room-east-southeast",
-      "room-northwest",
+      "room-level-04-purple-09",
+      "room-level-01-caramel-05",
+      "room-level-01-caramel-09",
+      "room-level-01-caramel-06",
+      "room-level-01-caramel-07",
+      "room-level-01-caramel-03",
     ];
     for (const identifier of stillOpenFromStart) {
       expect(
@@ -102,15 +102,15 @@ describe("inner gold room doors", () => {
         `${identifier} should be reachable from Start without secret doors`,
       ).toBe(true);
     }
-    for (const identifier of ["room-northeast", "room-east-northeast"]) {
+    for (const identifier of ["room-level-01-caramel-01", "room-level-01-caramel-02"]) {
       expect(
         reachable.has(identifier),
         `${identifier} can be reached the long way around without a secret door`,
       ).toBe(true);
     }
     expect(
-      reachable.has("room-east"),
-      "room-east still needs its secret door",
+      reachable.has("room-level-01-caramel-04"),
+      "room-level-01-caramel-04 still needs its secret door",
     ).toBe(false);
   });
 });

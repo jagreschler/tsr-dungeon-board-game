@@ -81,7 +81,7 @@ const keptSquares: readonly KeptSquare[] = [
     height: 78,
     links: [
       ["kitchen", "door"],
-      ["room-3-10", "door"],
+      ["room-level-02-green-08", "door"],
       ["corridor-342-1109", "open"],
     ],
   },
@@ -282,7 +282,7 @@ describe("merged duplicate corridor squares", () => {
       }
     }
 
-    expect(storedDoorMarkInkGaps.has("corridor-338-1048 room-3-10")).toBe(true);
+    expect(storedDoorMarkInkGaps.has("corridor-338-1048 room-level-02-green-08")).toBe(true);
   });
 
   it("can still reach every space from the Main Staircase", () => {
@@ -314,7 +314,7 @@ describe("merged duplicate corridor squares", () => {
     }
   });
 
-  it("draws the room-3-10 door from the merged hall square", () => {
+  it("draws the room-level-02-green-08 door from the merged hall square", () => {
     const parent = document.createElementNS(SVG_NAMESPACE, "g");
     const marks = appendStoredLinkMarks(parent, dungeonBoard, dungeonLayout);
     const line = [...marks.querySelectorAll("[data-stored-link-mark]")].find(
@@ -327,7 +327,7 @@ describe("merged duplicate corridor squares", () => {
           .join(" ");
 
         return (
-          pair === "corridor-338-1048 room-3-10" &&
+          pair === "corridor-338-1048 room-level-02-green-08" &&
           candidate.getAttribute("data-link-kind") === "door"
         );
       },

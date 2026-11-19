@@ -197,14 +197,14 @@ describe("rooms that are corridors", () => {
       expectBox(hall, { x: 316, y: 481, width: 40, height: 79 });
     });
 
-    it("is one secret door away from the north flagstone, and has no secret door to room-2-08", () => {
+    it("is one secret door away from the north flagstone, and has no secret door to room-level-03-orange-09", () => {
       expect(secretNeighbors(hall)).toEqual(["corridor-351-449"]);
       expect(secretNeighbors("corridor-351-449")).toEqual([hall]);
-      expect(connectionKind(hall, "room-2-08")).toBe(undefined);
+      expect(connectionKind(hall, "room-level-03-orange-09")).toBe(undefined);
       expect(connectionKind(hall, "corridor-337-584")).toBe("open");
-      expect(connectionKind(hall, "room-2-07")).toBe("door");
-      expect(doorMark(hall, "room-2-08")).toBeUndefined();
-      expect(doorMark(hall, "room-2-07") === undefined).toBe(false);
+      expect(connectionKind(hall, "room-level-03-orange-08")).toBe("door");
+      expect(doorMark(hall, "room-level-03-orange-09")).toBeUndefined();
+      expect(doorMark(hall, "room-level-03-orange-08") === undefined).toBe(false);
       expect(
         markSitsInTheGap(
           hall,
@@ -218,7 +218,7 @@ describe("rooms that are corridors", () => {
     it("blocks that one secret door until it is found", () => {
       expect(canStep(hall, "corridor-351-449", [])).toBe(false);
       expect(canStep(hall, "corridor-337-584", [])).toBe(true);
-      expect(canStep(hall, "room-2-07", [])).toBe(true);
+      expect(canStep(hall, "room-level-03-orange-08", [])).toBe(true);
       expect(
         canStep(hall, "corridor-351-449", [
           { from: hall, to: "corridor-351-449" },
@@ -227,8 +227,8 @@ describe("rooms that are corridors", () => {
     });
   });
 
-  describe("room-4-16 split by the printed secret door", () => {
-    const room = "room-4-16";
+  describe("room-level-04-purple-16 split by the printed secret door", () => {
+    const room = "room-level-04-purple-16";
     const nub = "corridor-1411-1515";
 
     it("keeps the magenta room and adds the south flagstone as a corridor", () => {
@@ -327,7 +327,7 @@ describe("rooms that are corridors", () => {
     for (const identifier of [
       "corridor-336-520",
       "corridor-1411-1515",
-      "room-4-16",
+      "room-level-04-purple-16",
       "corridor-1986-1495",
       "corridor-1982-1555",
       "corridor-1858-626",

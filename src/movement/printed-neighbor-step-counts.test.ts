@@ -62,16 +62,16 @@ describe("printed-neighbor step counts", () => {
       expect(violations, violations.join("\n")).toEqual([]);
       expect(walled).toEqual([
         "corridor-1011-741 (3) / corridor-986-786 (2)",
-        "corridor-1011-741 (3) / room-northwest (4)",
+        "corridor-1011-741 (3) / room-level-01-caramel-03 (4)",
         "corridor-1018-1011 (3) / corridor-966-968 (4)",
         "corridor-1196-1020 (2) / corridor-1197-970 (1)",
-        "corridor-1196-1020 (2) / room-south (2)",
-        "corridor-1196-1020 (2) / room-southeast (2)",
-        "corridor-1197-970 (1) / room-southeast (2)",
+        "corridor-1196-1020 (2) / room-level-01-caramel-06 (2)",
+        "corridor-1196-1020 (2) / room-level-01-caramel-09 (2)",
+        "corridor-1197-970 (1) / room-level-01-caramel-06 (2)",
         "corridor-1304-898 (1) / corridor-1358-918 (2)",
         "corridor-1358-918 (2) / corridor-1417-934 (3)",
         "corridor-1417-864 (4) / corridor-1433-799 (5)",
-        "corridor-966-968 (4) / room-4-06 (5)",
+        "corridor-966-968 (4) / room-level-01-caramel-08 (5)",
       ]);
     },
   );

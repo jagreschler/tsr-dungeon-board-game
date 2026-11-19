@@ -41,7 +41,7 @@ function boardSvg(): SVGSVGElement {
 
 function paintedGlow(svg: SVGSVGElement): SVGRectElement {
   const highlight = document.createElementNS(SVG_NAMESPACE, "g");
-  highlight.setAttribute("data-move-highlight", "room-3-14");
+  highlight.setAttribute("data-move-highlight", "room-level-03-orange-14");
   const rect = document.createElementNS(SVG_NAMESPACE, "rect");
   paintMoveGlow(rect);
   highlight.append(rect);
