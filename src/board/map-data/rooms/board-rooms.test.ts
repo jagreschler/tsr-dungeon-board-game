@@ -4,7 +4,7 @@ import { dungeonTraces } from "../dungeon-traces.ts";
 const roomsPerLevel = {
   1: 9,
   2: 9,
-  3: 16,
+  3: 17,
   4: 18,
   5: 16,
   6: 12,

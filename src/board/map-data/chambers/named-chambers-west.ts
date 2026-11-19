@@ -51,7 +51,7 @@ export const namedChambersWest: TracedSpace[] = [
     level: 4,
     x: 983,
     y: 1267,
-    width: 210,
+    width: 153,
     height: 143,
     printedName: "Torture Chamber",
     shape: "polygon",

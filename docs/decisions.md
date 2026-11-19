@@ -911,3 +911,46 @@ goes through `corridor-1457-598`. The gray-floor bans from
 `corridor-1454-489` and `corridor-1408-491` follow that square, one
 ban each. There are 337 corridor squares, and every space is still
 reachable from the Main Staircase.
+
+## DUN-34 — Four spaces split on a printed secret door (19 Nov 2026)
+
+Four stored spaces each covered two printed spaces with a secret door
+between them. Each one is now two spaces, joined by a secret door.
+A secret door still blocks a hero until the party has found it.
+With every secret door found, the whole map is still reachable from
+the Main Staircase.
+
+**Torture Chamber.** The named yellow chamber stays `torture-chamber`
+(level 4), box 983,1267 153×143. The small flagstone on its southeast
+corner is now `corridor-1167-1389` (level 4), box 1143,1370 49×39.
+The printed S is about (1136, 1380). The three open halls
+(`1078-1246`, `949-1298`, `1155-1317`) stay on the chamber. They
+touch the chamber, not the flagstone.
+
+**room-2-05.** The numbered room stays `room-2-05` (level 2), box
+316,481 40×79. The flagstone above it is `corridor-351-449` (level 2),
+box 322,434 58×31. The printed S between them is about (345, 470).
+The open hall into vestibule `401-453` moves onto the flagstone,
+because that is the half that touches the vestibule. The south open
+hall to `337-584`, the door to room-2-07, and the secret door to
+room-2-08 stay on the room. That secret door is on the room's east
+wall, about (355, 498), not on the north flagstone.
+
+**room-3-13.** Both halves are orange level-3 rooms. The upper one
+keeps `room-3-13`, box 341,1284 94×65. The lower one is `room-3-17`,
+box 351,1365 70×86. The printed S is about (375, 1352). The east door
+onto `464-1279` stays on the upper room. Level 3 now has 17 numbered
+rooms. The old Zenopus count of 16 had stored this pair as one room.
+There is a stored door mark named for room-3-13 and room-3-15, but
+there was never a door link, and the line drawing shows a solid wall
+between the lower room and room-3-15. The mark is renamed onto
+room-3-17. No door was added. The lower room also has a printed door
+west into a yellow corridor. That door was not stored before, so it
+is still not stored.
+
+**stairs-west.** The stair oval keeps `stairs-west` (level 1, down to
+level 4), box 811,741 89×48. The flagstone north of the S is
+`corridor-897-706` (level 1), box 870,682 54×49. The printed S is
+about (885, 735). The open hall to `934-689` moves onto that
+flagstone. The door to room-3-04 and the open halls to `792-768` and
+`909-774` stay on the stairs. Corridors are 340 (was 337).
