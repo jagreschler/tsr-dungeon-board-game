@@ -995,3 +995,56 @@ rooms are darker than the corridor gold `#d4b44a`. Level 2 moved from
 `#3f8f4a` to `#40b84a`. Level 6 moved from `#2f7cc0` to `#0dc4da`.
 Levels 3, 4, and 5 stay `#e07020`, `#c4458a`, and `#d23a32`. Chamber
 names stay on the cream chamber fill, and the door dots stay dark.
+
+## DUN-36 — Four stored rooms are really corridors (19 Nov 2026)
+
+Jason checked the line map and the color photo. Four stored rooms
+were yellow corridor floor, or a room with a corridor stuck on the
+end. They are corridors now. Each new corridor keeps the old room's
+level for now. Dropping corridor levels is a later change. A secret
+door still blocks a hero until the party has found it. With every
+secret door found, the whole map is still reachable from the Main
+Staircase.
+
+**The hall that was room-2-05.** That green shape is a yellow
+corridor. It is now `corridor-336-520` (level 2), on the same box
+316,481 40×79. Together with the north flagstone `corridor-351-449`
+it is two corridor squares with one secret door between them. The
+printed S is in the wall between those squares, and the door mark
+sits on that shared edge. The line map and the clear 1981 photo
+show a solid wall on the east side, with no S into room-2-08, so
+that secret door and its mark are gone. room-2-08 still has its
+ordinary door onto `corridor-401-453`. The open hall south to
+`corridor-337-584` and the door west to room-2-07 stay on the
+south square.
+
+**room-4-16.** The print is a magenta room with a yellow flagstone
+on its south side. An S sits in the wall between them, about
+(1407, 1489). The room keeps `room-4-16` (level 4), now box
+1345,1405 91×76. The flagstone is `corridor-1411-1515` (level 4),
+box 1385,1496 53×38. That one secret door joins them. The corridor
+floor runs straight through to `corridor-1354-1517` on the west and
+`corridor-1452-1517` on the east, so those two joins are open halls.
+Their old secret-door marks are gone. The ordinary door north into
+`corridor-1384-1372` stays on the room.
+
+**The halls that were room-3-16.** The line map shows two corridor
+squares, one above the other, with an open join and no S. The upper
+one is `corridor-1986-1495` (level 3), box 1964,1466 45×58. The
+lower one is `corridor-1982-1555` (level 3), box 1959,1524 46×63.
+They are joined by an open hall. The open link to `corridor-2044-1485`
+stays on the upper square. The open link to `corridor-1937-1568`
+stays on the lower square.
+
+**North of the King's Treasure Room.** room-6-01 and room-6-02 are
+two corridor squares. The printed S between them is about (1892, 633).
+They are now `corridor-1858-626` and `corridor-1920-626` (both level
+6), on the same boxes 1827,596 62×60 and 1889,596 62×60. The secret
+door stays between them. Its mark sits on the shared edge, where the
+printed S is, about (1892, 633). The west square keeps the open hall
+to `corridor-1799-637`. The east square keeps the open halls to
+`corridor-1931-674` and `corridor-1925-566`.
+
+The old room ids and their wall outlines are gone. Numbered rooms
+per level were 9, 9, 17, 18, 15, and 13. They are now 9, 8, 16, 18,
+15, and 11. Corridors were 340. They are now 346.

@@ -26,6 +26,8 @@ export const openLinks5: LinkTuple[] = [
   ["corridor-1532-1517", "corridor-1536-1565", "open"],
   ["corridor-1492-1516", "corridor-1452-1517", "open"],
   ["corridor-1300-1523", "corridor-1354-1517", "open"],
+  ["corridor-1354-1517", "corridor-1411-1515", "open"],
+  ["corridor-1411-1515", "corridor-1452-1517", "open"],
   ["corridor-1300-1523", "corridor-1285-1569", "open"],
   ["corridor-1536-1565", "corridor-1584-1571", "open"],
   ["corridor-273-1569", "corridor-348-1576", "open"],
