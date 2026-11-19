@@ -8,7 +8,7 @@ export const roomTuples1: TraceTuple[] = [
   ["room-level-01-caramel-04", 1, 1306, 778, 91, 102],
   ["room-level-01-caramel-05", 1, 941, 850, 107, 102],
   ["room-level-01-caramel-06", 1, 1230, 967, 92, 64],
-  ["room-level-01-caramel-07", 1, 1342, 972, 148, 100],
+  ["room-level-01-caramel-07", 1, 1384, 972, 105, 99],
   ["room-level-01-caramel-09", 1, 1090, 995, 73, 92],
   ["room-level-03-orange-01", 3, 392, 126, 108, 104],
   ["room-level-03-orange-02", 3, 519, 126, 104, 106],

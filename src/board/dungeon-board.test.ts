@@ -15,7 +15,6 @@ const ROOMS_PER_LEVEL: Record<Level, number> = {
 };
 
 const NAMED_CHAMBERS = [
-  "Main Gallery",
   "Kitchen",
   "Council Room",
   "Armory",
@@ -81,19 +80,7 @@ describe("dungeon board", () => {
       expect("level" in staircase).toBe(false);
     }
     expect(staircase?.printedName).toBe("Main Staircase");
-  });
-
-  it("treats the Main Gallery as the safe chamber", () => {
-    const gallery = findSpace(dungeonBoard, "main-gallery");
-
-    expect(gallery === undefined).toBe(false);
-    expect(gallery?.kind).toBe("mainGallery");
-    expect(gallery?.isSafe).toBe(true);
-    expect(gallery === undefined).toBe(false);
-    if (gallery !== undefined) {
-      expect("level" in gallery).toBe(false);
-    }
-    expect(gallery?.printedName).toBe("Main Gallery");
+    expect(staircase?.isSafe).toBe(true);
   });
 
   it("records the printed chamber names from the 1981 board", () => {

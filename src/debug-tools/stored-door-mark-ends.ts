@@ -73,11 +73,7 @@ function isHallKind(space: Space): boolean {
 }
 
 function spaceHasDoorWall(space: Space): boolean {
-  return (
-    space.kind === "room" ||
-    space.kind === "chamber" ||
-    space.kind === "mainGallery"
-  );
+  return space.kind === "room" || space.kind === "chamber";
 }
 
 function outlineOf(placement: SpacePlacement): BoardPoint[] {

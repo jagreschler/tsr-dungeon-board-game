@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import { chamberOutlines } from "./chamber-outlines.ts";
 import { namedChambersEast } from "../chambers/named-chambers-east.ts";
 import { namedChambersWest } from "../chambers/named-chambers-west.ts";
-import { startAndStairs } from "../chambers/start-and-stairs.ts";
 import type { OutlinePoint } from "../../traced-space.ts";
 import type { TracedSpace } from "../../traced-space.ts";
 
@@ -12,15 +11,7 @@ const REFERENCE_BOARD_IMAGE_HEIGHT = 1702;
 const OUTLINE_BOX_SLACK_IN_PIXELS = 40;
 
 function namedChambers(): TracedSpace[] {
-  const gallery = startAndStairs.find((trace) => {
-    return trace.identifier === "main-gallery";
-  });
-
-  if (gallery === undefined) {
-    throw new Error("Main Gallery is missing from the start-and-stairs traces.");
-  }
-
-  return [...namedChambersWest, ...namedChambersEast, gallery];
+  return [...namedChambersWest, ...namedChambersEast];
 }
 
 function printedNameOf(chamber: TracedSpace): string {
@@ -79,8 +70,8 @@ function assertOutlineStaysOnTheBoard(
 const chambers = namedChambers();
 
 describe("chamber outlines", () => {
-  it("has an outline for each of the 13 named chambers", () => {
-    expect(chambers.length).toBe(13);
+  it("has an outline for each of the 12 named chambers", () => {
+    expect(chambers.length).toBe(12);
     expect(Object.keys(chamberOutlines).sort()).toEqual(
       chambers.map((chamber) => chamber.identifier).sort(),
     );

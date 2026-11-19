@@ -23,16 +23,12 @@ describe("describeSpace", () => {
     expect(describeSpace(space)).toBe("Corridor 1098-942");
   });
 
-  it("names the Main Staircase and Main Gallery", () => {
+  it("names the Main Staircase", () => {
     const staircase = createSpace("main-staircase", "mainStaircase", {
       printedName: "Main Staircase",
     });
-    const gallery = createSpace("main-gallery", "mainGallery", {
-      printedName: "Main Gallery",
-    });
 
     expect(describeSpace(staircase)).toBe("Main Staircase");
-    expect(describeSpace(gallery)).toBe("Main Gallery");
   });
 
   it("names a colored room from its level and color words", () => {

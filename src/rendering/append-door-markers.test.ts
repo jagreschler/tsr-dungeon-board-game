@@ -81,8 +81,7 @@ describe("door markers", () => {
         });
         const isEnclosed =
           space?.kind === "room" ||
-          space?.kind === "chamber" ||
-          space?.kind === "mainGallery";
+          space?.kind === "chamber";
         const placement = findPlacement(dungeonLayout, identifier);
 
         if (

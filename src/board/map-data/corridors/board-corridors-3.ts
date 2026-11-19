@@ -8,6 +8,7 @@ export const corridorTuples3: CorridorTraceTuple[] = [
   ["corridor-1902-981", 1885, 952, 34, 58],
   ["corridor-2092-980", 2071, 953, 42, 55],
   ["corridor-1385-982", 1363, 958, 44, 48],
+  ["corridor-1365-1028", 1342, 1009, 46, 39],
   ["corridor-709-1013", 690, 981, 38, 64],
   ["corridor-1018-1011", 985, 983, 67, 57],
   ["corridor-1196-1020", 1174, 994, 44, 52],

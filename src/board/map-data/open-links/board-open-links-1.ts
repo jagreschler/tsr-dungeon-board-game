@@ -1,11 +1,10 @@
 import type { LinkTuple } from "../../traced-space.ts";
 
 export const openLinks1: LinkTuple[] = [
-  ["main-staircase", "main-gallery", "open"],
-  ["main-gallery", "corridor-1045-800", "open"],
-  ["main-gallery", "corridor-1304-898", "open"],
-  ["main-gallery", "corridor-1098-942", "open"],
-  ["main-gallery", "corridor-1197-970", "open"],
+  ["main-staircase", "corridor-1045-800", "open"],
+  ["main-staircase", "corridor-1304-898", "open"],
+  ["main-staircase", "corridor-1098-942", "open"],
+  ["main-staircase", "corridor-1197-970", "open"],
   ["corridor-897-706", "corridor-934-689", "open"],
   ["corridor-855-765", "corridor-792-768", "open"],
   ["corridor-855-765", "corridor-909-774", "open"],
@@ -52,6 +51,7 @@ export const openLinks1: LinkTuple[] = [
   ["corridor-1160-315", "corridor-1191-315", "open"],
   ["corridor-1191-315", "corridor-1244-318", "open"],
   ["corridor-1509-326", "corridor-1551-356", "open"],
+  ["wizards-laboratory", "corridor-1671-350", "open"],
   ["corridor-1354-371", "corridor-1354-409", "open"],
   ["corridor-1354-371", "corridor-1354-445", "open"],
   ["corridor-1122-374", "corridor-1122-417", "open"],

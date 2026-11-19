@@ -26,7 +26,7 @@ describe("EVENT_OVERLAY_DRAWN", () => {
     expect(overlayDrawnCount).toBe(1);
 
     svg
-      .querySelector("[data-move-highlight='main-gallery']")
+      .querySelector("[data-move-highlight='corridor-1098-942']")
       ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
 
     expect(overlayDrawnCount).toBe(2);
@@ -96,7 +96,7 @@ describe("DebugOverlayListener", () => {
     svg.removeAttribute("data-stored-link-marks-visible");
 
     svg
-      .querySelector("[data-move-highlight='main-gallery']")
+      .querySelector("[data-move-highlight='corridor-1098-942']")
       ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
 
     expect(svg.hasAttribute("data-stored-link-marks-visible")).toBe(false);
@@ -114,7 +114,7 @@ describe("DebugOverlayListener", () => {
     svg.removeAttribute("data-move-step-labels-visible");
 
     svg
-      .querySelector("[data-move-highlight='main-gallery']")
+      .querySelector("[data-move-highlight='corridor-1098-942']")
       ?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
 
     expect(svg.hasAttribute("data-move-step-labels-visible")).toBe(false);

@@ -11,7 +11,6 @@ const DOOR_SELECTOR = ".dungeon-board [data-door-kind='door']";
 const SECRET_DOOR_SELECTOR = ".dungeon-board [data-door-kind='secretDoor']";
 
 const NAMED_CHAMBERS = [
-  "Main Gallery",
   "Kitchen",
   "Council Room",
   "Armory",
@@ -147,8 +146,7 @@ describe("board layout", () => {
     const enclosed = dungeonBoard.spaces.filter((space) => {
       return (
         space.kind === "room" ||
-        space.kind === "chamber" ||
-        space.kind === "mainGallery"
+        space.kind === "chamber"
       );
     });
 
@@ -290,7 +288,7 @@ describe("GenerateBoard", () => {
   it("draws every room and chamber as a polygon of at least four points", () => {
     const svg = boardSvg();
     const groups = svg.querySelectorAll(
-      "[data-space-kind='room'], [data-space-kind='chamber'], [data-space-kind='mainGallery']",
+      "[data-space-kind='room'], [data-space-kind='chamber']",
     );
 
     expect(groups.length > 0).toBe(true);

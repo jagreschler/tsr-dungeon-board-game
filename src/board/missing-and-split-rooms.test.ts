@@ -13,7 +13,7 @@ const RED_ROOM = "room-level-05-red-10";
 const GREEN_ROOM = "room-level-02-green-06";
 const LOWER_CYAN_ROOM = "room-level-06-blue-12";
 const UPPER_CYAN_ROOM = "room-level-06-blue-09";
-const YELLOW_SQUARE = "corridor-1567-755";
+const YELLOW_SQUARE = "corridor-1567-765";
 
 function connectionKind(left: string, right: string) {
   const connection = dungeonBoard.connections.find((candidate) => {

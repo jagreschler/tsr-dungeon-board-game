@@ -1258,3 +1258,65 @@ under. The live names are:
 | `room-6-11` | `room-level-06-blue-10` | 6 blue |
 | `room-6-12` | `room-level-06-blue-11` | 6 blue |
 | `room-3-08` | `room-level-06-blue-12` | 6 blue |
+
+## DUN-40 — Seven board corrections (19 Nov 2026)
+
+Jason checked the aligned color photo against the stored map. Where the
+photo and the line map disagree, the photo wins. Each fix below is one
+he found on the board. Numbered rooms stay 9, 9, 16, 18, 16, and 12.
+Corridors stay 345: one doubled square is gone, and one yellow square
+that had been swallowed by a room is added. The Main Gallery is no
+longer its own space, so the board has one fewer space. With every
+secret door found, the whole map is still reachable from the Main
+Staircase. See `docs/screenshots/dun-40-after-full.png`.
+
+**The door west of room-level-03-orange-13.** The photo shows a door
+on the room's west wall, facing `corridor-313-1411`. That door is
+stored now. The mark runs from the corridor center (313, 1411.5) to
+the hall side of the gap (340, 1411).
+
+**One south-row square.** `corridor-989-1495` and `corridor-1019-1495`
+were two boxes on one yellow flagstone. They are now
+`corridor-1004-1495`, box 974, 1479, 60 by 32. The open halls to
+`corridor-949-1495` and `corridor-1047-1494` stay, once each. The link
+between the two halves is gone.
+
+**The two blue rooms by the King's Treasure Room.**
+`room-level-06-blue-01` and `room-level-06-blue-02` do not share a
+door. The stored door and its mark are gone. Each room keeps the door
+it already had on another wall.
+
+**The yellow square under room-level-06-blue-04.** The box
+1546, 737, 42 by 37 sat about 10 pixels too far north. It is now
+1546, 747, 42 by 37, id `corridor-1567-765`. The two secret doors, to
+`room-level-06-blue-04` and `room-level-06-blue-07`, moved with it.
+Their marks sit on the shifted walls.
+
+**Wizard's Laboratory and Wizard's Treasure Room.** The direct door
+between those two chambers, and its mark, are gone. The corridor
+between them is `corridor-1671-350`. The treasure room already doors
+onto it. The laboratory meets that square at its northeast tip. The
+photo does not show a door tab there, so the new link is an open hall
+and has no mark. The laboratory's door onto `corridor-1551-356` stays.
+
+**One circle at Start.** The Main Staircase and the Main Gallery were
+two spaces on the same circle, joined by an open hall. They are one
+space now: `main-staircase`. It is still the start, and it is safe.
+The gallery's open halls (to `corridor-1045-800`, `corridor-1304-898`,
+`corridor-1098-942`, and `corridor-1197-970`) are on the staircase.
+The `mainGallery` kind is gone, including the branches that described
+it and the branch that let a pawn stand on it. Standing on Start was
+already allowed. A hero can still walk through the circle. The five-step
+glow from Start is one step shorter on every path that used to pass
+through the gallery, so it now reaches 27 spaces.
+
+**The yellow square west of room-level-01-caramel-07.** The room
+outline had swallowed the flagstone at about x 1342–1387, y 1009–1047.
+That square is `corridor-1365-1028`, box 1342, 1009, 46 by 39. The
+room outline stops at the caramel wall. The photo shows a door on that
+west wall, so the square doors into the room, and the mark runs from
+the square's center (1365, 1028.5) to the gap (1382, 1030). The square
+opens north into `corridor-1385-982` and south into `corridor-1363-1074`.
+Those two corridors had been stored as doors of the room, because the
+room outline covered the square. Those room doors, and the north door
+mark, are gone.
