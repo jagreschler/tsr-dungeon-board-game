@@ -46,17 +46,19 @@ describe("DungeonSession", () => {
   it("moves the Hero onto a highlighted space when that glow is clicked", () => {
     const play = new DungeonSession(dungeonBoard, dungeonLayout, heroPiece);
     const svg = play.element();
-    const galleryGlow = svg.querySelector(
-      "[data-move-highlight='main-gallery']",
+    const hallGlow = svg.querySelector(
+      "[data-move-highlight='corridor-1098-942']",
     );
 
-    expect(galleryGlow === null).toBe(false);
-    galleryGlow?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    expect(hallGlow === null).toBe(false);
+    hallGlow?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
 
     const token = svg.querySelector("[data-piece-kind='hero']");
-    expect(token?.getAttribute("data-space-identifier")).toBe("main-gallery");
+    expect(token?.getAttribute("data-space-identifier")).toBe(
+      "corridor-1098-942",
+    );
     expect(
-      svg.querySelector("[data-move-highlight='main-gallery']") === null,
+      svg.querySelector("[data-move-highlight='corridor-1098-942']") === null,
     ).toBe(true);
     expect(
       svg.querySelector("[data-move-highlight='main-staircase']") === null,
@@ -128,7 +130,7 @@ describe("DungeonSession", () => {
     ).toBeNull();
   });
 
-  it("does not draw in the Main Gallery, a corridor, or a Level 2 room", () => {
+  it("does not draw in a corridor or a Level 2 room", () => {
     const session = new DungeonSession(
       dungeonBoard,
       dungeonLayout,
@@ -137,11 +139,6 @@ describe("DungeonSession", () => {
     );
     const svg = session.element();
     document.body.append(svg);
-
-    clickHighlight(svg, "main-gallery");
-    expect(document.querySelector("[data-monster-card-overlay]") === null).toBe(
-      true,
-    );
 
     clickHighlight(svg, "corridor-1098-942");
     expect(document.querySelector("[data-monster-card-overlay]") === null).toBe(

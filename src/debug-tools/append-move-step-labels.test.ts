@@ -7,9 +7,9 @@ import { SVG_NAMESPACE } from "../rendering/svg-namespace.ts";
 
 describe("appendMoveStepLabels", () => {
   it("writes the BFS step count on each highlighted space", () => {
-    const reachable = new Set(["main-gallery", "corridor-1098-942"]);
+    const reachable = new Set(["main-staircase", "corridor-1098-942"]);
     const stepCounts = new Map([
-      ["main-gallery", 1],
+      ["main-staircase", 1],
       ["corridor-1098-942", 1],
     ]);
     const parent = document.createElementNS(SVG_NAMESPACE, "g");
@@ -22,7 +22,7 @@ describe("appendMoveStepLabels", () => {
 
     const labels = appendMoveStepLabels(parent, dungeonLayout, stepCounts);
     const gallery = labels.querySelector(
-      "[data-move-step-label='main-gallery']",
+      "[data-move-step-label='main-staircase']",
     );
     const hall = labels.querySelector(
       "[data-move-step-label='corridor-1098-942']",

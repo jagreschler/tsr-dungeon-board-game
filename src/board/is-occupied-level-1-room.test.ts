@@ -13,13 +13,10 @@ describe("isOccupiedLevel1Room", () => {
     );
   });
 
-  it("is false for Start, the Main Gallery, corridors, and chambers", () => {
+  it("is false for Start, corridors, and chambers", () => {
     expect(
       isOccupiedLevel1Room(findSpace(dungeonBoard, "main-staircase")),
     ).toBe(false);
-    expect(isOccupiedLevel1Room(findSpace(dungeonBoard, "main-gallery"))).toBe(
-      false,
-    );
     expect(
       isOccupiedLevel1Room(findSpace(dungeonBoard, "corridor-1098-942")),
     ).toBe(false);

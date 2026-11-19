@@ -11,16 +11,6 @@ export const startAndStairs: TracedSpace[] = [
     printedName: "Main Staircase",
     shape: "circle",
     isStart: true,
-  },
-  {
-    identifier: "main-gallery",
-    kind: "mainGallery",
-    x: 1073,
-    y: 847,
-    width: 216,
-    height: 99,
-    printedName: "Main Gallery",
-    shape: "polygon",
     isSafe: true,
   },
 ];

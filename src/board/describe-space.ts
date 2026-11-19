@@ -6,7 +6,6 @@ const KIND_LABEL: Record<SpaceKind, string> = {
   chamber: "Chamber",
   corridor: "Corridor",
   mainStaircase: "Main Staircase",
-  mainGallery: "Main Gallery",
 };
 
 export function describeSpace(space: Space): string {
@@ -38,10 +37,6 @@ function nameFromKindAndIdentifier(space: Space): string {
 function kebabFromKind(kind: SpaceKind): string {
   if (kind === "mainStaircase") {
     return "main-staircase";
-  }
-
-  if (kind === "mainGallery") {
-    return "main-gallery";
   }
 
   return kind;

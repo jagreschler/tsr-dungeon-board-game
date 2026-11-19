@@ -3,7 +3,6 @@ import { dungeonTraces } from "../dungeon-traces.ts";
 import { namedTraces } from "./named-traces.ts";
 
 const namedChamberNames = [
-  "Main Gallery",
   "Crypt",
   "Armory",
   "Council Room",
@@ -19,7 +18,7 @@ const namedChamberNames = [
 ] as const;
 
 describe("named chambers and start", () => {
-  it("lists all 13 named chambers", () => {
+  it("lists the 12 named chambers", () => {
     const printedNames = namedTraces
       .map((trace) => trace.printedName)
       .filter((name): name is string => name !== undefined);
@@ -28,8 +27,8 @@ describe("named chambers and start", () => {
       expect(printedNames).toContain(name);
     }
 
-    expect(namedChamberNames.length).toBe(13);
-    expect(namedTraces.length).toBeGreaterThanOrEqual(13);
+    expect(namedChamberNames.length).toBe(12);
+    expect(namedTraces.length).toBeGreaterThanOrEqual(12);
   });
 
   it("marks the Main Staircase as the start", () => {
@@ -39,12 +38,12 @@ describe("named chambers and start", () => {
     expect(start?.printedName).toBe("Main Staircase");
   });
 
-  it("marks the Main Gallery as safe", () => {
-    const gallery = dungeonTraces.find(
-      (trace) => trace.identifier === "main-gallery",
+  it("marks the Main Staircase as safe", () => {
+    const start = dungeonTraces.find(
+      (trace) => trace.identifier === "main-staircase",
     );
 
-    expect(gallery?.isSafe).toBe(true);
-    expect(gallery?.printedName).toBe("Main Gallery");
+    expect(start?.isSafe).toBe(true);
+    expect(start?.isStart).toBe(true);
   });
 });

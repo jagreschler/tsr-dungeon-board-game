@@ -86,7 +86,7 @@ function spaceIsBlockedByAnotherPawn(
     return false;
   }
 
-  if (space.kind === "chamber" || space.kind === "mainGallery") {
+  if (space.kind === "chamber") {
     return false;
   }
 

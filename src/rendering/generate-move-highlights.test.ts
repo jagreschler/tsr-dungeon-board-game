@@ -7,7 +7,7 @@ import { GenerateMoveHighlights } from "./generate-move-highlights.ts";
 
 describe("GenerateMoveHighlights", () => {
   it("draws a green glow on each reachable space", () => {
-    const reachable = new Set(["main-gallery", "corridor-1098-942"]);
+    const reachable = new Set(["main-staircase", "corridor-1098-942"]);
     const group = new GenerateMoveHighlights(
       dungeonBoard,
       dungeonLayout,
@@ -17,7 +17,7 @@ describe("GenerateMoveHighlights", () => {
 
     expect(highlights.length).toBe(2);
     expect(
-      group.querySelector("[data-move-highlight='main-gallery']") === null,
+      group.querySelector("[data-move-highlight='main-staircase']") === null,
     ).toBe(false);
     expect(
       group.querySelector("[data-move-highlight='corridor-1098-942']") ===

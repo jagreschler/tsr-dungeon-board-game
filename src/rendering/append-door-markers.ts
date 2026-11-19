@@ -114,9 +114,5 @@ function spaceHasDoorWall(board: Board, identifier: string): boolean {
     return false;
   }
 
-  return (
-    space.kind === "room" ||
-    space.kind === "chamber" ||
-    space.kind === "mainGallery"
-  );
+  return space.kind === "room" || space.kind === "chamber";
 }

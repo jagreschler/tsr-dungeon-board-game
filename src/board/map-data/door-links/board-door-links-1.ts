@@ -45,7 +45,6 @@ export const specialtyRoomDoorLinks1: LinkTuple[] = [
   ["storeroom", "corridor-659-1460", "secretDoor"],
 
   ["wizards-laboratory", "corridor-1551-356", "door"],
-  ["wizards-treasure-room", "wizards-laboratory", "door"],
   ["wizards-treasure-room", "corridor-1789-445", "door"],
   ["wizards-treasure-room", "corridor-1671-350", "door"],
   ["wizards-treasure-room", "corridor-1880-295", "door"],
@@ -61,8 +60,7 @@ export const roomCompassxxDoorLinks1: LinkTuple[] = [
   ["room-level-01-caramel-01", "corridor-1319-730", "door"],
   ["room-level-01-caramel-03", "corridor-1011-741", "door"],
 
-  ["room-level-01-caramel-07", "corridor-1385-982", "door"],
-  ["room-level-01-caramel-07", "corridor-1363-1074", "door"],
+  ["room-level-01-caramel-07", "corridor-1365-1028", "door"],
 
   ["room-level-01-caramel-06", "corridor-1196-1020", "door"],
   
@@ -109,6 +107,7 @@ export const room3xxDoorLinks1: LinkTuple[] = [
   ["room-level-02-green-09", "corridor-654-1072", "door"],
   ["room-level-03-orange-10", "corridor-644-1194", "door"],
   ["room-level-03-orange-11", "corridor-464-1279", "door"],
+  ["room-level-03-orange-13", "corridor-313-1411", "door"],
   
   ["room-level-03-orange-14", "corridor-738-1344", "door"],
 
@@ -187,7 +186,6 @@ export const room6xxDoorLinks1: LinkTuple[] = [
   
 
 
-  ["room-level-06-blue-01", "room-level-06-blue-02", "door"],
   ["room-level-06-blue-02", "corridor-2095-751", "door"],
 
   ["room-level-06-blue-03", "corridor-1799-637", "door"],

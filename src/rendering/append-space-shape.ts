@@ -26,7 +26,6 @@ const ROOM_FILL: Record<Level, string> = {
 const CORRIDOR_FILL = "#d4b44a";
 const STAIRS_FILL = "#c4a060";
 const STAIRCASE_FILL = "#f0e0b0";
-const GALLERY_FILL = "#e8d9a0";
 const CHAMBER_FILL = "#efe0a8";
 
 export function appendSpaceShape(
@@ -84,25 +83,17 @@ function appendKindShape(
 function usesTracedOutline(
   space: Space,
   placement: SpacePlacement,
-): space is Extract<Space, { kind: "room" | "chamber" | "mainGallery" }> {
+): space is Extract<Space, { kind: "room" | "chamber" }> {
   if (placement.outline.length < 4) {
     return false;
   }
 
-  return (
-    space.kind === "room" ||
-    space.kind === "chamber" ||
-    space.kind === "mainGallery"
-  );
+  return space.kind === "room" || space.kind === "chamber";
 }
 
 function fillForEnclosedSpace(
-  space: Extract<Space, { kind: "room" | "chamber" | "mainGallery" }>,
+  space: Extract<Space, { kind: "room" | "chamber" }>,
 ): string {
-  if (space.kind === "mainGallery") {
-    return GALLERY_FILL;
-  }
-
   if (space.kind === "chamber") {
     return CHAMBER_FILL;
   }
