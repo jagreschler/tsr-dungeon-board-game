@@ -102,31 +102,34 @@ describe("torture chamber secret-door split", () => {
 });
 
 describe("room-2-05 secret-door split", () => {
-  const room = "room-2-05";
+  const hall = "corridor-336-520";
   const north = "corridor-351-449";
 
-  it("keeps the numbered room and adds the north flagstone as a level-2 corridor", () => {
-    expectKind(room, "room", 2);
-    expectBox(room, { x: 316, y: 481, width: 40, height: 79 });
+  it("keeps the north flagstone and treats the old room as the level-2 corridor under it", () => {
+    expect(findSpace(dungeonBoard, "room-2-05")).toBeUndefined();
+    expectKind(hall, "corridor", 2);
+    expectBox(hall, { x: 316, y: 481, width: 40, height: 79 });
     expectKind(north, "corridor", 2);
     expectBox(north, { x: 322, y: 434, width: 58, height: 31 });
   });
 
-  it("puts the vestibule opening on the north half and the other links on the room", () => {
-    expect(connectionKind(room, north)).toBe("secretDoor");
-    expect(connectionKind(north, room)).toBe("secretDoor");
+  it("puts the vestibule opening on the north half and the other links on the south hall", () => {
+    expect(connectionKind(hall, north)).toBe("secretDoor");
+    expect(connectionKind(north, hall)).toBe("secretDoor");
     expect(connectionKind(north, "corridor-401-453")).toBe("open");
-    expect(connectionKind(room, "corridor-401-453")).toBe(undefined);
-    expect(connectionKind(room, "corridor-337-584")).toBe("open");
-    expect(connectionKind(room, "room-2-07")).toBe("door");
-    expect(connectionKind(room, "room-2-08")).toBe("secretDoor");
+    expect(connectionKind(hall, "corridor-401-453")).toBe(undefined);
+    expect(connectionKind(hall, "corridor-337-584")).toBe("open");
+    expect(connectionKind(hall, "room-2-07")).toBe("door");
+    expect(connectionKind(hall, "room-2-08")).toBe(undefined);
     expect(connectionKind(north, "room-2-08")).toBe(undefined);
     expect(connectionKind(north, "room-2-07")).toBe(undefined);
     expect(connectionKind(north, "corridor-337-584")).toBe(undefined);
   });
 
-  it("keeps the room-2-08 secret-door mark on the room half", () => {
-    expect(storedDoorMarkInkGaps.has("room-2-05 room-2-08")).toBe(true);
+  it("does not keep a secret-door mark from the south hall into room-2-08", () => {
+    expect(storedDoorMarkInkGaps.has("corridor-336-520 room-2-08")).toBe(
+      false,
+    );
     expect(storedDoorMarkInkGaps.has("corridor-351-449 room-2-08")).toBe(
       false,
     );
