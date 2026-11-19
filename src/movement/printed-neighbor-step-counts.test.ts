@@ -70,7 +70,7 @@ describe("printed-neighbor step counts", () => {
         "corridor-1197-970 (1) / room-southeast (2)",
         "corridor-1304-898 (1) / corridor-1358-918 (2)",
         "corridor-1358-918 (2) / corridor-1417-934 (3)",
-        "corridor-1417-864 (4) / corridor-1433-817 (5)",
+        "corridor-1417-864 (4) / corridor-1433-799 (5)",
         "corridor-966-968 (4) / room-4-06 (5)",
       ]);
     },

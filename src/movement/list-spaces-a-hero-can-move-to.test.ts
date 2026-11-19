@@ -53,7 +53,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
       [],
     );
     expect(pastTheKitchen.has("kitchen")).toBe(true);
-    expect(pastTheKitchen.has("corridor-338-1028")).toBe(false);
+    expect(pastTheKitchen.has("corridor-338-1048")).toBe(false);
   });
 
   it("can pass through the Main Staircase and the Main Gallery", () => {
@@ -93,7 +93,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
     expect(reachable.has("corridor-1204-1177")).toBe(false);
     expect(reachable.has("corridor-836-966")).toBe(false);
     expect(reachable.has("corridor-1190-1139")).toBe(false);
-    expect(reachable.has("corridor-1436-640")).toBe(false);
+    expect(reachable.has("corridor-1456-640")).toBe(false);
     expect(reachable.has("corridor-1512-872")).toBe(false);
     expect(reachable.has("corridor-792-768")).toBe(false);
     expect(reachable.has("corridor-839-887")).toBe(false);
@@ -134,7 +134,7 @@ describe("listSpacesAHeroCanMoveTo", () => {
       [],
     );
 
-    expect(reachable.has("corridor-1433-817")).toBe(false);
+    expect(reachable.has("corridor-1433-799")).toBe(false);
     expect(reachable.has("corridor-1438-716")).toBe(false);
     expect(reachable.has("corridor-1429-681")).toBe(false);
     expect(reachable.has("corridor-1482-762")).toBe(false);
