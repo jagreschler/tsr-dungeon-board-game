@@ -14,15 +14,6 @@ const ROOMS_PER_LEVEL: Record<Level, number> = {
   6: 12,
 };
 
-const CHAMBERS_PER_LEVEL: Record<Level, number> = {
-  1: 1,
-  2: 2,
-  3: 2,
-  4: 2,
-  5: 4,
-  6: 2,
-};
-
 const NAMED_CHAMBERS = [
   "Main Gallery",
   "Kitchen",
@@ -45,22 +36,32 @@ function roomsOnLevel(level: Level) {
   });
 }
 
-function chambersOnLevel(level: Level) {
-  const chambers = listSpacesByKind(dungeonBoard, "chamber");
-  const galleries = listSpacesByKind(dungeonBoard, "mainGallery");
-
-  return [...chambers, ...galleries].filter((space) => {
-    return space.level === level;
-  });
-}
-
 describe("dungeon board", () => {
-  it("gives every space a level from 1 to 6", () => {
-    expect(dungeonBoard.spaces.length > 0).toBe(true);
+  it("gives every room a level from 1 to 6", () => {
+    const rooms = listSpacesByKind(dungeonBoard, "room");
 
-    for (const space of dungeonBoard.spaces) {
-      expect(space.level >= 1).toBe(true);
-      expect(space.level <= 6).toBe(true);
+    expect(rooms.length > 0).toBe(true);
+
+    for (const room of rooms) {
+      expect(room.level >= 1).toBe(true);
+      expect(room.level <= 6).toBe(true);
+    }
+  });
+
+  it("gives a level only to a room", () => {
+    const rooms = dungeonBoard.spaces.filter((space) => space.kind === "room");
+    const others = dungeonBoard.spaces.filter((space) => space.kind !== "room");
+
+    expect(rooms.length > 0).toBe(true);
+    expect(others.length > 0).toBe(true);
+
+    for (const room of rooms) {
+      expect("level" in room).toBe(true);
+    }
+
+    for (const space of others) {
+      expect("level" in space).toBe(false);
+      expect("destinationLevel" in space).toBe(false);
     }
   });
 
@@ -70,19 +71,15 @@ describe("dungeon board", () => {
     }
   });
 
-  it("places thirteen named chambers, with four on level 5", () => {
-    for (const level of [1, 2, 3, 4, 5, 6] as const) {
-      expect(chambersOnLevel(level).length).toBe(CHAMBERS_PER_LEVEL[level]);
-    }
-  });
-
   it("starts the party on the Main Staircase", () => {
     const staircase = findSpace(dungeonBoard, "main-staircase");
 
     expect(staircase === undefined).toBe(false);
     expect(staircase?.kind).toBe("mainStaircase");
     expect(staircase?.isStart).toBe(true);
-    expect(staircase?.level).toBe(1);
+    if (staircase !== undefined) {
+      expect("level" in staircase).toBe(false);
+    }
     expect(staircase?.printedName).toBe("Main Staircase");
   });
 
@@ -92,7 +89,10 @@ describe("dungeon board", () => {
     expect(gallery === undefined).toBe(false);
     expect(gallery?.kind).toBe("mainGallery");
     expect(gallery?.isSafe).toBe(true);
-    expect(gallery?.level).toBe(1);
+    expect(gallery === undefined).toBe(false);
+    if (gallery !== undefined) {
+      expect("level" in gallery).toBe(false);
+    }
     expect(gallery?.printedName).toBe("Main Gallery");
   });
 
@@ -149,14 +149,14 @@ describe("dungeon board", () => {
     }
   });
 
-  it("links stairs toward another level", () => {
-    const stairs = listSpacesByKind(dungeonBoard, "stairs");
+  it("stores the west stair oval as a corridor with no level", () => {
+    const stair = findSpace(dungeonBoard, "corridor-855-765");
 
-    expect(stairs.length > 0).toBe(true);
-
-    for (const stair of stairs) {
-      expect(stair.destinationLevel === undefined).toBe(false);
-      expect(stair.destinationLevel === stair.level).toBe(false);
+    expect(findSpace(dungeonBoard, "stairs-west")).toBeUndefined();
+    expect(stair?.kind).toBe("corridor");
+    if (stair !== undefined) {
+      expect("level" in stair).toBe(false);
+      expect("destinationLevel" in stair).toBe(false);
     }
   });
 });

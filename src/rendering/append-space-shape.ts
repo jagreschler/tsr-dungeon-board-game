@@ -4,6 +4,7 @@ import type { SpacePlacement } from "../board/space-placement.ts";
 import type { Level } from "../board/level.ts";
 import { boxFromPlacement } from "../board/placement-box.ts";
 import { appendChamberLabel } from "./append-chamber-label.ts";
+import { decorationFor } from "./board-decorations.ts";
 import {
   appendCircle,
   appendPolygon,
@@ -37,7 +38,9 @@ export function appendSpaceShape(
   const group = document.createElementNS(SVG_NAMESPACE, "g");
   group.setAttribute("data-space-identifier", space.identifier);
   group.setAttribute("data-space-kind", space.kind);
-  group.setAttribute("data-space-level", String(space.level));
+  if (space.kind === "room") {
+    group.setAttribute("data-space-level", String(space.level));
+  }
   const title = document.createElementNS(SVG_NAMESPACE, "title");
   title.textContent = describeSpace(space);
   group.append(title);
@@ -66,7 +69,10 @@ function appendKindShape(
     return;
   }
 
-  if (space.kind === "stairs") {
+  if (
+    space.kind === "corridor" &&
+    decorationFor(space.identifier) === "stairs"
+  ) {
     appendRect(group, box, STAIRS_FILL, 8);
     appendStairSteps(group, box);
     return;
@@ -75,7 +81,10 @@ function appendKindShape(
   appendRect(group, box, CORRIDOR_FILL, 1);
 }
 
-function usesTracedOutline(space: Space, placement: SpacePlacement): boolean {
+function usesTracedOutline(
+  space: Space,
+  placement: SpacePlacement,
+): space is Extract<Space, { kind: "room" | "chamber" | "mainGallery" }> {
   if (placement.outline.length < 4) {
     return false;
   }
@@ -87,7 +96,9 @@ function usesTracedOutline(space: Space, placement: SpacePlacement): boolean {
   );
 }
 
-function fillForEnclosedSpace(space: Space): string {
+function fillForEnclosedSpace(
+  space: Extract<Space, { kind: "room" | "chamber" | "mainGallery" }>,
+): string {
   if (space.kind === "mainGallery") {
     return GALLERY_FILL;
   }

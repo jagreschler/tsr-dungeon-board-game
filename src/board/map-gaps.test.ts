@@ -26,16 +26,20 @@ function connectionKind(from: string, to: string) {
 }
 
 describe("corridor-1116-162 south gap", () => {
-  it("adds two level-4 corridor squares between the dead end and corridor-1124-318", () => {
+  it("adds two corridor squares between the dead end and corridor-1124-318", () => {
     const upper = findSpace(dungeonBoard, UPPER);
     const lower = findSpace(dungeonBoard, LOWER);
 
     expect(upper === undefined).toBe(false);
     expect(upper?.kind).toBe("corridor");
-    expect(upper?.level).toBe(4);
+    if (upper !== undefined) {
+      expect("level" in upper).toBe(false);
+    }
     expect(lower === undefined).toBe(false);
     expect(lower?.kind).toBe("corridor");
-    expect(lower?.level).toBe(4);
+    if (lower !== undefined) {
+      expect("level" in lower).toBe(false);
+    }
   });
 
   it("opens corridor-1116-162 south into the upper new square", () => {

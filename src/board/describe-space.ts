@@ -7,12 +7,15 @@ const KIND_LABEL: Record<SpaceKind, string> = {
   corridor: "Corridor",
   mainStaircase: "Main Staircase",
   mainGallery: "Main Gallery",
-  stairs: "Stairs",
 };
 
 export function describeSpace(space: Space): string {
   const name = space.printedName ?? nameFromKindAndIdentifier(space);
-  return `${name}, level ${space.level}`;
+  if (space.kind === "room") {
+    return `${name}, level ${space.level}`;
+  }
+
+  return name;
 }
 
 function nameFromKindAndIdentifier(space: Space): string {

@@ -71,7 +71,9 @@ describe("missing and split rooms", () => {
     const queen = findPlacement(dungeonLayout, "queens-treasure-room");
 
     expect(room?.kind).toBe("room");
-    expect(room?.level).toBe(5);
+    if (room?.kind === "room") {
+      expect(room.level).toBe(5);
+    }
     expect(placement === undefined).toBe(false);
     expect(queen === undefined).toBe(false);
     if (placement === undefined || queen === undefined) {
@@ -94,7 +96,9 @@ describe("missing and split rooms", () => {
     });
 
     expect(room?.kind).toBe("room");
-    expect(room?.level).toBe(2);
+    if (room?.kind === "room") {
+      expect(room.level).toBe(2);
+    }
     expect(links.map((connection) => {
       return [connection.toSpaceIdentifier, connection.kind];
     })).toEqual([["corridor-478-1032", "door"]]);
@@ -107,8 +111,14 @@ describe("missing and split rooms", () => {
     const upperPlacement = findPlacement(dungeonLayout, UPPER_CYAN_ROOM);
     const lowerPlacement = findPlacement(dungeonLayout, LOWER_CYAN_ROOM);
 
-    expect(upper?.level).toBe(6);
-    expect(lower?.level).toBe(6);
+    expect(upper?.kind).toBe("room");
+    expect(lower?.kind).toBe("room");
+    if (upper?.kind === "room") {
+      expect(upper.level).toBe(6);
+    }
+    if (lower?.kind === "room") {
+      expect(lower.level).toBe(6);
+    }
     expect(upperPlacement === undefined).toBe(false);
     expect(lowerPlacement === undefined).toBe(false);
     if (upperPlacement === undefined || lowerPlacement === undefined) {

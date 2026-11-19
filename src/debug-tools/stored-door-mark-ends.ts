@@ -68,7 +68,6 @@ export function storedDoorMarkEnds(
 function isHallKind(space: Space): boolean {
   return (
     space.kind === "corridor" ||
-    space.kind === "stairs" ||
     space.kind === "mainStaircase"
   );
 }

@@ -4,7 +4,6 @@ export const namedChambersEast: TracedSpace[] = [
   {
     identifier: "wizards-treasure-room",
     kind: "chamber",
-    level: 5,
     x: 1691,
     y: 243,
     width: 172,
@@ -15,7 +14,6 @@ export const namedChambersEast: TracedSpace[] = [
   {
     identifier: "wizards-laboratory",
     kind: "chamber",
-    level: 5,
     x: 1546,
     y: 320,
     width: 140,
@@ -26,7 +24,6 @@ export const namedChambersEast: TracedSpace[] = [
   {
     identifier: "kings-treasure-room",
     kind: "chamber",
-    level: 6,
     x: 1891,
     y: 709,
     width: 145,
@@ -37,7 +34,6 @@ export const namedChambersEast: TracedSpace[] = [
   {
     identifier: "kings-library",
     kind: "chamber",
-    level: 6,
     x: 1616,
     y: 878,
     width: 171,
@@ -48,7 +44,6 @@ export const namedChambersEast: TracedSpace[] = [
   {
     identifier: "queens-treasure-room",
     kind: "chamber",
-    level: 5,
     x: 1606,
     y: 1131,
     width: 159,
@@ -59,7 +54,6 @@ export const namedChambersEast: TracedSpace[] = [
   {
     identifier: "queens-treasure-room-annex",
     kind: "chamber",
-    level: 5,
     x: 1583,
     y: 1342,
     width: 206,
