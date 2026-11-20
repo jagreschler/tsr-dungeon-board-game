@@ -1320,3 +1320,25 @@ opens north into `corridor-1385-982` and south into `corridor-1363-1074`.
 Those two corridors had been stored as doors of the room, because the
 room outline covered the square. Those room doors, and the north door
 mark, are gone.
+
+## DUN-41 — Card art is keyed by card name (2026-11-20)
+
+In the 1981 game the same card is printed for more than one level.
+Troll is on levels 4 and 5, Giant Spider is on levels 2 and 3, and
+Jade Idol is on levels 4, 5, and 6. A picture filed as `L4-troll`
+would be the wrong file when that same Troll is drawn on level 5.
+The picture is the card, so the file name is the card's name
+(`troll.jpg`, `giant-spider.jpg`, `jade-idol.jpg`). The catalog finds
+art by that name. It does not store a level, and lookup does not take
+one. The four clips follow the same names (`goblins.mp4` and the
+other three). Skeleton now has a picture, so the plain parchment
+stand-in is gone.
+
+The six numbers on a card used to stack the four classes in one tall
+column, and the last line was cut off. Every monster caption now
+reads in three columns of two: Lightning and Fireball, Wizard and
+Superhero, Hero and Elf.
+
+The web images are 768 by 1152 (2:3). That size keeps the Pages site
+light. Treasure and trap pictures are in `public/cards/` for a later
+change. This one does not deal them.

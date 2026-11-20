@@ -27,7 +27,7 @@ function goblinsOverlay(): MonsterCardOverlay {
 
 describe("MonsterCardOverlay", () => {
   it("plays a muted clip first with a Skip button", () => {
-    const assets = lookupMonsterCard(1, "Goblins");
+    const assets = lookupMonsterCard("Goblins");
     const values = monsterCombatValues("Goblins");
     goblinsOverlay().show(assets, values);
 
@@ -38,14 +38,14 @@ describe("MonsterCardOverlay", () => {
 
     expect(overlay === null).toBe(false);
     expect(video?.muted).toBe(true);
-    expect(video?.getAttribute("src") ?? "").toContain("L1-goblins.mp4");
+    expect(video?.getAttribute("src") ?? "").toContain("cards/goblins.mp4");
     expect(skip?.textContent).toBe("Skip");
     expect(cardStep?.hasAttribute("hidden")).toBe(true);
     expect(revealedEvents).toEqual([]);
   });
 
   it("shows the goblins card after Skip, with name and 1981 numbers", () => {
-    const assets = lookupMonsterCard(1, "Goblins");
+    const assets = lookupMonsterCard("Goblins");
     const values = monsterCombatValues("Goblins");
     goblinsOverlay().show(assets, values);
 
@@ -61,7 +61,7 @@ describe("MonsterCardOverlay", () => {
     expect(clipStep?.hasAttribute("hidden")).toBe(true);
     expect(card?.getAttribute("data-card-style")).toBe("red");
     expect(card?.querySelector("img")?.getAttribute("src") ?? "").toContain(
-      "L1-goblins.jpg",
+      "cards/goblins.jpg",
     );
     expect(text.includes("Goblins")).toBe(true);
     expect(text.includes("Lightning 6")).toBe(true);
@@ -77,7 +77,7 @@ describe("MonsterCardOverlay", () => {
   });
 
   it("falls back to the card when there is no clip", () => {
-    const assets = lookupMonsterCard(1, "Goblins");
+    const assets = lookupMonsterCard("Goblins");
     const values = monsterCombatValues("Goblins");
     goblinsOverlay().show({ ...assets, clipHref: undefined }, values);
 
@@ -97,7 +97,7 @@ describe("MonsterCardOverlay", () => {
   });
 
   it("removes the overlay when Close is pressed", () => {
-    const assets = lookupMonsterCard(1, "Goblins");
+    const assets = lookupMonsterCard("Goblins");
     const values = monsterCombatValues("Goblins");
     goblinsOverlay().show({ ...assets, clipHref: undefined }, values);
 
@@ -114,8 +114,8 @@ describe("MonsterCardOverlay", () => {
     ]);
   });
 
-  it("shows a plain parchment card when the monster has no art", () => {
-    const assets = lookupMonsterCard(1, "Skeleton");
+  it("shows the Skeleton picture with no clip", () => {
+    const assets = lookupMonsterCard("Skeleton");
     const values = monsterCombatValues("Skeleton");
     goblinsOverlay().show(assets, values);
 
@@ -124,15 +124,17 @@ describe("MonsterCardOverlay", () => {
     const text = overlay?.textContent ?? "";
 
     expect(card?.getAttribute("data-card-style")).toBe("red");
-    expect(card?.hasAttribute("data-plain-card")).toBe(true);
-    expect(card?.querySelector("img") === null).toBe(true);
+    expect(card?.querySelector("img")?.getAttribute("src") ?? "").toContain(
+      "cards/skeleton.jpg",
+    );
+    expect(overlay?.querySelector("video") === null).toBe(true);
     expect(text.includes("Skeleton")).toBe(true);
     expect(text.includes("Lightning 2")).toBe(true);
     expect(revealedEvents).toEqual([EVENT_CARD_REVEALED]);
   });
 
   it("shows the card when the muted clip ends", () => {
-    const assets = lookupMonsterCard(1, "Goblins");
+    const assets = lookupMonsterCard("Goblins");
     const values = monsterCombatValues("Goblins");
     goblinsOverlay().show(assets, values);
 

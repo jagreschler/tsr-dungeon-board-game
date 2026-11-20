@@ -56,7 +56,7 @@ describe("bindMonsterCardPreview", () => {
     expect(overlay?.querySelector("video") === null).toBe(false);
     expect(
       overlay?.querySelector("video")?.getAttribute("src") ?? "",
-    ).toContain("L1-hobgoblins.mp4");
+    ).toContain("cards/hobgoblins.mp4");
   });
 
   it("shows the hobgoblins card with no clip on Shift+H", () => {
@@ -101,7 +101,7 @@ describe("bindMonsterCardPreview", () => {
     expect(overlay?.querySelector("video") === null).toBe(false);
     expect(
       overlay?.querySelector("video")?.getAttribute("src") ?? "",
-    ).toContain("L1-giant-rats.mp4");
+    ).toContain("cards/giant-rats.mp4");
   });
 
   it("shows the giant rats card with no clip on Shift+R", () => {

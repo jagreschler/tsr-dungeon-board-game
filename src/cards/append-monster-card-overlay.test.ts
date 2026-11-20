@@ -8,7 +8,7 @@ afterEach(() => {
 });
 
 function showCard(monsterName: string): HTMLElement {
-  const assets = lookupMonsterCard(1, monsterName);
+  const assets = lookupMonsterCard(monsterName);
   const values = monsterCombatValues(monsterName);
   if (values === undefined) {
     throw new Error(`missing combat values for ${monsterName}`);
@@ -59,6 +59,23 @@ describe("appendMonsterCardOverlay stats caption", () => {
     expect(hobgoblins.classList.contains("monster-card-stats-parchment")).toBe(
       false,
     );
+  });
+
+  it("reads the six numbers in three columns of two", () => {
+    const lists = [
+      ...statsCaption("Goblins").querySelectorAll(
+        ".monster-card-stats-columns ul",
+      ),
+    ];
+    const lines = lists.map((list) => {
+      return [...list.querySelectorAll("li")].map((item) => item.textContent);
+    });
+
+    expect(lines).toEqual([
+      ["Lightning 6", "Fireball 2"],
+      ["Wizard 5", "Superhero 2"],
+      ["Hero 4", "Elf 3"],
+    ]);
   });
 
   it("places the caption using each card's stats-box percents", () => {

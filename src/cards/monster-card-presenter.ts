@@ -22,7 +22,7 @@ export class MonsterCardPresenter {
       return;
     }
 
-    const assets = lookupMonsterCard(1, monsterName);
+    const assets = lookupMonsterCard(monsterName);
     const combatValues = monsterCombatValues(monsterName);
     this.overlay.show(assets, combatValues);
   }

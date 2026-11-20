@@ -63,15 +63,15 @@ function cardStep(
   card.setAttribute("data-card-style", "red");
   card.className = "monster-card";
 
-  if (assets.imageHref === undefined) {
-    card.setAttribute("data-plain-card", "true");
-    card.append(statsCaption(combatValues, assets.statsBox));
-  } else {
+  const imageHref = assets.imageHref;
+  if (imageHref !== undefined) {
     const image = document.createElement("img");
-    image.src = assets.imageHref;
+    image.src = imageHref;
     image.alt = combatValues.name;
-    card.append(image, statsCaption(combatValues, assets.statsBox));
+    card.append(image);
   }
+
+  card.append(statsCaption(combatValues, assets.statsBox));
 
   const close = document.createElement("button");
   close.type = "button";
@@ -111,6 +111,8 @@ function statsCaption(
     valueList([
       `Wizard ${combatValues.wizard}`,
       `Superhero ${combatValues.superhero}`,
+    ]),
+    valueList([
       `Hero ${combatValues.hero}`,
       `Elf ${combatValues.elf}`,
     ]),
