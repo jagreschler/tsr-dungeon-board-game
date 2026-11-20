@@ -21,7 +21,9 @@ describe("MonsterCardPresenter", () => {
     );
 
     const card = document.querySelector("[data-monster-card]");
-    expect(card?.getAttribute("data-plain-card")).toBe("true");
+    expect(card?.querySelector("img")?.getAttribute("src") ?? "").toContain(
+      "cards/skeleton.jpg",
+    );
     expect(document.body.textContent?.includes("Skeleton")).toBe(true);
   });
 });

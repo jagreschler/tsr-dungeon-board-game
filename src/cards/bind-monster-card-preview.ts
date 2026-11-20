@@ -46,7 +46,7 @@ function showPreviewIfNeeded(
     return;
   }
 
-  const assets = lookupMonsterCard(1, monsterName);
+  const assets = lookupMonsterCard(monsterName);
   const combatValues = monsterCombatValues(monsterName);
   if (event.shiftKey) {
     overlay.show({ ...assets, clipHref: undefined }, combatValues);

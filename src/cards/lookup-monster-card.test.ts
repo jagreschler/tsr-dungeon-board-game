@@ -1,41 +1,54 @@
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
-import {
-  lookupMonsterCard,
-  monsterCardHrefs,
-} from "./lookup-monster-card.ts";
+import { LEVEL_1_MONSTER_NAMES } from "./monster-deck.ts";
+import { lookupMonsterCard, monsterSlug } from "./lookup-monster-card.ts";
 
 describe("lookupMonsterCard", () => {
-  it("returns the goblins card image and clip from L1-goblins files", () => {
-    const assets = lookupMonsterCard(1, "Goblins");
+  it("gives the same monster the same art on any level", () => {
+    const goblins = lookupMonsterCard("Goblins");
 
-    expect(assets.imageHref ?? "").toContain("L1-goblins.jpg");
-    expect(assets.clipHref ?? "").toContain("L1-goblins.mp4");
-    expect(assets.imageHref ?? "").toContain("cards/");
+    expect(goblins.imageHref ?? "").toContain("cards/goblins.jpg");
+    expect(goblins.clipHref ?? "").toContain("cards/goblins.mp4");
+    expect((goblins.imageHref ?? "").includes("L1-")).toBe(false);
+    expect((goblins.imageHref ?? "").includes("L6-")).toBe(false);
   });
 
-  it("slugs the monster name to lowercase", () => {
-    const assets = lookupMonsterCard(1, "GOBLINS");
+  it("gives every Level 1 monster a card image in public/cards", () => {
+    for (const name of new Set(LEVEL_1_MONSTER_NAMES)) {
+      const href = lookupMonsterCard(name).imageHref ?? "";
+      const fileName = `${monsterSlug(name)}.jpg`;
 
-    expect(assets.imageHref ?? "").toContain("L1-goblins.jpg");
-    expect(assets.clipHref ?? "").toContain("L1-goblins.mp4");
+      expect(href.endsWith(`cards/${fileName}`)).toBe(true);
+      expect(existsSync(resolve("public/cards", fileName))).toBe(true);
+    }
   });
 
-  it("returns the hobgoblins card image and clip from L1-hobgoblins files", () => {
-    const assets = lookupMonsterCard(1, "Hobgoblins");
+  it("slugs a shouted or spaced name onto that same picture", () => {
+    const goblins = lookupMonsterCard("GOBLINS");
+    const lizard = lookupMonsterCard("Giant Lizard");
 
-    expect(assets.imageHref ?? "").toContain("L1-hobgoblins.jpg");
-    expect(assets.clipHref ?? "").toContain("L1-hobgoblins.mp4");
+    expect(goblins.imageHref ?? "").toContain("cards/goblins.jpg");
+    expect(goblins.clipHref ?? "").toContain("cards/goblins.mp4");
+    expect(lizard.imageHref ?? "").toContain("cards/giant-lizard.jpg");
+    expect(lizard.clipHref ?? "").toContain("cards/giant-lizard.mp4");
   });
 
-  it("returns the giant lizard card image and clip from L1-giant-lizard files", () => {
-    const assets = lookupMonsterCard(1, "Giant Lizard");
-
-    expect(assets.imageHref ?? "").toContain("L1-giant-lizard.jpg");
-    expect(assets.clipHref ?? "").toContain("L1-giant-lizard.mp4");
+  it("plays a clip only for the monsters that have one", () => {
+    expect(lookupMonsterCard("Hobgoblins").clipHref ?? "").toContain(
+      "cards/hobgoblins.mp4",
+    );
+    expect(lookupMonsterCard("Giant Rats").clipHref ?? "").toContain(
+      "cards/giant-rats.mp4",
+    );
+    expect(lookupMonsterCard("Skeleton").imageHref ?? "").toContain(
+      "cards/skeleton.jpg",
+    );
+    expect(lookupMonsterCard("Skeleton").clipHref).toBe(undefined);
   });
 
   it("uses parchment caption ink on the Goblins dark-red stats box", () => {
-    expect(lookupMonsterCard(1, "Goblins").statsBox).toEqual({
+    expect(lookupMonsterCard("Goblins").statsBox).toEqual({
       topPercent: 76,
       heightPercent: 20,
       ink: "parchment",
@@ -43,17 +56,16 @@ describe("lookupMonsterCard", () => {
   });
 
   it("uses the default dark ink on parchment stats-boxes", () => {
-    expect(lookupMonsterCard(1, "Hobgoblins").statsBox).toEqual({
+    expect(lookupMonsterCard("Hobgoblins").statsBox).toEqual({
       topPercent: 74.8,
       heightPercent: 16,
       ink: "dark",
     });
-    expect(lookupMonsterCard(1, "Giant Lizard").statsBox.ink).toBe("dark");
-    expect(lookupMonsterCard(1, "Skeleton").statsBox.ink).toBe("dark");
+    expect(lookupMonsterCard("Giant Lizard").statsBox.ink).toBe("dark");
   });
 
   it("uses a taller, higher stats-box for giant lizard", () => {
-    expect(lookupMonsterCard(1, "Giant Lizard").statsBox).toEqual({
+    expect(lookupMonsterCard("Giant Lizard").statsBox).toEqual({
       topPercent: 67,
       heightPercent: 19,
       ink: "dark",
@@ -61,41 +73,15 @@ describe("lookupMonsterCard", () => {
   });
 
   it("uses the parchment stats-box and dark ink for giant rats", () => {
-    expect(lookupMonsterCard(1, "Giant Rats").statsBox).toEqual({
+    expect(lookupMonsterCard("Giant Rats").statsBox).toEqual({
       topPercent: 74,
       heightPercent: 17,
       ink: "dark",
     });
   });
 
-  it("hyphenates multi-word monster names in the file stem", () => {
-    const assets = monsterCardHrefs(1, "Giant Lizard", true);
-
-    expect(assets.imageHref ?? "").toContain("L1-giant-lizard.jpg");
-    expect(assets.clipHref ?? "").toContain("L1-giant-lizard.mp4");
-  });
-
-  it("returns the giant rats card image and clip from L1-giant-rats files", () => {
-    const assets = lookupMonsterCard(1, "Giant Rats");
-
-    expect(assets.imageHref ?? "").toContain("L1-giant-rats.jpg");
-    expect(assets.clipHref ?? "").toContain("L1-giant-rats.mp4");
-  });
-
-  it("omits art and clip for skeleton", () => {
-    const skeleton = lookupMonsterCard(1, "Skeleton");
-
-    expect(skeleton.imageHref).toBe(undefined);
-    expect(skeleton.clipHref).toBe(undefined);
-    expect(skeleton.statsBox).toEqual({
-      topPercent: 22,
-      heightPercent: 56,
-      ink: "dark",
-    });
-  });
-
-  it("omits the clip when the monster is unknown", () => {
-    const assets = lookupMonsterCard(1, "Owlbear");
+  it("omits art and clip when the monster is unknown", () => {
+    const assets = lookupMonsterCard("Owlbear");
 
     expect(assets.imageHref).toBe(undefined);
     expect(assets.clipHref).toBe(undefined);
@@ -104,12 +90,5 @@ describe("lookupMonsterCard", () => {
       heightPercent: 16,
       ink: "dark",
     });
-  });
-
-  it("omits the clip when the monster has card art but no clip file", () => {
-    const assets = monsterCardHrefs(1, "Goblins", false);
-
-    expect(assets.imageHref ?? "").toContain("L1-goblins.jpg");
-    expect(assets.clipHref).toBe(undefined);
   });
 });
