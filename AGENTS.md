@@ -17,7 +17,7 @@ Standing rules for agents. For why past choices were made, read `docs/decisions.
 ## Before you start
 - Never commit to main, ever. Every change goes on its own branch, cut from the latest `origin/main` (run `git fetch origin` first).
 - Every change reaches main only through a pull request that Jason reviews and approves.
-- Use JIRA-style branch names, like `DUN-29-load-reference-image`.
+- Name branches in JIRA style, with the project name or abbreviation first: PROJ-TICKET-NUMBER-FEATURE-NAME.
 - Work on the named problem in the brief. Make one small, targeted change per PR.
 - No unrequested refactors. Change architecture only when it clearly makes the code better, and say why.
 - Read the feature note in `docs/features/` for any feature you touch.
@@ -29,10 +29,9 @@ Standing rules for agents. For why past choices were made, read `docs/decisions.
 
 ## Proof of done
 - Write tests first. For a bug, add a test that fails before the fix and passes after.
-- Test behavior a player would notice. Never hard-code stored data like coordinates or full lists. Keep tests few, short, and clearly named.
+- Test behavior a user would notice. Never hard-code stored data like coordinates or full lists. Keep tests few, short, and clearly named.
 - When a test file grows past about 200 lines or starts covering more than one behavior, split it into smaller files, one per behavior. Same tests, smaller files, fewer merge conflicts.
 - Typecheck, tests, and build must pass.
-- For visual changes, check the running app at phone and desktop sizes and include screenshots.
 - Use heavy checks only for risky features. For a simple fix, just say it's cheaper for Jason to check it himself.
 
 ## Feature notes
@@ -47,13 +46,14 @@ Standing rules for agents. For why past choices were made, read `docs/decisions.
 - Hidden behavior: no magic, no metaprogramming, no clever tricks.
 - Environment checks scattered around. Dev mode comes in through one object.
 - Vague class names like Manager, Helper, or Utils, or words that are both noun and verb.
-- `any`, and `!x`. Write `x === false`.
+- No `any`.
+- Never use `!` for negation; it's easy to miss when reading. Write `x === false` for booleans, and `x === undefined` or `x === null` for values that may be missing.
 - Source files over about 100 lines.
 
 ## Reviews
 - When the same review comment comes up twice, propose a lint or CI check for it. Don't just leave a note.
 - Every PR gets a short plain-English "What this does and why" section.
-- Never push to main. Never merge or delete a branch without Jason's OK.
+- Never merge or delete a branch without Jason's OK.
 
 ## Repo-specific
 - Follow the 1981 TSR edition rules. Card art is named by card name, not by level.
