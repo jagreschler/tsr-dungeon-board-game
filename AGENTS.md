@@ -9,7 +9,8 @@ Standing rules for agents. For why past choices were made, read `docs/decisions.
 - A fresh clone must run with one setup command (`npm ci`, then `npm run dev`). If setup changes, fix it in the same PR.
 
 ## Before you start
-- Run `git fetch origin` and branch from the latest `origin/main`.
+- Never commit to main, ever. Every change goes on its own branch, cut from the latest `origin/main` (run `git fetch origin` first).
+- Every change reaches main only through a pull request that Jason reviews and approves.
 - Use JIRA-style branch names, like `DUN-29-load-reference-image`.
 - Work on the named problem in the brief. Make one small, targeted change per PR.
 - No unrequested refactors. Change architecture only when it clearly makes the code better, and say why.
@@ -45,7 +46,7 @@ Standing rules for agents. For why past choices were made, read `docs/decisions.
 ## Reviews
 - When the same review comment comes up twice, propose a lint or CI check for it. Don't just leave a note.
 - Every PR gets a short plain-English "What this does and why" section.
-- Never push to main, merge, or delete branches without Jason's OK.
+- Never push to main. Never merge or delete a branch without Jason's OK.
 
 ## Repo-specific
 - Follow the 1981 TSR edition rules. Card art is named by card name, not by level.
