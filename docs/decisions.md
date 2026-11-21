@@ -1347,3 +1347,7 @@ change. This one does not deal them.
 
 `AGENTS.md` holds standing rules for agents. `docs/decisions.md` holds the history. `docs/features` holds per-feature notes.
 Review fixes: generic JIRA branch names, "user" instead of "player", and no visual-check rule. The `!x` bullet and the Reviews "Never push to main" line stay as first written.
+
+## 2026-11-21 — Gitflow reference in the branch rules
+
+The Branches section of `AGENTS.md` now links to Atlassian's Gitflow workflow and states the short version of it. Agents need that so they follow Jason's release process: features merge back into `develop`, a release takes only fixes and then merges into both `main` and `develop` with a version tag, hotfixes are the only branches cut from `main`, and `main` only holds stable tagged releases. This repo has no `develop` yet, so branches still come off `main` until one exists.
