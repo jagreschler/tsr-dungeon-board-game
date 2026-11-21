@@ -1342,3 +1342,8 @@ Superhero, Hero and Elf.
 The web images are 768 by 1152 (2:3). That size keeps the Pages site
 light. Treasure and trap pictures are in `public/cards/` for a later
 change. This one does not deal them.
+
+## 2026-11-21 — Where agent rules, history, and feature notes live
+
+`AGENTS.md` holds standing rules for agents. `docs/decisions.md` holds the history. `docs/features` holds per-feature notes.
+Review fixes: generic JIRA branch names, "user" instead of "player", and no visual-check rule. The `!x` bullet and the Reviews "Never push to main" line stay as first written.
